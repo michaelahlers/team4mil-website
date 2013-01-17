@@ -64,10 +64,10 @@ require({
   'angular',
 
   /* Load Twitter Bootstrap. */
-  'bootstrap'//,
+  'bootstrap',
 
   /* The application itself. */
-  // 'applications'
+  'applications'
 
 ], function (document, angular) {
 
@@ -75,6 +75,6 @@ require({
    * defined prior to bootstrapping AngularJS. If this is done in the wrong
    * order, there will be visible flicker as ngCloak is removed and the main
    * application scope is digested. */
-  //angular.bootstrap(document, ['app'])
+  angular.bootstrap(document, ['app'])
 
 })
