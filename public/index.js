@@ -9,6 +9,7 @@ require({
     'angular-sanitize' : 'lib/angular-1.1.1/angular-sanitize',
     'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
     'domReady' : 'lib/domReady-2.0.1',
+    'flexslider' : 'lib/woothemes-FlexSlider-54e6d31/jquery.flexslider'
     'jquery' : 'lib/jquery-1.8.3',
     'modernizr' : 'lib/modernizr-2.6.1',
     'text' : 'lib/text-2.0.3.js'
@@ -41,6 +42,10 @@ require({
     },
 
     'bootstrap' : {
+      deps : ['jquery']
+    },
+
+    'flexslider' : {
       deps : ['jquery']
     },
 
