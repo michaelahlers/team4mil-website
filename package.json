@@ -1,13 +1,15 @@
 {
-  "name": "Team 4Mil",
-  "version": "0.0.1",
-  "description": "Web site for Team 4Mil.",
-  "dependencies": {
-    "express": "3.x",
-    "jade" : "*"
+  "name" : "team4mil",
+  "version" : "0.0.1",
+  "description" : "Web site for Team 4Mil.",
+  "private" : true,
+  "dependencies" : {
+    "express" : "3.x",
+    "jade" : "*",
+    "less-middleware" : "0.1.x"
   },
-  "engines": {
-    "node": "0.8.x",
-    "npm":  "1.1.x"
+  "engines" : {
+    "node" : "0.8.x",
+    "npm" : "1.1.x"
   }
 }
