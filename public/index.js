@@ -9,8 +9,8 @@ require({
     'angular-sanitize' : 'lib/angular-1.1.1/angular-sanitize',
     'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
     'domReady' : 'lib/domReady-2.0.1',
-    'flexslider' : 'lib/woothemes-FlexSlider-54e6d31/jquery.flexslider'
     'jquery' : 'lib/jquery-1.8.3',
+    'jquery-flexslider' : 'lib/woothemes-FlexSlider-54e6d31/jquery.flexslider',
     'modernizr' : 'lib/modernizr-2.6.1',
     'text' : 'lib/text-2.0.3.js'
   },
@@ -45,15 +45,15 @@ require({
       deps : ['jquery']
     },
 
-    'flexslider' : {
-      deps : ['jquery']
-    },
-
     'jquery' : {
       /* jQuery does not depend on Angular JS, but it must be loaded
        * afterwards to avoid subtle bugs. */
       deps : ['angular'],
       exports : '$'
+    },
+
+    'jquery-flexslider' : {
+      deps : ['jquery']
     }//,
 
     //'jquery-ui' : {
@@ -68,6 +68,7 @@ require({
 
   'domReady!',
   'angular',
+  'jquery',
 
   'bootstrap',
   'modernizr',
@@ -75,7 +76,7 @@ require({
   /* The application itself. */
   'applications'
 
-], function (document, angular) {
+], function (document, angular, $) {
 
   /* The requirements on this script ensure the application module has been
    * defined prior to bootstrapping AngularJS. If this is done in the wrong
