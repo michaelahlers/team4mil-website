@@ -9,4 +9,21 @@ html(lang='en')
     script(type='text/javascript', data-main='index', src='../lib/require-2.1.2.js')
 
   body(ng-controller='Application')
-    div(ng-view)
+    nav(class='navbar navbar-fixed-top')
+      div(class='navbar-inner')
+        div(class='container-fluid')
+          div(class='row-fluid')
+            div(class='span12')
+              a(class='brand', href='#/about') Team 4Mil
+              ul(class='nav')
+                li
+                  a(href='#/about') About
+                li
+                  a(href='#/sponsors') Sponsors
+
+    div(class='container-fluid')
+      div(class='row-fluid', ng-view)
+
+      footer(class='row-fluid')
+        div(class='span12')
+          p Footer content.

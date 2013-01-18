@@ -21,6 +21,11 @@ define(
         controller : 'About'
       })
 
+      $routeProvider.when('/sponsors', {
+        templateUrl : 'partials/sponsors',
+        controller : 'Sponsors'
+      })
+
       $routeProvider.otherwise({
         redirectTo : '/about'
       })

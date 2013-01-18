@@ -3,8 +3,8 @@
 define(
   [
     'controllers',
-
-    'controllers/About'
+    'controllers/About',
+    'controllers/Sponsors'
   ],
 
   function (controllers) {
