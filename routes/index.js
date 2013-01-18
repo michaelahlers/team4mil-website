@@ -17,7 +17,7 @@ exports.resources = function (req, res) {
       id = '452343718147971'
       break
     case 'sponsors':
-      id = '411911065524570/photos'
+      id = '452606691455007/photos'
   }
 
   req.facebook.api('/' + id, function (err, result) {
