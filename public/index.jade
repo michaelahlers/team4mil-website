@@ -11,17 +11,8 @@ html(lang='en')
     script(type='text/javascript', data-main='index', src='../lib/require-2.1.2.js')
 
   body(ng-controller='Application')
-    nav(class='navbar navbar-inverse navbar-fixed-top')
-      div(class='navbar-inner')
-        div(class='container-fluid')
-          div(class='row-fluid')
-            div(class='offset1 span10')
-              a(class='brand', href='#/about') Team 4Mil
-              ul(class='nav')
-                li(class='active')
-                  a(href='#/about') About
-                li
-                  a(href='#/sponsors') Sponsors
+    header
+      include header.jade
 
     div(class='container-fluid')
       ng-view
