@@ -1,12 +1,5 @@
 @import 'lib/chinstrap';
 
-@navbarMarginTop: 30px;
-@navbarMarginRight: 20px;
-@navbarMarginBottom: 20px;
-@navbarMarginLeft: 20px;
-
-@navbarHeight: 60px;
-
 .center {
   float: none;
   margin-left: auto;
@@ -47,6 +40,14 @@ body {
   .pull-right;
 }
 
+// Navigation styles.
+
+@navbarMarginTop: 30px;
+@navbarMarginRight: 20px;
+@navbarMarginBottom: 20px;
+@navbarMarginLeft: 20px;
+@navbarHeight: 60px;
+
 .navbar {
   margin: @navbarMarginTop @navbarMarginRight @navbarMarginBottom @navbarMarginLeft;
 
@@ -77,4 +78,9 @@ body {
     background-image: none;
     #translucent > .background(@grayDarker, 0.75);
   }
+}
+
+// Well styles.
+.well {
+  #translucent > .background(@wellBackground, 0.95);
 }
