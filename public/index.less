@@ -7,8 +7,6 @@
 
 @navbarHeight: 60px;
 
-//@baseFontSize: 20px;
-
 .center {
   float: none;
   margin-left: auto;
@@ -50,26 +48,27 @@ body {
 }
 
 .navbar {
-
   margin: @navbarMarginTop @navbarMarginRight @navbarMarginBottom @navbarMarginLeft;
 
   .brand {
     font-size: 25px;
-  }
 
-  .brand {
     img {
       width: 100px;
       position: absolute;
       top: -20px;
     }
   }
+
+  .nav {
+    font-size: @baseFontSize + 4px;
+  }
 }
 
 .navbar-fixed-top {
   .navbar-inner {
     .border-radius(@baseBorderRadius);
-    .box-shadow(0 1px 4px rgba(0,0,0,.065));
+    .box-shadow(0 3px 6px rgba(0,0,0,.5));
   }
 }
 
