@@ -1,8 +1,13 @@
 @import 'lib/twitter-bootstrap-558bc52/less/bootstrap.less';
 
+@navbarMarginTop: 30px;
+@navbarMarginRight: 20px;
+@navbarMarginBottom: 20px;
+@navbarMarginLeft: 20px;
+
 @navbarHeight: 60px;
 
-@baseFontSize: 20px;
+//@baseFontSize: 20px;
 
 .center {
   float: none;
@@ -16,7 +21,7 @@ html, body {
 
 /* Cope with the fixed-position navigation bar. */
 body {
-  padding-top: @navbarHeight + 20px;
+  padding-top: @navbarHeight + @navbarMarginTop + @navbarMarginBottom + 20px;
 }
 
 body {
@@ -44,7 +49,33 @@ body {
   .pull-right;
 }
 
-.navbar-inverse .navbar-inner {
-  background-image: none;
-  #translucent > .background(@grayDarker, 0.75);
+.navbar {
+
+  margin: @navbarMarginTop @navbarMarginRight @navbarMarginBottom @navbarMarginLeft;
+
+  .brand {
+    font-size: 25px;
+  }
+
+  .brand {
+    img {
+      width: 100px;
+      position: absolute;
+      top: -20px;
+    }
+  }
+}
+
+.navbar-fixed-top {
+  .navbar-inner {
+    .border-radius(@baseBorderRadius);
+    .box-shadow(0 1px 4px rgba(0,0,0,.065));
+  }
+}
+
+.navbar-inverse {
+  .navbar-inner {
+    background-image: none;
+    #translucent > .background(@grayDarker, 0.75);
+  }
 }
