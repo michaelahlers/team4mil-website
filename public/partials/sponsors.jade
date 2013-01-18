@@ -1,5 +1,2 @@
-div(class='row-fluid')
-  div(class='span12')
-    div(class='hero-unit')
-      h1 Sponsors
-      p People who give us money.
+div(class='row-fluid', ng-repeat='group in getSponsorGroups()')
+  img(class='span3', ng-repeat='sponsor in group', ng-src='{{sponsor.picture}}')
