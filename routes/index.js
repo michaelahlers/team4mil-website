@@ -22,7 +22,7 @@ exports.resources = function (req, res) {
 
   req.facebook.api('/' + id, function (err, result) {
     if (err) {
-      res.json(err)
+      res.json(500, err)
       return
     }
 
