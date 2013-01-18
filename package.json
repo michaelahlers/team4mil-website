@@ -1,6 +1,6 @@
 {
   "name" : "team4mil",
-  "version" : "0.0.2",
+  "version" : "0.0.3",
   "description" : "Web site for Team 4Mil.",
   "private" : true,
   "dependencies" : {
