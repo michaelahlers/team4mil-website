@@ -9,7 +9,7 @@ define(
 
     services.factory('Resource', function ($resource, $log) {
 
-      var service = $resource('/resources/:name', { 'resource' : '@resource' })
+      var service = $resource('/resources/:name')
 
       return service
 
