@@ -14,11 +14,18 @@ exports.resources = function (req, res) {
 
   switch (req.params.name) {
     case 'about':
-      id = 452343718147971
+      id = '452343718147971'
       break
+    case 'sponsors':
+      id = '411911065524570/photos'
   }
 
-  req.facebook.api('/' + id, function (err, user) {
-    res.json(user)
+  req.facebook.api('/' + id, function (err, result) {
+    if (err) {
+      res.json(err)
+      return
+    }
+
+    res.json(result)
   })
 }
