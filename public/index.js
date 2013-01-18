@@ -10,7 +10,7 @@ require({
     'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
     'domReady' : 'lib/domReady-2.0.1',
     'jquery' : 'lib/jquery-1.8.3',
-    'jquery-flexslider' : 'lib/woothemes-FlexSlider-54e6d31/jquery.flexslider',
+    'jquery-imagesLoaded' : 'lib/masonry-master/jquery.imagesloaded.min',
     'jquery-masonry' : 'lib/masonry-master/jquery.masonry',
     'modernizr' : 'lib/modernizr-2.6.1',
     'text' : 'lib/text-2.0.3.js'
@@ -53,12 +53,12 @@ require({
       exports : '$'
     },
 
-    'jquery-flexslider' : {
+    'jquery-imagesLoaded' : {
       deps : ['jquery']
     },
 
     'jquery-masonry' : {
-      deps : ['jquery']
+      deps : ['jquery', 'jquery-imagesLoaded']
     }//,
 
     //'jquery-ui' : {
