@@ -1,4 +1,7 @@
-@import 'lib/bootstrap-2.2.2/css/bootstrap.less';
+@import 'lib/twitter-bootstrap-558bc52/less/bootstrap.less';
+
+@navbar-margin: 0;
+@navbar-min-height: 40px;
 
 .center {
   float: none;
@@ -12,7 +15,7 @@ html, body {
 
 /* Cope with the fixed-position navigation bar. */
 body {
-  padding-top: 60px;
+  padding-top: @navbar-margin + @navbar-min-height + 20px;
 }
 
 body {
