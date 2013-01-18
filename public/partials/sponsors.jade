@@ -1,2 +1,5 @@
-div(class='row-fluid', ng-repeat='group in getSponsorGroups()')
-  img(class='span3 well well-small', ng-repeat='sponsor in group', ng-src='{{sponsor.source}}')
+div(class='row-fluid')
+  div(class='offset1 span10')
+    div(class='container-fluid')
+      div(class='row-fluid', ng-repeat='group in getSponsorGroups()')
+        img(class='span3 img-polaroid', ng-repeat='sponsor in group', ng-src='{{sponsor.source}}')
