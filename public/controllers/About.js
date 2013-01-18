@@ -1,6 +1,6 @@
 'use strict'
 
-define(['controllers'], function (controllers) {
-  controllers.controller('About', function ($rootScope, $scope) {
+define(['controllers', 'services/Resource'], function (controllers) {
+  controllers.controller('About', function ($rootScope, $scope, Resource) {
   })
 })
