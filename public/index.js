@@ -71,7 +71,6 @@ require({
   'jquery',
 
   'bootstrap',
-  'modernizr',
 
   /* The application itself. */
   'applications'
