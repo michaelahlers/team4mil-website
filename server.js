@@ -52,7 +52,7 @@ server.get('/', routes.index)
 server.get('/partials/:name', routes.partials)
 
 server.get('/facebook', /*Facebook.loginRequired(),*/ function (req, res) {
-  req.facebook.api('/352101904878722/notes', function (err, user) {
+  req.facebook.api('/452343718147971', function (err, user) {
     res.json(user)
   })
 
