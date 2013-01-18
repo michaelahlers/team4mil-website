@@ -15,16 +15,16 @@ html(lang='en')
       div(class='navbar-inner')
         div(class='container-fluid')
           div(class='row-fluid')
-            div(class='span12')
+            div(class='offset1 span10')
               a(class='brand', href='#/about') Team 4Mil
               ul(class='nav')
-                li
+                li(class='active')
                   a(href='#/about') About
                 li
                   a(href='#/sponsors') Sponsors
 
     div(class='container-fluid')
-      div(class='row-fluid', ng-view)
+      ng-view
 
       footer(class='row-fluid')
         div(class='span12')
