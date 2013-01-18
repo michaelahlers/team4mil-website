@@ -1,5 +1,11 @@
 div(class='row-fluid')
   div(class='offset1 span10')
     div(class='container-fluid')
-      div(class='row-fluid', ng-repeat='group in getSponsorGroups()')
-        img(class='span3 img-polaroid', ng-repeat='sponsor in group', ng-src='{{sponsor.source}}')
+      div(class='row-fluid', pc-masonry='div')
+        //div(class='span3 well well-small', ng-repeat='sponsor in sponsors.data')
+        img(class=' ', style='display: block; width: 200px; margin: 10px; float: left;', ng-src='{{sponsor.source}}', ng-repeat='sponsor in sponsors.data')
+        //| Another proud sponsor.
+        //div(class='span3 well well-small', ng-repeat='sponsor in sponsors.data')
+        img(class=' ', style='display: block; width: 200px; margin: 10px; float: left;', ng-src='{{sponsor.source}}', ng-repeat='sponsor in sponsors.data')
+        //| Another proud sponsor.
+        img(class=' ', style='display: block; width: 200px; margin: 10px; float: left;', ng-src='{{sponsor.source}}', ng-repeat='sponsor in sponsors.data')

@@ -4,7 +4,9 @@ define([
 
   'controllers',
 
-  'services/Resource'
+  'services/Resource',
+
+  'directives/masonry'
 
 ], function (controllers) {
   controllers.controller('Sponsors', function ($rootScope, $scope, $log, Resource) {
@@ -23,5 +25,20 @@ define([
 
       return sponsors
     }
+
+//    $scope.$watch('sponsors', function (outgoing, incoming) {
+//      $(function () {
+//
+//        var $container = $('#logos');
+//
+//        $container.imagesLoaded(function () {
+//          alert('')
+//          $container.masonry({
+//            itemSelector : 'img'
+//          })
+//        })
+//
+//      })
+//    })
   })
 })

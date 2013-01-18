@@ -12,7 +12,7 @@ define(
   ],
   function (angular) {
 
-    var module = angular.module('app', [ 'controllers'/*, 'directives'*/])
+    var module = angular.module('app', [ 'controllers', 'directives'])
 
     module.config(function ($routeProvider, $locationProvider) {
 
