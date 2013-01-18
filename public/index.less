@@ -1,7 +1,8 @@
 @import 'lib/twitter-bootstrap-558bc52/less/bootstrap.less';
 
-@navbar-margin: 0;
-@navbar-min-height: 40px;
+@navbarHeight: 60px;
+
+@baseFontSize: 20px;
 
 .center {
   float: none;
@@ -15,7 +16,7 @@ html, body {
 
 /* Cope with the fixed-position navigation bar. */
 body {
-  padding-top: @navbar-margin + @navbar-min-height + 20px;
+  padding-top: @navbarHeight + 20px;
 }
 
 body {
@@ -41,4 +42,9 @@ body {
 
 .photo_right {
   .pull-right;
+}
+
+.navbar-inverse .navbar-inner {
+  background-image: none;
+  #translucent > .background(@grayDarker, 0.75);
 }
