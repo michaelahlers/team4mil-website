@@ -51,7 +51,8 @@ server.configure('development', function () {
 server.get('/', routes.index)
 server.get('/partials/:name', routes.partials)
 
-server.get('/resources/:name', routes.resources)
+server.get('/resources/about', routes.about)
+server.get('/resources/sponsors', routes.sponsors)
 
 http.createServer(server).listen(server.get('port'), function () {
   console.log('Express server listening on port ' + server.get('port') + '.')
