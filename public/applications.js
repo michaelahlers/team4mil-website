@@ -7,7 +7,7 @@ define(
     'controllers',
     'controllers/Application',
 
-    'controllers/About',
+    'controllers/Mission',
     'controllers/Contact',
     'controllers/Sponsors',
 
@@ -19,9 +19,14 @@ define(
 
     module.config(function ($routeProvider, $locationProvider) {
 
-      $routeProvider.when('/about', {
-        templateUrl : 'partials/about',
-        controller : 'About'
+      $routeProvider.when('/mission', {
+        templateUrl : 'partials/mission',
+        controller : 'Mission'
+      })
+
+      $routeProvider.when('/teams', {
+        templateUrl : 'partials/teams',
+        controller : 'Teams'
       })
 
       $routeProvider.when('/sponsors', {
@@ -35,7 +40,7 @@ define(
       })
 
       $routeProvider.otherwise({
-        redirectTo : '/about'
+        redirectTo : '/mission'
       })
 
     })

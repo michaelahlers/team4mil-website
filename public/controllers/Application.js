@@ -3,8 +3,10 @@
 define(
   [
     'controllers',
-    'controllers/About',
-    'controllers/Sponsors'
+    'controllers/Mission',
+    'controllers/Teams',
+    'controllers/Sponsors',
+    'controllers/Contact'
   ],
 
   function (controllers) {

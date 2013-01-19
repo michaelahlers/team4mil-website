@@ -11,7 +11,7 @@ exports.partials = function (req, res) {
   res.render('partials/' + req.params.name)
 }
 
-exports.about = function (req, res) {
+exports.mission = function (req, res) {
   req.facebook.api('/452343718147971', function (err, result) {
     if (err) {
       res.json(500, err)
