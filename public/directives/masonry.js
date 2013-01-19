@@ -15,21 +15,19 @@ define([
       restrict : 'A',
 
       controller : function ($rootScope, $scope, $element, $attrs, $log) {
-        $log.log('controller')
-      },
+        var $container = $($element)
 
-      link : function (scope, iElement, iAttrs) {
-        var $container = $(iElement);
+        $container.masonry({
+          columnWidth : function (containerWidth) {
+            return containerWidth / 4;
+          }
+        })
 
-        setTimeout(function () {
+        $scope.$watch(function () {
           $container.imagesLoaded(function () {
-            $container.masonry({
-              columnWidth : function (containerWidth) {
-                return containerWidth / 4;
-              }
-            })
+            $container.masonry('reload')
           })
-        }, 1000)
+        })
       }
     }
   })
