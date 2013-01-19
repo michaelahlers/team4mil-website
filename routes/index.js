@@ -1,6 +1,8 @@
 /*jshint node:true*/
 'use strict'
 
+var async = require('async')
+
 exports.index = function (req, res) {
   res.render('index')
 }
@@ -36,7 +38,23 @@ exports.news = function (req, res) {
 }
 
 exports.sponsors = function (req, res) {
-  req.facebook.api('/452606691455007/photos', function (err, result) {
+
+  async.parallel([
+
+    function (callback) {
+      req.facebook.api('/452941154754894', function (err, result) {
+        callback(err, result)
+      })
+    },
+
+    function (callback) {
+      req.facebook.api('/452606691455007/photos', function (err, result) {
+        callback(err, result)
+      })
+    }
+
+  ], function (err, results) {
+
     if (err) {
       res.json(500, err)
       return
@@ -44,7 +62,9 @@ exports.sponsors = function (req, res) {
 
     res.json(
       {
-        records : result.data.map(function (sponsor) {
+        title : results[0].subject,
+        summary : results[0].message,
+        sponsors : results[1].data.map(function (sponsor) {
             return {
               id : sponsor.id,
               title : sponsor.name.split('\n')[0],
@@ -57,5 +77,6 @@ exports.sponsors = function (req, res) {
         )
       }
     )
+
   })
 }
