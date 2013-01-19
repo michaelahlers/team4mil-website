@@ -20,6 +20,17 @@ exports.about = function (req, res) {
   })
 }
 
+exports.news = function (req, res) {
+  req.facebook.api('/175224842526528?fields=posts', function (err, result) {
+    if (err) {
+      res.json(500, err)
+      return
+    }
+
+    res.json(result)
+  })
+}
+
 exports.sponsors = function (req, res) {
   req.facebook.api('/452606691455007/photos', function (err, result) {
     if (err) {

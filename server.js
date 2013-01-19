@@ -52,6 +52,7 @@ server.get('/', routes.index)
 server.get('/partials/:name', routes.partials)
 
 server.get('/resources/about', routes.about)
+server.get('/resources/news', routes.news)
 server.get('/resources/sponsors', routes.sponsors)
 
 http.createServer(server).listen(server.get('port'), function () {
