@@ -26,14 +26,30 @@ exports.mission = function (req, res) {
   })
 }
 
-exports.news = function (req, res) {
-  req.facebook.api('/175224842526528?fields=posts', function (err, result) {
+exports.teams = function (req, res) {
+
+  async.parallel([
+
+    function (callback) {
+      req.facebook.api('/452954424753567', function (err, result) {
+        callback(err, result)
+      })
+    },
+
+  ], function (err, results) {
+
     if (err) {
       res.json(500, err)
       return
     }
 
-    res.json(result)
+    res.json(
+      {
+        title : results[0].subject,
+        summary : results[0].message
+      }
+    )
+
   })
 }
 
@@ -75,6 +91,33 @@ exports.sponsors = function (req, res) {
             }
           }
         )
+      }
+    )
+
+  })
+}
+
+exports.contact = function (req, res) {
+
+  async.parallel([
+
+    function (callback) {
+      req.facebook.api('/452955478086795', function (err, result) {
+        callback(err, result)
+      })
+    },
+
+  ], function (err, results) {
+
+    if (err) {
+      res.json(500, err)
+      return
+    }
+
+    res.json(
+      {
+        title : results[0].subject,
+        summary : results[0].message
       }
     )
 
