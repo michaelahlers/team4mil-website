@@ -11,10 +11,6 @@ html, body {
   height: 100%;
 }
 
-/* Cope with the fixed-position navigation bar. */
-body { //padding-top: @navbarHeight + @navbarMarginTop + @navbarMarginBottom + 20px;
-}
-
 .hero-about {
   background-image: url('images/backgrounds/team4mil-coin_3000x2000.jpeg');
   background-size: cover;
@@ -27,7 +23,7 @@ body { //padding-top: @navbarHeight + @navbarMarginTop + @navbarMarginBottom + 2
 
   .hero-title-about {
     margin: auto @gridGutterWidth;
-    font-size: @baseFontSize * 3; //margin: 200px @gridGutterWidth @gridGutterWidth @gridGutterWidth;
+    font-size: @baseFontSize * 3;
     color: white;
     text-shadow: @shadowDropSharp;
   }
@@ -37,6 +33,35 @@ body { //padding-top: @navbarHeight + @navbarMarginTop + @navbarMarginBottom + 2
     padding: @gridGutterWidth;
     font-size: @baseFontSize * 1.5;
     line-height: @baseLineHeight * 1.5;
+    color: white;
+    text-shadow: @shadowDropSharp;
+    #translucent > .background(@black, .75);
+    .border-radius(@baseBorderRadius);
+  }
+}
+
+.hero-teams {
+  background-image: url('images/backgrounds/2012-complete-rider-team_2048x1356.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.min.htc');
+
+  padding-top: 150px;
+  padding-bottom: 50px;
+
+  .hero-title-teams {
+    margin: auto @gridGutterWidth;
+    font-size: @baseFontSize * 3;
+    color: white;
+    text-shadow: @shadowDropSharp;
+  }
+
+  .hero-summary-teams {
+    margin: @gridGutterWidth;
+    padding: @gridGutterWidth;
+    font-size: @baseFontSize * 1.25;
+    line-height: @baseLineHeight * 1.25;
     color: white;
     text-shadow: @shadowDropSharp;
     #translucent > .background(@black, .75);
@@ -56,7 +81,7 @@ body { //padding-top: @navbarHeight + @navbarMarginTop + @navbarMarginBottom + 2
 
   .hero-title-sponsors {
     margin: auto @gridGutterWidth;
-    font-size: @baseFontSize * 3; //margin: 200px @gridGutterWidth @gridGutterWidth @gridGutterWidth;
+    font-size: @baseFontSize * 3;
     color: white;
     text-shadow: @shadowDropSharp;
   }
