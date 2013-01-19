@@ -16,7 +16,11 @@ exports.about = function (req, res) {
       return
     }
 
-    res.json(result)
+    res.json({
+      id : result.id,
+      title : result.subject,
+      summary : result.message
+    })
   })
 }
 
