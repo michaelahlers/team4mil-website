@@ -27,13 +27,18 @@ exports.sponsors = function (req, res) {
       return
     }
 
-    res.json(result.data.map(function (sponsor) {
-      return {
-        id : sponsor.id,
-        source : sponsor.images.filter(function (image) {
-          return 480 == image.width
-        })[0].source
+    res.json(
+      {
+        records : result.data.map(function (sponsor) {
+            return {
+              id : sponsor.id,
+              source : sponsor.images.filter(function (image) {
+                return 480 == image.width
+              })[0].source
+            }
+          }
+        )
       }
-    }))
+    )
   })
 }
