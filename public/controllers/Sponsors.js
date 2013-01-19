@@ -11,7 +11,5 @@ define([
 ], function (controllers) {
   controllers.controller('Sponsors', function ($rootScope, $scope, $log, Resource) {
     $scope.sponsors = Resource.get({name : 'sponsors'})
-
-    $log.log($scope.sponsors)
   })
 })
