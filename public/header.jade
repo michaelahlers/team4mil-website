@@ -6,13 +6,13 @@ nav(class='navbar navbar-inverse navbar-fixed-top')
           a(class='brand', href='#/about')
             img(src='images/logos/team4mil_200x200.png', alt='Team 4Mil - For the Military, Warriors and Veterans')
           ul(class='nav pull-right')
-            li(class='active')
+            li(ng-class="{'About':'active'}[controller]")
               a(href='#/about')
                 | About
-            li
+            li(ng-class="{'Sponsors':'active'}[controller]")
               a(href='#/sponsors')
                 | Sponsors
-            li
+            li(ng-class="{'Contact':'active'}[controller]")
               a(href='#/contact')
                 | Contact
             li
