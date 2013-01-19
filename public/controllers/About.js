@@ -1,7 +1,18 @@
 'use strict'
 
-define(['controllers', 'services/Resource'], function (controllers) {
-  controllers.controller('About', function ($rootScope, $scope, Resource) {
-    $scope.content = Resource.get({name : 'about'})
+define([
+
+  'controllers',
+
+  'services/Cache',
+  'services/Resource'
+
+], function (controllers) {
+
+  controllers.controller('About', function ($rootScope, $scope, $log, Cache, Resource) {
+    $scope.content = Cache.get('about', function () {
+      return Resource.get({name : 'about'})
+    })
   })
+
 })
