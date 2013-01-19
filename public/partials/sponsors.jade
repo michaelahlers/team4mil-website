@@ -1,11 +1,12 @@
 div(class='row-fluid')
-  div(class='offset1 span10')
-    div(class='container-fluid')
-      div(class='row-fluid', pc-masonry='div')
-        //div(class='span3 well well-small', ng-repeat='sponsor in sponsors.data')
-        img(class=' ', style='display: block; width: 200px; margin: 10px; float: left;', ng-src='{{sponsor.source}}', ng-repeat='sponsor in sponsors.data')
-        //| Another proud sponsor.
-        //div(class='span3 well well-small', ng-repeat='sponsor in sponsors.data')
-        img(class=' ', style='display: block; width: 200px; margin: 10px; float: left;', ng-src='{{sponsor.source}}', ng-repeat='sponsor in sponsors.data')
-        //| Another proud sponsor.
-        img(class=' ', style='display: block; width: 200px; margin: 10px; float: left;', ng-src='{{sponsor.source}}', ng-repeat='sponsor in sponsors.data')
+  div(class='offset1 span10', pc-masonry)
+    div(class='', style='width: 25%;', ng-repeat='sponsor in sponsors.data')
+      div(class='img-polaroid', style='margin: 10px;')
+        img(ng-src='{{sponsor.source}}')
+        p Another proud sponsor!
+      div(class='img-polaroid', style='margin: 10px;')
+        img(ng-src='{{sponsor.source}}')
+        p Another proud sponsor!
+      div(class='img-polaroid', style='margin: 10px;')
+        img(ng-src='{{sponsor.source}}')
+        p Another proud sponsor!

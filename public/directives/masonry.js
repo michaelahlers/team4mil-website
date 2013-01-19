@@ -23,7 +23,11 @@ define([
 
         setTimeout(function () {
           $container.imagesLoaded(function () {
-            $container.masonry()
+            $container.masonry({
+              columnWidth : function (containerWidth) {
+                return containerWidth / 4;
+              }
+            })
           })
         }, 1000)
       }
