@@ -32,6 +32,8 @@ exports.sponsors = function (req, res) {
         records : result.data.map(function (sponsor) {
             return {
               id : sponsor.id,
+              title : sponsor.name.split('\n')[0],
+              location : sponsor.name.split('\n')[1],
               source : sponsor.images.filter(function (image) {
                 return 480 == image.width
               })[0].source
