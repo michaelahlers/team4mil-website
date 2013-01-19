@@ -1,6 +1,7 @@
-div(class='row-fluid')
-  div(class='offset1 span10')
-    div(class='hero-unit hero-about')
-      h1 {{content.subject}}
-    div(class='well well-large')
-      p(ng-bind-html='content.message')
+div(class='container-fluid hero-about')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      h1(class='header-about') {{content.subject}}
+  div(class='row-fluid')
+    div(class='offset1 span8')
+      div(class='body-about', ng-bind-html='content.message')
