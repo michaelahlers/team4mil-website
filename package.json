@@ -4,8 +4,10 @@
   "description" : "Web site for Team 4Mil.",
   "private" : true,
   "dependencies" : {
+    "async" : "*",
     "express" : "3.x",
     "facebook-node-sdk" : "0.2.x",
+    "futures" : ">=2.1.0",
     "jade" : "*",
     "less-middleware" : "0.1.x"
   },
