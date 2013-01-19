@@ -17,10 +17,15 @@ define([
       controller : function ($rootScope, $scope, $element, $attrs, $log) {
         var $container = $($element)
 
-        $container.masonry({
-          columnWidth : function (containerWidth) {
-            return containerWidth / 4;
-          }
+        $container.css({ opacity : 0 })
+
+        $container.imagesLoaded(function () {
+          $container.masonry({
+            columnWidth : function (containerWidth) {
+              return containerWidth / 4;
+            }
+          })
+          $container.css({ opacity : 1 })
         })
 
         $scope.$watch(function () {
