@@ -6,7 +6,10 @@ define(
 
     'controllers',
     'controllers/Application',
+
     'controllers/About',
+    'controllers/Contact',
+    'controllers/Sponsors',
 
     'directives'
   ],
@@ -24,6 +27,11 @@ define(
       $routeProvider.when('/sponsors', {
         templateUrl : 'partials/sponsors',
         controller : 'Sponsors'
+      })
+
+      $routeProvider.when('/contact', {
+        templateUrl : 'partials/contact',
+        controller : 'Contact'
       })
 
       $routeProvider.otherwise({
