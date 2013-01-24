@@ -36,6 +36,30 @@ exports.teams = function (req, res) {
       })
     },
 
+    function (callback) {
+      req.facebook.api('/455292724519737', function (err, result) {
+        callback(err, result)
+      })
+    },
+
+    function (callback) {
+      req.facebook.api('/455292724519737/photos', function (err, result) {
+        callback(err, result)
+      })
+    },
+
+    function (callback) {
+      req.facebook.api('/455292931186383', function (err, result) {
+        callback(err, result)
+      })
+    },
+
+    function (callback) {
+      req.facebook.api('/455292931186383/photos', function (err, result) {
+        callback(err, result)
+      })
+    }
+
   ], function (err, results) {
 
     if (err) {
@@ -46,7 +70,29 @@ exports.teams = function (req, res) {
     res.json(
       {
         title : results[0].subject,
-        summary : results[0].message
+        summary : results[0].message,
+        teams : [
+          {
+            title : results[1].name,
+            summary : results[1].description,
+            members : results[2].data.map(function (image) {
+              return {
+                name : image.name,
+                source : image.source
+              }
+            })
+          },
+          {
+            title : results[3].name,
+            summary : results[3].description,
+            members : results[4].data.map(function (image) {
+              return {
+                name : image.name,
+                source : image.source
+              }
+            })
+          }
+        ]
       }
     )
 
@@ -105,7 +151,7 @@ exports.contact = function (req, res) {
       req.facebook.api('/452955478086795', function (err, result) {
         callback(err, result)
       })
-    },
+    }
 
   ], function (err, results) {
 
