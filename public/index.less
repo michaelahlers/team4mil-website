@@ -22,14 +22,12 @@ html, body {
   padding-bottom: 150px;
 
   .hero-title-about {
-    margin: auto @gridGutterWidth;
     font-size: @baseFontSize * 3;
     color: white;
     text-shadow: @shadowDropSharp;
   }
 
   .hero-summary-about {
-    margin: @gridGutterWidth;
     padding: @gridGutterWidth;
     font-size: @baseFontSize * 1.5;
     line-height: @baseLineHeight * 1.5;
@@ -51,14 +49,12 @@ html, body {
   padding-bottom: 150px;
 
   .hero-title-teams {
-    margin: auto @gridGutterWidth;
     font-size: @baseFontSize * 3;
     color: white;
     text-shadow: @shadowDropSharp;
   }
 
   .hero-summary-teams {
-    margin: @gridGutterWidth;
     padding: @gridGutterWidth;
     font-size: @baseFontSize * 1.25;
     line-height: @baseLineHeight * 1.25;
@@ -80,14 +76,12 @@ html, body {
   padding-bottom: 150px;
 
   .hero-title-sponsors {
-    margin: auto @gridGutterWidth;
     font-size: @baseFontSize * 3;
     color: white;
     text-shadow: @shadowDropSharp;
   }
 
   .hero-summary-sponsors {
-    margin: @gridGutterWidth;
     padding: @gridGutterWidth;
     font-size: @baseFontSize * 1.25;
     line-height: @baseLineHeight * 1.25;
@@ -113,14 +107,12 @@ html, body {
   padding-bottom: 150px;
 
   .hero-title-contact {
-    margin: auto @gridGutterWidth;
     font-size: @baseFontSize * 3;
     color: white;
     text-shadow: @shadowDropSharp;
   }
 
   .hero-summary-contact {
-    margin: @gridGutterWidth;
     padding: @gridGutterWidth;
     font-size: @baseFontSize * 1.25;
     line-height: @baseLineHeight * 1.25;
@@ -153,6 +145,11 @@ html, body {
 
 .navbar {
   margin: @navbarMarginTop @navbarMarginRight @navbarMarginBottom @navbarMarginLeft;
+
+  .container-fluid {
+    margin-left: -@navbarMarginLeft;
+    margin-right: -@navbarMarginRight;
+  }
 
   .brand {
     font-size: 25px;
