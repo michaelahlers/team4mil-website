@@ -18,6 +18,6 @@ div(class='container-fluid body-sponsors')
     div(class='span5')
       h2 {{content.teams[1].title}}
       p {{content.teams[1].summary}}
-      div(ng-repeat='member in content.teams[0].members')
+      div(ng-repeat='member in content.teams[1].members')
         img(class='img-polaroid', ng-src='{{member.source}}')
         p {{member.name}}
