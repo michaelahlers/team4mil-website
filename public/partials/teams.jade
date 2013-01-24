@@ -8,5 +8,16 @@ div(class='container-fluid hero-teams')
 
 div(class='container-fluid body-sponsors')
   div(class='row-fluid')
-    div(class='offset1 span10')
-      p Team bio columns go here&hellip;
+    div(class='offset1 span5')
+      h2 {{content.teams[0].title}}
+      p {{content.teams[0].summary}}
+      div(ng-repeat='member in content.teams[0].members')
+        img(class='img-polaroid', ng-src='{{member.source}}')
+        p {{member.name}}
+
+    div(class='span5')
+      h2 {{content.teams[1].title}}
+      p {{content.teams[1].summary}}
+      div(ng-repeat='member in content.teams[0].members')
+        img(class='img-polaroid', ng-src='{{member.source}}')
+        p {{member.name}}
