@@ -1,7 +1,8 @@
 /*jshint node:true*/
 'use strict'
 
-var async = require('async')
+var async = require('async'),
+  util = require('util')
 
 exports.index = function (req, res) {
   res.render('index')
@@ -23,6 +24,24 @@ exports.mission = function (req, res) {
       title : result.subject,
       summary : result.message
     })
+  })
+}
+
+exports.members = function (req, res) {
+  var template = 'SELECT title, content FROM note WHERE uid="175224842526528" and title="%s"'
+  var query = util.format(template, req.params.name)
+
+  req.facebook.api('/fql', {q : query}, function (err, result) {
+    if (err) {
+      res.json(500, err)
+      return
+    }
+
+    if (0 == result.data.length || 1 < result.data.length) {
+      res.json(500, result)
+    }
+
+    res.json(result)
   })
 }
 
