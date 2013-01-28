@@ -27,18 +27,17 @@ exports.mission = function (req, res) {
   })
 }
 
-exports.members = function (req, res) {
+var getMember = function (facebook, name, callback) {
   var template = 'SELECT title, content FROM note WHERE uid="175224842526528" and title="%s"'
-  var query = util.format(template, req.params.name)
+  var query = util.format(template, name)
+  facebook.api('/fql', {q : query}, callback)
+}
 
-  req.facebook.api('/fql', {q : query}, function (err, result) {
-    if (err) {
+exports.members = function (req, res) {
+  getMember(req.facebook, req.params.name, function (err, result) {
+    if (err || 0 == result.data.length || 1 < result.data.length) {
       res.json(500, err)
       return
-    }
-
-    if (0 == result.data.length || 1 < result.data.length) {
-      res.json(500, result)
     }
 
     res.json(result)
@@ -85,6 +84,9 @@ exports.teams = function (req, res) {
       res.json(500, err)
       return
     }
+
+    var title = results[0].subject
+      , summary = results[0].message
 
     res.json(
       {
