@@ -27,31 +27,22 @@ exports.mission = function (req, res) {
   })
 }
 
-var getMember = function (facebook, name, callback) {
-  var template = 'SELECT title, content FROM note WHERE uid="175224842526528" and title="%s"'
-  var query = util.format(template, name)
-  facebook.api('/fql', {q : query}, callback)
-}
-
-exports.members = function (req, res) {
-  getMember(req.facebook, req.params.name, function (err, result) {
-    if (err || 0 == result.data.length || 1 < result.data.length) {
-      res.json(500, err)
-      return
-    }
-
-    res.json(result)
-  })
-}
+//var getMember = function (facebook, name, callback) {
+//  var template = 'SELECT title, content FROM note WHERE uid="175224842526528" and title="%s"'
+//  var query = util.format(template, name)
+//  facebook.api('/fql', {q : query}, callback)
+//}
 
 exports.teams = function (req, res) {
 
+  /* Facebook may eventually hate us, but that would be a good problem to have. */
   var calls = [
     '/452954424753567',
     '/455292724519737',
     '/455292724519737/photos',
     '/455292931186383',
-    '/455292931186383/photos'
+    '/455292931186383/photos',
+    '/175224842526528?fields=notes'
   ]
 
   async.map(
@@ -71,8 +62,14 @@ exports.teams = function (req, res) {
         return
       }
 
-      var title = results[0].subject
-        , summary = results[0].message
+      /* This is not the worst thing I have ever done. */
+      var getBiography = function (name) {
+        var note = results[5].notes.data.filter(function (note) {
+          return name == note.subject
+        }) [0]
+
+        return note || {}
+      }
 
       res.json(
         {
@@ -85,7 +82,8 @@ exports.teams = function (req, res) {
               members : results[2].data.map(function (image) {
                 return {
                   name : image.name,
-                  source : image.source
+                  source : image.source,
+                  biography : getBiography(image.name).message
                 }
               })
             },
@@ -95,7 +93,8 @@ exports.teams = function (req, res) {
               members : results[4].data.map(function (image) {
                 return {
                   name : image.name,
-                  source : image.source
+                  source : image.source,
+                  biography : getBiography(image.name).message
                 }
               })
             }
