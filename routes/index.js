@@ -73,6 +73,13 @@ exports.teams = function (req, res) {
         return note || {}
       }
 
+      var toId = function (name) {
+        return name
+          .replace(/[“”]/g, '')
+          .replace(/[\s]/g, '-')
+          .toLowerCase()
+      }
+
       res.json(
         {
           title : results[0].subject,
@@ -83,6 +90,7 @@ exports.teams = function (req, res) {
               summary : results[1].description,
               members : results[2].data.map(function (image) {
                 return {
+                  id : toId(image.name),
                   name : image.name,
                   source : image.source,
                   biography : getBiography(image.name).message.replace(/\<p\>\s*\<\/p\>/g, '')
@@ -94,6 +102,7 @@ exports.teams = function (req, res) {
               summary : results[3].description,
               members : results[4].data.map(function (image) {
                 return {
+                  id : toId(image.name),
                   name : image.name,
                   source : image.source,
                   biography : getBiography(image.name).message.replace(/\<p\>\s*\<\/p\>/g, '')
