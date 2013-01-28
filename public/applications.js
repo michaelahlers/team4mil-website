@@ -29,6 +29,11 @@ define(
         controller : 'Teams'
       })
 
+      $routeProvider.when('/teams/:id', {
+        templateUrl : 'partials/teams',
+        controller : 'Teams'
+      })
+
       $routeProvider.when('/sponsors', {
         templateUrl : 'partials/sponsors',
         controller : 'Sponsors'
