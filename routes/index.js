@@ -64,6 +64,8 @@ exports.teams = function (req, res) {
 
       /* This is not the worst thing I have ever done. */
       var getBiography = function (name) {
+        name = (name || '').trim()
+
         var note = results[5].notes.data.filter(function (note) {
           return name == note.subject
         }) [0]
