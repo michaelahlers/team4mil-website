@@ -11,13 +11,19 @@ div(class='container-fluid body-sponsors')
     div(class='offset1 span5')
       h2 {{content.teams[0].title}}
       p {{content.teams[0].summary}}
-      div(ng-repeat='member in content.teams[0].members')
-        img(class='img-polaroid', ng-src='{{member.source}}')
-        p {{member.name}}
+
+      div(class='media', ng-repeat='member in content.teams[0].members')
+        a(class='pull-left span4', href='#')
+          img(class='media-object', ng-src='{{member.source}}')
+        div(class='media-body')
+          h3(class='media-heading') {{member.name}}
 
     div(class='span5')
       h2 {{content.teams[1].title}}
       p {{content.teams[1].summary}}
-      div(ng-repeat='member in content.teams[1].members')
-        img(class='img-polaroid', ng-src='{{member.source}}')
-        p {{member.name}}
+
+      div(class='media', ng-repeat='member in content.teams[1].members')
+        a(class='pull-left span4', href='#')
+          img(class='media-object', ng-src='{{member.source}}')
+        div(class='media-body')
+          h3(class='media-heading') {{member.name}}
