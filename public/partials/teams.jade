@@ -13,7 +13,7 @@ div(class='container-fluid body-sponsors')
       p {{content.teams[0].summary}}
 
       div(class='media', ng-repeat='member in content.teams[0].members')
-        a(class='pull-left span4', ng-href='#/teams/{{member.id}}')
+        a(class='pull-left span4', ng-href='#/teams?id={{member.id}}')
           img(class='media-object img-rounded', ng-src='{{member.source}}')
         div(class='media-body')
           h3(class='media-heading') {{member.name}}
@@ -24,7 +24,7 @@ div(class='container-fluid body-sponsors')
       p {{content.teams[1].summary}}
 
       div(class='media', ng-repeat='member in content.teams[1].members')
-        a(class='pull-left span4', ng-href='#/teams/{{member.id}}')
+        a(class='pull-left span4', ng-href='#/teams?id={{member.id}}')
           img(class='media-object img-rounded', ng-src='{{member.source}}')
         div(class='media-body')
           h3(class='media-heading') {{member.name}}

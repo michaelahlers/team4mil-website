@@ -24,13 +24,13 @@ define(
         controller : 'Mission'
       })
 
+//      $routeProvider.when('/teams', {
+//        redirectTo : '/teams/'
+//      })
+
       $routeProvider.when('/teams', {
         templateUrl : 'partials/teams',
-        controller : 'Teams'
-      })
-
-      $routeProvider.when('/teams/:id', {
-        templateUrl : 'partials/teams',
+        reloadOnSearch : false,
         controller : 'Teams'
       })
 
