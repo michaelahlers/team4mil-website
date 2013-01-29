@@ -11,7 +11,7 @@ define([
 
 ], function ($, controllers) {
 
-  controllers.controller('Teams', function ($rootScope, $scope, $routeParams, $log, Cache, Resource) {
+  controllers.controller('Teams', function ($rootScope, $scope, $routeParams, $location, $log, Cache, Resource) {
     $scope.content = Cache.get('teams', function () {
       return Resource.get({name : 'teams'})
     })
@@ -43,9 +43,12 @@ define([
       })[0]
     })
 
-    $scope.$watch('focused', function (current, previous) {
-      $log.log(current.id)
+    $('#modalBiography').on('hide', function () {
+      $location.search({})
+      $rootScope.$apply()
+    })
 
+    $scope.$watch('focused', function (current, previous) {
       if (current.id) {
         $('#modalBiography').modal('show')
       } else {
