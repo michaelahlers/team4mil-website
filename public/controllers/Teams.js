@@ -16,15 +16,21 @@ define([
       return Resource.get({name : 'teams'})
     })
 
-    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
-      $scope.focusedId = $routeParams.id
 
-      //$('#modalBiography').modal('show')
-      //$('#modalBiography').modal('hide')
+    $scope.$on('$routeUpdate', function () {
+      $scope.focused = {
+        id : $routeParams.id
+      }
     })
 
-    $scope.$watch('content.teams + focusedId', function () {
-      if (!$scope.content.teams || !$scope.focusedId) {
+    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
+      $scope.focused = {
+        id : $routeParams.id
+      }
+    })
+
+    $scope.$watch('content.teams + focused.id', function () {
+      if (!$scope.content.teams || !$scope.focused.id) {
         return
       }
 
@@ -33,12 +39,18 @@ define([
       })
 
       $scope.focused = members.filter(function (member) {
-        return $scope.focusedId = member.id
+        return $scope.focused.id == member.id
       })[0]
     })
 
     $scope.$watch('focused', function (current, previous) {
-      $log.log(current, previous)
+      $log.log(current.id)
+
+      if (current.id) {
+        $('#modalBiography').modal('show')
+      } else {
+        $('#modalBiography').modal('hide')
+      }
     })
   })
 
