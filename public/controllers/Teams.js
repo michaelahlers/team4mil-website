@@ -11,7 +11,7 @@ define([
 
 ], function ($, controllers) {
 
-  controllers.controller('Teams', function ($rootScope, $scope, $routeParams, $location, $log, Cache, Resource) {
+  controllers.controller('Teams', function ($rootScope, $scope, $timeout, $routeParams, $location, $log, Cache, Resource) {
     $scope.content = Cache.get('teams', function () {
       return Resource.get({name : 'teams'})
     })
@@ -43,16 +43,19 @@ define([
       })[0]
     })
 
-    $('#modalBiography').on('hide', function () {
-      $location.search({})
-      $rootScope.$apply()
-    })
+//    $('#modalBiography').on('hide', function () {
+//      $scope.focused = {}
+//    })
 
     $scope.$watch('focused', function (current, previous) {
       if (current.id) {
-        $('#modalBiography').modal('show')
+        $('#modalBiography').modal({
+          backdrop : 'static',
+          keyboard : false
+        })
       } else {
         $('#modalBiography').modal('hide')
+        $location.search({})
       }
     })
   })
