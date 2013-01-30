@@ -12,20 +12,19 @@ div(class='container-fluid body-sponsors')
       h2 {{content.teams[0].title}}
       p {{content.teams[0].summary}}
 
-      div(class='media', ng-repeat='member in content.teams[0].members')
-        a(class='pull-left span4', ng-href='#/teams?id={{member.id}}')
-          img(class='media-object img-rounded', ng-src='{{member.source}}')
-        div(class='media-body')
-          h3(class='media-heading') {{member.name}}
-          //div(ng-bind-html='member.biography')
+      div(class='row-fluid', ng-repeat='members in toRows(content.teams[0].members, 3)')
+        div(class='thumbnails')
+          a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
+            img(class='', ng-src='{{member.source}}')
+            h4 {{member.name}}
 
     div(class='span5')
       h2 {{content.teams[1].title}}
       p {{content.teams[1].summary}}
 
-      ul(class='thumbnails')
-        li(class='span4 ', ng-repeat='member in content.teams[1].members')
-          a(class='thumbnail', ng-href='#/teams?id={{member.id}}')
+      div(class='row-fluid', ng-repeat='members in toRows(content.teams[1].members, 3)')
+        div(class='thumbnails')
+          a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
             img(class='', ng-src='{{member.source}}')
             h4 {{member.name}}
 

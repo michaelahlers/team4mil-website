@@ -16,6 +16,19 @@ define([
       return Resource.get({name : 'teams'})
     })
 
+    $scope.toRows = function (array, length) {
+      array = (array || []).slice(0)
+
+      var rows = []
+
+      while (array.length) {
+        rows.push(array.splice(0, length))
+      }
+
+      $log.log(rows)
+
+      return rows
+    }
 
     $scope.$on('$routeUpdate', function () {
       $scope.focused = {
