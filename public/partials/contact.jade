@@ -13,5 +13,36 @@ section(class='body-contact container-fluid ')
         img(class='pull-left span3', ng-src='{{member.picture.location}}')
         h3 {{member.name}}
         h4 {{member.title}}
-    div(class='span5')
-      p Contact form goes here.
+    div(class='span5', ng-controller='ContactMessage')
+      form(name='message')
+        fieldset
+          div(class='control-group')
+            span(class='help-block') First, tell us who you would like to contact.
+            div(class='controls')
+              label(class='radio')
+                input(type='radio', name='recipient', value='contact@team4il.org', ng-model='recipient.mail')
+                em Anyone
+              label(class='radio', ng-repeat='member in content.board.members')
+                input(type='radio', name='recipient', value='{{member.mail}}', ng-model='recipient.mail')
+                span {{member.name}}
+          div(class='control-group')
+            span(class='help-block') Second, tell us how we can get back to you.
+            div(class='controls')
+              input(class='span6', type='email', name='senderMail', ng-model='sender.mail', placeholder='Your e-mail address.')
+            div(class='controls')
+              input(class='span6', type='text', name='senderPhone', ng-model='sender.phone', placeholder='Your phone number.')
+          div(class='control-group')
+            span(class='help-block') Third, tell us your comments (these fields are required).
+            div(class='controls')
+              input(class='span6', type='text', name='subject', ng-model='subject', placeholder='Message subject.', required)
+            div(class='controls')
+              textarea(class='span12', rows='10', name='body', ng-model='body', placeholder='Your comments to Team 4Mil.', required)
+          div(class='control-group')
+            div(class='form-actions')
+              button(type='submit', class='btn btn-primary pull-right') Send
+      div
+        div recipient.mail : {{recipient.mail}}
+        div sender.mail : {{sender.mail}}
+        div sender.phone : {{sender.phone}}
+        div subject : {{subject}}
+        div body : {{body}}
