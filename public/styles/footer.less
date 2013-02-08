@@ -9,23 +9,21 @@ body {
 
   & > footer {
     height: 100%;
+    color: gray;
 
-    & > div {
+    & > section {
+      padding-top: @gridGutterWidth;
       height: 100%;
-      width: 100%;
       min-height: 100px;
       position: relative;
       .box-shadow(inset @shadowDropStandard);
       background: url('styles/bright_squares/bright_squares.png');
 
-      & > div {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
+      .badge-pattern {
+        & > img {
+          width: 60px;
+        }
       }
-    }
-
-    section {
 
     }
 
