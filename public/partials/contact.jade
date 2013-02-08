@@ -6,7 +6,12 @@ div(class='container-fluid hero-contact')
     div(class='offset1 span10')
       div(class='hero-summary-contact', ng-bind-html='content.summary')
 
-div(class='container-fluid body-sponsors')
+section(class='body-contact container-fluid ')
   div(class='row-fluid')
-    div(class='offset1 span10')
-      p Contact form goes here&hellip;
+    div(class='offset1 span5')
+      a(id='{{member.id}}', class='media thumbnail', ng-repeat='member in content.board.members')
+        img(class='pull-left span3', ng-src='{{member.picture.location}}')
+        h3 {{member.name}}
+        h4 {{member.title}}
+    div(class='span5')
+      p Contact form goes here.

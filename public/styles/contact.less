@@ -1,0 +1,38 @@
+@import-once
+'../lib/chinstrap'
+;
+@import-once
+'variables'
+;
+
+.hero-contact {
+  background-image: url('images/backgrounds/2012-colgary-dowd-radio_2048x1356.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.min.htc');
+
+  padding-top: 200px;
+  padding-bottom: 150px;
+
+  .hero-title-contact {
+    font-size: @baseFontSize * 3;
+    color: white;
+    text-shadow: @shadowDropSharp;
+  }
+
+  .hero-summary-contact {
+    padding: @gridGutterWidth;
+    font-size: @baseFontSize * 1.25;
+    line-height: @baseLineHeight * 1.25;
+    color: white;
+    text-shadow: @shadowDropSharp;
+    #translucent > .background(@black, .75);
+    .border-radius(@baseBorderRadius);
+  }
+}
+
+.body-contact {
+  padding-top: @gridGutterWidth;
+  padding-bottom: @gridGutterWidth;
+}

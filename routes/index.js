@@ -164,27 +164,62 @@ exports.sponsors = function (req, res) {
 
 exports.contact = function (req, res) {
 
-  async.parallel([
+  var toId = function (name) {
+    return name
+      .replace(/[“”]/g, '')
+      .replace(/[\s]/g, '-')
+      .toLowerCase()
+  }
 
-    function (callback) {
-      req.facebook.api('/452955478086795', function (err, result) {
+  var toMailAddress = function(name) {
+    return name
+      .replace(/[“”]/g, '')
+      .replace(/[\s]/g, '.')
+      .toLowerCase() + '@team4mil.org'
+  }
+
+  var resources = [
+    '/452955478086795',
+    '/463970396985303/photos'
+  ]
+
+  async.map(
+    resources,
+
+    /* Iterator. */
+    function (call, callback) {
+      req.facebook.api(call, function (err, result) {
         callback(err, result)
       })
-    }
+    },
 
-  ], function (err, results) {
+    function (err, results) {
 
-    if (err) {
-      res.json(500, err)
-      return
-    }
-
-    res.json(
-      {
-        title : results[0].subject,
-        summary : results[0].message
+      if (err) {
+        res.json(500, err)
+        return
       }
-    )
 
-  })
+      res.json(
+        {
+          title : results[0].subject,
+          summary : results[0].message,
+          board : {
+            members : results[1].data.map(function (member) {
+              return {
+                id: toId(member.name.split('\n')[0]),
+                mail: toMailAddress(member.name.split('\n')[0]),
+                name : member.name.split('\n')[0],
+                title : member.name.split('\n')[1],
+                picture : {
+                  location : member.source
+                }
+              }
+            })
+          }
+        }
+
+      )
+    }
+  )
 }
