@@ -1,49 +1,56 @@
 /*jshint node:true*/
 'use strict'
 
-//var nodemailer = require('nodemailer')
-//
-//var transport = nodemailer.createTransport('SMTP', {
-//  service : 'Mailgun',
-//  auth : {
-//    user : 'api',
-//    pass : 'key-4vqyrivdws3fvkaj2d391ict3kbsinb5'
-//  }
-//})
-//
-
 var Mailgun = require('mailgun').Mailgun
+  , util = require('util')
 
 var transport = new Mailgun('key-4vqyrivdws3fvkaj2d391ict3kbsinb5')
 
+var authorizedRecipients = [
+  'contact@team4il.org',
+  'wayne.dowd@team4mil.org',
+  'mason.poe@team4mil.org',
+  'bethany.kelsey@team4mil.org',
+  'joe.arnone@team4mil.org',
+]
+
 exports.send = function (req, res) {
 
+  var message = req.body.message
+
+  console.log(message)
+
+  /* Unpack the message. */
+  var recipient = message.recipient.mail || 'contact@team4il.org'
+  var sender = message.sender.mail
+  var subject = message.subject || '(No subject.)'
+  var body = message.body || '(No body.)'
+
+  if (authorizedRecipients.indexOf(recipient) < 0) {
+    res.json(500, {
+      error : util.format('Unauthorized recipient: %s.', recipient)
+    })
+    return
+  }
+
+  if (!sender) {
+    res.json(500, {
+      error : util.format('Missing sender.')
+    })
+    return
+  }
+
   transport.sendText(
-    'michael.ahlers@team4mil.org',
-    ['michael@ahlers.co'],
-    'This is the subject',
-    'This is the text',
+    sender,
+    [ 'michael@ahlers.co' ],
+    subject,
+    body,
     '',
     {},
     function (err) {
-      if (err) console.log('Oh noes: ' + err);
-      else     console.log('Success');
+      console.log('Mailgun response.', err)
     })
 
-
-//
-//  var options = {
-//    from : 'michael.ahlers@team4mil.org',
-//    to : 'michael@ahlers.co',
-//    subject : 'Hello!',
-//    text : 'You suck.'
-//  }
-//
-//  console.log('Sending mail.', options)
-//
-//  transport.sendMail(options, function (error, response) {
-//    console.log(error || response)
-//  })
 
   res.json()
 

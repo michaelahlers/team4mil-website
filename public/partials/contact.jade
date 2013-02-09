@@ -31,8 +31,6 @@ section(class='body-contact container-fluid ')
             span(ng-show='messageForm.senderMailText.$error.email', class='help-block alert') The provided address is invalid.
             div(class='controls')
               input(class='span6', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
-            div(class='controls')
-              input(class='span6', type='text', name='senderPhoneText', ng-model='sender.phone', placeholder='Your phone number.')
           div(class='control-group')
             span(class='help-block lead') <strong>Third</strong>, tell us your comments.
             div(class='controls')
@@ -45,6 +43,5 @@ section(class='body-contact container-fluid ')
       div
         div recipient.mail : {{recipient.mail}}
         div sender.mail : {{sender.mail}}
-        div sender.phone : {{sender.phone}}
         div subject : {{subject}}
         div body : {{body}}
