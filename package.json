@@ -9,6 +9,7 @@
     "facebook-node-sdk" : "0.2.x",
     "futures" : ">=2.1.0",
     "jade" : "*",
+    "nodemailer" : "0.3.x",
     "less-middleware" : "0.1.x"
   },
   "engines" : {

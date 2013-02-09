@@ -51,10 +51,12 @@ server.configure('development', function () {
 server.get('/', routes.index)
 server.get('/partials/:name', routes.partials)
 
-server.get('/resources/mission', routes.mission)
-server.get('/resources/teams', routes.teams)
-server.get('/resources/sponsors', routes.sponsors)
-server.get('/resources/contact', routes.contact)
+server.get('/resources/mission', routes.resources.mission)
+server.get('/resources/teams', routes.resources.teams)
+server.get('/resources/sponsors', routes.resources.sponsors)
+server.get('/resources/contact', routes.resources.contact)
+
+server.post('/contact', routes.contact.send)
 
 http.createServer(server).listen(server.get('port'), function () {
   console.log('Express server listening on port ' + server.get('port') + '.')
