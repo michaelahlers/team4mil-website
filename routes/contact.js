@@ -18,10 +18,13 @@ var transport = new Mailgun('key-4vqyrivdws3fvkaj2d391ict3kbsinb5')
 
 exports.send = function (req, res) {
 
-  transport.sendText('michael@ahlers.co', [],
+  transport.sendText(
+    'michael.ahlers@team4mil.org',
+    ['michael@ahlers.co'],
     'This is the subject',
     'This is the text',
-    'michael.ahlers@team4mil.org', {},
+    '',
+    {},
     function (err) {
       if (err) console.log('Oh noes: ' + err);
       else     console.log('Success');
