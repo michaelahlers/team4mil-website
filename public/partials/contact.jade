@@ -19,12 +19,9 @@ section(class='body-contact container-fluid ')
           div(class='control-group')
             span(class='help-block lead') <strong>First</strong>, chose who you would like to contact.
             div(class='controls')
-              label(class='radio')
-                input(type='radio', name='recipientRadio', value='contact@team4il.org', ng-model='recipient.mail')
-                em Anyone
-              label(class='radio', ng-repeat='member in content.board.members')
-                input(type='radio', name='recipientRadio', value='{{member.mail}}', ng-model='recipient.mail')
-                span {{member.name}}
+              label(class='radio', ng-repeat='option in getRecipients()')
+                input(type='radio', name='recipientRadio', value='{{option.mail}}', ng-model='recipient.mail')
+                span {{option.name}}
           div(class='control-group')
             span(class='help-block lead') <strong>Second</strong>, let us know how we can get back to you.
             span(ng-show='messageForm.senderMailText.$error.required', class='help-block alert') Your address is required.

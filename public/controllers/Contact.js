@@ -17,19 +17,21 @@ define([
   })
 
   controllers.controller('ContactMessage', function ($rootScope, $scope, $log, $timeout, $http) {
-    var defaultRecipient = $scope.recipient = {
-      mail : 'contact@team4il.org'
+    var getRecipients = $scope.getRecipients = function () {
+      return [
+        {
+          name : 'Anybody',
+          mail : 'contact@team4mil.org'
+        }
+      ].concat($scope.$eval('content.board.members') || [])
     }
 
-//var findRecipient = function (mail) {
-//  if (!$scope.content || !$scope.content.board) {
-//    return undefined
-//  }
-//
-//  return $.grep($scope.content.board.members, function (member) {
-//    return member.mail == mail
-//  })[0]
-//}
+    $scope.reset = function () {
+      $scope.recipient = getRecipients()[0]
+      delete $scope.sender
+      delete $scope.subject
+      delete $scope.body
+    }
 
     $scope.send = function () {
 
@@ -59,12 +61,8 @@ define([
             success : true
           }
 
-          $scope.recipient = defaultRecipient
-          delete $scope.sender
-          delete $scope.subject
-          delete $scope.body
-
           $timeout(closeStatus, 5000)
+          $timeout($scope.reset, 5000)
         })
         .error(function () {
           $scope.status = {
@@ -72,6 +70,8 @@ define([
           }
         })
     }
+
+    $scope.reset()
   })
 
 })
