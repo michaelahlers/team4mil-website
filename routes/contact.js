@@ -11,7 +11,7 @@ var authorizedRecipients = [
   'wayne.dowd@team4mil.org',
   'mason.poe@team4mil.org',
   'bethany.kelsey@team4mil.org',
-  'joe.arnone@team4mil.org',
+  'joe.arnone@team4mil.org'
 ]
 
 exports.send = function (req, res) {

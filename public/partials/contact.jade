@@ -45,3 +45,9 @@ section(class='body-contact container-fluid ')
         div sender.mail : {{sender.mail}}
         div subject : {{subject}}
         div body : {{body}}
+
+      div(id='modalStatus', class='modal fade', tabindex='-1')
+        div(class='modal-header')
+          h3 Contacting Team 4Mil
+        div(class='modal-body')
+          p {{status.message}}
