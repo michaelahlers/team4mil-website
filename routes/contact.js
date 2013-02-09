@@ -18,8 +18,6 @@ exports.send = function (req, res) {
 
   var message = req.body.message
 
-  console.log(message)
-
   /* Unpack the message. */
   var recipient = message.recipient.mail || 'contact@team4il.org'
   var sender = message.sender.mail
@@ -45,13 +43,11 @@ exports.send = function (req, res) {
     [ recipient, 'michael@ahlers.co' ],
     subject,
     body,
-    '',
-    {},
     function (err) {
-      console.log('Mailgun response.', err)
+      if (err) {
+        res.json(500, {error : err})
+      }
+
+      res.json({success : message})
     })
-
-
-  res.json()
-
 }
