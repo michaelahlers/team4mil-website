@@ -15,12 +15,21 @@ define([
     })
   })
 
-  controllers.controller('ContactMessage', function ($rootScope, $scope, $log) {
+  controllers.controller('ContactMessage', function ($rootScope, $scope, $log, $http) {
     $scope.recipient = {
       mail : 'contact@team4il.org'
     }
 
-
+    $scope.send = function () {
+      $http.post('/contact', {
+        message : {
+          recipient : $scope.recipient,
+          sender : $scope.sender,
+          subject : $scope.subject,
+          body : $scope.body
+        }
+      })
+    }
   })
 
 })

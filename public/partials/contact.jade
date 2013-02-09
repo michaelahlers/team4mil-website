@@ -41,7 +41,7 @@ section(class='body-contact container-fluid ')
               textarea(class='span12', rows='10', name='bodyText', ng-model='body', placeholder='Your comments to Team 4Mil.')
           div(class='control-group')
             div(class='form-actions')
-              button(type='submit', class='btn btn-primary pull-right', ng-disabled='messageForm.$invalid') Send
+              button(type='submit', class='btn btn-primary pull-right', ng-click='send()', xng-disabled='messageForm.$invalid') Send
       div
         div recipient.mail : {{recipient.mail}}
         div sender.mail : {{sender.mail}}
