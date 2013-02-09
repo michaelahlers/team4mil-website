@@ -50,4 +50,15 @@ section(class='body-contact container-fluid ')
         div(class='modal-header')
           h3 Contacting Team 4Mil
         div(class='modal-body')
-          p {{status.message}}
+          p(ng-show='status.pending') Sending your message to {{recipient.mail}}&hellip;
+          p(ng-show='status.success')
+            span(class='label label-success') Success!
+            | &nbsp;Your message was sent to {{recipient.mail}}!
+          p(ng-show='status.error')
+            span(class='label label-important') Error!
+            | &nbsp;We're sorry, but there was a problem sending your message!
+            | You can still reach Team 4Mil by writing to
+            a(href='mailto:contact@team4mil.org') contact@team4mil.org
+            | .
+        div(class='modal-footer', ng-hide='status.pending')
+          button(class='btn btn-primary', ng-click='closeStatus()') Close
