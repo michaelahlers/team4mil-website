@@ -10,13 +10,10 @@ define([
 
 ], function (controllers, $) {
 
-  controllers.controller('Contact', function ($rootScope, $scope, $log, Cache, Resource) {
+  controllers.controller('Contact', function ($rootScope, $scope, $log, $http, $timeout, Cache, Resource) {
     $scope.content = Cache.get('contact', function () {
       return Resource.get({name : 'contact'})
     })
-  })
-
-  controllers.controller('ContactMessage', function ($rootScope, $scope, $log, $timeout, $http) {
 
     $scope.$watch('content.board.members', function (members) {
       var recipients = $scope.recipients = [
@@ -32,9 +29,9 @@ define([
 
     var reset = $scope.reset = function () {
       $scope.recipientId = $scope.$eval('recipients[0].id')
-      delete $scope.sender
-      delete $scope.subject
-      delete $scope.body
+      $scope.sender = {}
+      $scope.subject = ''
+      $scope.body = ''
     }
 
     reset()
