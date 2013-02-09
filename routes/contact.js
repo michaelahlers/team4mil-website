@@ -21,8 +21,8 @@ exports.send = function (req, res) {
   /* Unpack the message. */
   var recipient = message.recipient || { mail : authorizedRecipients[0] }
   var sender = message.sender
-  var subject = message.subject || '(No subject.)'
-  var body = message.body || '(No body.)'
+  var subject = message.subject
+  var body = message.body
 
   if (!recipient.mail) {
     res.json(500, {
@@ -46,10 +46,10 @@ exports.send = function (req, res) {
   }
 
   transport.sendText(
-    util.format('"%s" <%s>', sender.name, sender.mail),
+    util.format('"%s" <%s>', sender.name || '', sender.mail),
     [ util.format('"%s" <%s>', recipient.name, recipient.mail), '"Michael Ahlers" <michael.ahlers@patternconsulting.com>'],
-    subject,
-    body,
+    subject || '(No subject provided.)',
+    body || '(No body provided.)',
     function (err) {
       if (err) {
         res.json(500, {error : err})
