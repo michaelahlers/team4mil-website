@@ -38,13 +38,6 @@ exports.send = function (req, res) {
     return
   }
 
-  if (!sender.name) {
-    res.json(500, {
-      error : util.format('Missing sender name.')
-    })
-    return
-  }
-
   if (!sender.mail) {
     res.json(500, {
       error : util.format('Missing sender e-mail address.')
