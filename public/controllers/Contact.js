@@ -15,6 +15,10 @@ define([
       return Resource.get({name : 'contact'})
     })
 
+    $scope.selectRecipient = function (id) {
+      $scope.recipientId = id
+    }
+
     $scope.$watch('content.board.members', function (members) {
       var recipients = $scope.recipients = [
         {

@@ -10,11 +10,11 @@ section(class='body-contact container-fluid ')
   div(class='row-fluid')
 
     div(class='offset1 span5')
-      a(
-      id='{{member.id}}',
-      class='media thumbnail',
-      ng-repeat='member in content.board.members',
-      ng-class='{selected:member.id == recipientId || recipients[0].id == recipientId}')
+      a(id='{{member.id}}'
+      , class='media thumbnail t4m-member'
+      , ng-repeat='member in content.board.members'
+      , ng-class='{selected:member.id == recipientId || recipients[0].id == recipientId}'
+      , ng-click='selectRecipient(member.id)')
         img(class='pull-left span3', ng-src='{{member.picture.location}}')
         h3 {{member.name}}
         h4 {{member.title}}
