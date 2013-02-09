@@ -8,11 +8,17 @@ div(class='container-fluid hero-contact')
 
 section(class='body-contact container-fluid ')
   div(class='row-fluid')
+
     div(class='offset1 span5')
-      a(id='{{member.id}}', class='media thumbnail', ng-repeat='member in content.board.members')
+      a(
+      id='{{member.id}}',
+      class='media thumbnail',
+      ng-repeat='member in content.board.members',
+      ng-class='{selected:member.id == recipientId || recipients[0].id == recipientId}')
         img(class='pull-left span3', ng-src='{{member.picture.location}}')
         h3 {{member.name}}
         h4 {{member.title}}
+
     div(class='span5')
       form(name='messageForm')
         fieldset
