@@ -22,7 +22,7 @@ define([
       var recipients = $scope.recipients = [
         {
           id : 'anybody',
-          name : 'Anybody',
+          name : 'Team 4Mil',
           mail : 'contact@team4mil.org'
         }
       ].concat(members || [])
@@ -32,13 +32,9 @@ define([
 
     var reset = $scope.reset = function () {
       $scope.recipientId = $scope.$eval('recipients[0].id')
-      //delete $scope.sender
-      //delete $scope.subject
-      //delete $scope.body
-
-      $scope.sender = {name : 'Michael', mail : 'foo@bear.com'}
-      $scope.subject = 'Foo'
-      $scope.body = 'Bear'
+      delete $scope.sender
+      delete $scope.subject
+      delete $scope.body
     }
 
     reset()

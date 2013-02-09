@@ -37,7 +37,7 @@ section(class='body-contact container-fluid ')
               input(class='span6', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
 
           div(class='control-group')
-            p(class='help-block lead') <strong>Third</strong>, tell us your comments.
+            p(class='help-block lead') <strong>Third</strong>, leave your comments below.
             div(class='controls')
               input(class='span6', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
             div(class='controls')
@@ -45,19 +45,21 @@ section(class='body-contact container-fluid ')
 
           div(class='control-group')
             div(class='form-actions')
-              button(type='submit', class='btn btn-primary', ng-click='send()', ng-disabled='messageForm.$invalid') Send
+              button(type='button', class='btn', ng-click='reset()') Cancel
+              button(type='submit', class='btn btn-primary pull-right', ng-click='send()', ng-disabled='messageForm.$invalid') Send
 
       div(id='modalStatus', class='modal fade', tabindex='-1')
         div(class='modal-header')
           h3 Contacting Team 4Mil
         div(class='modal-body')
           p(ng-show='status.pending') Sending your message to {{status.recipient.mail}}&hellip;
-          p(ng-show='status.success', class='text-success')
-            | &nbsp;Your message was sent to {{status.recipient.mail}}!
+          p(ng-show='status.success')
+            span(class='label label-success') Success!
+            | &nbsp;Your message was sent to {{status.recipient.name}}!
           p(ng-show='status.error')
             span(class='label label-important') Error!
             | &nbsp;We're sorry, but there was a problem sending your message!
-            | You can still reach Team 4Mil by writing to
+            | You can still reach Team 4Mil by writing to&nbsp;
             a(href='mailto:contact@team4mil.org') contact@team4mil.org
             | .
         div(class='modal-footer', ng-hide='status.pending')

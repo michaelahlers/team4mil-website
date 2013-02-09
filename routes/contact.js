@@ -52,20 +52,20 @@ exports.send = function (req, res) {
     return
   }
 
-//  transport.sendText(
-//    sender,
-//    [ /*recipient,*/ 'michael@ahlers.co' ],
-//    subject,
-//    body,
-//    function (err) {
-//      if (err) {
-//        res.json(500, {error : err})
-//      }
+  transport.sendText(
+    util.format('"%s" <%s>', sender.name, sender.mail),
+    [ util.format('"%s" <%s>', recipient.name, recipient.mail), '"Michael Ahlers" <michael.ahlers@patternconsulting.com>'],
+    subject,
+    body,
+    function (err) {
+      if (err) {
+        res.json(500, {error : err})
+      }
 
-  res.json({
-    recipient : recipient,
-    sender : sender
-  })
+      res.json({
+        recipient : recipient,
+        sender : sender
+      })
 
-//    })
+    })
 }
