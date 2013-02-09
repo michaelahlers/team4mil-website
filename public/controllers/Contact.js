@@ -3,11 +3,12 @@
 define([
 
   'controllers',
+  'jquery',
 
   'services/Cache',
   'services/Resource'
 
-], function (controllers) {
+], function (controllers, $) {
 
   controllers.controller('Contact', function ($rootScope, $scope, $log, Cache, Resource) {
     $scope.content = Cache.get('contact', function () {
@@ -17,8 +18,17 @@ define([
 
   controllers.controller('ContactMessage', function ($rootScope, $scope, $log, $http) {
     $scope.recipient = {
-      name : 'Anybody',
       mail : 'contact@team4il.org'
+    }
+
+    var findRecipient = function (mail) {
+      if (!$scope.content || !$scope.content.board) {
+        return undefined
+      }
+
+      return $.grep($scope.content.board.members, function (member) {
+        return member.mail == mail
+      })[0]
     }
 
     $scope.send = function () {
