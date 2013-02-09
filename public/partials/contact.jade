@@ -16,41 +16,44 @@ section(class='body-contact container-fluid ')
     div(class='span5', ng-controller='ContactMessage')
       form(name='messageForm')
         fieldset
+
           div(class='control-group')
-            span(class='help-block lead') <strong>First</strong>, chose who you would like to contact.
+            p(class='help-block lead') <strong>First</strong>, chose who you would like to contact.
             div(class='controls')
-              label(class='radio', ng-repeat='option in getRecipients()')
-                input(type='radio', name='recipientRadio', value='{{option.mail}}', ng-model='recipient.mail')
-                span {{option.name}}
+              label(class='radio', ng-repeat='recipient in recipients')
+                input(type='radio', name='recipientRadio', value='{{recipient.id}}', ng-model='$parent.recipientId')
+                span {{recipient.name}}
+
           div(class='control-group')
-            span(class='help-block lead') <strong>Second</strong>, let us know how we can get back to you.
-            span(ng-show='messageForm.senderMailText.$error.required', class='help-block alert') Your address is required.
-            span(ng-show='messageForm.senderMailText.$error.email', class='help-block alert') The provided address is invalid.
+            p(class='help-block lead') <strong>Second</strong>, tell us a little about yourself.
+            div(ng-show='messageForm.senderNameText.$invalid || messageForm.senderMailText.$invalid', class='help-block alert')
+              ul(class='unstyled')
+                li(ng-show='messageForm.senderNameText.$error.required') Your name is required.
+                li(ng-show='messageForm.senderMailText.$error.required') Your e-mail address is required.
+                li(ng-show='messageForm.senderMailText.$error.email') The provided e-mail address is invalid.
+            div(class='controls')
+              input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.', required)
             div(class='controls')
               input(class='span6', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
+
           div(class='control-group')
-            span(class='help-block lead') <strong>Third</strong>, tell us your comments.
+            p(class='help-block lead') <strong>Third</strong>, tell us your comments.
             div(class='controls')
               input(class='span6', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
             div(class='controls')
               textarea(class='span12', rows='10', name='bodyText', ng-model='body', placeholder='Your comments to Team 4Mil.')
+
           div(class='control-group')
             div(class='form-actions')
-              button(type='submit', class='btn btn-primary pull-right', ng-click='send()', xng-disabled='messageForm.$invalid') Send
-      div
-        div recipient.mail : {{recipient.mail}}
-        div sender.mail : {{sender.mail}}
-        div subject : {{subject}}
-        div body : {{body}}
+              button(type='submit', class='btn btn-primary', ng-click='send()', ng-disabled='messageForm.$invalid') Send
 
       div(id='modalStatus', class='modal fade', tabindex='-1')
         div(class='modal-header')
           h3 Contacting Team 4Mil
         div(class='modal-body')
-          p(ng-show='status.pending') Sending your message to {{recipient.mail}}&hellip;
-          p(ng-show='status.success')
-            span(class='label label-success') Success!
-            | &nbsp;Your message was sent to {{recipient.mail}}!
+          p(ng-show='status.pending') Sending your message to {{status.recipient.mail}}&hellip;
+          p(ng-show='status.success', class='text-success')
+            | &nbsp;Your message was sent to {{status.recipient.mail}}!
           p(ng-show='status.error')
             span(class='label label-important') Error!
             | &nbsp;We're sorry, but there was a problem sending your message!

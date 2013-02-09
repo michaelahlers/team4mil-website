@@ -17,36 +17,58 @@ define([
   })
 
   controllers.controller('ContactMessage', function ($rootScope, $scope, $log, $timeout, $http) {
-    var getRecipients = $scope.getRecipients = function () {
-      return [
+
+    $scope.$watch('content.board.members', function (members) {
+      var recipients = $scope.recipients = [
         {
+          id : 'anybody',
           name : 'Anybody',
           mail : 'contact@team4mil.org'
         }
-      ].concat($scope.$eval('content.board.members') || [])
+      ].concat(members || [])
+
+      $scope.recipientId = recipients[0].id
+    })
+
+    var reset = $scope.reset = function () {
+      $scope.recipientId = $scope.$eval('recipients[0].id')
+      //delete $scope.sender
+      //delete $scope.subject
+      //delete $scope.body
+
+      $scope.sender = {name : 'Michael', mail : 'foo@bear.com'}
+      $scope.subject = 'Foo'
+      $scope.body = 'Bear'
     }
 
-    $scope.reset = function () {
-      $scope.recipient = getRecipients()[0]
-      delete $scope.sender
-      delete $scope.subject
-      delete $scope.body
-    }
+    reset()
 
-    $scope.send = function () {
+    $scope.$watch('recipientId', function (id) {
+      $scope.recipient = $.grep($scope.recipients || [], function (recipient) {
+        return recipient.id == id
+      })[0]
+    })
 
-      var closeStatus = $scope.closeStatus = function () {
-        $('#modalStatus').modal('hide')
-      }
-
-      $scope.status = {
-        pending : true
-      }
-
+    var openStatus = function () {
       $('#modalStatus').modal({
         backdrop : 'static',
         keyboard : false
       })
+    }
+
+    var closeStatus = $scope.closeStatus = function () {
+      $('#modalStatus').modal('hide')
+    }
+
+    $scope.send = function () {
+
+      $scope.status = {
+        pending : true,
+        recipient : $scope.recipient,
+        sender : $scope.sender
+      }
+
+      openStatus()
 
       $http.post('/contact', {
         message : {
@@ -56,22 +78,27 @@ define([
           body : $scope.body
         }
       })
-        .success(function () {
+        .success(function (data, status, headers, config) {
+
           $scope.status = {
-            success : true
+            success : true,
+            recipient : data.recipient,
+            sender : data.sender
           }
 
+          $scope.reset()
           $timeout(closeStatus, 5000)
-          $timeout($scope.reset, 5000)
+
         })
-        .error(function () {
+        .error(function (data, status, headers, config) {
+
           $scope.status = {
             error : true
           }
-        })
-    }
 
-    $scope.reset()
+        })
+
+    }
   })
 
 })

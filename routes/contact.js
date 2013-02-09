@@ -7,7 +7,7 @@ var Mailgun = require('mailgun').Mailgun
 var transport = new Mailgun('key-4vqyrivdws3fvkaj2d391ict3kbsinb5')
 
 var authorizedRecipients = [
-  'contact@team4il.org',
+  'contact@team4mil.org',
   'wayne.dowd@team4mil.org',
   'mason.poe@team4mil.org',
   'bethany.kelsey@team4mil.org',
@@ -19,35 +19,53 @@ exports.send = function (req, res) {
   var message = req.body.message
 
   /* Unpack the message. */
-  var recipient = message.recipient.mail || 'contact@team4il.org'
-  var sender = message.sender.mail
+  var recipient = message.recipient || { mail : authorizedRecipients[0] }
+  var sender = message.sender
   var subject = message.subject || '(No subject.)'
   var body = message.body || '(No body.)'
 
-  if (authorizedRecipients.indexOf(recipient) < 0) {
+  if (!recipient.mail) {
     res.json(500, {
-      error : util.format('Unauthorized recipient: %s.', recipient)
+      error : util.format('Missing recipient e-mail address.')
     })
     return
   }
 
-  if (!sender) {
+  if (authorizedRecipients.indexOf(recipient.mail) < 0) {
     res.json(500, {
-      error : util.format('Missing sender.')
+      error : util.format('Unauthorized recipient: %s.', recipient.mail)
     })
     return
   }
 
-  transport.sendText(
-    sender,
-    [ /*recipient,*/ 'michael@ahlers.co' ],
-    subject,
-    body,
-    function (err) {
-      if (err) {
-        res.json(500, {error : err})
-      }
-
-      res.json({success : message})
+  if (!sender.name) {
+    res.json(500, {
+      error : util.format('Missing sender name.')
     })
+    return
+  }
+
+  if (!sender.mail) {
+    res.json(500, {
+      error : util.format('Missing sender e-mail address.')
+    })
+    return
+  }
+
+//  transport.sendText(
+//    sender,
+//    [ /*recipient,*/ 'michael@ahlers.co' ],
+//    subject,
+//    body,
+//    function (err) {
+//      if (err) {
+//        res.json(500, {error : err})
+//      }
+
+  res.json({
+    recipient : recipient,
+    sender : sender
+  })
+
+//    })
 }
