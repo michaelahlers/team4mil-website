@@ -42,7 +42,7 @@ exports.send = function (req, res) {
 
   transport.sendText(
     sender,
-    [ 'michael@ahlers.co' ],
+    [ recipient, 'michael@ahlers.co' ],
     subject,
     body,
     '',
