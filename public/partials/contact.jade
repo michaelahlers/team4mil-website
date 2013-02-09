@@ -10,28 +10,26 @@ section(class='body-contact container-fluid ')
   div(class='row-fluid')
 
     div(class='offset1 span5')
+
+      p(class='help-block')
+        span(class='lead') <strong>First</strong>, chose who you would like to contact.
+        br
+        span(class='muted') You may optionally choose a specific recipient below.
+
       a(id='{{member.id}}'
       , class='media thumbnail t4m-member'
       , ng-repeat='member in content.board.members'
       , ng-class='{selected:member.id == recipientId || recipients[0].id == recipientId}'
       , ng-click='selectRecipient(member.id)')
-        img(class='pull-left span3', ng-src='{{member.picture.location}}')
-        h3 {{member.name}}
-        h4 {{member.title}}
+        img(class='pull-left span2', ng-src='{{member.picture.location}}')
+        span(class='lead')
+          strong {{member.name}}
+        br
+        span {{member.title}}
 
     div(class='span5')
       form(name='messageForm')
         fieldset
-
-          div(class='control-group')
-            p(class='help-block')
-              span(class='lead') <strong>First</strong>, chose who you would like to contact.
-              br
-              span(class='muted') Click on any of the following names, or the pictures on the left.
-            div(class='controls')
-              label(class='radio', ng-repeat='recipient in recipients')
-                input(type='radio', name='recipientRadio', value='{{recipient.id}}', ng-model='$parent.recipientId')
-                span {{recipient.name}}
 
           div(class='control-group')
             p(class='help-block')
@@ -57,9 +55,8 @@ section(class='body-contact container-fluid ')
               textarea(class='span12', rows='10', name='bodyText', ng-model='body', placeholder='Your comments to Team 4Mil.')
 
           div(class='control-group')
-            div(class='form-actions')
-              button(type='button', class='btn', ng-click='reset()') Cancel
-              button(type='submit', class='btn btn-primary pull-right', ng-click='send()', ng-disabled='messageForm.$invalid') Send
+            button(type='button', class='btn', ng-click='reset()') Cancel
+            button(type='submit', class='btn btn-primary pull-right', ng-click='send()', ng-disabled='messageForm.$invalid') Send
 
       div(id='modalStatus', class='modal fade', tabindex='-1')
         div(class='modal-header')
