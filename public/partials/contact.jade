@@ -24,26 +24,33 @@ section(class='body-contact container-fluid ')
         fieldset
 
           div(class='control-group')
-            p(class='help-block lead') <strong>First</strong>, chose who you would like to contact.
+            p(class='help-block')
+              span(class='lead') <strong>First</strong>, chose who you would like to contact.
+              br
+              span(class='muted') Click on any of the following names, or the pictures on the left.
             div(class='controls')
               label(class='radio', ng-repeat='recipient in recipients')
                 input(type='radio', name='recipientRadio', value='{{recipient.id}}', ng-model='$parent.recipientId')
                 span {{recipient.name}}
 
           div(class='control-group')
-            p(class='help-block lead') <strong>Second</strong>, tell us a little about yourself.
-            div(ng-show='messageForm.senderNameText.$invalid || messageForm.senderMailText.$invalid', class='help-block alert')
-              ul(class='unstyled')
-                li(ng-show='messageForm.senderNameText.$error.required') Your name is required.
-                li(ng-show='messageForm.senderMailText.$error.required') Your e-mail address is required.
-                li(ng-show='messageForm.senderMailText.$error.email') The provided e-mail address is invalid.
+            p(class='help-block')
+              span(class='lead') <strong>Second</strong>, tell us a little about yourself.
+              br
+              span(class='muted') Don't worry, we will <em>only</em> use this information to contact you.
             div(class='controls')
-              input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.', required)
+              input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.')
             div(class='controls')
               input(class='span6', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
+              span(class='help-inline')
+                span(class='text-warning', ng-show='messageForm.senderMailText.$error.required') Your address is required.
+                span(class='text-warning', ng-show='messageForm.senderMailText.$error.email') Please recheck your address.
 
           div(class='control-group')
-            p(class='help-block lead') <strong>Third</strong>, leave your comments below.
+            p(class='help-block')
+              span(class='lead') <strong>Third</strong>, leave your comments below.
+              br
+              span(class='muted') Once you're finished, click the “Send” button below.
             div(class='controls')
               input(class='span6', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
             div(class='controls')
