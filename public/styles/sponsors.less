@@ -23,8 +23,24 @@
     margin-bottom: 0;
     border-bottom: none;
 
-    a:hover {
-      border-bottom: none;
+    li {
+      margin-bottom: 0;
+
+      a {
+        background-color: @grayLighter;
+        border-bottom: none;
+      }
+
+      a:hover {
+        border-bottom: none;
+      }
+    }
+
+    li.active {
+      a {
+        font-weight: bold;
+        background-color: @white;
+      }
     }
   }
 
