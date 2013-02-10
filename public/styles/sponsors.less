@@ -15,21 +15,20 @@
   padding-top: 400px;
   padding-bottom: 50px;
 
-  .hero-title-sponsors {
-    font-size: @baseFontSize * 3;
-    color: white;
-    text-shadow: @shadowDropSharp;
+  h1 {
+    color: @white;
+    text-shadow: @shadowDropStandard;
   }
 
-  .hero-summary-sponsors {
-    padding: @gridGutterWidth;
-    font-size: @baseFontSize * 1.25;
-    line-height: @baseLineHeight * 1.25;
-    color: white;
-    text-shadow: @shadowDropSharp;
-    #translucent > .background(@black, .75);
-    .border-radius(@baseBorderRadius);
-  }
+//  .hero-summary-sponsors {
+//    padding: @gridGutterWidth;
+//    font-size: @baseFontSize * 1.25;
+//    line-height: @baseLineHeight * 1.25;
+//    color: white;
+//    text-shadow: @shadowDropSharp;
+//    #translucent > .background(@black, .75);
+//    .border-radius(@baseBorderRadius);
+//  }
 }
 
 .body-sponsors {
@@ -37,4 +36,8 @@
   padding-top: @gridGutterWidth;
   padding-bottom: @gridGutterWidth;
 
+  .t4m-summary {
+  /* From Bootstrap type.less, blockquote, p. */
+    #font > .shorthand(16px,300,@baseLineHeight * 1.25);
+  }
 }
