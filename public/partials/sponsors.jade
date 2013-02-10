@@ -2,22 +2,21 @@ div(class='container-fluid hero-sponsors')
   div(class='row-fluid')
     div(class='offset1 span10')
       h1(class='hero-title-sponsors') {{content.title}}
-  div(class='row-fluid')
-    div(class='offset1 span10')
-      div(class='hero-summary-sponsors', ng-bind-html='content.summary')
 
 div(class='container-fluid body-sponsors')
   div(class='row-fluid')
-    div(class='offset1 span10', pc-masonry)
-      div(class='', style='width: 25%;', ng-repeat='sponsor in content.sponsors')
-        address(class='well well-small', style='margin: 10px;')
-          a(target='_blank', ng-href='//{{sponsor.location}}')
-            img(class='img-rounded', ng-src='{{sponsor.source}}')
-      div(class='', style='width: 25%;', ng-repeat='sponsor in content.sponsors')
-        div(class='well well-small', style='margin: 10px;')
-          a(target='_blank', ng-href='//{{sponsor.location}}')
-            img(class='img-rounded', ng-src='{{sponsor.source}}')
-      div(class='', style='width: 25%;', ng-repeat='sponsor in content.sponsors')
-        div(class='well well-small', style='margin: 10px;')
-          a(target='_blank', ng-href='//{{sponsor.location}}')
-            img(class='img-rounded', ng-src='{{sponsor.source}}')
+
+    div(class='offset1 span6')
+      div(ng-repeat='sponsor in content.sponsors')
+        div(class='row-fluid media')
+          div(class='span6', style='background: none;')
+            p
+              span(class='lead')
+                strong {{sponsor.name}}
+              br
+              a(ng-href='{{sponsor.location}}', target='_blank') {{sponsor.location}}
+            p {{sponsor.description}}
+          img(class='offset1 span5', ng-src='{{sponsor.source}}')
+        hr(ng-hide='$last')
+
+    div(class='span4', ng-bind-html='content.summary')

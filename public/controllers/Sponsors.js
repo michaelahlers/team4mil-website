@@ -5,9 +5,7 @@ define([
   'controllers',
 
   'services/Cache',
-  'services/Resource',
-
-  'directives/masonry'
+  'services/Resource'
 
 ], function (controllers) {
   controllers.controller('Sponsors', function ($rootScope, $scope, $log, Cache, Resource) {

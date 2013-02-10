@@ -141,7 +141,7 @@ exports.sponsors = function (req, res) {
             sponsor.name = sponsor.name.replace(/\n+/g, '\n')
             return {
               id : sponsor.id,
-              title : sponsor.name.split('\n')[0],
+              name : sponsor.name.split('\n')[0],
               location : sponsor.name.split('\n')[1],
               description : sponsor.name.split('\n')[2],
               source : sponsor.images.filter(function (image) {
