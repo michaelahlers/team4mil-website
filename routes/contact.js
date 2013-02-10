@@ -4,7 +4,7 @@
 var Mailgun = require('mailgun').Mailgun
   , util = require('util')
 
-var transport = new Mailgun('key-4vqyrivdws3fvkaj2d391ict3kbsinb5')
+var transport = new Mailgun(process.env.MAILGUN_API_KEY || 'key-4vqyrivdws3fvkaj2d391ict3kbsinb5')
 
 var authorizedRecipients = [
   'contact@team4mil.org',
