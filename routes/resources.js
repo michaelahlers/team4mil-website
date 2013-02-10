@@ -138,10 +138,12 @@ exports.sponsors = function (req, res) {
         title : results[0].subject,
         summary : results[0].message,
         sponsors : results[1].data.map(function (sponsor) {
+            sponsor.name = sponsor.name.replace(/\n+/g, '\n')
             return {
               id : sponsor.id,
               title : sponsor.name.split('\n')[0],
               location : sponsor.name.split('\n')[1],
+              description : sponsor.name.split('\n')[2],
               source : sponsor.images.filter(function (image) {
                 return 480 == image.width
               })[0].source
