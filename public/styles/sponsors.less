@@ -16,7 +16,7 @@
     color: @white;
     text-shadow: @shadowDropStandard;
     margin-top: 400px;
-    margin-bottom: 50px;
+    margin-bottom: @gridGutterWidth;
   }
 
   .nav {
@@ -29,6 +29,7 @@
       a {
         background-color: @grayLighter;
         border-bottom: none;
+        margin-right: @gridGutterWidth / 2;
       }
 
       a:hover {
