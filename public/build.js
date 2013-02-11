@@ -1,76 +1,82 @@
-var require = {
-  name : './index',
-  out : 'index.min.js',
+(function (window, module, exports) {
+  return window.require = module.exports = exports = {
+    name : './index',
+    out : 'index.min.js',
 
-  paths : {
-    'angular' : 'lib/angular-1.1.1/angular',
-    'angular-bootstrap' : 'lib/angular-1.1.1/angular-bootstrap',
-    'angular-bootstrap-prettify' : 'lib/angular-1.1.1/angular-bootstrap-prettify',
-    'angular-loader' : 'lib/angular-1.1.1/angular-loader',
-    'angular-resource' : 'lib/angular-1.1.1/angular-resource',
-    'angular-sanitize' : 'lib/angular-1.1.1/angular-sanitize',
-    'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
-    'domReady' : 'lib/domReady-2.0.1',
-    'jquery' : 'lib/jquery-1.8.3',
-    'jquery-gridster' : 'lib/gridster.js-master/dist/jquery.gridster.js',
-    'jquery-imagesLoaded' : 'lib/jquery.imagesloaded.min',
-    'jquery-masonry' : 'lib/masonry-master/jquery.masonry',
-    'modernizr' : 'lib/modernizr-2.6.1',
-    'text' : 'lib/text-2.0.3.js'
-  },
-
-  shim : {
-
-    'angular' : {
-      exports : 'angular'
+    paths : {
+      'angular' : 'lib/angular-1.1.1/angular',
+      'angular-bootstrap' : 'lib/angular-1.1.1/angular-bootstrap',
+      'angular-bootstrap-prettify' : 'lib/angular-1.1.1/angular-bootstrap-prettify',
+      'angular-loader' : 'lib/angular-1.1.1/angular-loader',
+      'angular-resource' : 'lib/angular-1.1.1/angular-resource',
+      'angular-sanitize' : 'lib/angular-1.1.1/angular-sanitize',
+      'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
+      'domReady' : 'lib/domReady-2.0.1',
+      'jquery' : 'lib/jquery-1.8.3',
+      'jquery-gridster' : 'lib/gridster.js-master/dist/jquery.gridster.js',
+      'jquery-imagesLoaded' : 'lib/jquery.imagesloaded.min',
+      'jquery-masonry' : 'lib/masonry-master/jquery.masonry',
+      'modernizr' : 'lib/modernizr-2.6.1',
+      'text' : 'lib/text-2.0.3.js'
     },
 
-    'angular-bootstrap' : {
-      deps : ['angular', 'bootstrap']
-    },
+    shim : {
 
-    'angular-bootstrap-prettify' : {
-      deps : ['angular', 'angular-bootstrap']
-    },
+      'angular' : {
+        exports : 'angular'
+      },
 
-    'angular-loader' : {
-      deps : ['angular']
-    },
+      'angular-bootstrap' : {
+        deps : ['angular', 'bootstrap']
+      },
 
-    'angular-resource' : {
-      deps : ['angular']
-    },
+      'angular-bootstrap-prettify' : {
+        deps : ['angular', 'angular-bootstrap']
+      },
 
-    'angular-sanitize' : {
-      deps : ['angular']
-    },
+      'angular-loader' : {
+        deps : ['angular']
+      },
 
-    'bootstrap' : {
-      deps : ['jquery']
-    },
+      'angular-resource' : {
+        deps : ['angular']
+      },
 
-    'jquery' : {
-      /* jQuery does not depend on Angular JS, but it must be loaded
-       * afterwards to avoid subtle bugs. */
-      deps : ['angular'],
-      exports : '$'
-    },
+      'angular-sanitize' : {
+        deps : ['angular']
+      },
 
-    'jquery-gridster' : {
-      deps : ['jquery']
-    },
+      'bootstrap' : {
+        deps : ['jquery']
+      },
 
-    'jquery-imagesLoaded' : {
-      deps : ['jquery']
-    },
+      'jquery' : {
+        /* jQuery does not depend on Angular JS, but it must be loaded
+         * afterwards to avoid subtle bugs. */
+        deps : ['angular'],
+        exports : '$'
+      },
 
-    'jquery-masonry' : {
-      deps : ['jquery', 'jquery-imagesLoaded']
-    }//,
+      'jquery-gridster' : {
+        deps : ['jquery']
+      },
 
-    //'jquery-ui' : {
-    //  deps : ['jquery']
-    //}
+      'jquery-imagesLoaded' : {
+        deps : ['jquery']
+      },
 
+      'jquery-masonry' : {
+        deps : ['jquery', 'jquery-imagesLoaded']
+      }//,
+
+      //'jquery-ui' : {
+      //  deps : ['jquery']
+      //}
+
+    }
   }
-}
+})(
+  'undefined' === typeof window ? {} : window,
+  'undefined' === typeof module ? {} : module,
+  'undefined' === typeof exports ? {} : exports
+)
