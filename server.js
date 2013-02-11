@@ -53,7 +53,7 @@ server.get('/partials/:name', routes.partials)
 
 server.get('/resources/mission', routes.resources.mission)
 server.get('/resources/teams', routes.resources.teams)
-server.get('/resources/sponsors', routes.resources.sponsors)
+server.get('/resources/sponsorship', routes.resources.sponsorship)
 server.get('/resources/contact', routes.resources.contact)
 
 server.post('/contact', routes.contact.send)

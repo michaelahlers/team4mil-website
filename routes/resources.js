@@ -110,7 +110,7 @@ exports.teams = function (req, res) {
   )
 }
 
-exports.sponsors = function (req, res) {
+exports.sponsorship = function (req, res) {
 
   async.parallel([
 

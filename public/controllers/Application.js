@@ -5,7 +5,7 @@ define(
     'controllers',
     'controllers/Mission',
     'controllers/Teams',
-    'controllers/Sponsors',
+    'controllers/Sponsorship',
     'controllers/Contact'
   ],
 

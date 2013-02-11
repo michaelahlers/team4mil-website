@@ -9,7 +9,7 @@ define(
 
     'controllers/Mission',
     'controllers/Contact',
-    'controllers/Sponsors',
+    'controllers/Sponsorship',
 
     'directives'
   ],
@@ -34,9 +34,9 @@ define(
         controller : 'Teams'
       })
 
-      $routeProvider.when('/sponsors', {
-        templateUrl : 'partials/sponsors',
-        controller : 'Sponsors'
+      $routeProvider.when('/sponsorship', {
+        templateUrl : 'partials/sponsorship',
+        controller : 'Sponsorship'
       })
 
       $routeProvider.when('/contact', {
