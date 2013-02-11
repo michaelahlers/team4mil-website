@@ -97,7 +97,7 @@ switch (process.env.NODE_ENV) {
       }
       start()
     })
-    break;
+    break
 
   default:
     start()
