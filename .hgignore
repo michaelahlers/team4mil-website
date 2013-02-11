@@ -11,3 +11,4 @@
 logs/
 node_modules/
 public/index.css
+public/index.production.js
