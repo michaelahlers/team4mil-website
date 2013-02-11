@@ -40,16 +40,23 @@ server.configure(function () {
     appId : '273576052771797',
     secret : '666835a394317bd1bc070afcf00c6702'
   }))
+})
 
+
+//try {
 //  requirejs.optimize({
 //    baseUrl : __dirname + '/public',
 //    appDir : '.',
-//    name : 'index',
-//    dir : __dirname + '/public'
+//    modules : [
+//      {name : 'index'}
+//    ],
+//    dir : __dirname + '/dist'
 //  }, function (res) {
-//    console.log(res)
+//    console.log('Optimize result.', res)
 //  })
-})
+//} catch (e) {
+//  console.log('Optimize exception.', e)
+//}
 
 server.configure('development', function () {
   server.use(express.errorHandler({ dumpExceptions : true, showStack : true }))
