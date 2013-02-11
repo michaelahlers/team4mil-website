@@ -1,5 +1,5 @@
-(function (window, module, exports) {
-  return window.require = module.exports = exports = {
+(function (window, module) {
+  return window.require = module.exports = {
     name : './index',
     out : 'index.min.js',
 
@@ -75,8 +75,4 @@
 
     }
   }
-})(
-  'undefined' === typeof window ? {} : window,
-  'undefined' === typeof module ? {} : module,
-  'undefined' === typeof exports ? {} : exports
-)
+})('undefined' === typeof window ? {} : window, 'undefined' === typeof module ? {} : module)
