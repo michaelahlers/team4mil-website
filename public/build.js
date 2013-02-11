@@ -1,7 +1,7 @@
 (function (window, module) {
   return window.require = module.exports = {
     name : './index',
-    out : 'index.min.js',
+    out : './index.min.js',
 
     paths : {
       'angular' : 'lib/angular-1.1.1/angular',
