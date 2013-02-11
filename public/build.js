@@ -1,4 +1,6 @@
 (function (window, module) {
+  /* See https://github.com/jrburke/r.js/blob/master/build/example.build.js for complete documentation on these options. */
+
   return window.require = module.exports = {
     name : './index',
     out : './index.production.js',
@@ -77,6 +79,7 @@
 
     optimize : 'uglify2',
     uglify2 : {
+      warnings : true,
       /* Mangling defeats Angular injection by function argument names. */
       mangle : false
     }
