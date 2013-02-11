@@ -24,19 +24,16 @@ define(
         controller : 'Mission'
       })
 
-//      $routeProvider.when('/teams', {
-//        redirectTo : '/teams/'
-//      })
-
       $routeProvider.when('/teams', {
         templateUrl : 'partials/teams',
-        reloadOnSearch : false,
-        controller : 'Teams'
+        controller : 'Teams',
+        reloadOnSearch : false
       })
 
       $routeProvider.when('/sponsorship', {
         templateUrl : 'partials/sponsorship',
-        controller : 'Sponsorship'
+        controller : 'Sponsorship',
+        reloadOnSearch : false
       })
 
       $routeProvider.when('/contact', {
