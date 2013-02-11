@@ -15,11 +15,18 @@ html(lang='en')
     else
       script(type='text/javascript', data-main='index', src='../lib/require-2.1.2.js')
 
-  body(ng-controller='Application')
+  body
     header
       include header.jade
 
-    article(ng-view)
+    article(ng-cloak, ng-show='"Contact" == controller', ng-controller='Contact')
+      include partials/contact.jade
+
+    article(ng-cloak, ng-show='"Mission" == controller', ng-controller='Mission')
+      include partials/mission.jade
+
+    article(ng-cloak, ng-show='"Sponsorship" == controller', ng-controller='Sponsorship')
+      include partials/sponsorship.jade
 
     footer
       include footer.jade
