@@ -8,6 +8,7 @@ var express = require('express')
   , http = require('http')
   , https = require('https')
   , path = require('path')
+  , requirejs = require('requirejs')
   , routes = require('./routes')
 
 var server = express()
@@ -39,9 +40,22 @@ server.configure(function () {
     appId : '273576052771797',
     secret : '666835a394317bd1bc070afcf00c6702'
   }))
+
+//  requirejs.optimize({
+//    baseUrl : __dirname + '/public',
+//    appDir : '.',
+//    name : 'index',
+//    dir : __dirname + '/public'
+//  }, function (res) {
+//    console.log(res)
+//  })
 })
 
 server.configure('development', function () {
+  server.use(express.errorHandler({ dumpExceptions : true, showStack : true }))
+})
+
+server.configure('production', function () {
   server.use(express.errorHandler())
 })
 
