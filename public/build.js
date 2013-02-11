@@ -73,6 +73,12 @@
       //  deps : ['jquery']
       //}
 
+    },
+
+    optimize : 'uglify2',
+    uglify2 : {
+      /* Mangling defeats Angular injection by function argument names. */
+      mangle : false
     }
   }
 })('undefined' === typeof window ? {} : window, 'undefined' === typeof module ? {} : module)
