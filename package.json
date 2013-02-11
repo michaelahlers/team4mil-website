@@ -10,8 +10,8 @@
     "futures" : ">=2.1.0",
     "jade" : "*",
     "mailgun" : "0.4.x",
-    "nodemailer" : "0.3.x",
-    "less-middleware" : "0.1.x"
+    "less-middleware" : "0.1.x",
+    "requirejs" : "2.1.x"
   },
   "engines" : {
     "node" : "0.8.x",
