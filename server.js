@@ -8,7 +8,6 @@ var express = require('express')
   , http = require('http')
   , https = require('https')
   , path = require('path')
-  , requirejs = require('requirejs')
   , routes = require('./routes')
 
 var server = express()
@@ -40,23 +39,8 @@ server.configure(function () {
     appId : '273576052771797',
     secret : '666835a394317bd1bc070afcf00c6702'
   }))
+
 })
-
-
-//try {
-//  requirejs.optimize({
-//    baseUrl : __dirname + '/public',
-//    appDir : '.',
-//    modules : [
-//      {name : 'index'}
-//    ],
-//    dir : __dirname + '/dist'
-//  }, function (res) {
-//    console.log('Optimize result.', res)
-//  })
-//} catch (e) {
-//  console.log('Optimize exception.', e)
-//}
 
 server.configure('development', function () {
   server.use(express.errorHandler({ dumpExceptions : true, showStack : true }))
@@ -79,6 +63,43 @@ server.get('/resources/contact', routes.resources.contact)
 
 server.post('/contact', routes.contact.send)
 
-http.createServer(server).listen(server.get('port'), function () {
-  console.log('Express server listening on port ' + server.get('port') + '.')
-})
+var build = function (callback) {
+  console.log('Building client...')
+
+  var requirejs = require('requirejs')
+    , config = require('./public/build')
+
+  config.baseUrl = __dirname + '/public'
+  config.out = __dirname + '/public/' + config.out
+
+  requirejs.optimize(config, function (result) {
+    if (result instanceof Error) {
+      callback(result)
+      return
+    }
+    callback()
+  })
+}
+
+var start = function () {
+  http.createServer(server).listen(server.get('port'), function (foo) {
+    console.log('Express server listening on port ' + server.get('port') + '.')
+  })
+}
+
+switch (process.env.NODE_ENV) {
+
+  case 'production':
+    build(function (err) {
+      if (err) {
+        console.log(err)
+        throw err
+      }
+      start()
+    })
+    break;
+
+  default:
+    start()
+
+}
