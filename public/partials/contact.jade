@@ -15,6 +15,10 @@ section(class='body-contact container-fluid')
         span(class='lead') <strong>First</strong>, chose who you would like to contact.
         br
         span(class='muted') You may optionally choose a specific recipient below.
+        span(class='muted', ng-show='recipients[0].id == recipientId')
+          | &nbsp;(You've not chosen a specific person, so anyone who's available will answer your message.)
+        span(class='muted', ng-hide='recipients[0].id == recipientId')
+          | &nbsp;(You've chosen {{recipient.name}} to receive your message, but you can still pick someone else.)
 
       a(id='{{member.id}}'
       , class='media thumbnail t4m-member'
@@ -29,34 +33,41 @@ section(class='body-contact container-fluid')
 
     div(class='span5')
       form(name='messageForm')
-        fieldset
 
-          div(class='control-group')
-            p(class='help-block')
-              span(class='lead') <strong>Second</strong>, tell us a little about yourself.
-              br
-              span(class='muted') Don't worry, we will <em>only</em> use this information to contact you.
-            div(class='controls')
-              input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.')
-            div(class='controls')
-              input(class='span6', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
-              span(class='help-inline')
-                span(class='text-warning', ng-show='messageForm.senderMailText.$error.required') Your address is required.
-                span(class='text-warning', ng-show='messageForm.senderMailText.$error.email') Please recheck your address.
+        p(class='help-block')
+          span(class='lead') <strong>Second</strong>, tell us a little about yourself.
+          br
+          span(class='muted') Don't worry, we will <em>only</em> use this information to contact you.
 
-          div(class='control-group')
+        div(class='control-group', ng-class='{"warning":!sender.name}')
+          div(class='controls')
+            input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.')
+            span(class='help-inline', ng-hide='sender.name') Your name is helpful, but not required.
+
+        div(class='control-group', ng-class='{"error":messageForm.senderMailText.$invalid}')
+          div(class='controls')
+            input(class='span6', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
+            span(class='help-inline', ng-show='messageForm.senderMailText.$error.required') Your address is required.
+            span(class='help-inline', ng-show='messageForm.senderMailText.$error.email') Please recheck your address.
+
+        div(class='control-group')
+          div(class='controls')
             p(class='help-block')
               span(class='lead') <strong>Third</strong>, leave your comments below.
               br
               span(class='muted') Once you're finished, click the “Send” button below.
-            div(class='controls')
-              input(class='span6', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
-            div(class='controls')
-              textarea(class='span12', rows='10', name='bodyText', ng-model='body', placeholder='Your comments to Team 4Mil.')
 
-          div(class='control-group')
-            button(type='button', class='btn', ng-click='reset()') Cancel
-            button(type='submit', class='btn btn-primary pull-right', ng-click='send()', ng-disabled='messageForm.$invalid') Send
+        div(class='control-group')
+          div(class='controls')
+            input(class='span6', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
+
+        div(class='control-group')
+          div(class='controls')
+            textarea(class='span12', rows='10', name='bodyText', ng-model='body', placeholder='Your comments to Team 4Mil.')
+
+        div(class='control-group')
+          button(type='button', class='btn', ng-click='reset()') Reset
+          button(type='submit', class='btn btn-primary pull-right', ng-click='send()', ng-disabled='messageForm.$invalid') Send
 
       div(id='modalStatus', class='modal fade', tabindex='-1')
         div(class='modal-header')
