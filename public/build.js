@@ -12,6 +12,7 @@
       'angular-loader' : 'lib/angular-1.1.1/angular-loader',
       'angular-resource' : 'lib/angular-1.1.1/angular-resource',
       'angular-sanitize' : 'lib/angular-1.1.1/angular-sanitize',
+      'async' : 'lib/async',
       'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
       'domReady' : 'lib/domReady-2.0.1',
       'jquery' : 'lib/jquery-1.8.3',
