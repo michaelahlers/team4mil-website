@@ -4,6 +4,8 @@ define(
   [
     'angular',
 
+    'services/Resource',
+
     'controllers',
 
     'controllers/Mission',
@@ -15,30 +17,50 @@ define(
   ],
   function (angular) {
 
-    var module = angular.module('app', [ 'controllers', 'directives'])
+    var module = angular.module('app', [ 'services', 'controllers', 'directives' ])
 
     module.config(function ($routeProvider, $locationProvider) {
 
       $routeProvider.when('/mission', {
-        //templateUrl : 'partials/mission',
-        controller : 'Mission'
+        templateUrl : 'partials/mission',
+        controller : 'Mission',
+        resolve : {
+          content : function (Resource) {
+            return Resource.get('mission')
+          }
+        }
       })
 
       $routeProvider.when('/teams', {
-        //templateUrl : 'partials/teams',
+        templateUrl : 'partials/teams',
         controller : 'Teams',
-        reloadOnSearch : false
+        reloadOnSearch : false,
+        resolve : {
+          content : function (Resource) {
+            return Resource.get('teams')
+          }
+        }
       })
 
       $routeProvider.when('/sponsorship', {
-        //templateUrl : 'partials/sponsorship',
+        templateUrl : 'partials/sponsorship',
         controller : 'Sponsorship',
-        reloadOnSearch : false
+        reloadOnSearch : false,
+        resolve : {
+          content : function (Resource) {
+            return Resource.get('sponsorship')
+          }
+        }
       })
 
       $routeProvider.when('/contact', {
-        //templateUrl : 'partials/contact',
-        controller : 'Contact'
+        templateUrl : 'partials/contact',
+        controller : 'Contact',
+        resolve : {
+          content : function (Resource) {
+            return Resource.get('contact')
+          }
+        }
       })
 
       $routeProvider.otherwise({

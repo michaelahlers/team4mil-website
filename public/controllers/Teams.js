@@ -4,22 +4,13 @@ define([
 
   'jquery',
 
-  'controllers',
-
-  'services/Cache',
-  'services/Resource'
+  'controllers'
 
 ], function ($, controllers) {
 
-  controllers.controller('Teams', function ($rootScope, $scope, $timeout, $routeParams, $location, $log, Cache, Resource) {
+  controllers.controller('Teams', function ($rootScope, $scope, $timeout, $routeParams, $location, $log, content) {
 
-    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
-      $scope.active = 'Teams' == (current && current.$route && current.$route.controller)
-    })
-
-    $scope.content = Cache.get('teams', function () {
-      return Resource.get({name : 'teams'})
-    })
+    $scope.content = content
 
     $scope.toRows = function (array, length) {
       array = (array || []).slice(0)

@@ -3,22 +3,12 @@
 define([
 
   'controllers',
-  'jquery',
-
-  'services/Cache',
-  'services/Resource'
+  'jquery'
 
 ], function (controllers, $) {
 
-  controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $routeParams, $http, $timeout, Cache, Resource) {
-
-    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
-      $scope.active = 'Contact' == (current && current.$route && current.$route.controller)
-    })
-
-    $scope.content = Cache.get('contact', function () {
-      return Resource.get({name : 'contact'})
-    })
+  controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $routeParams, $http, $timeout, content) {
+    $scope.content = content
 
     $scope.selectRecipient = function (id) {
       $scope.recipientId = id

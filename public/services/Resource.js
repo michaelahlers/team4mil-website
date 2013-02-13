@@ -1,18 +1,35 @@
-define(
-  [
-    'services',
+'use strict'
 
-    /* AngularJS dependencies. */
-    'angular-resource'
-  ],
-  function (services) {
+define([
+  'services', 'angular-resource', 'services/Cache'
+], function (services) {
+  services.factory('Resource', function ($q, $resource, $timeout, $log, Cache) {
+    var resource = $resource('/resources/:name')
 
-    services.factory('Resource', function ($resource, $log) {
+    return {
+      /**
+       * Retrieves the named resource.
+       * @param name Identifies which content block to load.
+       * @return {*} An existing loaded resource, or a promise.
+       */
+      get : function (name) {
 
-      var service = $resource('/resources/:name')
+        /* Return either the cached promise. */
+        return Cache.get(name, function () {
+          var deferred = $q.defer()
 
-      return service
+          $resource('/resources/:name').get({name : name}, function (result) {
+            $timeout(function () {
+              deferred.resolve(result)
+            }, 2000)
+          })
 
-    })
+          /* Provides the promise to the cache. */
+          return deferred.promise
+        })
+
+      }
+    }
 
   })
+})
