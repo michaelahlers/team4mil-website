@@ -10,7 +10,12 @@ define([
 
 ], function (controllers, $) {
 
-  controllers.controller('Contact', function ($rootScope, $scope, $log, $http, $timeout, Cache, Resource) {
+  controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $routeParams, $http, $timeout, Cache, Resource) {
+
+    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
+      $scope.active = 'Contact' == (current && current.$route && current.$route.controller)
+    })
+
     $scope.content = Cache.get('contact', function () {
       return Resource.get({name : 'contact'})
     })

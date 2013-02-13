@@ -19,13 +19,13 @@ html(lang='en')
     header
       include header.jade
 
-    article(ng-cloak, ng-show='"Contact" == controller', ng-controller='Contact')
+    article(ng-cloak, ng-show='active', ng-controller='Contact')
       include partials/contact.jade
 
-    article(ng-cloak, ng-show='"Mission" == controller', ng-controller='Mission')
+    article(ng-cloak, ng-show='active', ng-controller='Mission')
       include partials/mission.jade
 
-    article(ng-cloak, ng-show='"Sponsorship" == controller', ng-controller='Sponsorship')
+    article(ng-cloak, ng-show='active', ng-controller='Sponsorship')
       include partials/sponsorship.jade
 
     footer

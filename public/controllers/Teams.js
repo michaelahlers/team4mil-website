@@ -12,6 +12,11 @@ define([
 ], function ($, controllers) {
 
   controllers.controller('Teams', function ($rootScope, $scope, $timeout, $routeParams, $location, $log, Cache, Resource) {
+
+    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
+      $scope.active = 'Teams' == (current && current.$route && current.$route.controller)
+    })
+
     $scope.content = Cache.get('teams', function () {
       return Resource.get({name : 'teams'})
     })
