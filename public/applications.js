@@ -12,6 +12,7 @@ define(
     'controllers/Contact',
     'controllers/Sponsorship',
     'controllers/Teams',
+    'controllers/Donate',
 
     'directives'
   ],
@@ -51,6 +52,11 @@ define(
             return Resource.get('sponsorship')
           }
         }
+      })
+
+      $routeProvider.when('/donate', {
+        templateUrl : 'partials/donate',
+        controller : 'Donate'
       })
 
       $routeProvider.when('/contact', {
