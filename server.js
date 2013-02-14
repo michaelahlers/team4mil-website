@@ -54,6 +54,7 @@ server.configure('production', function () {
  * User interface routes.
  */
 server.get('/', routes.index)
+server.get('/directives/:name', routes.directives)
 server.get('/partials/:name', routes.partials)
 
 server.get('/resources/mission', routes.resources.mission)
