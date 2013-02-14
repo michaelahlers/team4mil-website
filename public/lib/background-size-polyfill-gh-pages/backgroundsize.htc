@@ -259,8 +259,9 @@ function handleResize() {
 }
 
 function restore() {
+	var expando = element.bgsExpando;
+
 	try {
-	  var expando = element.bgsExpando;
 		element.style.backgroundImage = "url('" + expando.backgroundSrc + "')";
 		element.removeChild( expando.wrapper );
 		element.bgsExpando = null;
