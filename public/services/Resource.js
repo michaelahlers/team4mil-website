@@ -15,18 +15,18 @@ define([
       get : function (name) {
 
         /* Return either the cached promise. */
-        return Cache.get(name, function () {
-          var deferred = $q.defer()
+        //return Cache.get(name, function () {
+        var deferred = $q.defer()
 
-          $resource('/resources/:name').get({name : name}, function (result) {
-            $timeout(function () {
-              deferred.resolve(result)
-            }, 2000)
-          })
-
-          /* Provides the promise to the cache. */
-          return deferred.promise
+        $resource('/resources/:name').get({name : name}, function (result) {
+          $timeout(function () {
+            deferred.resolve(result)
+          }, 1000)
         })
+
+        /* Provides the promise to the cache. */
+        return deferred.promise
+        //})
 
       }
     }
