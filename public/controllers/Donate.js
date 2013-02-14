@@ -6,7 +6,7 @@ define([
 
 ], function (controllers) {
 
-  return controllers.controller('Donate', function ($rootScope, $scope, $log, content) {
+  return controllers.controller('Donate', function ($rootScope, $scope, $log) {
   })
 
 })
