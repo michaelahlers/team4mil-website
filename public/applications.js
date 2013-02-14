@@ -8,6 +8,7 @@ define(
 
     'controllers',
 
+    'controllers/Navigation',
     'controllers/Mission',
     'controllers/Contact',
     'controllers/Sponsorship',
