@@ -133,7 +133,7 @@ function refreshBackgroundImage( element, expando, callback ) {
 
 		expando.ignoreNextPropertyChange = true;
 		element.style.backgroundImage = "none";
-	
+
 	} else {
 		// the callback should be exacuted in all cases
 		callback();
@@ -168,7 +168,7 @@ function updateBackground( element, expando ) {
 				img.style.height = "auto";
 				img.style.left = 0;
 			}
-		
+
 		// elemRatio > imgRatio
 		} else {
 			expando.constrain = curConstrain = "height";
@@ -205,7 +205,7 @@ function updateBackground( element, expando ) {
 				img.style.height = "100%";
 				img.style.top = 0;
 			}
-		
+
 		// elemRatio > imgRatio
 		} else {
 			expando.constrain = curConstrain = "width";
@@ -259,9 +259,8 @@ function handleResize() {
 }
 
 function restore() {
-	var expando = element.bgsExpando;
-
 	try {
+	  var expando = element.bgsExpando;
 		element.style.backgroundImage = "url('" + expando.backgroundSrc + "')";
 		element.removeChild( expando.wrapper );
 		element.bgsExpando = null;
