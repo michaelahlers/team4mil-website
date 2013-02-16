@@ -5,6 +5,9 @@
    * silly workaround is meant to cope with inexplicable Internet Explorer bugs, and is documented in the RequireJS
    * manual at http://requirejs.org/docs/api.html#config under Configuration Options. */
 
+  /* See http://requirejs.org/docs/api.html#config-shim for clarification shimming jQuery plugins and other libraries
+   * that augment an existing namespace. */
+
   return window.build = module.exports = {
     baseUrl : '/',
     name : './index',
@@ -22,6 +25,7 @@
       'jquery' : 'lib/jquery-1.8.3',
       'jquery-gridster' : 'lib/gridster.js-master/dist/jquery.gridster.js',
       'jquery-imagesLoaded' : 'lib/jquery.imagesloaded',
+      'jquery-scrollTo' : 'lib/balupton-jquery-scrollto-c90f9b7/scripts/jquery.scrollto',
       'text' : 'lib/text-2.0.3.js'
     },
 
@@ -63,11 +67,18 @@
       },
 
       'jquery-gridster' : {
-        deps : ['jquery']
+        deps : ['jquery'],
+        exports : 'jQuery.fn.gridster'
       },
 
       'jquery-imagesLoaded' : {
-        deps : ['jquery']
+        deps : ['jquery'],
+        exports : 'jQuery.fn.imagesLoaded'
+      },
+
+      'jquery-scrollTo' : {
+        deps : ['jquery'],
+        exports : 'jQuery.fn.ScrollTo'
       }
       //,
       //
