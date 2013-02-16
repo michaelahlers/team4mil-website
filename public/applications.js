@@ -33,7 +33,7 @@ define(
         }
       })
 
-      $routeProvider.when('/teams/:team', {
+      $routeProvider.when('/teams/:id', {
         templateUrl : 'partials/teams',
         controller : 'Teams',
         reloadOnSearch : false,

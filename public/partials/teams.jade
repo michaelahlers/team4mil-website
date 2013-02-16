@@ -2,36 +2,40 @@ div(class='container-fluid hero hero-teams')
   div(class='row-fluid')
     div(class='offset1 span10')
       h1 {{content.title}}
-  div(class='row-fluid')
-    div(class='offset1 span10')
-      div(class='lead hero-summary hero-summary-teams', ng-bind-html='content.summary')
+      ul(class='nav nav-tabs lead')
+        li(ng-repeat='team in content.teams', ng-class='{ "active" : $parent.team.id == team.id }')
+          a(ng-href='#/teams/{{team.id}}') {{team.title}}
 
-div(class='container-fluid body-sponsors')
-  div(class='row-fluid')
-    div(class='offset1 span5')
-      h2 {{content.teams[0].title}}
-      p {{content.teams[0].summary}}
+//
+  div(class='container-fluid body-sponsors')
+    div(class='row-fluid')
+      div(class='offset1 span10')
+        div(class='lead', ng-bind-html='content.summary')
 
-      div(class='row-fluid', ng-repeat='members in toRows(content.teams[0].members, 3)')
-        div(class='thumbnails')
-          a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
-            img(class='', ng-src='{{member.source}}')
-            h4 {{member.name}}
+    div(class='row-fluid')
+      div(class='offset1 span5')
+        h2 {{content.teams[0].title}}
+        p {{content.teams[0].summary}}
 
-    div(class='span5')
-      h2 {{content.teams[1].title}}
-      p {{content.teams[1].summary}}
+        div(class='row-fluid', ng-repeat='members in toRows(content.teams[0].members, 3)')
+          div(class='thumbnails')
+            a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
+              img(class='', ng-src='{{member.source}}')
+              h4 {{member.name}}
 
-      div(class='row-fluid', ng-repeat='members in toRows(content.teams[1].members, 3)')
-        div(class='thumbnails')
-          a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
-            img(class='', ng-src='{{member.source}}')
-            h4 {{member.name}}
+      div(class='span5')
+        h2 {{content.teams[1].title}}
+        p {{content.teams[1].summary}}
+
+        div(class='row-fluid', ng-repeat='members in toRows(content.teams[1].members, 3)')
+          div(class='thumbnails')
+            a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
+              img(class='', ng-src='{{member.source}}')
+              h4 {{member.name}}
 
 div(id='modalBiography', class='modal fade', tabindex='-1')
   div(class='modal-header')
-    //button(type='button', class='close') ×
     h3 {{focused.name}}
-  div(class='modal-body', ng-bind-html='focused.biography')
-  div(class='modal-footer')
-    button(class='btn', ng-click='focused = {}') Close
+div(class='modal-body', ng-bind-html='focused.biography')
+div(class='modal-footer')
+  button(class='btn', ng-click='focused = {}') Close
