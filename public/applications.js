@@ -33,7 +33,7 @@ define(
         }
       })
 
-      $routeProvider.when('/teams', {
+      $routeProvider.when('/teams/:team', {
         templateUrl : 'partials/teams',
         controller : 'Teams',
         reloadOnSearch : false,
@@ -42,6 +42,10 @@ define(
             return Resource.get('teams')
           }
         }
+      })
+
+      $routeProvider.when('/teams', {
+        redirectTo : '/teams/'
       })
 
       $routeProvider.when('/sponsorship', {
