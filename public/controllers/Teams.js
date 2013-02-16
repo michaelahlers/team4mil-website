@@ -12,15 +12,21 @@ define([
 
     $scope.content = content
 
-    var findTeamById = function (id) {
-      return  $.grep($scope.content.teams || [], function (team) {
-        return id == team.id
+    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
+      var id = $routeParams.id || $scope.$eval('content.teams[0].id')
+      $scope.team = $.grep($scope.$eval('content.teams') || [], function (team) {
+        return team.id == id
+      })[0]
+    })
+
+    var selectMember = function () {
+      $scope.member = $.grep($scope.$eval('team.members') || [], function (member) {
+        return member.id == $routeParams.member
       })[0]
     }
 
-    $scope.$on('$routeChangeSuccess', function (event, current, previous) {
-      $scope.team = findTeamById(current.params.id) || $scope.content.teams[0].id
-    })
+    $scope.$on('$routeChangeSuccess', selectMember)
+    $scope.$on('$routeUpdate', selectMember)
 
     /*
      $scope.toRows = function (array, length) {

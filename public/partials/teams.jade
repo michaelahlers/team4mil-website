@@ -6,6 +6,21 @@ div(class='container-fluid hero hero-teams')
         li(ng-repeat='team in content.teams', ng-class='{ "active" : $parent.team.id == team.id }')
           a(ng-href='#/teams/{{team.id}}') {{team.title}}
 
+div(class='container-fluid body-sponsors')
+  div(class='row-fluid')
+    div(class='offset1 span5')
+
+      a(id='{{member.id}}'
+      , class='media thumbnail t4m-member'
+      , ng-repeat='member in team.members'
+      , ng-class='{ selected:member.id == selectedId || recipients[0].id == selectedId }'
+      , ng-href='#/teams/{{team.id}}?member={{member.id}}')
+        img(class='pull-left span4', ng-src='{{member.picture.location}}')
+        span(class='lead')
+          strong {{member.name}}
+
+    div(class='span5') {{member.id}}
+
 //
   div(class='container-fluid body-sponsors')
     div(class='row-fluid')
@@ -33,9 +48,9 @@ div(class='container-fluid hero hero-teams')
               img(class='', ng-src='{{member.source}}')
               h4 {{member.name}}
 
-div(id='modalBiography', class='modal fade', tabindex='-1')
-  div(class='modal-header')
-    h3 {{focused.name}}
-div(class='modal-body', ng-bind-html='focused.biography')
-div(class='modal-footer')
-  button(class='btn', ng-click='focused = {}') Close
+  div(id='modalBiography', class='modal fade', tabindex='-1')
+    div(class='modal-header')
+      h3 {{focused.name}}
+  div(class='modal-body', ng-bind-html='focused.biography')
+  div(class='modal-footer')
+    button(class='btn', ng-click='focused = {}') Close

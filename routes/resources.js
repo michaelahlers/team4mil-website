@@ -92,7 +92,7 @@ exports.teams = function (req, res) {
                 return {
                   id : toId(image.name),
                   name : image.name,
-                  source : image.source,
+                  picture : { location : image.source},
                   biography : getBiography(image.name).message.replace(/\<p\>\s*\<\/p\>/g, '')
                 }
               })
@@ -105,7 +105,7 @@ exports.teams = function (req, res) {
                 return {
                   id : toId(image.name),
                   name : image.name,
-                  source : image.source,
+                  picture : { location : image.source},
                   biography : getBiography(image.name).message.replace(/\<p\>\s*\<\/p\>/g, '')
                 }
               })
