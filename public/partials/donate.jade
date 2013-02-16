@@ -16,7 +16,7 @@ div(class='container-fluid body-donate')
             input(class='span9'
             , type='text'
             , name='giverName'
-            , ng-model='donation.giver.name'
+            , ng-model='donation.donor.name'
             , placeholder="Card holder's full name."
             , required)
 
@@ -55,14 +55,30 @@ div(class='container-fluid body-donate')
 
         div(class='control-group')
           div(class='controls controls-row')
-            div(class='input-prepend input-append')
-              span(class='add-on') $
-              input(class='input-mini'
-              , name='amount'
-              , type='number'
-              , ng-model='donation.amount'
-              , required)
-              span(class='add-on') .00
+            div(class='span6')
+              div(class='input-prepend input-append')
+                span(class='add-on') $
+                input(class='input-mini'
+                , name='amount'
+                , type='number'
+                , ng-model='donation.amount'
+                , required)
+                span(class='add-on') .00
+            div(class='span3')
+              button(class='btn btn-success pull-right', type='submit') Donate
+
+      p
+        code donation.donor.name : {{donation.donor.name}}
+      p
+        code donation.card.number : {{donation.card.number}}
+      p
+        code donation.card.expiration.month : {{donation.card.expiration.month}}
+      p
+        code donation.card.expiration.year : {{donation.card.expiration.year}}
+      p
+        code donation.card.code : {{donation.card.code}}
+      p
+        code donation.amount : {{donation.amount}}
 
 
     div(class='span5')
