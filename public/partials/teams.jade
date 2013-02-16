@@ -32,4 +32,7 @@ section(class='container-fluid body-teams')
 
     div(class='span5', ng-show='member')
       h3 {{member.name}}
+        div(class='btn-group pull-right')
+          a(class='btn', ng-href='#/teams/{{team.id}}?member={{getPrevious().id}}') Prev
+          a(class='btn', ng-href='#/teams/{{team.id}}?member={{getNext().id}}') Next
       div(ng-bind-html='member.biography')
