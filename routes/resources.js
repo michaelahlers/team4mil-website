@@ -27,6 +27,13 @@ exports.mission = function (req, res) {
 
 exports.teams = function (req, res) {
 
+  var toId = function (name) {
+    return name
+      .replace(/[“”]/g, '')
+      .replace(/[\s]/g, '-')
+      .toLowerCase()
+  }
+
   /* Facebook may eventually hate us, but that would be a good problem to have. */
   var calls = [
     '/452954424753567',
@@ -78,6 +85,7 @@ exports.teams = function (req, res) {
           summary : results[0].message,
           teams : [
             {
+              id : toId(results[1].name),
               title : results[1].name,
               summary : results[1].description,
               members : results[2].data.map(function (image) {
@@ -90,6 +98,7 @@ exports.teams = function (req, res) {
               })
             },
             {
+              id : toId(results[3].name),
               title : results[3].name,
               summary : results[3].description,
               members : results[4].data.map(function (image) {
