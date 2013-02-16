@@ -20,6 +20,7 @@
       'angular-loader' : 'lib/angular-1.1.2/angular-loader',
       'angular-resource' : 'lib/angular-1.1.2/angular-resource',
       'angular-sanitize' : 'lib/angular-1.1.2/angular-sanitize',
+      'angular-ui-bootstrap' : 'lib/ui-bootstrap-tpls-0.1.0',
       'async' : 'lib/async',
       'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
       'jquery' : 'lib/jquery-1.8.3',
@@ -53,6 +54,10 @@
 
       'angular-sanitize' : {
         deps : ['angular']
+      },
+
+      'angular-ui-bootstrap' : {
+        deps : ['angular', 'bootstrap', 'jquery']
       },
 
       'bootstrap' : {
