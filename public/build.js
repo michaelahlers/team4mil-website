@@ -1,7 +1,11 @@
 (function (window, module) {
   /* See https://github.com/jrburke/r.js/blob/master/build/example.build.js for complete documentation on these options. */
 
-  return window.require = module.exports = {
+  /* In browsers, export to build then use a local script afterwards to assign window.build to var require. This
+   * silly workaround is meant to cope with inexplicable Internet Explorer bugs, and is documented in the RequireJS
+   * manual at http://requirejs.org/docs/api.html#config under Configuration Options. */
+
+  return window.build = module.exports = {
     baseUrl : '/',
     name : './index',
     out : './index.production.js',
