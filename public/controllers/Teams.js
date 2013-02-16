@@ -4,7 +4,9 @@ define([
 
   'jquery',
 
-  'controllers'
+  'controllers',
+
+  'jquery-smooth-scroll'
 
 ], function ($, controllers) {
 
@@ -37,6 +39,17 @@ define([
       var members = ($scope.$eval('team.members') || [])
       return members[(members.indexOf($scope.$eval('member')) + members.length - 1) % members.length]
     }
+
+    $scope.$watch('member', function () {
+
+      $.smoothScroll({
+        scrollTarget : $('#foobear'),
+        afterScroll : function () {
+          $log.log('afterScroll')
+        }
+      })
+
+    })
 
   })
 
