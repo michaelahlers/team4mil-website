@@ -6,7 +6,7 @@ define([
 
   'controllers',
 
-  'jquery-smooth-scroll'
+  'directives/pc-scroller'
 
 ], function ($, controllers) {
 
@@ -39,19 +39,6 @@ define([
       var members = ($scope.$eval('team.members') || [])
       return members[(members.indexOf($scope.$eval('member')) + members.length - 1) % members.length]
     }
-
-    $scope.$watch('member', function (incoming, outgoing) {
-      if (!incoming) {
-        return
-      }
-
-      $.smoothScroll({
-        scrollTarget : $('#foobear'),
-        offset : -$('body > header > nav').outerHeight(true)
-      })
-
-    })
-
   })
 
 })
