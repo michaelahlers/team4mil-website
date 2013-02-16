@@ -19,9 +19,9 @@ html(lang="en")
     script(type='text/javascript', src='build.js')
 
     if ('production' == process.env.NODE_ENV)
-      script(type='text/javascript', data-main='index.production', src='../lib/require-2.1.2.js')
+      script(type='text/javascript', data-main='index.production', src='../lib/require-2.1.4.min.js')
     else
-      script(type='text/javascript', data-main='index', src='../lib/require-2.1.2.js')
+      script(type='text/javascript', data-main='index', src='../lib/require-2.1.4.min.js')
 
   body
     header
