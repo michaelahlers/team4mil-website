@@ -15,11 +15,13 @@ define(
     'controllers/Teams',
     'controllers/Donate',
 
-    'directives'
+    'directives',
+
+    'angular-bootstrap'
   ],
   function (angular) {
 
-    var module = angular.module('app', [ 'services', 'controllers', 'directives' ])
+    var module = angular.module('app', [ 'services', 'controllers', 'directives', 'bootstrap' ])
 
     module.config(function ($routeProvider, $locationProvider) {
 
