@@ -17,12 +17,14 @@ define(
 
     'directives',
 
+    'filters',
+
     'angular-bootstrap',
     'angular-ui-bootstrap'
   ],
   function (angular) {
 
-    var module = angular.module('app', [ 'services', 'controllers', 'directives', 'bootstrap', 'ui.bootstrap' ])
+    var module = angular.module('app', [ 'services', 'controllers', 'directives', 'filters', 'bootstrap', 'ui.bootstrap' ])
 
     module.config(function ($routeProvider, $locationProvider) {
 
