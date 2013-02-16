@@ -173,7 +173,6 @@ exports.contact = function (req, res) {
   }
 
   var resources = [
-    '/452955478086795',
     '/463970396985303/photos'
   ]
 
@@ -196,10 +195,8 @@ exports.contact = function (req, res) {
 
       res.json(
         {
-          title : results[0].subject,
-          summary : results[0].message,
           board : {
-            members : results[1].data.map(function (member) {
+            members : results[0].data.map(function (member) {
               return {
                 id : toId(member.name.split('\n')[0]),
                 mail : toMailAddress(member.name.split('\n')[0]),
