@@ -25,7 +25,7 @@
       'jquery' : 'lib/jquery-1.8.3',
       'jquery-gridster' : 'lib/gridster.js-master/dist/jquery.gridster.js',
       'jquery-imagesLoaded' : 'lib/jquery.imagesloaded',
-      'jquery-scrollTo' : 'lib/balupton-jquery-scrollto-c90f9b7/scripts/jquery.scrollto',
+      'jquery-smooth-scroll' : 'lib/jquery-smooth-scroll-1.4.9/jquery.smooth-scroll',
       'text' : 'lib/text-2.0.3.js'
     },
 
@@ -76,9 +76,9 @@
         exports : 'jQuery.fn.imagesLoaded'
       },
 
-      'jquery-scrollTo' : {
+      'jquery-smooth-scroll' : {
         deps : ['jquery'],
-        exports : 'jQuery.fn.ScrollTo'
+        exports : 'jQuery.fn.smoothScroll'
       }
       //,
       //
