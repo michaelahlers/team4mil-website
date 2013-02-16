@@ -2,7 +2,9 @@
 
 define([
   'angular',
-  'angular-sanitize'
+
+  'angular-sanitize',
+  'services'
 ], function (angular) {
-  angular.module('controllers', [ 'ngSanitize', 'services' ])
+  return angular.module('controllers', [ 'ngSanitize', 'services' ])
 })
