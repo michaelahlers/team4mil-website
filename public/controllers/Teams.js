@@ -40,13 +40,14 @@ define([
       return members[(members.indexOf($scope.$eval('member')) + members.length - 1) % members.length]
     }
 
-    $scope.$watch('member', function () {
+    $scope.$watch('member', function (incoming, outgoing) {
+      if (!incoming) {
+        return
+      }
 
       $.smoothScroll({
         scrollTarget : $('#foobear'),
-        afterScroll : function () {
-          $log.log('afterScroll')
-        }
+        offset : -$('body > header > nav').outerHeight(true)
       })
 
     })
