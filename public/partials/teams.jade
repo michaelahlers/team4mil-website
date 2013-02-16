@@ -13,7 +13,7 @@ section(class='container-fluid body-teams')
       a(id='{{member.id}}'
       , class='media thumbnail t4m-member'
       , ng-repeat='member in team.members'
-      , ng-class='{ selected : member == $parent.member }'
+      , ng-class='{ selected : member == $parent.member || !$parent.member }'
       , ng-href='#/teams/{{team.id}}?member={{member.id}}')
         img(class='pull-left span4', ng-src='{{member.picture.location}}')
         span(class='lead')
