@@ -7,6 +7,10 @@ div(class='container-fluid hero hero-teams')
           a(ng-href='#/teams/{{team.id}}') {{team.title}}
 
 section(class='container-fluid body-teams')
+  //
+    div(class='row-fluid')
+      div(class='offset1 span10 lead', ng-bind-html='content.summary')
+
   div(class='row-fluid')
     div(class='offset1 span5')
 
@@ -19,38 +23,13 @@ section(class='container-fluid body-teams')
         span(class='lead')
           strong {{member.name}}
 
-    div(class='span5') {{member.id}}
+    div(class='span5', ng-hide='member')
+      h3 {{team.title}}
+      p(class='lead') {{team.summary}}
+      p(class='lead help-block')
+        strong To learn more about a rider
+        | &nbsp;please click their name or picture from the list to the left.
 
-//
-  div(class='container-fluid body-sponsors')
-    div(class='row-fluid')
-      div(class='offset1 span10')
-        div(class='lead', ng-bind-html='content.summary')
-
-    div(class='row-fluid')
-      div(class='offset1 span5')
-        h2 {{content.teams[0].title}}
-        p {{content.teams[0].summary}}
-
-        div(class='row-fluid', ng-repeat='members in toRows(content.teams[0].members, 3)')
-          div(class='thumbnails')
-            a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
-              img(class='', ng-src='{{member.source}}')
-              h4 {{member.name}}
-
-      div(class='span5')
-        h2 {{content.teams[1].title}}
-        p {{content.teams[1].summary}}
-
-        div(class='row-fluid', ng-repeat='members in toRows(content.teams[1].members, 3)')
-          div(class='thumbnails')
-            a(class='thumbnail span4', ng-repeat='member in members', ng-href='#/teams?id={{member.id}}')
-              img(class='', ng-src='{{member.source}}')
-              h4 {{member.name}}
-
-  div(id='modalBiography', class='modal fade', tabindex='-1')
-    div(class='modal-header')
-      h3 {{focused.name}}
-  div(class='modal-body', ng-bind-html='focused.biography')
-  div(class='modal-footer')
-    button(class='btn', ng-click='focused = {}') Close
+    div(class='span5', ng-show='member')
+      h3 {{member.name}}
+      div(ng-bind-html='member.biography')
