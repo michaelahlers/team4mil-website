@@ -1,11 +1,8 @@
 'use strict'
 
-define(
-  [
-    'angular-sanitize'
-  ],
-  function () {
-    var module = angular.module('controllers', [ 'ngSanitize', 'services' ])
-
-    return module
-  })
+define([
+  'angular',
+  'angular-sanitize'
+], function (angular) {
+  angular.module('controllers', [ 'ngSanitize', 'services' ])
+})
