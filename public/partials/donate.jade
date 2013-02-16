@@ -6,7 +6,76 @@ div(class='container-fluid hero hero-donate')
 div(class='container-fluid body-donate')
   div(class='row-fluid')
     div(class='offset1 span5')
-      p Donation form.
+      p(class='help-block lead')
+        strong Team 4Mil accepts online donations here.
+        | &nbsp;Please write something that would make people give us money.
+
+      form(name='donationForm')
+        div(class='control-group')
+          div(class='controls controls-row')
+            input(class='span9'
+            , type='text'
+            , name='giverName'
+            , ng-model='donation.giver.name'
+            , placeholder="Card holder's full name."
+            , required)
+
+        div(class='control-group')
+          div(class='controls controls-row')
+            input(class='span9'
+            , type='text'
+            , name='cardNumber'
+            , ng-model='donation.card.number'
+            , placeholder='Credit card number.'
+            , required)
+
+          div(class='controls controls-row')
+            select(class='span3'
+            , name='cardExpMonth'
+            , ng-model='donation.card.expiration.month'
+            , required)
+              option(ng-repeat='month in []|sequence:1:12', value='{{month}}') {{month}}
+
+            div(class='input-prepend span3 text-align-center')
+              span(class='add-on') 20
+              input(class='input-mini'
+              , type='number'
+              , name='cardExpYear'
+              , ng-model='donation.card.expiration.year'
+              , placeholder='Year.'
+              , required)
+
+            div(class='span3')
+              input(class='span12'
+              , type='text'
+              , name='cardVC'
+              , ng-model='donation.card.code'
+              , placeholder='CVC.'
+              , required)
+
+        div(class='control-group')
+          div(class='controls controls-row')
+            div(class='input-prepend input-append')
+              span(class='add-on') $
+              input(class='input-mini'
+              , name='amount'
+              , type='number'
+              , ng-model='donation.amount'
+              , required)
+              span(class='add-on') .00
+
 
     div(class='span5')
-      p Details for donating by mail.
+      p(class='help-block lead')
+        strong You can also donate by mail.
+        | &nbsp;Please make your cheque payable to “Team 4Mil,” and send it to the following address.
+
+      p
+        address(class='lead')
+          | Team 4Mil
+          br
+          | c/o Wayne Dowd
+          br
+          | 4053 Brideghampton Lane
+          br
+          | Virginia Beach, VA  23455

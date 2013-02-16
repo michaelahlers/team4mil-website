@@ -2,7 +2,8 @@
 
 define([
 
-  'controllers'
+  'controllers',
+  'filters/sequence'
 
 ], function (controllers) {
 
