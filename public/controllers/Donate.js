@@ -36,6 +36,15 @@ define([
 
     $scope.startDonation = function () {
 
+
+    }
+
+    $scope.cancelDonation = function () {
+
+    }
+
+    $scope.confirmDonation = function () {
+
       Stripe.charge(
         {
           card : {
@@ -54,14 +63,6 @@ define([
         function (err, result) {
           $log.log(err, result)
         })
-
-    }
-
-    $scope.cancelDonation = function () {
-
-    }
-
-    $scope.confirmDonation = function () {
 
     }
   })
