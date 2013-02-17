@@ -7,8 +7,6 @@ define([
 
   return controllers.controller('Donate', function ($rootScope, $scope, $http, $log, Stripe) {
 
-    $log.log(Stripe)
-
     var reset = function () {
       var now = new Date()
 
