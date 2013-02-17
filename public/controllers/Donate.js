@@ -11,7 +11,7 @@ define([
 
   Stripe.setPublishableKey('pk_test_bAwWmtD5CZPctFHF5mzK2ZUx')
 
-  return controllers.controller('Donate', function ($rootScope, $scope, $log) {
+  return controllers.controller('Donate', function ($rootScope, $scope, $http, $log) {
 
     var reset = function () {
       var now = new Date()
@@ -47,8 +47,13 @@ define([
         exp_month : $scope.$eval('donation.card.expiration.month'),
         exp_year : $scope.$eval('donation.card.expiration.year'),
         cvc : $scope.$eval('donation.card.code')
-      }, function (res) {
-        $log.log(arguments)
+      }, function (status, response) {
+        $http.post('/charge', {
+          id : response.id,
+          /* Stripe works in cents. */
+          currency : 'USD',
+          amount : $scope.$eval('donation.amount') * 100
+        })
       })
 
     }
