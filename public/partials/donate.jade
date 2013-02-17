@@ -13,59 +13,65 @@ div(class='container-fluid body-donate')
       form(name='donationForm')
         div(class='control-group')
           div(class='controls controls-row')
-            input(class='span9'
+            input(class='span6'
             , type='text'
             , name='giverName'
             , ng-model='donation.donor.name'
             , placeholder="Card holder's full name."
             , required)
 
+            input(class='span6'
+            , type='email'
+            , name='giverName'
+            , ng-model='donation.donor.mail'
+            , placeholder="Donor's e-mail address."
+            , required)
+
         div(class='control-group')
           div(class='controls controls-row')
-            input(class='span9'
+            input(class='span7 input-card-number'
             , type='text'
             , name='cardNumber'
             , ng-model='donation.card.number'
             , placeholder='Credit card number.'
             , required)
 
+            div(class='span5')
+              img(src='/images/logos/accepted-credit-cards.png', tooltip='All major credit cards accepted.')
+
           div(class='controls controls-row')
-            select(class='span3'
+            select(class='span5 card-expiration-month'
             , name='cardExpMonth'
             , ng-model='donation.card.expiration.month'
             , required)
-              option(ng-repeat='month in []|sequence:1:12', value='{{month}}') {{month}}
+              option(ng-repeat='month in months', value='{{month.index}}') {{month.name}}
 
-            div(class='input-prepend span3 text-align-center')
-              span(class='add-on') 20
-              input(class='input-mini'
-              , type='number'
-              , name='cardExpYear'
-              , ng-model='donation.card.expiration.year'
-              , placeholder='Year.'
-              , required)
+            input(class='span4 input-card-expiration-year'
+            , type='number'
+            , name='cardExpYear'
+            , ng-model='donation.card.expiration.year'
+            , placeholder='Expiration year.'
+            , required)
 
-            div(class='span3')
-              input(class='span12'
-              , type='text'
-              , name='cardVC'
-              , ng-model='donation.card.code'
-              , placeholder='CVC.'
-              , required)
+            input(class='span3 input-card-verification-code'
+            , type='text'
+            , name='cardVC'
+            , ng-model='donation.card.code'
+            , placeholder='CVC.'
+            , required)
 
         div(class='control-group')
           div(class='controls controls-row')
-            div(class='span6')
-              div(class='input-prepend input-append')
+            div(class='span10')
+              div(class='pull-right input-prepend input-append')
                 span(class='add-on') $
-                input(class='input-mini'
+                input(class='input-small input-amount'
                 , name='amount'
                 , type='number'
                 , ng-model='donation.amount'
                 , required)
                 span(class='add-on') .00
-            div(class='span3')
-              button(class='btn btn-success pull-right', type='submit') Donate
+            button(class='span2 btn btn-success', type='submit') Donate
 
       p
         code donation.donor.name : {{donation.donor.name}}
