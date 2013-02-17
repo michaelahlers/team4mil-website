@@ -9,6 +9,8 @@ define([
   'Stripe'
 ], function (controllers, Stripe) {
 
+  Stripe.setPublishableKey('pk_test_bAwWmtD5CZPctFHF5mzK2ZUx')
+
   return controllers.controller('Donate', function ($rootScope, $scope, $log) {
 
     var reset = function () {
@@ -16,8 +18,8 @@ define([
 
       $scope.donation = {
         donor : {
-          name : '',
-          mail : ''
+          name : 'John Smith',
+          mail : 'john@example.com'
         },
         card : {
           /* Sample credit card number for Stripe testing. */
@@ -26,8 +28,9 @@ define([
             month : now.getMonth() + 1,
             year : now.getFullYear()
           },
-          code : ''
-        }
+          code : '1234'
+        },
+        amount : 100
       }
     }
 
@@ -38,6 +41,15 @@ define([
     }
 
     $scope.startDonation = function () {
+
+      Stripe.createToken({
+        number : $scope.$eval('donation.card.number'),
+        exp_month : $scope.$eval('donation.card.expiration.month'),
+        exp_year : $scope.$eval('donation.card.expiration.year'),
+        cvc : $scope.$eval('donation.card.code')
+      }, function (res) {
+        $log.log(arguments)
+      })
 
     }
 
