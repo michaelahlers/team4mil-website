@@ -12,6 +12,7 @@ define([
 
   services.factory('Stripe', function ($http, $log) {
 
+      /* Handles the first step, submitting the credit card information directly to Stripe, who then replies with a single-use token. */
       var createToken = function (card, callback) {
 
         Stripe.createToken(
@@ -36,14 +37,24 @@ define([
 
       }
 
+      /* After the single-use token is retrieved, issue the charge with the amount to our server, which holds the private key. The server then issues the charge request to Stripe. */
       var createCharge = function (charge, callback) {
-        $http.post('/stripe/charges', charge)
+        $http.post('/stripe/charges',
+
+          {
+            token : charge.token,
+            currency : charge.currency,
+            amount : charge.amount
+          })
+
           .success(function (data, status) {
             callback(undefined, data)
           })
+
           .error(function (data, status) {
             callback(data, undefined)
           })
+
       }
 
       return {
@@ -59,7 +70,7 @@ define([
 
               /* Map the result into a one-time charge object. */
               {
-                id : result.id,
+                token : result.id,
                 currency : charge.currency,
                 amount : charge.amount
               },
@@ -71,7 +82,7 @@ define([
                   return
                 }
 
-                callback(undefined, err)
+                callback(undefined, result)
               })
           })
 
