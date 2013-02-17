@@ -1,7 +1,7 @@
 /*jshint node:true*/
 'use strict'
 
-var stripe = require('stripe')('pk_test_bAwWmtD5CZPctFHF5mzK2ZUx')
+var stripe = require('stripe')('sk_test_fxNypkThUlkUzMcEMR9Jj1cB')
 
 exports.charge = function (req, res) {
   var charge = {
@@ -10,12 +10,14 @@ exports.charge = function (req, res) {
     amount : req.body.amount
   }
 
-  stripe.charges.create(charge, function (err) {
+  console.log(charge)
+
+  stripe.charges.create(charge, function (err, result) {
     if (err) {
       res.json(500, err)
       return
     }
 
-    res.ok()
+    res.json(result)
   })
 }
