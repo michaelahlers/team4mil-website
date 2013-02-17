@@ -44,7 +44,19 @@ div(class='container-fluid body-donate')
             , name='cardExpMonth'
             , ng-model='donation.card.expiration.month'
             , required)
-              option(ng-repeat='month in months', value='{{month.index}}') {{month.name}}
+              option(value='1') January
+              option(value='2') February
+              option(value='3') March
+              option(value='4') April
+              option(value='5') May
+              option(value='6') June
+              option(value='7') July
+              option(value='8') August
+              option(value='9') September
+              option(value='10') October
+              option(value='11') November
+              option(value='12') December
+
 
             input(class='span4 input-card-expiration-year'
             , type='number'
@@ -58,11 +70,14 @@ div(class='container-fluid body-donate')
             , name='cardVC'
             , ng-model='donation.card.code'
             , placeholder='CVC.'
+            , tooltip='The verification or security code is usually located on the back of your credit card.'
+            , tooltip-placement='right'
             , required)
 
         div(class='control-group')
           div(class='controls controls-row')
-            div(class='span10')
+            button(class='span2 btn', type='button', ng-click='resetDonation()') Reset
+            div(class='span8')
               div(class='pull-right input-prepend input-append')
                 span(class='add-on') $
                 input(class='input-small input-amount'
@@ -71,7 +86,7 @@ div(class='container-fluid body-donate')
                 , ng-model='donation.amount'
                 , required)
                 span(class='add-on') .00
-            button(class='span2 btn btn-success', type='submit') Donate
+            button(class='span2 btn btn-success', type='submit', ng-click='startDonation()') Donate
 
       p
         code donation.donor.name : {{donation.donor.name}}
@@ -101,3 +116,21 @@ div(class='container-fluid body-donate')
           | 4053 Brideghampton Lane
           br
           | Virginia Beach, VA  23455
+
+div(id='modalConfirmation', class='modal fade', tabindex='-1')
+  div(class='modal-header')
+    h3 Donate
+  div(class='modal-body')
+    p(ng-show='status.pending') You are about to donate money to Team 4Mil. Are you sure?
+    p(ng-show='status.success')
+      span(class='label label-success') Success!
+      | &nbsp;You've successfully donated to Team 4Mil. We'll send you a confirmation e-mail shortly.
+    p(ng-show='status.error')
+      span(class='label label-important') Error!
+      | &nbsp;We're sorry, but there was a problem processing your donation.
+      | Please visit the&nbsp;
+      a(href='#/contact') Contact page (click here)
+      | &nbsp;and tell us about the problem.
+  div(class='modal-footer')
+    button(class='btn', ng-click='cancelDonation()') Cancel
+    button(class='btn btn-success', ng-click='confirmDonation()') Donate
