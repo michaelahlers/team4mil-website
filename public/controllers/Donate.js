@@ -1,10 +1,13 @@
 'use strict'
 
+define('Stripe', ['noext!https://js.stripe.com/v1/'], function () {
+  return window.Stripe
+})
+
 define([
-
-  'controllers'
-
-], function (controllers) {
+  'controllers',
+  'Stripe'
+], function (controllers, Stripe) {
 
   return controllers.controller('Donate', function ($rootScope, $scope, $log) {
 
