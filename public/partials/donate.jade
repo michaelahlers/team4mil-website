@@ -58,14 +58,14 @@ div(class='container-fluid body-donate')
               option(value='12') December
 
 
-            input(class='span4 input-card-expiration-year'
+            input(class='span3 input-card-expiration-year'
             , type='number'
             , name='cardExpYear'
             , ng-model='donation.card.expiration.year'
             , placeholder='Expiration year.'
             , required)
 
-            input(class='span3 input-card-verification-code'
+            input(class='span4 input-card-verification-code'
             , type='text'
             , name='cardVC'
             , ng-model='donation.card.code'
@@ -102,10 +102,13 @@ div(class='container-fluid body-donate')
         code donation.amount : {{donation.amount}}
 
 
-    div(class='span5')
-      p(class='help-block lead')
-        strong You can also donate by mail.
-        | &nbsp;Please make your cheque payable to “Team 4Mil,” and send it to the following address.
+    div(class='offset1 span4')
+      p(class='help-block')
+        span(class='lead')
+          strong Donations can also be made by mail
+          | &nbsp;if you prefer.
+        br
+        span(class='muted') Please make your cheque payable to “Team 4Mil,” and send it to the following address.
 
       p
         address(class='lead')
