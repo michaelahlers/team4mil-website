@@ -5,12 +5,28 @@ div(class='container-fluid hero hero-donate')
 
 div(class='container-fluid body-donate')
   div(class='row-fluid')
+    div(class='offset1 span10')
+      p(class='lead')
+        strong
+          | Team 4Mil is a volunteer-staffed, 503(c) organization dedicated to
+          | supporting combat-wounded veterans, and their families, on the road to
+          | recovery through the sport of cycling.
+        | &nbsp;Your donations go to the operational expenses of our wounded
+        | warrior team and US Service-member teams in numerous cycling events.
+
+  div(class='row-fluid')
     div(class='offset1 span5')
-      p(class='help-block lead')
-        strong Team 4Mil accepts online donations here.
-        | &nbsp;Please write something that would make people give us money.
+      h3 Make an Online Donation
+      p(class='help-block')
+        | The information you provide here will bandled securely, and processed
+        | by a trusted credit card processing agency.
 
       form(name='donationForm')
+        p(class='help-block')
+          span(class='lead') <strong>First</strong>, your name and e-mail address.
+          br
+          span(class='muted') Don't worry, we will <em>never</em> share your personal information.
+
         div(class='control-group')
           div(class='controls controls-row')
             input(class='span6'
@@ -101,24 +117,22 @@ div(class='container-fluid body-donate')
       p
         code donation.amount : {{donation.amount}}
 
+    div(class='span5')
+      h3 Mail-in Your Donation
 
-    div(class='offset1 span4')
-      p(class='help-block')
-        span(class='lead')
-          strong Donations can also be made by mail
-          | &nbsp;if you prefer.
+      p(class='help-block muted')
+        | If you prefer, you can send your contribution to us by mail. Please
+        | make checks or money orders payable to “Team 4Mil,” and send them to
+        | the following address.
+
+      blockquote(class='lead')
+        | Team 4Mil
         br
-        span(class='muted') Please make your cheque payable to “Team 4Mil,” and send it to the following address.
-
-      p
-        address(class='lead')
-          | Team 4Mil
-          br
-          | c/o Wayne Dowd
-          br
-          | 4053 Brideghampton Lane
-          br
-          | Virginia Beach, VA  23455
+        | c/o Wayne Dowd
+        br
+        | 4053 Bridgehampton Lane
+        br
+        | Virginia Beach, VA  23455
 
 div(id='modalConfirmation', class='modal fade', tabindex='-1')
   div(class='modal-header')
