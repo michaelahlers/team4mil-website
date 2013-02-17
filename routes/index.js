@@ -2,6 +2,7 @@
 'use strict'
 
 var contact = require('./contact')
+  , donate = require('./donate')
   , resources = require('./resources')
 
 exports.index = function (req, res) {
@@ -17,4 +18,5 @@ exports.partials = function (req, res) {
 }
 
 exports.contact = contact
+exports.donate = donate
 exports.resources = resources

@@ -63,6 +63,7 @@ server.get('/resources/sponsorship', routes.resources.sponsorship)
 server.get('/resources/contact', routes.resources.contact)
 
 server.post('/contact', routes.contact.send)
+server.post('/charge', routes.donate.charge)
 
 var build = function (callback) {
   console.log('Building client...')
