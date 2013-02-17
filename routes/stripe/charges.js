@@ -3,7 +3,7 @@
 
 var stripe = require('stripe')('sk_test_fxNypkThUlkUzMcEMR9Jj1cB')
 
-exports.charge = function (req, res) {
+exports.create = function (req, res) {
   var charge = {
     card : req.body.id,
     currency : req.body.currency,

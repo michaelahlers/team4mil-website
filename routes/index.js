@@ -2,7 +2,7 @@
 'use strict'
 
 var contact = require('./contact')
-  , donate = require('./donate')
+  , stripe = require('./stripe')
   , resources = require('./resources')
 
 exports.index = function (req, res) {
@@ -18,5 +18,5 @@ exports.partials = function (req, res) {
 }
 
 exports.contact = contact
-exports.donate = donate
+exports.stripe = stripe
 exports.resources = resources
