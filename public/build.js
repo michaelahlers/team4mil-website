@@ -27,6 +27,7 @@
       'jquery-gridster' : 'lib/gridster.js-master/dist/jquery.gridster.js',
       'jquery-imagesLoaded' : 'lib/jquery.imagesloaded',
       'jquery-smooth-scroll' : 'lib/jquery-smooth-scroll-1.4.9/jquery.smooth-scroll',
+      'noext' : 'lib/requirejs-plugins-master/src/noext',
       'text' : 'lib/text-2.0.3.js'
     },
 
@@ -84,6 +85,10 @@
       'jquery-smooth-scroll' : {
         deps : ['jquery'],
         exports : 'jQuery.fn.smoothScroll'
+      },
+
+      'stripe' : {
+        exports : 'Stripe'
       }
       //,
       //
