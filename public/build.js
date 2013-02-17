@@ -9,9 +9,9 @@
    * that augment an existing namespace. */
 
   return window.build = module.exports = {
-    baseUrl : '/',
-    name : './index',
-    out : './index.production.js',
+    baseUrl : '.',
+    name : 'index',
+    out : 'index.production.js',
 
     paths : {
       'angular' : 'lib/angular-1.1.2/angular',
