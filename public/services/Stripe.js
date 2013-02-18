@@ -48,7 +48,6 @@ define([
               deferred.resolve(data)
             })
             .error(function (data, status) {
-              /* Dispose the response object. Too messy for our needs. */
               $log.error('Failed to GET status service.', status, data)
               deferred.reject(report('status.service.unavailable'))
             }
@@ -78,7 +77,7 @@ define([
             /* Rejected. Status was not received.. */
             function (reasons) {
               $log.error('Unable to configure.', reasons)
-              deferred.reject(report(reasons, 'stripe.service.unconfigured'))
+              deferred.reject(report(reasons, 'stripe.configuration.unavailable'))
             }
           )
 
@@ -114,7 +113,7 @@ define([
                       deferred.resolve(result.id)
                     } else {
                       $log.error('Failed to create token.', status, result)
-                      deferred.reject(report('stripe.charge.card.invalid'))
+                      deferred.reject(report('stripe.service.token.unavailable'))
                     }
                   })
                 }
@@ -136,9 +135,9 @@ define([
           var deferred = $q.defer()
 
           createToken(charge.card).then(
+
             /* Resolved. To token was received. */
             function (token) {
-
               $http.post('/stripe/charges',
                 {
                   token : token,
@@ -150,17 +149,23 @@ define([
                 })
                 .error(function (data, status) {
                   $log.error('Failed to create charge.', status, data)
-                  /* TODO: Interpret the cause. */
-                  deferred.reject(data)
-                })
 
+                  var reasons
+                  switch (data.name) {
+                    case 'card_error':
+                      reasons = report(reasons, 'charge.card.invalid')
+                      break
+                  }
+                  deferred.reject(reasons)
+                })
             },
 
             /* Rejected. The token failed. */
             function (reasons) {
               $log.error('Unable to create charge.', reasons)
-              deferred.reject(report(reasons, 'stripe.charge.create.failed'))
+              deferred.reject(report(reasons, 'charge.token.unavailable'))
             }
+
           )
 
           return deferred.promise
@@ -180,49 +185,10 @@ define([
             return Stripe.cardType(value || '')
           },
 
-          charge : function (charge, callback) {
-
-            createCharge(charge).then(
-              /* Resolved. */
-              function (token) {
-                $log.log(token)
-
-                callback(undefined, {})
-              },
-              /* Rejected. */
-              function (reasons) {
-                $log.error('Failed to charge account.', reasons)
-
-                callback({}, undefined)
-              })
-
-//          createToken(charge.card, function (err, result) {
-//            if (err) {
-//              callback(err, undefined)
-//              return
-//            }
-//
-//            createCharge(
-//
-//              /* Map the result into a one-time charge object. */
-//              {
-//                token : result.id,
-//                currency : charge.currency,
-//                amount : charge.amount
-//              },
-//
-//              /* Handle the response. */
-//              function (err, result) {
-//                if (err) {
-//                  callback(err, undefined)
-//                  return
-//                }
-//
-//                callback(undefined, result)
-//              })
-//          })
-
+          charge : function (charge) {
+            return createCharge(charge)
           }
+
         }
 
       }

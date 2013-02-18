@@ -109,31 +109,22 @@ define([
         processing : true
       }
 
-      Stripe.charge(
-        {
-          card : {
-            name : $scope.$eval('donation.donor.name'),
-            number : $scope.$eval('donation.card.number'),
-            expiration : {
-              month : $scope.$eval('donation.card.expiration.month'),
-              year : $scope.$eval('donation.card.expiration.year')
-            },
-            code : $scope.$eval('donation.card.code')
+      Stripe.charge({
+        card : {
+          name : $scope.$eval('donation.donor.name'),
+          number : $scope.$eval('donation.card.number'),
+          expiration : {
+            month : $scope.$eval('donation.card.expiration.month'),
+            year : $scope.$eval('donation.card.expiration.year')
           },
-          currency : 'USD',
-          amount : $scope.$eval('donation.amount') * 100
+          code : $scope.$eval('donation.card.code')
         },
+        currency : 'USD',
+        amount : $scope.$eval('donation.amount') * 100
+      }).then(
 
-        function (err, result) {
-
-          if (err) {
-            $scope.status = {
-              error : true
-            }
-
-            return
-          }
-
+        /* Resolved. */
+        function (result) {
           var number = $scope.$eval('donation.card.number').trim()
           number = number.substring(number.length - 4)
 
@@ -146,6 +137,15 @@ define([
           }
 
           reset()
+        },
+
+        /* Rejected. */
+        function (reasons) {
+          $log.error('Unable to charge account.', reasons)
+
+          $scope.status = {
+            error : true
+          }
         })
 
     }
