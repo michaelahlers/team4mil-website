@@ -148,7 +148,18 @@ define([
           $log.error('Unable to charge account.', reasons)
 
           $scope.status = {
-            error : true
+            error : true,
+            service : {
+              unavailable : reasons.hasAny(
+                'status.service.unavailable',
+                'stripe.configuration.unavailable',
+                'stripe.service.token.unavailable',
+                'stripe.service.unavailable',
+                'charge.token.unavailable')
+            },
+            card : {
+              invalid : reasons.hasAny('charge.card.invalid')
+            }
           }
         })
 

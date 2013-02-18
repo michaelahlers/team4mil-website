@@ -6,30 +6,44 @@ define('Stripe', ['noext!https://js.stripe.com/v1/'], function (stripe, status) 
 
 define([
   'angular',
+  'jquery',
   'services',
   'Stripe'
-], function (angular, services, Stripe) {
+], function (angular, $, services, Stripe) {
 
     var isUndefined = angular.isUndefined
     var isArray = angular.isArray
     var isString = angular.isString
 
-    var report = function (list, message) {
-      if (isString(list) && isUndefined(message)) {
-        return [list]
+    var report = function (reasons, message) {
+      if (isString(reasons) && isUndefined(message)) {
+        message = reasons
+        reasons = []
       }
 
-      if (isUndefined(list)) {
-        list = []
+      if (isUndefined(reasons)) {
+        reasons = []
       }
 
-      if (!isArray(list)) {
-        list = [list]
+      if (!isArray(reasons)) {
+        reasons = [reasons]
       }
 
-      list.push(message)
+      reasons.push(message)
 
-      return list
+      if (isUndefined(reasons.hasAny)) {
+        reasons.hasAny = function (items) {
+          items = isArray(items) ? items : arguments
+          for (var index = 0; index < items.length; index++) {
+            if (reasons.indexOf(items[index]) > -1) {
+              return true
+            }
+          }
+          return false
+        }
+      }
+
+      return reasons
     }
 
     /**
