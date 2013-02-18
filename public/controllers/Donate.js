@@ -18,8 +18,8 @@ define([
         card : {
           number : '',
           expiration : {
-            month : now.getMonth() + 1,
-            year : now.getFullYear()
+            month : NaN, //now.getMonth() + 1,
+            year : NaN//now.getFullYear()
           },
           code : ''
         },
