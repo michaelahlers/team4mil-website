@@ -10,6 +10,9 @@ define([
   'Stripe'
 ], function (services, Stripe) {
 
+  /**
+   * Visit https://stripe.com/docs/stripe.js for details.
+   */
   services.factory('Stripe', function ($http, $log) {
 
       /* Handles the first step, submitting the credit card information directly to Stripe, who then replies with a single-use token. */
@@ -58,18 +61,13 @@ define([
       }
 
       return {
-        validate : {
 
-          /* Visit https://stripe.com/docs/stripe.js for details. */
+        validateNumber : function (value) {
+          return Stripe.validateCardNumber(value)
+        },
 
-          number : function (value) {
-            return Stripe.validateCardNumber(value)
-          },
-
-          CVC : function (value) {
-            return Stripe.validateCVC(value)
-          }
-
+        validateCVC : function (value) {
+          return Stripe.validateCVC(value)
         },
 
         charge : function (charge, callback) {

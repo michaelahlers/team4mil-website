@@ -22,7 +22,7 @@ define([
         link : function (scope, element, attrs, ctrl) {
 
           ctrl.$parsers.unshift(function (viewValue) {
-            var valid = Stripe.validate.CVC(viewValue)
+            var valid = Stripe.validateCVC(viewValue)
 
             if (!valid) {
               ctrl.$setValidity('creditCardVerificationCode', false);
