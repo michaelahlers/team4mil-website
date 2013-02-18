@@ -10,9 +10,9 @@ define([
 ], function (angular, directives) {
 
   /**
-   * Verifies a field contains a valid credit card number.
+   * Verifies a field contains a valid credit card verification code.
    */
-  directives.directive('pcCreditCardNumber', function ($log, Stripe) {
+  directives.directive('pcCreditCardVerificationCode', function ($log, Stripe) {
 
       return {
 
@@ -22,14 +22,14 @@ define([
         link : function (scope, element, attrs, ctrl) {
 
           ctrl.$parsers.unshift(function (viewValue) {
-            var valid = Stripe.validate.number(viewValue)
+            var valid = Stripe.validate.CVC(viewValue)
 
             if (!valid) {
-              ctrl.$setValidity('creditCardNumber', false);
+              ctrl.$setValidity('creditCardVerificationCode', false);
               return undefined;
             }
 
-            ctrl.$setValidity('creditCardNumber', true);
+            ctrl.$setValidity('creditCardVerificationCode', true);
             return viewValue;
           })
 

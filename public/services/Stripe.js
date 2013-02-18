@@ -64,6 +64,10 @@ define([
 
           number : function (value) {
             return Stripe.validateCardNumber(value)
+          },
+
+          CVC : function (value) {
+            return Stripe.validateCVC(value)
           }
 
         },

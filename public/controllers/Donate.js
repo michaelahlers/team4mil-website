@@ -3,7 +3,8 @@
 define([
   'controllers',
   'services/Stripe',
-  'directives/pc-credit-card-number'
+  'directives/pc-credit-card-number',
+  'directives/pc-credit-card-verification-code'
 ], function (controllers) {
 
   return controllers.controller('Donate', function ($rootScope, $scope, $http, $log, Stripe) {
