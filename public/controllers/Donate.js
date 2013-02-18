@@ -4,10 +4,16 @@ define([
   'controllers',
   'services/Stripe',
   'directives/pc-credit-card-number',
-  'directives/pc-credit-card-verification-code'
+  'directives/pc-credit-card-verification-code',
+  'filters/sequence'
 ], function (controllers) {
 
   return controllers.controller('Donate', function ($rootScope, $scope, $http, $parse, $log, Stripe) {
+
+    $scope.now = {
+      month : new Date().getMonth() + 1,
+      year : new Date().getFullYear()
+    }
 
     var updateCardType = function () {
       $parse('donation.card.type').assign($scope, Stripe.getCardType($scope.$eval('donation.card.number')))

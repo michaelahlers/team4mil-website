@@ -93,7 +93,7 @@ div(class='container-fluid body-donate')
             img(class='logo-credit-card', src='/images/logos/Discover_44x30.png', ng-class='{"Discover":"active"}[donation.card.type]')
 
         div(class='row-fluid')
-          div(class='control-group span4', ng-class='{"error":donationForm.cardExpMonth.$invalid}')
+          div(class='control-group span3', ng-class='{"error":donationForm.cardExpMonth.$invalid}')
             div(class='controls')
               select(class='span12 card-expiration-month'
               , name='cardExpMonth'
@@ -112,16 +112,15 @@ div(class='container-fluid body-donate')
                 option(value='11') November
                 option(value='12') December
 
-          div(class='control-group span4', ng-class='{"error":donationForm.cardExpYear.$invalid}')
+          div(class='control-group span2', ng-class='{"error":donationForm.cardExpYear.$invalid}')
             div(class='controls')
-              input(class='span12 input-card-expiration-year'
-              , type='number'
+              select(class='span12 card-expiration-year'
               , name='cardExpYear'
               , ng-model='donation.card.expiration.year'
-              , placeholder='Expiration year.'
               , required)
+                option(ng-value='{{now.year + offset}}', ng-repeat='offset in []|sequence:0:20') {{now.year + offset}}
 
-          div(class='control-group span4', ng-class='{"error":donationForm.cardVC.$invalid}')
+          div(class='control-group offset3 span4', ng-class='{"error":donationForm.cardVC.$invalid}')
             div(class='controls')
               input(class='span12 input-card-verification-code'
               , type='text'
