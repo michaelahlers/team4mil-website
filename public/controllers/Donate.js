@@ -30,17 +30,27 @@ define([
 
     reset()
 
+    var openStatus = function () {
+      $('#modalStatus').modal({
+        backdrop : 'static',
+        keyboard : false
+      })
+    }
+
+    var closeStatus = function () {
+      $('#modalStatus').modal('hide')
+    }
+
     $scope.resetDonation = function () {
       reset()
     }
 
     $scope.startDonation = function () {
-
-
+      openStatus()
     }
 
     $scope.cancelDonation = function () {
-
+      closeStatus()
     }
 
     $scope.confirmDonation = function () {
