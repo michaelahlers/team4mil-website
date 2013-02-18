@@ -220,7 +220,7 @@ div(id='modalStatus', class='modal fade', tabindex='-1')
         | order.
     div(class='modal-footer')
       button(class='btn', ng-click='cancelDonation()') Review
-      button(class='btn btn-success', ng-click='confirmDonation()') Donate
+      button(class='btn btn-primary', ng-click='confirmDonation()') Confirm
 
   div(ng-show='status.processing')
     div(class='modal-body')
@@ -246,7 +246,14 @@ div(id='modalStatus', class='modal fade', tabindex='-1')
     div(class='modal-body')
       p
         span(class='label label-important') Error!
-        | &nbsp;We're sorry, but there was a problem processing your donation.
+        | &nbsp;We're sorry, but there was a problem processing your donation.&nbsp;
+        span(ng-show='status.card.invalid')
+          | It appears your card has been declined.
+          | Please check your account information!
+        span(ng-show='status.service.unavailable')
+          | The credit service is temporarily unavailable. Our people will
+          | look into the problem.&nbsp;
+          strong Please try again later!
 
     div(class='modal-footer')
       button(class='btn btn-primary', ng-click='closeStatus()') Close
