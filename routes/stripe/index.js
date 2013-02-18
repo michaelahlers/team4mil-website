@@ -1,7 +1,16 @@
 /*jshint node:true*/
 'use strict'
 
-var stripe = require('stripe')('sk_test_fxNypkThUlkUzMcEMR9Jj1cB')
+var environment = require('../../environment')
+  , stripe = require('stripe')(environment.STRIPE_SECRET_KEY)
   , charges = require('./charges')(stripe)
+
+exports.status = function (req, res) {
+  res.json({
+    keys : {
+      publishable : environment.STRIPE_PUBLISHABLE_KEY
+    }
+  })
+}
 
 exports.charges = charges

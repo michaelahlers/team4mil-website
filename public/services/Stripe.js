@@ -1,7 +1,7 @@
 'use strict'
 
-define('Stripe', ['noext!https://js.stripe.com/v1/'], function () {
-  window.Stripe.setPublishableKey('pk_test_bAwWmtD5CZPctFHF5mzK2ZUx')
+define('Stripe', ['noext!https://js.stripe.com/v1/', 'json!/stripe/status'], function (stripe, status) {
+  window.Stripe.setPublishableKey(status.keys.publishable)
   return window.Stripe
 })
 
