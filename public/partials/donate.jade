@@ -68,7 +68,7 @@ div(class='container-fluid body-donate')
           | Account information looks good!
 
         div(class='row-fluid')
-          div(class='control-group span7', ng-class='{"error":donationForm.cardNumber.$invalid}')
+          div(class='control-group span8', ng-class='{"error":donationForm.cardNumber.$invalid}')
             div(class='controls')
               input(class='span12 input-card-number'
               , type='text'
@@ -78,8 +78,14 @@ div(class='container-fluid body-donate')
               , pc-credit-card-number
               , required)
 
-          div(class='span5')
-            img(src='/images/logos/accepted-credit-cards.png')
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/Visa_44x30.png', ng-class='{"Visa":"active"}[donation.card.type]')
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/American-Express_44x30.png', ng-class='{"American Express":"active"}[donation.card.type]')
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/MasterCard_44x30.png', ng-class='{"MasterCard":"active"}[donation.card.type]')
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/Discover_44x30.png', ng-class='{"Discover":"active"}[donation.card.type]')
 
         div(class='row-fluid')
           div(class='control-group span4', ng-class='{"error":donationForm.cardExpMonth.$invalid}')
