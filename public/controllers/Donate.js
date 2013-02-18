@@ -51,8 +51,8 @@ define([
 
       $scope.donation = {
         donor : {
-          name : 'John Smith',
-          mail : 'john@example.com'
+          name : 'Michael Ahlers',
+          mail : 'michael.ahlers@patternconsulting.com'
         },
         card : {
           /* Sample credit card number for Stripe testing. */
