@@ -140,6 +140,10 @@ define([
             function (token) {
               $http.post('/stripe/charges',
                 {
+                  payer : {
+                    name : charge.payer.name,
+                    mail : charge.payer.mail
+                  },
                   token : token,
                   currency : charge.currency,
                   amount : charge.amount

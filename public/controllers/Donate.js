@@ -110,6 +110,10 @@ define([
       }
 
       Stripe.charge({
+        payer : {
+          name : $scope.$eval('donation.donor.name'),
+          mail : $scope.$eval('donation.donor.mail')
+        },
         card : {
           name : $scope.$eval('donation.donor.name'),
           number : $scope.$eval('donation.card.number'),
