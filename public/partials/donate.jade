@@ -170,20 +170,21 @@ div(class='container-fluid body-donate')
           , tooltip-placement='right')
             | Donate
 
-      p
-        code donation.donor.name : {{donation.donor.name}}
-      p
-        code donation.card.number : {{donation.card.number}}
-      p
-        code donation.card.type : {{donation.card.type}}
-      p
-        code donation.card.expiration.month : {{donation.card.expiration.month}}
-      p
-        code donation.card.expiration.year : {{donation.card.expiration.year}}
-      p
-        code donation.card.code : {{donation.card.code}}
-      p
-        code donation.amount : {{donation.amount}}
+      div(ng-show='false')
+        p
+          code donation.donor.name : {{donation.donor.name}}
+        p
+          code donation.card.number : {{donation.card.number}}
+        p
+          code donation.card.type : {{donation.card.type}}
+        p
+          code donation.card.expiration.month : {{donation.card.expiration.month}}
+        p
+          code donation.card.expiration.year : {{donation.card.expiration.year}}
+        p
+          code donation.card.code : {{donation.card.code}}
+        p
+          code donation.amount : {{donation.amount}}
 
     div(class='span5')
       h3 Mail-in Your Donation
@@ -205,17 +206,47 @@ div(class='container-fluid body-donate')
 div(id='modalStatus', class='modal fade', tabindex='-1')
   div(class='modal-header')
     h3 Donate
-  div(class='modal-body')
-    p(ng-show='status.pending') You are about to donate money to Team 4Mil. Are you sure?
-    p(ng-show='status.success')
-      span(class='label label-success') Success!
-      | &nbsp;You've successfully donated to Team 4Mil. We'll send you a confirmation e-mail shortly.
-    p(ng-show='status.error')
-      span(class='label label-important') Error!
-      | &nbsp;We're sorry, but there was a problem processing your donation.
-      | Please visit the&nbsp;
-      a(href='#/contact') Contact page (click here)
-      | &nbsp;and tell us about the problem.
-  div(class='modal-footer')
-    button(class='btn', ng-click='cancelDonation()') Cancel
-    button(class='btn btn-success', ng-click='confirmDonation()') Donate
+
+  div(ng-show='status.pending')
+    div(class='modal-body')
+      p
+        | Your donation of&nbsp;
+        strong ${{status.amount}}.00
+        | &nbsp;will be made from account ending&nbsp;
+        strong {{status.card.number}}
+        | &nbsp;when you click the &ldquo;Confirm&rdquo; button below. You can
+        | You can click the &ldquo;Review&rdquo; button if you'd like to recheck
+        | your order.
+    div(class='modal-footer')
+      button(class='btn', ng-click='cancelDonation()') Review
+      button(class='btn btn-success', ng-click='confirmDonation()') Donate
+
+  div(ng-show='status.processing')
+    div(class='modal-body')
+      div(class='row-fluid')
+        p(class='lead')
+          i(class='icon-spinner icon-spin')
+          | &nbsp;Processing your order&hellip;
+
+  div(ng-show='status.success')
+    div(class='modal-body')
+      p(class='lead text-success')
+        i(class='icon-certificate')
+        | &nbsp;Thank you!
+      p
+        | Your ${{status.amount}}.00 donation has been charged to account
+        | ending {{status.card.number}}! You'll be receiving a confirmation
+        | e-mail shortly.
+
+    div(class='modal-footer')
+      button(class='btn btn-primary', ng-click='closeStatus()') Close
+
+  div(ng-show='status.error')
+    div(class='modal-body')
+      p
+        span(class='label label-important') Error!
+        | &nbsp;We're sorry, but there was a problem processing your donation.
+
+    div(class='modal-footer')
+      button(class='btn btn-primary', ng-click='closeStatus()') Close
+

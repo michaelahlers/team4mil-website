@@ -70,7 +70,7 @@ define([
       })
     }
 
-    var closeStatus = function () {
+    var closeStatus = $scope.closeStatus = function () {
       $('#modalStatus').modal('hide')
     }
 
@@ -79,6 +79,17 @@ define([
     }
 
     $scope.startDonation = function () {
+      var number = $scope.$eval('donation.card.number').trim()
+      number = number.substring(number.length - 4)
+
+      $scope.status = {
+        pending : true,
+        card : {
+          number : number
+        },
+        amount : $scope.$eval('donation.amount')
+      }
+
       openStatus()
     }
 
@@ -87,6 +98,10 @@ define([
     }
 
     $scope.confirmDonation = function () {
+
+      $scope.status = {
+        processing : true
+      }
 
       Stripe.charge(
         {
@@ -104,7 +119,27 @@ define([
         },
 
         function (err, result) {
-          $log.log(err, result)
+
+          if (err) {
+            $scope.status = {
+              error : true
+            }
+
+            return
+          }
+
+          var number = $scope.$eval('donation.card.number').trim()
+          number = number.substring(number.length - 4)
+
+          $scope.status = {
+            success : true,
+            card : {
+              number : number
+            },
+            amount : $scope.$eval('donation.amount')
+          }
+
+          reset()
         })
 
     }
