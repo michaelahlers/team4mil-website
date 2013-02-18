@@ -58,6 +58,14 @@ define([
       }
 
       return {
+        validate : {
+
+          number : function (value) {
+            return Stripe.validateCardNumber(value)
+          }
+
+        },
+
         charge : function (charge, callback) {
 
           createToken(charge.card, function (err, result) {

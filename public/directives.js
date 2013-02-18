@@ -1,7 +1,9 @@
 'use strict'
 
 define([
-  'angular'
+  'angular',
+
+  'services'
 ], function (angular) {
-  return angular.module('directives', [])
+  return angular.module('directives', [ 'services' ])
 })
