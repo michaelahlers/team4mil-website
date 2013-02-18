@@ -62,8 +62,13 @@ div(class='container-fluid body-donate')
           br
           span(class='muted') We accept all major credit and debit cards.
 
+        div(class='alert', ng-show='form.cardNumber.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
+          | Please provide your account information.
+        div(class='alert alert-success', ng-hide='form.cardNumber.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
+          | Account information looks good!
+
         div(class='row-fluid')
-          div(class='control-group span7')
+          div(class='control-group span7', ng-class='{"error":form.cardNumber.$invalid}')
             div(class='controls')
               input(class='span12 input-card-number'
               , type='text'
@@ -76,7 +81,7 @@ div(class='container-fluid body-donate')
             img(src='/images/logos/accepted-credit-cards.png')
 
         div(class='row-fluid')
-          div(class='control-group span5')
+          div(class='control-group span4', ng-class='{"error":form.cardExpMonth.$invalid}')
             div(class='controls')
               select(class='span12 card-expiration-month'
               , name='cardExpMonth'
@@ -95,7 +100,7 @@ div(class='container-fluid body-donate')
                 option(value='11') November
                 option(value='12') December
 
-          div(class='control-group span3')
+          div(class='control-group span4', ng-class='{"error":form.cardExpYear.$invalid}')
             div(class='controls')
               input(class='span12 input-card-expiration-year'
               , type='number'
@@ -104,7 +109,7 @@ div(class='container-fluid body-donate')
               , placeholder='Expiration year.'
               , required)
 
-          div(class='control-group span4')
+          div(class='control-group span4', ng-class='{"error":form.cardVC.$invalid}')
             div(class='controls')
               input(class='span12 input-card-verification-code'
               , type='text'
