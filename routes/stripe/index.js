@@ -6,7 +6,7 @@ var environment = require('../../environment')
   , charges = require('./charges')(stripe)
 
 exports.status = function (req, res) {
-  res.json(500, {
+  res.json({
     keys : {
       publishable : environment.STRIPE_PUBLISHABLE_KEY
     }
