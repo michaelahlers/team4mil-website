@@ -111,8 +111,9 @@ div(class='container-fluid body-donate')
 
         div(class='control-group')
           div(class='controls controls-row')
-            button(class='span2 btn', type='button', ng-click='resetDonation()') Reset
-            div(class='span8')
+            button(class='span2 btn', type='button', ng-click='resetDonation()', tooltip='This will clear all information from the donation form.') Reset
+            button(class='span2 btn', type='button', ng-click='populate()', tooltip='This button is only for testing purposes.') Fill
+            div(class='span6')
               div(class='pull-right input-prepend input-append')
                 span(class='add-on') $
                 input(class='input-small input-amount'
@@ -121,7 +122,11 @@ div(class='container-fluid body-donate')
                 , ng-model='donation.amount'
                 , required)
                 span(class='add-on') .00
-            button(class='span2 btn btn-success', type='submit', ng-click='startDonation()') Donate
+            button(class='span2 btn btn-success'
+            , type='submit'
+            , ng-click='startDonation()'
+            , tooltip="We'll review your donation before charging your account.")
+              | Donate
 
       p
         code donation.donor.name : {{donation.donor.name}}

@@ -12,6 +12,26 @@ define([
 
       $scope.donation = {
         donor : {
+          name : '',
+          mail : ''
+        },
+        card : {
+          number : '',
+          expiration : {
+            month : now.getMonth() + 1,
+            year : now.getFullYear()
+          },
+          code : ''
+        },
+        amount : NaN
+      }
+    }
+
+    $scope.populate = function () {
+      var now = new Date()
+
+      $scope.donation = {
+        donor : {
           name : 'John Smith',
           mail : 'john@example.com'
         },
