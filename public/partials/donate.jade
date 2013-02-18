@@ -30,10 +30,10 @@ div(class='container-fluid body-donate')
           span(class='muted') Don't worry, we will <em>never</em> share your personal information.
 
         div(class='alert', ng-show='form.donorName.$invalid || form.donorMail.$invalid')
-          | We need your name and a valid e-mail address.
+          | We need your full name and a valid e-mail address.
 
         div(class='alert alert-success', ng-hide='form.donorName.$invalid || form.donorMail.$invalid')
-          | Your name and e-mail address look good!
+          | Your full name and e-mail address look good!
 
         div(class='row-fluid')
           div(class='control-group span6', ng-class='{"error":form.donorName.$invalid}')
