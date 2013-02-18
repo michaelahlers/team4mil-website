@@ -60,6 +60,8 @@ define([
       return {
         validate : {
 
+          /* Visit https://stripe.com/docs/stripe.js for details. */
+
           number : function (value) {
             return Stripe.validateCardNumber(value)
           }
