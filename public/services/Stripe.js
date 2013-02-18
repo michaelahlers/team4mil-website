@@ -1,9 +1,8 @@
 'use strict'
 
-//define('Stripe', ['noext!https://js.stripe.com/v1/', 'json!/stripe/status'], function (stripe, status) {
-//  window.Stripe.setPublishableKey(status.keys.publishable)
-//  return window.Stripe
-//})
+define('Stripe', ['noext!https://js.stripe.com/v1/'], function (stripe, status) {
+  return window.Stripe
+})
 
 define([
   'services',
@@ -13,51 +12,107 @@ define([
   /**
    * Visit https://stripe.com/docs/stripe.js for details.
    */
-  services.factory('Stripe', function ($http, $log) {
+  services.factory('Stripe', function ($q, $http, $rootScope, $log) {
 
-      /* Handles the first step, submitting the credit card information directly to Stripe, who then replies with a single-use token. */
-      var createToken = function (card, callback) {
+      var getStatus = function () {
+        return $http.get('/stripe/status')
+      }
 
-        Stripe.createToken(
+      var configure = function () {
+        var deferred = $q.defer()
 
-          /* Map our values to the Stripe API. */
-          {
-            name : card.name,
-            number : card.number,
-            exp_month : card.expiration.month,
-            exp_year : card.expiration.year,
-            cvc : card.code
+        getStatus().then(
+          /* Resolved. Status was received. */
+          function (response) {
+            var key = response.data.keys.publishable
+            Stripe.setPublishableKey(key)
+            deferred.resolve({
+              key : key
+            })
           },
 
-          /* Handle the response, and invoke the callback appropriately. */
-          function (status, result) {
-            if (200 == status) {
-              callback(undefined, result)
-            } else {
-              callback(result, undefined)
-            }
-          })
+          /* Rejected. Status was received. */
+          function (reason) {
+            deferred.reject(reason)
+          }
+        )
 
+        return deferred.promise
+      }
+
+      /* Handles the first step, submitting the credit card information directly to Stripe, who then replies with a single-use token. */
+      var createToken = function (card) {
+        var deferred = $q.defer()
+
+        configure().then(
+          /* Resolved. Configuration was successful. */
+          function (configuration) {
+            Stripe.createToken(
+              /* Map our values to the Stripe API. */
+              {
+                name : card.name,
+                number : card.number,
+                exp_month : card.expiration.month,
+                exp_year : card.expiration.year,
+                cvc : card.code
+              },
+
+              /* Handle the response, and configures the promise. */
+              function (status, result) {
+                /* This callback is triggered outside the Angular lifecycle. */
+                $rootScope.$apply(function () {
+                  if (200 == status) {
+                    deferred.resolve(result.id)
+                  } else {
+                    /* TODO: Interpret the cause. */
+                    deferred.reject(result)
+                  }
+                })
+              }
+            )
+          },
+
+          /* Rejected. Configuration failed. */
+          function (reason) {
+            deferred.reject(reason)
+          }
+        )
+
+        return deferred.promise
       }
 
       /* After the single-use token is retrieved, issue the charge with the amount to our server, which holds the private key. The server then issues the charge request to Stripe. */
-      var createCharge = function (charge, callback) {
-        $http.post('/stripe/charges',
+      var createCharge = function (charge) {
+        var deferred = $q.defer()
 
-          {
-            token : charge.token,
-            currency : charge.currency,
-            amount : charge.amount
-          })
+        createToken(charge.card).then(
+          /* Resolved. To token was received. */
+          function (token) {
 
-          .success(function (data, status) {
-            callback(undefined, data)
-          })
+            $http.post('/stripe/charges',
+              {
+                token : token,
+                currency : charge.currency,
+                amount : charge.amount
+              })
+              .success(function (data, status) {
+                deferred.resolve(data)
+              })
+              .error(function (data, status) {
+                /* TODO: Interpret the cause. */
+                deferred.reject(data)
+              })
 
-          .error(function (data, status) {
-            callback(data, undefined)
-          })
+          },
 
+          /* Rejected. The token failed. */
+          function (reason) {
+            /* TODO: Interpret the cause. */
+            deferred.reject(reason)
+          }
+        )
+
+        return deferred.promise
       }
 
       return {
@@ -76,31 +131,45 @@ define([
 
         charge : function (charge, callback) {
 
-          createToken(charge.card, function (err, result) {
-            if (err) {
-              callback(err, undefined)
-              return
-            }
+          createCharge(charge).then(
+            /* Resolved. */
+            function (token) {
+              $log.log(token)
 
-            createCharge(
+              callback(undefined, {})
+            },
+            /* Rejected. */
+            function (reason) {
+              $log.error(reason)
 
-              /* Map the result into a one-time charge object. */
-              {
-                token : result.id,
-                currency : charge.currency,
-                amount : charge.amount
-              },
+              callback({}, undefined)
+            })
 
-              /* Handle the response. */
-              function (err, result) {
-                if (err) {
-                  callback(err, undefined)
-                  return
-                }
-
-                callback(undefined, result)
-              })
-          })
+//          createToken(charge.card, function (err, result) {
+//            if (err) {
+//              callback(err, undefined)
+//              return
+//            }
+//
+//            createCharge(
+//
+//              /* Map the result into a one-time charge object. */
+//              {
+//                token : result.id,
+//                currency : charge.currency,
+//                amount : charge.amount
+//              },
+//
+//              /* Handle the response. */
+//              function (err, result) {
+//                if (err) {
+//                  callback(err, undefined)
+//                  return
+//                }
+//
+//                callback(undefined, result)
+//              })
+//          })
 
         }
       }
