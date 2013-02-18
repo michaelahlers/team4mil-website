@@ -62,9 +62,9 @@ div(class='container-fluid body-donate')
           br
           span(class='muted') We accept all major credit and debit cards.
 
-        div(class='alert', ng-show='form.cardNumber.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
+        div(class='alert', ng-show='form.cardNumber.$invalid || form.cardExpMonth.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
           | Please provide your account information.
-        div(class='alert alert-success', ng-hide='form.cardNumber.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
+        div(class='alert alert-success', ng-hide='form.cardNumber.$invalid || form.cardExpMonth.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
           | Account information looks good!
 
         div(class='row-fluid')
