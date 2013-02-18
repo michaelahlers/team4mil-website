@@ -2,7 +2,8 @@
 'use strict'
 
 var environment = require('./environment')
-  , transport = require('mailgun').Mailgun(environment.MAILGUN_API_KEY)
+  , Mailgun = require('mailgun').Mailgun
+  , transport = new Mailgun(environment.MAILGUN_API_KEY)
   , util = require('util')
 
 /**
