@@ -71,7 +71,7 @@ define([
         },
 
         getCardType : function (value) {
-          return Stripe.cardType(value)
+          return Stripe.cardType(value || '')
         },
 
         charge : function (charge, callback) {
