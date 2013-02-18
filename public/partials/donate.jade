@@ -30,10 +30,12 @@ div(class='container-fluid body-donate')
           span(class='muted') Don't worry, we will <em>never</em> share your personal information.
 
         div(class='alert', ng-show='donationForm.donorName.$invalid || donationForm.donorMail.$invalid')
-          | We need your full name and a valid e-mail address.
+          i(class='icon-exclamation-sign')
+          | &nbsp;We need your full name and a valid e-mail address.
 
         div(class='alert alert-success', ng-hide='donationForm.donorName.$invalid || donationForm.donorMail.$invalid')
-          | Your full name and e-mail address look good!
+          i(class='icon-ok-sign')
+          | &nbsp;Your full name and e-mail address look good!
 
         div(class='row-fluid')
           div(class='control-group span6', ng-class='{"error":donationForm.donorName.$invalid}')
@@ -63,9 +65,11 @@ div(class='container-fluid body-donate')
           span(class='muted') We accept all major credit and debit cards.
 
         div(class='alert', ng-show='donationForm.cardNumber.$invalid || donationForm.cardExpMonth.$invalid || donationForm.cardExpYear.$invalid || donationForm.cardVC.$invalid')
-          | Please provide your account information.
+          i(class='icon-exclamation-sign')
+          | &nbsp;Please provide your account information.
         div(class='alert alert-success', ng-hide='donationForm.cardNumber.$invalid || donationForm.cardExpMonth.$invalid || donationForm.cardExpYear.$invalid || donationForm.cardVC.$invalid')
-          | Account information looks good!
+          i(class='icon-ok-sign')
+          | &nbsp;Account information looks good!
 
         div(class='row-fluid')
           div(class='control-group span8', ng-class='{"error":donationForm.cardNumber.$invalid}')
@@ -139,9 +143,11 @@ div(class='container-fluid body-donate')
             | You'll have a chance to review the donation.
 
         div(class='alert', ng-show='donationForm.amount.$invalid')
-          | Tell us how much you'd like to give.
+          i(class='icon-exclamation-sign')
+          | &nbsp;Tell us how much you'd like to give.
         div(class='alert alert-success', ng-hide='donationForm.amount.$invalid')
-          | You've opted to donate ${{donation.amount}}.00!
+          i(class='icon-ok-sign')
+          | &nbsp;You've opted to donate ${{donation.amount}}.00!
 
         div(class='row-fluid')
           button(class='span2 btn', type='button', ng-click='resetDonation()', tooltip='This will clear all information from the donation form.') Reset
