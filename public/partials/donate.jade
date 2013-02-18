@@ -21,7 +21,7 @@ div(class='container-fluid body-donate')
         | The information you provide here will be handled securely, and
         | processed by a trusted credit card processing agency.
 
-      form(name='form')
+      form(name='donationForm')
         p(class='help-block')
           span(class='lead')
             strong First
@@ -29,14 +29,14 @@ div(class='container-fluid body-donate')
           br
           span(class='muted') Don't worry, we will <em>never</em> share your personal information.
 
-        div(class='alert', ng-show='form.donorName.$invalid || form.donorMail.$invalid')
+        div(class='alert', ng-show='donationForm.donorName.$invalid || donationForm.donorMail.$invalid')
           | We need your full name and a valid e-mail address.
 
-        div(class='alert alert-success', ng-hide='form.donorName.$invalid || form.donorMail.$invalid')
+        div(class='alert alert-success', ng-hide='donationForm.donorName.$invalid || donationForm.donorMail.$invalid')
           | Your full name and e-mail address look good!
 
         div(class='row-fluid')
-          div(class='control-group span6', ng-class='{"error":form.donorName.$invalid}')
+          div(class='control-group span6', ng-class='{"error":donationForm.donorName.$invalid}')
             div(class='controls')
               input(class='span12'
               , type='text'
@@ -45,10 +45,10 @@ div(class='container-fluid body-donate')
               , placeholder="Card holder's full name."
               , required)
 
-          div(class='control-group span6', ng-class='{"error":form.donorMail.$invalid}')
+          div(class='control-group span6', ng-class='{"error":donationForm.donorMail.$invalid}')
             div(class='controls')
               input(class='span12 '
-              , ng-class='{"error":form.donorMail.$invalid}'
+              , ng-class='{"error":donationForm.donorMail.$invalid}'
               , type='email'
               , name='donorMail'
               , ng-model='donation.donor.mail'
@@ -62,13 +62,13 @@ div(class='container-fluid body-donate')
           br
           span(class='muted') We accept all major credit and debit cards.
 
-        div(class='alert', ng-show='form.cardNumber.$invalid || form.cardExpMonth.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
+        div(class='alert', ng-show='donationForm.cardNumber.$invalid || donationForm.cardExpMonth.$invalid || donationForm.cardExpYear.$invalid || donationForm.cardVC.$invalid')
           | Please provide your account information.
-        div(class='alert alert-success', ng-hide='form.cardNumber.$invalid || form.cardExpMonth.$invalid || form.cardExpYear.$invalid || form.cardVC.$invalid')
+        div(class='alert alert-success', ng-hide='donationForm.cardNumber.$invalid || donationForm.cardExpMonth.$invalid || donationForm.cardExpYear.$invalid || donationForm.cardVC.$invalid')
           | Account information looks good!
 
         div(class='row-fluid')
-          div(class='control-group span7', ng-class='{"error":form.cardNumber.$invalid}')
+          div(class='control-group span7', ng-class='{"error":donationForm.cardNumber.$invalid}')
             div(class='controls')
               input(class='span12 input-card-number'
               , type='text'
@@ -81,7 +81,7 @@ div(class='container-fluid body-donate')
             img(src='/images/logos/accepted-credit-cards.png')
 
         div(class='row-fluid')
-          div(class='control-group span4', ng-class='{"error":form.cardExpMonth.$invalid}')
+          div(class='control-group span4', ng-class='{"error":donationForm.cardExpMonth.$invalid}')
             div(class='controls')
               select(class='span12 card-expiration-month'
               , name='cardExpMonth'
@@ -100,7 +100,7 @@ div(class='container-fluid body-donate')
                 option(value='11') November
                 option(value='12') December
 
-          div(class='control-group span4', ng-class='{"error":form.cardExpYear.$invalid}')
+          div(class='control-group span4', ng-class='{"error":donationForm.cardExpYear.$invalid}')
             div(class='controls')
               input(class='span12 input-card-expiration-year'
               , type='number'
@@ -109,14 +109,14 @@ div(class='container-fluid body-donate')
               , placeholder='Expiration year.'
               , required)
 
-          div(class='control-group span4', ng-class='{"error":form.cardVC.$invalid}')
+          div(class='control-group span4', ng-class='{"error":donationForm.cardVC.$invalid}')
             div(class='controls')
               input(class='span12 input-card-verification-code'
               , type='text'
               , name='cardVC'
               , ng-model='donation.card.code'
-              , placeholder='CVC.'
-              , tooltip='The verification or security code is usually located on the back of your credit or debit card.'
+              , placeholder='Verification code.'
+              , tooltip='The card verification or security code is usually located on the back of your credit or debit card.'
               , tooltip-placement='right'
               , required)
 
