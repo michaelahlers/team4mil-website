@@ -236,8 +236,12 @@ div(id='modalStatus', class='modal fade', tabindex='-1')
         | &nbsp;Thank you!
       p
         | Your ${{status.amount}}.00 donation has been charged to account
-        | ending {{status.card.number}}! You'll be receiving a confirmation
-        | e-mail shortly.
+        | ending {{status.card.number}}! We'll send a confirmation e-mail to
+        | your address, {{status.donor.mail}}, shortly!
+      p
+        | If you have any questions about your donation, please contact&nbsp;
+        a(href='mailto:donations@team4mil.org') donations@team4mil.org
+        | .
 
     div(class='modal-footer')
       button(class='btn btn-primary', ng-click='closeStatus()') Close

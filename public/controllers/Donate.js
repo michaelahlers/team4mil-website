@@ -134,8 +134,14 @@ define([
 
           $scope.status = {
             success : true,
+            donor : {
+              mail : $scope.$eval('donation.donor.mail')
+            },
             card : {
               number : number
+            },
+            charge : {
+              id : result.id
             },
             amount : $scope.$eval('donation.amount')
           }
