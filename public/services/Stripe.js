@@ -70,6 +70,10 @@ define([
           return Stripe.validateCVC(value)
         },
 
+        getCardType : function (value) {
+          return Stripe.cardType(value)
+        },
+
         charge : function (charge, callback) {
 
           createToken(charge.card, function (err, result) {

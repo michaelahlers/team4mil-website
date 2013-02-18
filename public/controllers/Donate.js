@@ -7,7 +7,12 @@ define([
   'directives/pc-credit-card-verification-code'
 ], function (controllers) {
 
-  return controllers.controller('Donate', function ($rootScope, $scope, $http, $log, Stripe) {
+  return controllers.controller('Donate', function ($rootScope, $scope, $http, $parse, $log, Stripe) {
+
+    $scope.$watch('donation.card.number', function (value) {
+      var type = Stripe.getCardType(value)
+      $parse('donation.card.type').assign($scope, type)
+    })
 
     var reset = function () {
       var now = new Date()
