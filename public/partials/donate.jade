@@ -21,7 +21,7 @@ div(class='container-fluid body-donate')
         | The information you provide here will be handled securely, and
         | processed by a trusted credit card processing agency.
 
-      form(name='donationForm')
+      form(name='form')
         p(class='help-block')
           span(class='lead')
             strong First
@@ -29,18 +29,26 @@ div(class='container-fluid body-donate')
           br
           span(class='muted') Don't worry, we will <em>never</em> share your personal information.
 
-        div(class='control-group')
-          div(class='controls controls-row')
-            input(class='span6'
+        div(class='alert', ng-show='form.donorName.$invalid || form.donorMail.$invalid')
+          | We need your name and a valid e-mail address.
+
+        div(class='alert alert-success', ng-hide='form.donorName.$invalid || form.donorMail.$invalid')
+          | Your name and e-mail address look good!
+
+        div(class='row-fluid')
+          div(class='control-group span6', ng-class='{"error":form.donorName.$invalid}')
+            input(class=''
             , type='text'
-            , name='giverName'
+            , name='donorName'
             , ng-model='donation.donor.name'
             , placeholder="Card holder's full name."
             , required)
 
-            input(class='span6'
+          div(class='control-group span6', ng-class='{"error":form.donorMail.$invalid}')
+            input(class=''
+            , ng-class='{"error":form.donorMail.$invalid}'
             , type='email'
-            , name='giverName'
+            , name='donorMail'
             , ng-model='donation.donor.mail'
             , placeholder="Donor's e-mail address."
             , required)

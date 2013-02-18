@@ -27,6 +27,9 @@ define([
       }
     }
 
+    /**
+     * Exists only for testing purposes.
+     */
     $scope.populate = function () {
       var now = new Date()
 
