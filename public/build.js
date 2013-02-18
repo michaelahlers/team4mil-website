@@ -29,6 +29,8 @@
       'jquery-imagesLoaded' : 'lib/jquery.imagesloaded',
       'jquery-smooth-scroll' : 'lib/jquery-smooth-scroll-1.4.9/jquery.smooth-scroll',
       'noext' : 'lib/requirejs-plugins-master/src/noext',
+      /* This is not recommended, but r.js will exclude it at compilation. */
+      'Stripe' : 'noext!https://js.stripe.com/v1/',
       'text' : 'lib/text-2.0.5'
     },
 
@@ -88,7 +90,7 @@
         exports : 'jQuery.fn.smoothScroll'
       },
 
-      'stripe' : {
+      'Stripe' : {
         exports : 'Stripe'
       }
       //,

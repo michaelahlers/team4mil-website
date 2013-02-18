@@ -1,9 +1,9 @@
 'use strict'
 
-define('Stripe', ['noext!https://js.stripe.com/v1/', 'json!/stripe/status'], function (stripe, status) {
-  window.Stripe.setPublishableKey(status.keys.publishable)
-  return window.Stripe
-})
+//define('Stripe', ['noext!https://js.stripe.com/v1/', 'json!/stripe/status'], function (stripe, status) {
+//  window.Stripe.setPublishableKey(status.keys.publishable)
+//  return window.Stripe
+//})
 
 define([
   'services',
