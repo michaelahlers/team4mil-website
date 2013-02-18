@@ -37,21 +37,23 @@ div(class='container-fluid body-donate')
 
         div(class='row-fluid')
           div(class='control-group span6', ng-class='{"error":form.donorName.$invalid}')
-            input(class=''
-            , type='text'
-            , name='donorName'
-            , ng-model='donation.donor.name'
-            , placeholder="Card holder's full name."
-            , required)
+            div(class='controls')
+              input(class='span12'
+              , type='text'
+              , name='donorName'
+              , ng-model='donation.donor.name'
+              , placeholder="Card holder's full name."
+              , required)
 
           div(class='control-group span6', ng-class='{"error":form.donorMail.$invalid}')
-            input(class=''
-            , ng-class='{"error":form.donorMail.$invalid}'
-            , type='email'
-            , name='donorMail'
-            , ng-model='donation.donor.mail'
-            , placeholder="Donor's e-mail address."
-            , required)
+            div(class='controls')
+              input(class='span12 '
+              , ng-class='{"error":form.donorMail.$invalid}'
+              , type='email'
+              , name='donorMail'
+              , ng-model='donation.donor.mail'
+              , placeholder="Donor's e-mail address."
+              , required)
 
         p(class='help-block')
           span(class='lead')
@@ -60,51 +62,58 @@ div(class='container-fluid body-donate')
           br
           span(class='muted') We accept all major credit and debit cards.
 
-        div(class='control-group')
-          div(class='controls controls-row')
-            input(class='span7 input-card-number'
-            , type='text'
-            , name='cardNumber'
-            , ng-model='donation.card.number'
-            , placeholder='Credit card number.'
-            , required)
+        div(class='row-fluid')
+          div(class='control-group span7')
+            div(class='controls')
+              input(class='span12 input-card-number'
+              , type='text'
+              , name='cardNumber'
+              , ng-model='donation.card.number'
+              , placeholder='Credit card number.'
+              , required)
 
-            div(class='span5')
-              img(src='/images/logos/accepted-credit-cards.png')
+          div(class='span5')
+            img(src='/images/logos/accepted-credit-cards.png')
 
-          div(class='controls controls-row')
-            select(class='span5 card-expiration-month'
-            , name='cardExpMonth'
-            , ng-model='donation.card.expiration.month'
-            , required)
-              option(value='1') January
-              option(value='2') February
-              option(value='3') March
-              option(value='4') April
-              option(value='5') May
-              option(value='6') June
-              option(value='7') July
-              option(value='8') August
-              option(value='9') September
-              option(value='10') October
-              option(value='11') November
-              option(value='12') December
+        div(class='row-fluid')
+          div(class='control-group span5')
+            div(class='controls')
+              select(class='span12 card-expiration-month'
+              , name='cardExpMonth'
+              , ng-model='donation.card.expiration.month'
+              , required)
+                option(value='1') January
+                option(value='2') February
+                option(value='3') March
+                option(value='4') April
+                option(value='5') May
+                option(value='6') June
+                option(value='7') July
+                option(value='8') August
+                option(value='9') September
+                option(value='10') October
+                option(value='11') November
+                option(value='12') December
 
-            input(class='span3 input-card-expiration-year'
-            , type='number'
-            , name='cardExpYear'
-            , ng-model='donation.card.expiration.year'
-            , placeholder='Expiration year.'
-            , required)
+          div(class='control-group span3')
+            div(class='controls')
+              input(class='span12 input-card-expiration-year'
+              , type='number'
+              , name='cardExpYear'
+              , ng-model='donation.card.expiration.year'
+              , placeholder='Expiration year.'
+              , required)
 
-            input(class='span4 input-card-verification-code'
-            , type='text'
-            , name='cardVC'
-            , ng-model='donation.card.code'
-            , placeholder='CVC.'
-            , tooltip='The verification or security code is usually located on the back of your credit or debit card.'
-            , tooltip-placement='right'
-            , required)
+          div(class='control-group span4')
+            div(class='controls')
+              input(class='span12 input-card-verification-code'
+              , type='text'
+              , name='cardVC'
+              , ng-model='donation.card.code'
+              , placeholder='CVC.'
+              , tooltip='The verification or security code is usually located on the back of your credit or debit card.'
+              , tooltip-placement='right'
+              , required)
 
         p(class='help-block')
           span(class='lead')
@@ -116,12 +125,11 @@ div(class='container-fluid body-donate')
             | comfortable with, please click the “Donate” button below.
             | You'll have a chance to review the donation.
 
-
-        div(class='control-group')
-          div(class='controls controls-row')
-            button(class='span2 btn', type='button', ng-click='resetDonation()', tooltip='This will clear all information from the donation form.') Reset
-            button(class='span2 btn', type='button', ng-click='populate()', tooltip='This button is only for testing purposes.') Fill
-            div(class='span6')
+        div(class='row-fluid')
+          button(class='span2 btn', type='button', ng-click='resetDonation()', tooltip='This will clear all information from the donation form.') Reset
+          button(class='span2 btn', type='button', ng-click='populate()', tooltip='This button is only for testing purposes.') Fill
+          div(class='control-group span6')
+            div(class='controls')
               div(class='pull-right input-prepend input-append')
                 span(class='add-on') $
                 input(class='input-small input-amount'
@@ -130,11 +138,11 @@ div(class='container-fluid body-donate')
                 , ng-model='donation.amount'
                 , required)
                 span(class='add-on') .00
-            button(class='span2 btn btn-success'
-            , type='submit'
-            , ng-click='startDonation()'
-            , tooltip="We'll review your donation before charging your account.")
-              | Donate
+          button(class='span2 btn btn-success'
+          , type='submit'
+          , ng-click='startDonation()'
+          , tooltip="We'll review your donation before charging your account.")
+            | Donate
 
       p
         code donation.donor.name : {{donation.donor.name}}
