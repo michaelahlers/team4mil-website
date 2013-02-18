@@ -14,25 +14,49 @@ define([
    */
   services.factory('Stripe', function ($q, $http, $rootScope, $log) {
 
+      /**
+       * @return {promise} Promise providing the Stripe status object.
+       */
       var getStatus = function () {
-        return $http.get('/stripe/status')
+        return $http.get('/stripe/status').then(
+
+          /* Resolved. Status was received. */
+          function (response) {
+            return response.data
+          },
+
+          /* Rejected. Status was not available. */
+          function (response) {
+            /* TODO: Interpret the response. */
+            $log.err('Status service GET failed.', reason)
+            return response.data
+          }
+
+        )
       }
 
-      var configure = function () {
+      /**
+       * Configures the Stripe service API.
+       *
+       * @return {promise} Promise providing the configuration.
+       */
+      var getConfiguration = function () {
         var deferred = $q.defer()
 
         getStatus().then(
           /* Resolved. Status was received. */
-          function (response) {
-            var key = response.data.keys.publishable
+          function (status) {
+            var key = status.keys.publishable
             Stripe.setPublishableKey(key)
             deferred.resolve({
               key : key
             })
           },
 
-          /* Rejected. Status was received. */
+          /* Rejected. Status was not received.. */
           function (reason) {
+            /* TODO: Interpret the response. */
+            $log.err('Status rejected.', reason)
             deferred.reject(reason)
           }
         )
@@ -40,11 +64,15 @@ define([
         return deferred.promise
       }
 
-      /* Handles the first step, submitting the credit card information directly to Stripe, who then replies with a single-use token. */
+      /**
+       * Submittings the credit card information directly to Stripe, who then replies with a single-use token.
+       *
+       * @return {promise} Promise providing a single-use token for issuing a charge.
+       */
       var createToken = function (card) {
         var deferred = $q.defer()
 
-        configure().then(
+        getConfiguration().then(
           /* Resolved. Configuration was successful. */
           function (configuration) {
             Stripe.createToken(
