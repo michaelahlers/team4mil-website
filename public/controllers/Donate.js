@@ -9,10 +9,13 @@ define([
 
   return controllers.controller('Donate', function ($rootScope, $scope, $http, $parse, $log, Stripe) {
 
-    $scope.$watch('donation.card.number', function (value) {
-      var type = Stripe.getCardType(value)
-      $parse('donation.card.type').assign($scope, type)
-    })
+    var updateCardType = function () {
+      $parse('donation.card.type').assign($scope, Stripe.getCardType($scope.$eval('donation.card.number')))
+    }
+
+    $scope.$watch('donation', updateCardType)
+    $scope.$watch('donation.card', updateCardType)
+    $scope.$watch('donation.card.number', updateCardType)
 
     var reset = function () {
       var now = new Date()
