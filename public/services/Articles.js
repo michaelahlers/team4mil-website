@@ -3,7 +3,7 @@
 define([
   'services', 'angular-resource', 'services/Cache'
 ], function (services) {
-  services.factory('Resource', function ($q, $resource, $timeout, $log, Cache) {
+  services.factory('Articles', function ($q, $resource, $timeout, $log, Cache) {
     var resource = $resource('/resources/:name')
 
     return {
@@ -18,7 +18,7 @@ define([
         return Cache.get(name, function () {
           var deferred = $q.defer()
 
-          $resource('/resources/:name').get({name : name}, function (result) {
+          $resource('/articles/:name').get({name : name}, function (result) {
             deferred.resolve(result)
           })
 

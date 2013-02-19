@@ -4,7 +4,7 @@ define(
   [
     'angular',
 
-    'services/Resource',
+    'services/Articles',
 
     'controllers',
 
@@ -32,8 +32,8 @@ define(
         templateUrl : 'partials/mission',
         controller : 'Mission',
         resolve : {
-          content : function (Resource) {
-            return Resource.get('mission')
+          content : function (Articles) {
+            return Articles.get('mission')
           }
         }
       })
@@ -43,8 +43,8 @@ define(
         controller : 'Teams',
         reloadOnSearch : false,
         resolve : {
-          content : function (Resource) {
-            return Resource.get('teams')
+          content : function (Articles) {
+            return Articles.get('teams')
           }
         }
       })
@@ -58,8 +58,8 @@ define(
         controller : 'Sponsorship',
         reloadOnSearch : false,
         resolve : {
-          content : function (Resource) {
-            return Resource.get('sponsorship')
+          content : function (Articles) {
+            return Articles.get('sponsorship')
           }
         }
       })
@@ -73,8 +73,8 @@ define(
         templateUrl : 'partials/contact',
         controller : 'Contact',
         resolve : {
-          content : function (Resource) {
-            return Resource.get('contact')
+          content : function (Articles) {
+            return Articles.get('contact')
           }
         }
       })

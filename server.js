@@ -57,15 +57,15 @@ server.get('/', routes.index)
 server.get('/directives/:name', routes.directives)
 server.get('/partials/:name', routes.partials)
 
-server.get('/resources/mission', routes.resources.mission)
-server.get('/resources/teams', routes.resources.teams)
-server.get('/resources/sponsorship', routes.resources.sponsorship)
-server.get('/resources/contact', routes.resources.contact)
+server.get('/articles/mission', routes.services.articles.mission.get)
+server.get('/articles/teams', routes.services.articles.teams.get)
+server.get('/articles/sponsorship', routes.services.articles.sponsorship.get)
+server.get('/articles/contact', routes.services.articles.contact.get)
 
 server.post('/contact', routes.contact.send)
 
-server.get('/stripe/status', routes.stripe.status)
-server.post('/stripe/charges', routes.stripe.charges.create)
+server.get('/stripe/status', routes.services.stripe.status)
+server.post('/stripe/charges', routes.services.stripe.charges.create)
 
 var build = function (callback) {
   console.log('Building client...')
