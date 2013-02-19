@@ -2,7 +2,6 @@
 'use strict'
 
 var async = require('async')
-  , util = require('util')
 
 /* TODO: Replace async with promises (Q library)! */
 

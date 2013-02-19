@@ -1,37 +1,48 @@
 /*jshint node:true*/
 'use strict'
 
+var util = require('util')
+
 var version0 = require('./version0')
 
 var versions = [ version0 ]
-var latest = version0
-
+  , latest = version0
 
 var getService = function (version) {
-  return versions[version] || latest
+  if (version) {
+    return versions[version]
+  }
+
+  return latest
 }
 
-var getHandler = function (article, method) {
+var getMethod = function (article, method) {
   return function (req, res) {
-    var service = getService(req.params.version)
+    var version = req.query.version
+      , service = getService(version)
+
+    if (!service) {
+      throw new Error(util.format('No "articles" service found for version "%s".', version))
+    }
+
     return service[article][method](req, res)
   }
 }
 
 exports.mission = {
-  get : getHandler('mission', 'get')
+  get : getMethod('mission', 'get')
 }
 
 exports.teams = {
-  get : getHandler('teams', 'get')
+  get : getMethod('teams', 'get')
 }
 
 exports.sponsorship = {
-  get : getHandler('sponsorship', 'get')
+  get : getMethod('sponsorship', 'get')
 }
 
 exports.contact = {
-  get : getHandler('contact', 'get')
+  get : getMethod('contact', 'get')
 }
 
 exports.versions = versions
