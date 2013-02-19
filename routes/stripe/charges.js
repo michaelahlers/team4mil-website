@@ -38,7 +38,7 @@ module.exports = function (stripe) {
           },
 
           subject : 'Thank you, from Team 4Mil, for your donation!',
-          body : util.format("We've processed your donation of $%s.00 to account ending %s.", charge.amount, result.card.last4)
+          body : util.format("We've processed your donation of $%s.00 to account ending %s.", Math.floor(charge.amount / 100), result.card.last4)
         }
 
         mailer.send(message)
