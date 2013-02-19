@@ -41,16 +41,21 @@ section(class='body-contact container-fluid')
           br
           span(class='muted') Don't worry, we will <em>only</em> use this information to contact you.
 
-        div(class='control-group', ng-class='{"warning":!sender.name}')
+        div(class='alert', ng-show='messageForm.senderNameText.$invalid || messageForm.senderMailText.$invalid')
+          i(class='icon-exclamation-sign')
+          | &nbsp;We need your name and a valid e-mail address.
+
+        div(class='alert alert-success', ng-hide='messageForm.senderNameText.$invalid || messageForm.senderMailText.$invalid')
+          i(class='icon-ok-sign')
+          | &nbsp;Your name and e-mail address look good!
+
+        div(class='control-group', ng-class='{"error":messageForm.senderNameText.$invalid}')
           div(class='controls')
-            input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.')
-            span(class='help-inline', ng-hide='sender.name') Your name is helpful, but not required.
+            input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.', required)
 
         div(class='control-group', ng-class='{"error":messageForm.senderMailText.$invalid}')
           div(class='controls')
-            input(class='span6', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
-            span(class='help-inline', ng-show='messageForm.senderMailText.$error.required') Your address is required.
-            span(class='help-inline', ng-show='messageForm.senderMailText.$error.email') Please recheck your address.
+            input(class='span8', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
 
         div(class='control-group')
           div(class='controls')
@@ -61,7 +66,7 @@ section(class='body-contact container-fluid')
 
         div(class='control-group')
           div(class='controls')
-            input(class='span6', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
+            input(class='span12', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
 
         div(class='control-group')
           div(class='controls')
