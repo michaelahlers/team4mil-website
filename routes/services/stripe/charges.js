@@ -1,7 +1,7 @@
 /*jshint node:true*/
 'use strict'
 
-var mailer = require('../../mailer.js')
+var mailer = require('../../../mailer.js')
   , util = require('util')
 
 module.exports = function (stripe) {

@@ -11,9 +11,11 @@ var getService = function (version) {
   return versions[version] || latest
 }
 
-var getHandler = function (article, method, req, res) {
-  var service = getService(req.params.version)
-  return service[article][method]
+var getHandler = function (article, method) {
+  return function (req, res) {
+    var service = getService(req.params.version)
+    return service[article][method](req, res)
+  }
 }
 
 exports.mission = {
