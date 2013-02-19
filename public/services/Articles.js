@@ -18,7 +18,7 @@ define([
         return Cache.get(name, function () {
           var deferred = $q.defer()
 
-          $resource('/articles/:name?version=0').get({name : name}, function (result) {
+          $resource('/articles/0/:name').get({name : name}, function (result) {
             deferred.resolve(result)
           })
 

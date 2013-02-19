@@ -2,7 +2,6 @@
 'use strict'
 
 var contact = require('./contact')
-  , services = require('./services')
 
 exports.index = function (req, res) {
   res.render('index')
@@ -17,4 +16,3 @@ exports.partials = function (req, res) {
 }
 
 exports.contact = contact
-exports.services = services
