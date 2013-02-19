@@ -8,12 +8,29 @@ define([
   'filters/sequence'
 ], function (controllers) {
 
-  return controllers.controller('Donate', function ($rootScope, $scope, $http, $parse, $log, Stripe) {
+  return controllers.controller('Donate', function ($rootScope, $scope, $http, $parse, $filter, $log, Stripe) {
 
-    $scope.now = {
-      month : new Date().getMonth() + 1,
-      year : new Date().getFullYear()
-    }
+    /* TODO: Move to constants for injection. */
+    $scope.months = [
+      { name : 'January', index : 1 },
+      { name : 'February', index : 2 },
+      { name : 'March', index : 3 },
+      { name : 'April', index : 4 },
+      { name : 'May', index : 5 },
+      { name : 'June', index : 6 },
+      { name : 'July', index : 7 },
+      { name : 'August', index : 8 },
+      { name : 'September', index : 9 },
+      { name : 'October', index : 10 },
+      { name : 'November', index : 11 },
+      { name : 'December', index : 12 }
+    ]
+
+    /* TODO: Move to constants for injection. */
+    $scope.years = $.map($filter('sequence')([], 0, 20), function (offset) {
+      /* There is a magic time of year when this will produce the wrong output... */
+      return new Date().getFullYear() + offset
+    })
 
     var updateCardType = function () {
       $parse('donation.card.type').assign($scope, Stripe.getCardType($scope.$eval('donation.card.number')))

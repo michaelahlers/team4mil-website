@@ -98,27 +98,16 @@ div(class='container-fluid body-donate')
               select(class='span12 card-expiration-month'
               , name='cardExpMonth'
               , ng-model='donation.card.expiration.month'
+              , ng-options='month.index as month.name for month in months'
               , required)
-                option(value='1') January
-                option(value='2') February
-                option(value='3') March
-                option(value='4') April
-                option(value='5') May
-                option(value='6') June
-                option(value='7') July
-                option(value='8') August
-                option(value='9') September
-                option(value='10') October
-                option(value='11') November
-                option(value='12') December
 
           div(class='control-group span2', ng-class='{"error":donationForm.cardExpYear.$invalid}')
             div(class='controls')
               select(class='span12 card-expiration-year'
               , name='cardExpYear'
               , ng-model='donation.card.expiration.year'
+              , ng-options='year as year for year in years'
               , required)
-                option(ng-value='{{now.year + offset}}', ng-repeat='offset in []|sequence:0:20') {{now.year + offset}}
 
           div(class='control-group offset3 span4', ng-class='{"error":donationForm.cardVC.$invalid}')
             div(class='controls')
