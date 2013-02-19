@@ -1,0 +1,29 @@
+nav(class='navbar navbar-inverse navbar-fixed-top', ng-controller='Navigation')
+  div(class='navbar-inner')
+    div(class='container-fluid')
+      div(class='row-fluid')
+        div(class='offset1 span10')
+          a(class='brand', href='#/about')
+            img(src='images/logos/team4mil_200x200.png', alt='Team 4Mil: For the Military, Warriors and Veterans')
+          ul(class='nav pull-right')
+            li(ng-class="{'Mission':'active'}[controller]")
+              a(href='#/mission')
+                | Mission
+            li(ng-class="{'Teams':'active'}[controller]")
+              a(href='#/teams')
+                | Teams
+            li(ng-class="{'Sponsorship':'active'}[controller]")
+              a(href='#/sponsorship')
+                | Sponsorship
+            li(ng-class="{'Donate':'active'}[controller]")
+              a(href='#/donate')
+                | Donate
+            li(ng-class="{'Contact':'active'}[controller]")
+              a(href='#/contact')
+                | Contact
+            li
+              a(target='_blank', href='//twitter.com/team4mil')
+                i(class='icon-twitter-sign')
+            li
+              a(target='_blank', href='//facebook.com/team4mil')
+                i(class='icon-facebook-sign')

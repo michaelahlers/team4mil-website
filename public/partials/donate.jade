@@ -1,0 +1,253 @@
+div(class='container-fluid hero hero-donate')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      h1 Donate
+
+div(class='container-fluid body-donate')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      p(class='lead')
+        strong
+          | Team 4Mil is a volunteer-staffed, 503(c) organization dedicated to
+          | supporting combat-wounded veterans, and their families, on the road to
+          | recovery through the sport of cycling.
+        | &nbsp;Your donations go to the operational expenses of our wounded
+        | warrior team and US Service-member teams in numerous cycling events.
+
+  div(class='row-fluid')
+    div(class='offset1 span5')
+      h3 Make an Online Donation&nbsp;
+        i(class='icon-lock')
+      p(class='help-block')
+        | The information you provide here will be handled securely, and
+        | processed by a trusted credit card processing agency.
+
+      form(name='donationForm')
+        p(class='help-block')
+          span(class='lead')
+            strong First
+            | , your name and e-mail address.
+          br
+          span(class='muted') Don't worry, we will <em>never</em> share your personal information.
+
+        div(class='alert', ng-show='donationForm.donorName.$invalid || donationForm.donorMail.$invalid')
+          i(class='icon-exclamation-sign')
+          | &nbsp;We need your full name and a valid e-mail address.
+
+        div(class='alert alert-success', ng-hide='donationForm.donorName.$invalid || donationForm.donorMail.$invalid')
+          i(class='icon-ok-sign')
+          | &nbsp;Your full name and e-mail address look good!
+
+        div(class='row-fluid')
+          div(class='control-group span5', ng-class='{"error":donationForm.donorName.$invalid}')
+            div(class='controls')
+              input(class='span12'
+              , type='text'
+              , name='donorName'
+              , ng-model='donation.donor.name'
+              , placeholder="Card holder's full name."
+              , required)
+
+          div(class='control-group span7', ng-class='{"error":donationForm.donorMail.$invalid}')
+            div(class='controls')
+              input(class='span12 '
+              , ng-class='{"error":donationForm.donorMail.$invalid}'
+              , type='email'
+              , name='donorMail'
+              , ng-model='donation.donor.mail'
+              , placeholder="Donor's e-mail address."
+              , required)
+
+        p(class='help-block')
+          span(class='lead')
+            strong Second
+            | , payment method.
+          br
+          span(class='muted') We accept all major credit and debit cards.
+
+        div(class='alert', ng-show='donationForm.cardNumber.$invalid || donationForm.cardExpMonth.$invalid || donationForm.cardExpYear.$invalid || donationForm.cardVC.$invalid')
+          i(class='icon-exclamation-sign')
+          | &nbsp;Please provide your account information.
+        div(class='alert alert-success', ng-hide='donationForm.cardNumber.$invalid || donationForm.cardExpMonth.$invalid || donationForm.cardExpYear.$invalid || donationForm.cardVC.$invalid')
+          i(class='icon-ok-sign')
+          | &nbsp;Account information looks good!
+
+        div(class='row-fluid')
+          div(class='control-group span8', ng-class='{"error":donationForm.cardNumber.$invalid}')
+            div(class='controls')
+              input(class='span12 input-card-number'
+              , type='text'
+              , name='cardNumber'
+              , ng-model='donation.card.number'
+              , placeholder='Credit card number.'
+              , pc-credit-card-number
+              , required)
+
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/Visa_44x30.png', ng-class='{"Visa":"active"}[donation.card.type]')
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/American-Express_44x30.png', ng-class='{"American Express":"active"}[donation.card.type]')
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/MasterCard_44x30.png', ng-class='{"MasterCard":"active"}[donation.card.type]')
+          div(class='span1')
+            img(class='logo-credit-card', src='/images/logos/Discover_44x30.png', ng-class='{"Discover":"active"}[donation.card.type]')
+
+        div(class='row-fluid')
+          div(class='control-group span3', ng-class='{"error":donationForm.cardExpMonth.$invalid}')
+            div(class='controls')
+              select(class='span12 card-expiration-month'
+              , name='cardExpMonth'
+              , ng-model='donation.card.expiration.month'
+              , ng-options='month.index as month.name for month in months'
+              , required)
+
+          div(class='control-group span2', ng-class='{"error":donationForm.cardExpYear.$invalid}')
+            div(class='controls')
+              select(class='span12 card-expiration-year'
+              , name='cardExpYear'
+              , ng-model='donation.card.expiration.year'
+              , ng-options='year as year for year in years'
+              , required)
+
+          div(class='control-group offset3 span4', ng-class='{"error":donationForm.cardVC.$invalid}')
+            div(class='controls')
+              input(class='span12 input-card-verification-code'
+              , type='text'
+              , name='cardVC'
+              , ng-model='donation.card.code'
+              , placeholder='Verification code.'
+              , tooltip='The card verification or security code is usually located on the back of your credit or debit card.'
+              , tooltip-placement='right'
+              , pc-credit-card-verification-code
+              , required)
+
+        p(class='help-block')
+          span(class='lead')
+            strong Third
+            | , choose an amount.
+          br
+          span(class='muted')
+            | Any amount helps! When you've entered a dollar amount you're
+            | comfortable with, please click the “Donate” button below.
+            | You'll have a chance to review the donation.
+
+        div(class='alert', ng-show='donationForm.amount.$invalid')
+          i(class='icon-exclamation-sign')
+          | &nbsp;Tell us how much you'd like to give.
+        div(class='alert alert-success', ng-hide='donationForm.amount.$invalid')
+          i(class='icon-ok-sign')
+          | &nbsp;You've opted to donate ${{donation.amount}}.00!
+
+        div(class='row-fluid')
+          button(class='span2 btn', type='button', ng-click='resetDonation()', tooltip='This will clear all information from the donation form.') Reset
+          button(class='span2 btn', type='button', ng-click='populate()', tooltip='This button is only for testing purposes.') Fill
+          div(class='control-group span6', ng-class='{"error":donationForm.amount.$invalid}')
+            div(class='controls')
+              div(class='pull-right input-prepend input-append')
+                span(class='add-on') $
+                input(class='input-small input-amount'
+                , name='amount'
+                , type='number'
+                , ng-model='donation.amount'
+                , required)
+                span(class='add-on') .00
+          button(class='span2 btn btn-success'
+          , ng-disabled='donationForm.$invalid'
+          , type='submit'
+          , ng-click='startDonation()'
+          , tooltip="We'll review your donation before charging your account."
+          , tooltip-placement='right')
+            | Donate
+
+      div(ng-show='false')
+        p
+          code donation.donor.name : {{donation.donor.name}}
+        p
+          code donation.card.number : {{donation.card.number}}
+        p
+          code donation.card.type : {{donation.card.type}}
+        p
+          code donation.card.expiration.month : {{donation.card.expiration.month}}
+        p
+          code donation.card.expiration.year : {{donation.card.expiration.year}}
+        p
+          code donation.card.code : {{donation.card.code}}
+        p
+          code donation.amount : {{donation.amount}}
+
+    div(class='span5')
+      h3 Mail-in Your Donation&nbsp;
+        i(class='icon-envelope-alt')
+
+      p(class='help-block muted')
+        | If you prefer, you can send your contribution to us by mail. Please
+        | make checks or money orders payable to “Team 4Mil,” and send them to
+        | the following address.
+
+      blockquote(class='lead')
+        | Team 4Mil
+        br
+        | c/o Wayne Dowd
+        br
+        | 4053 Bridgehampton Lane
+        br
+        | Virginia Beach, VA  23455
+
+div(id='modalStatus', class='modal fade', tabindex='-1')
+  div(class='modal-header')
+    h3 Donate
+
+  div(ng-show='status.pending')
+    div(class='modal-body')
+      p
+        | Your donation of&nbsp;
+        strong ${{status.amount}}.00
+        | &nbsp;will be made from account ending&nbsp;
+        strong {{status.card.number}}
+        | &nbsp;when you click the &ldquo;Confirm&rdquo; button below. You can
+        | click the &ldquo;Review&rdquo; button if you'd like to recheck the
+        | order.
+    div(class='modal-footer')
+      button(class='btn', ng-click='cancelDonation()') Review
+      button(class='btn btn-primary', ng-click='confirmDonation()') Confirm
+
+  div(ng-show='status.processing')
+    div(class='modal-body')
+      div(class='row-fluid')
+        p(class='lead')
+          i(class='icon-spinner icon-spin')
+          | &nbsp;Processing your order&hellip;
+
+  div(ng-show='status.success')
+    div(class='modal-body')
+      p(class='lead text-success')
+        i(class='icon-certificate')
+        | &nbsp;Thank you!
+      p
+        | Your ${{status.amount}}.00 donation has been charged to account
+        | ending {{status.card.number}}! We'll send a confirmation e-mail to
+        | your address, {{status.donor.mail}}, shortly!
+      p
+        | If you have any questions about your donation, please contact&nbsp;
+        a(href='mailto:donations@team4mil.org') donations@team4mil.org
+        | .
+
+    div(class='modal-footer')
+      button(class='btn btn-primary', ng-click='closeStatus()') Close
+
+  div(ng-show='status.error')
+    div(class='modal-body')
+      p
+        span(class='label label-important') Error!
+        | &nbsp;We're sorry, but there was a problem processing your donation.&nbsp;
+        span(ng-show='status.card.invalid')
+          | It appears your card has been declined.
+          | Please check your account information!
+        span(ng-show='status.service.unavailable')
+          | The credit service is temporarily unavailable. Our people will
+          | look into the problem.&nbsp;
+          strong Please try again later!
+
+    div(class='modal-footer')
+      button(class='btn btn-primary', ng-click='closeStatus()') Close
+
