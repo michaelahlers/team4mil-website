@@ -14,6 +14,9 @@ var environment = require('./environment')
  */
 exports.send = function (message, callback) {
 
+  callback = callback || function () {
+  }
+
   /* Unpack the message. */
   var recipient = {
     name : message.recipient.name,
