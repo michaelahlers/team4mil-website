@@ -58,6 +58,7 @@ define([
               }
             }
 
+            /* Visit https://github.com/kswedberg/jquery-smooth-scroll for documentation. */
             $.smoothScroll({
               scrollTarget : $($element),
               offset : offset
