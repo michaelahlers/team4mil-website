@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Visit https://stripe.com/docs/stripe.js to read more about the Stripe JavaScript API.
+ */
 define('Stripe', ['noext!https://js.stripe.com/v1/'], function (stripe, status) {
   return window.Stripe
 })
