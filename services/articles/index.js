@@ -1,8 +1,6 @@
 /*jshint node:true*/
 'use strict'
 
-var util = require('util')
-
 var version0 = require('./version0')
   , latest = version0
 
