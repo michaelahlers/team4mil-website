@@ -18,7 +18,7 @@ var status = function (req, res) {
 
 module.exports = function (connect) {
 
-  connect.get('/stripe/status', status)
+  connect.get('/stripe', status)
   connect.post('/stripe/charges', charges.create)
 
 }

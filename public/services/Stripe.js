@@ -60,7 +60,7 @@ define([
         var getStatus = function () {
           var deferred = $q.defer()
 
-          $http.get('/stripe/status')
+          $http.get('/stripe')
             .success(function (data, status) {
               deferred.resolve(data)
             })
