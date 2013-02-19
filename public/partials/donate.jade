@@ -39,7 +39,7 @@ div(class='container-fluid body-donate')
           | &nbsp;Your full name and e-mail address look good!
 
         div(class='row-fluid')
-          div(class='control-group span6', ng-class='{"error":donationForm.donorName.$invalid}')
+          div(class='control-group span5', ng-class='{"error":donationForm.donorName.$invalid}')
             div(class='controls')
               input(class='span12'
               , type='text'
@@ -48,7 +48,7 @@ div(class='container-fluid body-donate')
               , placeholder="Card holder's full name."
               , required)
 
-          div(class='control-group span6', ng-class='{"error":donationForm.donorMail.$invalid}')
+          div(class='control-group span7', ng-class='{"error":donationForm.donorMail.$invalid}')
             div(class='controls')
               input(class='span12 '
               , ng-class='{"error":donationForm.donorMail.$invalid}'
