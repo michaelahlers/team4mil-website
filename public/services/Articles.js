@@ -18,7 +18,9 @@ define([
         var deferred = cache[name] = (cache[name] || $q.defer())
 
         $resource('/articles/0/:name').get({name : name}, function (result) {
-          deferred.resolve(result)
+          //$timeout(function () {
+            deferred.resolve(result)
+          //}, 2000)
         })
 
         /* Provides the promise. */

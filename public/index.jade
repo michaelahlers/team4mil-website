@@ -26,10 +26,10 @@ html(lang="en")
       script(type='text/javascript', data-main='index', src='../lib/require-2.1.4.min.js')
 
   body
-    header
+    header(ng-cloak, ng-controller='Header', ng-show='visible')
       include header.jade
 
-    article(ng-view)
+    article(ng-cloak, ng-view)
 
-    footer
+    footer(ng-cloak, ng-controller='Footer', ng-show='visible')
       include footer.jade

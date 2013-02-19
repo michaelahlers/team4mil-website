@@ -4,8 +4,9 @@ define([
   'controllers'
 ], function (controllers) {
 
-  return controllers.controller('Navigation', function ($rootScope, $scope, $log) {
+  return controllers.controller('Header', function ($rootScope, $scope, $log) {
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+      $scope.visible = true
       $scope.controller = current && current.$route && current.$route.controller
     })
   })
