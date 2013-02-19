@@ -1,7 +1,8 @@
 /*jshint node:true*/
 'use strict'
 
-/* Visit https://github.com/abh/node-stripe for the Node Stripe API documentation. */
+/* Visit https://github.com/abh/node-stripe for the Node Stripe API documentation.
+ * Also see https://stripe.com/docs/api for the Stripe REST API guide. */
 
 var environment = require('../../environment')
   , stripe = require('stripe')(environment.STRIPE_SECRET_KEY)
