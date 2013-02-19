@@ -15,6 +15,7 @@ exports.get = function (req, res) {
     }
 
     res.json({
+      _version : 0,
       id : result.id,
       title : result.subject,
       summary : result.message

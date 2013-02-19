@@ -45,6 +45,7 @@ exports.get = function (req, res) {
 
       res.json(
         {
+          _version : 0,
           board : {
             members : results[0].data.map(function (member) {
               return {

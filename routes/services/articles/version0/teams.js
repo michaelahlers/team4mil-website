@@ -62,6 +62,7 @@ exports.get = function (req, res) {
 
       res.json(
         {
+          _version : 0,
           title : results[0].subject,
           summary : results[0].message,
           teams : [
