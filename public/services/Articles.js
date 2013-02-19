@@ -1,10 +1,11 @@
 'use strict'
 
 define([
-  'services', 'angular-resource', 'services/Cache'
+  'services', 'angular-resource'
 ], function (services) {
-  services.factory('Articles', function ($q, $resource, $timeout, $log, Cache) {
-    var resource = $resource('/resources/:name')
+  services.factory('Articles', function ($q, $resource, $timeout, $log) {
+
+    var cache = {}
 
     return {
       /**
@@ -14,17 +15,14 @@ define([
        */
       get : function (name) {
 
-        /* Return either the cached promise. */
-        return Cache.get(name, function () {
-          var deferred = $q.defer()
+        var deferred = cache[name] = (cache[name] || $q.defer())
 
-          $resource('/articles/0/:name').get({name : name}, function (result) {
-            deferred.resolve(result)
-          })
-
-          /* Provides the promise to the cache. */
-          return deferred.promise
+        $resource('/articles/0/:name').get({name : name}, function (result) {
+          deferred.resolve(result)
         })
+
+        /* Provides the promise. */
+        return deferred.promise
 
       }
     }
