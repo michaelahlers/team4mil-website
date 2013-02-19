@@ -52,7 +52,13 @@ define(
       })
 
       $routeProvider.when('/teams', {
-        redirectTo : '/teams/'
+        redirectTo : '/teams/',
+        /* TODO: Remove this temporary hack for issue #14. */
+        resolve : {
+          content : function (Articles) {
+            return Articles.get('teams')
+          }
+        }
       })
 
       $routeProvider.when('/sponsorship', {
