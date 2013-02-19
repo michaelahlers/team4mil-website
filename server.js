@@ -57,10 +57,9 @@ server.get('/', routes.index)
 server.get('/directives/:name', routes.directives)
 server.get('/partials/:name', routes.partials)
 
-require('./services')(server)
-
 server.post('/contact', routes.contact.send)
 
+require('./services')(server)
 
 var build = function (callback) {
   console.log('Building client...')
