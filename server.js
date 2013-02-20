@@ -6,9 +6,6 @@
 var express = require('express')
   , Facebook = require('facebook-node-sdk')
   , http = require('http')
-  , https = require('https')
-  , path = require('path')
-  , routes = require('./routes')
 
 var server = express()
 
@@ -21,6 +18,7 @@ server.configure(function () {
   server.use(express.methodOverride())
 
   server.use('/', require('./clients/desktop').application)
+  server.use('/touch', require('./clients/mobile').application)
 
   server.use(Facebook.middleware({
     appId : '273576052771797',
@@ -36,8 +34,6 @@ server.configure('development', function () {
 server.configure('production', function () {
   server.use(express.errorHandler())
 })
-
-server.post('/contact', routes.contact.send)
 
 require('./services')(server)
 

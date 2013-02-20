@@ -1,7 +1,7 @@
 /*jshint node:true*/
 'use strict'
 
-var mailer = require('../mailer')
+var mailer = require('../../mailer')
 
 var transport = mailer.transport
 
