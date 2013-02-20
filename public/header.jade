@@ -6,20 +6,23 @@ nav(class='navbar navbar-inverse navbar-fixed-top')
           a(class='brand', href='#/about')
             img(src='images/logos/team4mil_200x200.png', alt='Team 4Mil: For the Military, Warriors and Veterans')
           ul(class='nav pull-right')
+            li
+              a(href='#/mission', tooltip='Visit the home page.', tooltip-placement='left')
+                i(class='icon-home')
             li(ng-class="{'Mission':'active'}[controller]")
-              a(href='#/mission')
+              a(href='#/mission', tooltip="Read about Team&nbsp;4Mil's mission to help our nation's combat-wounded veterans.", tooltip-placement='bottom')
                 | Mission
             li(ng-class="{'Teams':'active'}[controller]")
-              a(href='#/teams')
+              a(href='#/teams', tooltip="Meet our warriors and their mentors.", tooltip-placement='bottom')
                 | Teams
             li(ng-class="{'Sponsorship':'active'}[controller]")
-              a(href='#/sponsorship')
+              a(href='#/sponsorship', tooltip="Meet the companies who support Team&nbsp;4Mil in its mission.", tooltip-placement='bottom')
                 | Sponsorship
             li(ng-class="{'Donate':'active'}[controller]")
-              a(href='#/donate')
+              a(href='#/donate', tooltip="Help our soldiers by contributing financial support to our cause.", tooltip-placement='bottom')
                 | Donate
             li(ng-class="{'Contact':'active'}[controller]")
-              a(href='#/contact')
+              a(href='#/contact', tooltip="Send questions, comments, and feedback to Team&nbsp;4Mil's board of directors.", tooltip-placement='bottom')
                 | Contact
             li
               a(target='_blank', href='//twitter.com/team4mil')
