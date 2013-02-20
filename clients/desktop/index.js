@@ -32,11 +32,16 @@ var getBuild = function () {
     config.baseUrl = __dirname + '/public'
     config.out = __dirname + '/public/' + config.out
 
+    console.info('Building the desktop web client.')
+
     requirejs.optimize(config, function (result) {
       if (result instanceof Error) {
+        console.error('Could not build desktop web client.', result)
         deferred.reject(result)
         return
       }
+
+      console.error('Desktop web client built.')
       deferred.resolve(result)
     })
 
@@ -60,6 +65,6 @@ application.get('/partials/:name', function (req, res) {
 
 application.post('/contact', contact.send)
 
-module.exports = getBuild().then(function () {
+module.exports = getBuild().then(function (build) {
   return application
 })
