@@ -27,9 +27,10 @@ html(lang="en")
 
   body
     div(class='loading', ng-controller='Loading', ng-show='visible')
-      div(class='loading-inner')
-        i(class='icon-spinner icon-spin')
-        | &nbsp;Please wait&hellip;
+      div(class='loading-container')
+        div(class='loading-inner')
+          i(class='icon-spinner icon-spin')
+          | &nbsp;Please wait&hellip;
 
     header(ng-cloak, ng-controller='Header', ng-show='visible')
       include header.jade

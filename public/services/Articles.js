@@ -19,9 +19,9 @@ define([
 
         $resource('/articles/0/:name').get({name : name}, function (result) {
           /* Helpful for testing. */
-          $timeout(function () {
+          //$timeout(function () {
             deferred.resolve(result)
-          }, 2000)
+          //}, 2000)
         })
 
         /* Provides the promise. */
