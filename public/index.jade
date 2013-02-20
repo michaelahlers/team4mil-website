@@ -26,6 +26,11 @@ html(lang="en")
       script(type='text/javascript', data-main='index', src='../lib/require-2.1.4.min.js')
 
   body
+    div(class='loading', ng-controller='Loading', ng-show='visible')
+      div(class='loading-inner')
+        i(class='icon-spinner icon-spin')
+        | &nbsp;Please wait&hellip;
+
     header(ng-cloak, ng-controller='Header', ng-show='visible')
       include header.jade
 

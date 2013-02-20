@@ -8,6 +8,7 @@ define(
 
     'controllers',
 
+    'controllers/Loading',
     'controllers/Header',
     'controllers/Footer',
 
