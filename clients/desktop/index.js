@@ -11,9 +11,6 @@ application.configure(function () {
   application.set('view engine', 'jade')
   application.use(express.favicon(__dirname + '/public/images/logos/team4mil_favicon.ico'))
 
-  //application.use(express.bodyParser())
-  //application.use(express.methodOverride())
-
   //application.use(express.cookieParser('your secret here'))
   //application.use(express.session({
   //  secret : 'your secret here'

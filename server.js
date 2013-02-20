@@ -22,8 +22,8 @@ server.configure(function () {
 
   server.use(express.logger('dev'))
 
-//  server.use(express.bodyParser())
-//  server.use(express.methodOverride())
+  server.use(express.bodyParser())
+  server.use(express.methodOverride())
 
 //  server.use(express.cookieParser('your secret here'))
 //  server.use(express.session({
