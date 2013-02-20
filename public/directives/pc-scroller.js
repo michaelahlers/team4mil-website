@@ -23,7 +23,8 @@ define([
           /**
            * Watch expression to trigger scrolling, evaluated in the parent scope.
            */
-          watch : '@',
+          /* TODO: We do not actually reference this from the scope. */
+          monitor : '@',
 
           /**
            * Expression executed in the parent scope, or independently (if that fails) that calculates the scroll offset.
@@ -37,14 +38,14 @@ define([
         },
 
         controller : function ($rootScope, $scope, $element, $attrs) {
-          var watch = $attrs.watch
+          var monitor = $attrs.monitor
           var offset = $scope.$parent.$eval($attrs.offset) || eval($attrs.offset) || 0
 
-          if (!watch) {
-            throw new Error('The watch expression is required.')
+          if (!monitor) {
+            throw new Error('The monitor expression is required.')
           }
 
-          $scope.$parent.$watch(watch, function (incoming, outgoing) {
+          $scope.$parent.$watch(monitor, function (incoming, outgoing) {
             if (angular.isDefined($attrs.cancel)) {
               var cancel = $scope.cancel()
 
