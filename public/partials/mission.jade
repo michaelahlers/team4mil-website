@@ -5,3 +5,19 @@ div(class='container-fluid hero hero-mission')
   div(class='row-fluid')
     div(class='offset1 span10')
       div(class='lead hero-summary hero-summary-mission', ng-bind-html='content.summary')
+
+section(class='body-mission container-fluid')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      div(class='row-fluid')
+        div(class='span3 well well-small')
+          include mission/teams.html
+
+        div(class='span3 well well-small')
+          include mission/sponsorship.html
+
+        div(class='span3 well well-small')
+          include mission/donate.html
+
+        div(class='span3 well well-small')
+          include mission/contact.html
