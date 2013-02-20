@@ -18,37 +18,6 @@ define([
     var isArray = angular.isArray
     var isString = angular.isString
 
-    var report = function (reasons, message) {
-      if (isString(reasons) && isUndefined(message)) {
-        message = reasons
-        reasons = []
-      }
-
-      if (isUndefined(reasons)) {
-        reasons = []
-      }
-
-      if (!isArray(reasons)) {
-        reasons = [reasons]
-      }
-
-      reasons.push(message)
-
-      if (isUndefined(reasons.hasAny)) {
-        reasons.hasAny = function (items) {
-          items = isArray(items) ? items : arguments
-          for (var index = 0; index < items.length; index++) {
-            if (reasons.indexOf(items[index]) > -1) {
-              return true
-            }
-          }
-          return false
-        }
-      }
-
-      return reasons
-    }
-
     /**
      * Visit https://stripe.com/docs/stripe.js for details.
      */
@@ -66,7 +35,7 @@ define([
             })
             .error(function (data, status) {
               $log.error('Failed to GET status service.', status, data)
-              deferred.reject(report('status.service.unavailable'))
+              deferred.reject('status.service.unavailable')
             }
           )
 
@@ -92,9 +61,10 @@ define([
             },
 
             /* Rejected. Status was not received.. */
-            function (reasons) {
-              $log.error('Unable to configure.', reasons)
-              deferred.reject(report(reasons, 'stripe.configuration.unavailable'))
+            function (reason) {
+              /* We are not concerned with the reason. All that matters is we cannot fulfill our promise. */
+              $log.error('Unable to configure.', reason)
+              deferred.reject('stripe.configuration.unavailable')
             }
           )
 
@@ -130,7 +100,7 @@ define([
                       deferred.resolve(result.id)
                     } else {
                       $log.error('Failed to create token.', status, result)
-                      deferred.reject(report('stripe.service.token.unavailable'))
+                      deferred.reject('stripe.service.token.unavailable')
                     }
                   })
                 }
@@ -138,9 +108,10 @@ define([
             },
 
             /* Rejected. Configuration failed. */
-            function (reasons) {
-              $log.error('Unable to create token.', reasons)
-              deferred.reject(report(reasons, 'stripe.service.unavailable'))
+            function (reason) {
+              /* We are not concerned with the reason. All that matters is we cannot fulfill our promise. */
+              $log.error('Unable to create token.', reason)
+              deferred.reject('stripe.service.unavailable')
             }
           )
 
@@ -171,20 +142,20 @@ define([
                 .error(function (data, status) {
                   $log.error('Failed to create charge.', status, data)
 
-                  var reasons
                   switch (data.name) {
                     case 'card_error':
-                      reasons = report(reasons, 'charge.card.invalid')
+                      deferred.reject('charge.card.invalid')
                       break
+                    default:
+                      deferred.reject('charge.create.error')
                   }
-                  deferred.reject(reasons)
                 })
             },
 
             /* Rejected. The token failed. */
-            function (reasons) {
-              $log.error('Unable to create charge.', reasons)
-              deferred.reject(report(reasons, 'charge.token.unavailable'))
+            function (reason) {
+              $log.error('Unable to create charge.', reason)
+              deferred.reject('charge.token.unavailable')
             }
 
           )

@@ -167,21 +167,25 @@ define([
         },
 
         /* Rejected. */
-        function (reasons) {
-          $log.error('Unable to charge account.', reasons)
+        function (reason) {
+          $log.error('Unable to charge account.', reason)
 
           $scope.status = {
             error : true,
             service : {
-              unavailable : reasons.hasAny(
+              unavailable : [
                 'status.service.unavailable',
                 'stripe.configuration.unavailable',
                 'stripe.service.token.unavailable',
                 'stripe.service.unavailable',
-                'charge.token.unavailable')
+                'charge.token.unavailable',
+                'charge.create.error'
+              ].indexOf(reason) > -1
             },
             card : {
-              invalid : reasons.hasAny('charge.card.invalid')
+              invalid : [
+                'charge.card.invalid'
+              ].indexOf(reason) > -1
             }
           }
         })
