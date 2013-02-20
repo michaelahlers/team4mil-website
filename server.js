@@ -15,25 +15,10 @@ var server = express()
 server.configure(function () {
   server.set('port', process.env.PORT || 3000)
 
-//  server.set('views', __dirname + '/public')
-//  server.set('view engine', 'jade')
-
-//  server.use(express.favicon(__dirname + '/public/images/logos/team4mil_favicon.ico'))
-
   server.use(express.logger('dev'))
 
   server.use(express.bodyParser())
   server.use(express.methodOverride())
-
-//  server.use(express.cookieParser('your secret here'))
-//  server.use(express.session({
-//    secret : 'your secret here'
-//  }))
-
-//  /* TODO: Reconfigure to direct output elsewhere besides source. */
-//  server.use(require('less-middleware')({ src : __dirname + '/public' }))
-
-//  server.use(express.static(path.join(__dirname, '/public')))
 
   server.use('/', require('./clients/desktop').application)
 
@@ -51,13 +36,6 @@ server.configure('development', function () {
 server.configure('production', function () {
   server.use(express.errorHandler())
 })
-
-/*
- * User interface routes.
- */
-//server.get('/', routes.index)
-//server.get('/directives/:name', routes.directives)
-//server.get('/partials/:name', routes.partials)
 
 server.post('/contact', routes.contact.send)
 
