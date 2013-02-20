@@ -15,25 +15,27 @@ var server = express()
 server.configure(function () {
   server.set('port', process.env.PORT || 3000)
 
-  server.set('views', __dirname + '/public')
-  server.set('view engine', 'jade')
+//  server.set('views', __dirname + '/public')
+//  server.set('view engine', 'jade')
 
-  server.use(express.favicon(__dirname + '/public/images/logos/team4mil_favicon.ico'))
+//  server.use(express.favicon(__dirname + '/public/images/logos/team4mil_favicon.ico'))
 
   server.use(express.logger('dev'))
 
-  server.use(express.bodyParser())
-  server.use(express.methodOverride())
+//  server.use(express.bodyParser())
+//  server.use(express.methodOverride())
 
-  server.use(express.cookieParser('your secret here'))
-  server.use(express.session({
-    secret : 'your secret here'
-  }))
+//  server.use(express.cookieParser('your secret here'))
+//  server.use(express.session({
+//    secret : 'your secret here'
+//  }))
 
-  /* TODO: Reconfigure to direct output elsewhere besides source. */
-  server.use(require('less-middleware')({ src : __dirname + '/public' }))
+//  /* TODO: Reconfigure to direct output elsewhere besides source. */
+//  server.use(require('less-middleware')({ src : __dirname + '/public' }))
 
-  server.use(express.static(path.join(__dirname, '/public')))
+//  server.use(express.static(path.join(__dirname, '/public')))
+
+  server.use('/', require('./clients/desktop').application)
 
   server.use(Facebook.middleware({
     appId : '273576052771797',
@@ -53,31 +55,31 @@ server.configure('production', function () {
 /*
  * User interface routes.
  */
-server.get('/', routes.index)
-server.get('/directives/:name', routes.directives)
-server.get('/partials/:name', routes.partials)
+//server.get('/', routes.index)
+//server.get('/directives/:name', routes.directives)
+//server.get('/partials/:name', routes.partials)
 
 server.post('/contact', routes.contact.send)
 
 require('./services')(server)
 
-var build = function (callback) {
-  console.log('Building client...')
-
-  var requirejs = require('requirejs')
-    , config = require('./public/build')
-
-  config.baseUrl = __dirname + '/public'
-  config.out = __dirname + '/public/' + config.out
-
-  requirejs.optimize(config, function (result) {
-    if (result instanceof Error) {
-      callback(result)
-      return
-    }
-    callback()
-  })
-}
+//var build = function (callback) {
+//  console.log('Building client...')
+//
+//  var requirejs = require('requirejs')
+//    , config = require('./public/build')
+//
+//  config.baseUrl = __dirname + '/public'
+//  config.out = __dirname + '/public/' + config.out
+//
+//  requirejs.optimize(config, function (result) {
+//    if (result instanceof Error) {
+//      callback(result)
+//      return
+//    }
+//    callback()
+//  })
+//}
 
 var start = function () {
   http.createServer(server).listen(server.get('port'), function (foo) {
@@ -87,15 +89,15 @@ var start = function () {
 
 switch (process.env.NODE_ENV) {
 
-  case 'production':
-    build(function (err) {
-      if (err) {
-        console.log(err)
-        throw err
-      }
-      start()
-    })
-    break
+//  case 'production':
+//    build(function (err) {
+//      if (err) {
+//        console.log(err)
+//        throw err
+//      }
+//      start()
+//    })
+//    break
 
   default:
     start()
