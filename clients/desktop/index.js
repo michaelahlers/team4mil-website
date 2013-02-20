@@ -18,6 +18,28 @@ application.configure(function () {
   application.use(express.static(path.join(__dirname, '/public')))
 })
 
+application.configure('production', function () {
+
+  /* TODO: Either make this block or publish a promise. */
+
+  console.log('Building desktop web client...')
+
+  var requirejs = require('requirejs')
+    , config = require('./public/build')
+
+  config.baseUrl = __dirname + '/public'
+  config.out = __dirname + '/public/' + config.out
+
+  requirejs.optimize(config, function (result) {
+    if (result instanceof Error) {
+      console.log(result)
+      return
+    }
+    console.log('Desktop web build completed.')
+  })
+
+})
+
 application.get('/', function (req, res) {
   res.render('index')
 })
