@@ -18,7 +18,7 @@ server.configure(function () {
   server.set('views', __dirname + '/public')
   server.set('view engine', 'jade')
 
-  server.use(express.favicon())
+  server.use(express.favicon(__dirname + '/public/images/logos/team4mil_favicon.ico'))
 
   server.use(express.logger('dev'))
 
