@@ -2,6 +2,7 @@
 'use strict'
 
 var mailer = require('../../mailer')
+  , util = require('util')
 
 var transport = mailer.transport
 
