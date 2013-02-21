@@ -35,33 +35,20 @@ server.configure('production', function () {
 })
 
 
-var startServices = Q.all([
+var startApplications = Q.allResolved([
 
   require('./services').then(function (services) {
     server.use('/services', services)
-  })
-
-])
-
-var startClients = Q.all([
-
-  require('./clients/desktop').then(function (application) {
-    server.use('/', application)
   }),
 
-  require('./clients/mobile').then(function (application) {
-    server.use('/mobile', application)
+  require('./clients').then(function (clients) {
+    server.use('/clients', clients)
   })
 
 ])
 
-var startServer = Q.fcall(function () {
+startApplications.then(function () {
   http.createServer(server).listen(server.get('port'), function () {
     console.log('Express server listening on port ' + server.get('port') + '.')
   })
 })
-
-Q.all([
-  startServices,
-  startClients
-]).then(startServer)
