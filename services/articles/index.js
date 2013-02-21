@@ -10,18 +10,25 @@ articles.configure(function () {
   /* Empty for now. */
 })
 
-
-var getVersion0 = require('./version0')
-  , getLatest = getVersion0
-
 module.exports = Q.all([
 
-  getVersion0.then(function (version0) {
+  require('./version0').then(function (version0) {
     articles.use('/0', version0)
   }),
 
-  getLatest.then(function (latest) {
+  require('./version0').then(function (latest) {
     articles.use('/', latest)
   })
 
-])
+]).then(
+
+  function () {
+    console.info('services-articles', 'available')
+    return articles
+  },
+
+  function (reason) {
+    console.error('services-articles', 'unavailable', reason)
+  }
+
+)

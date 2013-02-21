@@ -1,18 +1,8 @@
 /*jshint node:true*/
 'use strict'
 
-//var articles = require('./articles')
-//  , stripe = require('./stripe')
-//module.exports = function (connect) {
-//  articles(connect)
-//  stripe(connect)
-//}
-
-
 var express = require('express')
   , Q = require('q')
-
-var getArticles = require('./articles')
 
 var services = express()
 
@@ -22,8 +12,19 @@ services.configure(function () {
 
 module.exports = Q.all([
 
-  getArticles.then(function (articles) {
-    articles.use('/articles', articles)
+  require('./articles').then(function (articles) {
+    services.use('/articles', articles)
   })
 
-])
+]).then(
+
+  function () {
+    console.info('services', 'available')
+    return services
+  },
+
+  function (reason) {
+    console.error('services', 'unavailable', reason)
+  }
+
+)

@@ -23,6 +23,6 @@ service.get('/sponsorship', sponsorship.get)
 service.get('/contact', contact.get)
 
 module.exports = Q.fcall(function () {
-  /* No other asynchronous calls at the moment. */
+  console.info('services-articles-version0', 'available')
   return service
 })
