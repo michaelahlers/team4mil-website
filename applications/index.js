@@ -14,40 +14,40 @@
 var express = require('express')
   , Q = require('q')
 
-var clients = express()
+var applications = express()
 
-clients.configure(function () {
-  clients.enable('strict routing')
+applications.configure(function () {
+  applications.enable('strict routing')
 })
 
 module.exports = Q.all([
 
   require('./desktop').then(function (desktop) {
 
-    clients.get('/desktop', function (req, res) {
+    applications.get('/desktop', function (req, res) {
       res.redirect('desktop/')
     })
-    clients.use('/desktop/', desktop)
+    applications.use('/desktop/', desktop)
 
   }),
 
   require('./mobile').then(function (articles) {
 
-    clients.get('/mobile', function (req, res) {
+    applications.get('/mobile', function (req, res) {
       res.redirect('mobile/')
     })
-    clients.use('/mobile/', articles)
+    applications.use('/mobile/', articles)
   })
 
 ]).then(
 
   function () {
-    console.info('clients', 'available')
-    return clients
+    console.info('applications', 'available')
+    return applications
   },
 
   function (reason) {
-    console.error('clients', 'unavailable', reason)
+    console.error('applications', 'unavailable', reason)
   }
 
 )

@@ -35,8 +35,8 @@ var startApplications = Q.allResolved([
     server.use('/services', services)
   }),
 
-  require('./clients').then(function (clients) {
-    server.use('/clients', clients)
+  require('./applications').then(function (applications) {
+    server.use('/applications', applications)
   })
 
 ])
