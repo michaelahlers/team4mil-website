@@ -5,9 +5,10 @@
   "private" : true,
   "dependencies" : {
     "async" : "*",
+    "ejs" : "0.8.x",
     "express" : "3.x",
     "facebook-node-sdk" : "0.2.x",
-    "futures" : ">=2.1.0",
+    "futures" : "2.1.x",
     "jade" : "*",
     "mailgun" : "0.4.x",
     "less-middleware" : "0.1.x",

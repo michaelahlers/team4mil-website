@@ -18,12 +18,12 @@ html(lang="en")
     script(type='text/javascript', src='//html5shim.googlecode.com/svn/trunk/html5.js')
 
     if ('production' == process.env.NODE_ENV)
-      script(type='text/javascript', data-main='index.production', src='../lib/require-2.1.4.min.js')
+      script(type='text/javascript', data-main='index.production', src='lib/require-2.1.4.min.js')
     else
       script(type='text/javascript', src='build.js')
       script(type='text/javascript')
         var require = window.build
-      script(type='text/javascript', data-main='index', src='../lib/require-2.1.4.min.js')
+      script(type='text/javascript', data-main='index', src='lib/require-2.1.4.min.js')
 
   body
     div(class='loading', ng-controller='Loading', ng-show='visible')

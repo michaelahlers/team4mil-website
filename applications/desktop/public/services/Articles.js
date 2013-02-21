@@ -17,10 +17,10 @@ define([
 
         var deferred = cache[name] = (cache[name] || $q.defer())
 
-        $resource('/articles/0/:name').get({name : name}, function (result) {
+        $resource('/services/articles/0/:name').get({name : name}, function (result) {
           /* Helpful for testing. */
           //$timeout(function () {
-            deferred.resolve(result)
+          deferred.resolve(result)
           //}, 2000)
         })
 

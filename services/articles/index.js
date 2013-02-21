@@ -1,19 +1,34 @@
 /*jshint node:true*/
 'use strict'
 
-var version0 = require('./version0')
-  , latest = version0
+var express = require('express')
+  , Q = require('q')
 
-module.exports = function (connect) {
+var articles = express()
 
-  connect.get('/articles/mission', latest.mission.get)
-  connect.get('/articles/teams', latest.teams.get)
-  connect.get('/articles/sponsorship', latest.sponsorship.get)
-  connect.get('/articles/contact', latest.contact.get)
+articles.configure(function () {
+  /* Empty for now. */
+})
 
-  connect.get('/articles/0/mission', version0.mission.get)
-  connect.get('/articles/0/teams', version0.teams.get)
-  connect.get('/articles/0/sponsorship', version0.sponsorship.get)
-  connect.get('/articles/0/contact', version0.contact.get)
+module.exports = Q.all([
 
-}
+  require('./version0').then(function (version0) {
+    articles.use('/0', version0)
+  }),
+
+  require('./version0').then(function (latest) {
+    articles.use('/', latest)
+  })
+
+]).then(
+
+  function () {
+    console.info('services-articles', 'available')
+    return articles
+  },
+
+  function (reason) {
+    console.error('services-articles', 'unavailable', reason)
+  }
+
+)
