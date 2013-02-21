@@ -16,6 +16,7 @@ application.configure(function () {
   application.use(express.favicon(__dirname + '/public/images/logos/team4mil_favicon.ico'))
   application.use(require('less-middleware')({ src : __dirname + '/public' }))
   application.use(express.static(path.join(__dirname, '/public')))
+  application.enable('strict routing')
 })
 
 var getBuild = function () {
@@ -49,7 +50,6 @@ var getBuild = function () {
 
   return deferred.promise
 }
-
 
 application.get('/', function (req, res) {
   res.render('index')
