@@ -9,6 +9,7 @@ exports.get = function (req, res) {
 
   var toId = function (name) {
     return name
+      .trim()
       .replace(/[“”]/g, '')
       .replace(/[\s]/g, '-')
       .toLowerCase()
@@ -16,6 +17,7 @@ exports.get = function (req, res) {
 
   var toMailAddress = function (name) {
     return name
+      .trim()
       .replace(/[“”]/g, '')
       .replace(/[\s]/g, '.')
       .toLowerCase() + '@team4mil.org'
