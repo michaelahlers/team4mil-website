@@ -34,7 +34,10 @@ server.configure('production', function () {
   server.use(express.errorHandler())
 })
 
-require('./services')(server)
+
+var startServices = require('./services').then(function (services) {
+  server.use('/services', services)
+})
 
 var startClients = Q.allResolved([
 
@@ -48,8 +51,12 @@ var startClients = Q.allResolved([
 
 ])
 
-startClients.then(function () {
+var startServer = Q.fcall(function () {
   http.createServer(server).listen(server.get('port'), function (foo) {
     console.log('Express server listening on port ' + server.get('port') + '.')
   })
 })
+
+Q.fcall(startServices)
+  .then(startClients)
+  .then(startServer)
