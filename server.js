@@ -28,21 +28,34 @@ server.configure('production', function () {
   server.use(express.errorHandler())
 })
 
+var startServices = require('./services').then(function (services) {
+  server.use('/services', services)
+})
+
 
 var startApplications = Q.allResolved([
 
-  require('./services').then(function (services) {
-    server.use('/services', services)
-  }),
-
   require('./applications').then(function (applications) {
     server.use('/applications', applications)
+  }),
+
+  require('./applications/desktop').then(function (desktop) {
+    server.use('/', desktop)
+  }),
+
+  require('./applications/mobile').then(function (mobile) {
+    server.use('/mobile', mobile)
   })
 
 ])
 
-startApplications.then(function () {
-  http.createServer(server).listen(server.get('port'), function () {
-    console.log('Express server listening on port ' + server.get('port') + '.')
+Q.allResolved([
+
+  startServices,
+  startApplications
+])
+  .then(function () {
+    http.createServer(server).listen(server.get('port'), function () {
+      console.log('Express server listening on port ' + server.get('port') + '.')
+    })
   })
-})
