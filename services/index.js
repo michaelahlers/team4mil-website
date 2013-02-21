@@ -14,6 +14,10 @@ module.exports = Q.all([
 
   require('./articles').then(function (articles) {
     services.use('/articles', articles)
+  }),
+
+  require('./stripe').then(function (stripe) {
+    services.use('/stripe', stripe)
   })
 
 ]).then(

@@ -1,21 +1,34 @@
 /*jshint node:true*/
 'use strict'
 
-/* Visit https://github.com/abh/node-stripe for the Node Stripe API documentation.
- * Also see https://stripe.com/docs/api for the Stripe REST API guide. */
+var express = require('express')
+  , Q = require('q')
 
-var environment = require('../../environment')
-  , stripe = require('stripe')(environment.STRIPE_SECRET_KEY)
+var stripe = express()
 
-var version0 = require('./version0')(stripe)
-  , latest = version0
+stripe.configure(function () {
+  /* Empty for now. */
+})
 
-module.exports = function (connect) {
+module.exports = Q.all([
 
-  connect.get('/stripe', latest.status)
-  connect.post('/stripe/charges', latest.charges.create)
+  require('./version0').then(function (version0) {
+    stripe.use('/0', version0)
+  }),
 
-  connect.get('/stripe/0', version0.status)
-  connect.post('/stripe/0/charges', version0.charges.create)
+  require('./version0').then(function (latest) {
+    stripe.use('/', latest)
+  })
 
-}
+]).then(
+
+  function () {
+    console.info('services-stripe', 'available')
+    return stripe
+  },
+
+  function (reason) {
+    console.error('services-stripe', 'unavailable', reason)
+  }
+
+)
