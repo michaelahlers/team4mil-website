@@ -2,6 +2,7 @@
 'use strict'
 
 var express = require('express')
+  , Facebook = require('facebook-node-sdk')
   , path = require('path')
   , Q = require('q')
 
@@ -14,6 +15,12 @@ var service = express()
 
 service.configure(function () {
   /* Empty for now. */
+
+  service.use(Facebook.middleware({
+    appId : '273576052771797',
+    secret : '666835a394317bd1bc070afcf00c6702'
+  }))
+
 })
 
 service.get('/mission', mission.get)
