@@ -33,12 +33,7 @@ div(class='container-fluid body-sponsorship', ng-show='"contributors" == view')
 div(class='container-fluid body-sponsorship', ng-show='"opportunities" == view')
   div(class='row-fluid')
     div(class='offset1 span10')
-      p(class='t4m-summary')
-        | Team 4Mil needs your help to significantly grow our innovative cycling rehabilitation programs for wounded warriors. Making a significant charitable
-        | donation creates a visible partnership that honors our military men and women. Our expanded support base within military and cycling communities
-        | offer unique opportunities to create brand association with an outstanding organization that appreciates the personal nature of giving support to a
-        | cause. The 2013 RAAM event is just around the corner and now is the time to start planning your custom sponsorship package to help us link your
-        | company message with the well known mission of Team 4Mil.
+      include sponsorship/opportunities/summary.html
 
   div(class='row-fluid')
     div(class='span3')
