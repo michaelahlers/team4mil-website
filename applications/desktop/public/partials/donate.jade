@@ -17,8 +17,9 @@ div(class='container-fluid body-donate')
   div(class='row-fluid')
     div(class='offset1 span5')
       h3 Make an Online Donation&nbsp;
-        i(class='icon-lock')
       p(class='help-block')
+        a(href='https://stripe.com/gallery', target='_blank', class='span3 pull-right')
+          img(src='images/logos/stripe_119x26.png')
         | The information you provide here will be handled securely, and
         | processed by a trusted credit card processing agency.
 
@@ -26,9 +27,8 @@ div(class='container-fluid body-donate')
         p(class='help-block')
           span(class='lead')
             strong First
-            | , your name and e-mail address.
+            | , your contact information.
           br
-          span(class='muted') Don't worry, we will <em>never</em> share your personal information.
 
         div(class='alert', ng-show='donationForm.donorName.$invalid || donationForm.donorMail.$invalid')
           i(class='icon-exclamation-sign')
