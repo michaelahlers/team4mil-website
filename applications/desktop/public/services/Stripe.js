@@ -29,7 +29,7 @@ define([
         var getStatus = function () {
           var deferred = $q.defer()
 
-          $http.get('/stripe')
+          $http.get('/services/stripe')
             .success(function (data, status) {
               deferred.resolve(data)
             })
@@ -126,7 +126,7 @@ define([
 
             /* Resolved. To token was received. */
             function (token) {
-              $http.post('/stripe/charges',
+              $http.post('/services/stripe/charges',
                 {
                   payer : {
                     name : charge.payer.name,
