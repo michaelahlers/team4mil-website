@@ -1,0 +1,41 @@
+doctype 5
+//if IE 7
+  html(class="ie7 ie", lang="en")
+//if IE 8
+  html(class="ie8 ie", lang="en")
+//if IE 9
+  html(class="ie9 ie", lang="en")
+// [if !IE ] <!
+html(lang="en")
+  // <![endif]
+
+  head
+    meta(http-equiv='X-UA-Compatible', content='chrome=1')
+
+    title Team 4Mil
+    link(type='text/css', media='screen', rel='stylesheet', href='index.css')
+
+    script(type='text/javascript', src='//html5shim.googlecode.com/svn/trunk/html5.js')
+
+    if ('production' == process.env.NODE_ENV)
+      script(type='text/javascript', data-main='index.production', src='lib/require-2.1.4.min.js')
+    else
+      script(type='text/javascript', src='build.js')
+      script(type='text/javascript')
+        var require = window.build
+      script(type='text/javascript', data-main='index', src='lib/require-2.1.4.min.js')
+
+  body
+    div(class='loading', ng-controller='Loading', ng-show='visible')
+      div(class='loading-container')
+        div(class='loading-inner')
+          i(class='icon-spinner icon-spin')
+          | &nbsp;Please wait&hellip;
+
+    header(ng-cloak, ng-controller='Header', ng-show='visible')
+      include header.jade
+
+    article(ng-cloak, ng-view)
+
+    footer(ng-cloak, ng-controller='Footer', ng-show='visible')
+      include footer.jade

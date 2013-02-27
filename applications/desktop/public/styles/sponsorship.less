@@ -1,0 +1,34 @@
+@import-once
+'../lib/chinstrap'
+;
+@import-once
+'variables'
+;
+
+html.ie8 .hero-sponsorship {
+  -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.htc');
+}
+
+.hero-sponsorship {
+  background-image: url('images/backgrounds/woundedwarriors-raam-finish_1022x681.jpeg');
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+
+  h1 {
+    color: @white;
+    margin-top: 400px;
+    margin-bottom: @gridGutterWidth;
+  }
+}
+
+.body-sponsorship {
+  background: @white;
+  padding-top: @gridGutterWidth;
+  padding-bottom: @gridGutterWidth;
+
+  .t4m-summary {
+  /* From Bootstrap type.less, blockquote, p. */
+    #font > .shorthand(16px,300,@baseLineHeight * 1.25);
+  }
+}
