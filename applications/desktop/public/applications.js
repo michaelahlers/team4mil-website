@@ -1,5 +1,9 @@
 'use strict'
 
+define('google-analytics', ['//google-analytics.com/ga.js'], function () {
+  return window._gaq
+})
+
 define(
   [
     'angular',

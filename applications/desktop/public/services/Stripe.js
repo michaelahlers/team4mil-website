@@ -3,6 +3,7 @@
 /**
  * Visit https://stripe.com/docs/stripe.js to read more about the Stripe JavaScript API.
  */
+/* TODO: Remove function arguments. */
 define('Stripe', ['noext!https://js.stripe.com/v1/'], function (stripe, status) {
   return window.Stripe
 })
