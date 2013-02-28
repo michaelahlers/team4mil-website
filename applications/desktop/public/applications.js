@@ -3,6 +3,7 @@
 define(
   [
     'angular',
+    'google-analytics',
 
     'services/Articles',
 
@@ -25,7 +26,7 @@ define(
     'angular-bootstrap',
     'angular-ui-bootstrap'
   ],
-  function (angular) {
+  function (angular, gaq) {
 
     var module = angular.module('app', [ 'services', 'controllers', 'directives', 'filters', 'bootstrap', 'ui.bootstrap' ])
 
@@ -94,7 +95,17 @@ define(
 
     })
 
-    module.run(function ($rootScope, $log) {
+    module.run(function ($rootScope, $location, $log) {
+
+      /* Site-wide analytics tracking. */
+      gaq.push(['_setAccount', 'UA-38900711-2'])
+      var trackView = function () {
+        $log.info('Logging ' + $location.url())
+        gaq.push(['_trackPageview', $location.url()])
+      }
+      $rootScope.$on('$viewContentLoaded', trackView)
+      $rootScope.$on('$routeUpdate', trackView)
+
     })
 
     return module
