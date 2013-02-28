@@ -34,9 +34,8 @@ html(lang="en")
 
     if('true' == process.env.BETA_FLAG)
       div(class='t4m-beta-program progress progress-warning progress-striped')
-        div(class='bar', style='width: 100%;')
-          a(href='https://bitbucket.org/michaelahlers/team-4mil-website/issues/new', target='_blank')
-           | Team 4Mil Public Beta&mdash;Please click here to report any issues.
+        a(class='bar', style='width: 100%;', href='https://bitbucket.org/michaelahlers/team-4mil-website/issues/new', target='_blank')
+         | Team 4Mil Public Beta&mdash;Please click here to report any issues.
 
     header(ng-cloak, ng-controller='Header', ng-show='visible')
       include header.jade
