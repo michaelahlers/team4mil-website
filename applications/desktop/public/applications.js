@@ -113,6 +113,10 @@ define(
       $rootScope.$on('$viewContentLoaded', trackView)
       $rootScope.$on('$routeUpdate', trackView)
 
+      $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+        $rootScope.controller = current && current.$route && current.$route.controller
+      })
+
     })
 
     return module
