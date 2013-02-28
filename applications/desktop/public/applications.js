@@ -102,7 +102,7 @@ define(
     module.run(function ($rootScope, $location, $log) {
 
       /* Site-wide analytics tracking. */
-      gaq.push(['_setAccount', 'UA-38900711-1'])
+      gaq.push(['_setAccount', 'UA-38900919-1'])
       gaq.push(['_setDomainName', 'team4mil.org'])
       var trackView = function () {
         $log.info('Logging ' + $location.url())
