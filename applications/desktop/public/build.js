@@ -23,7 +23,7 @@
       'angular-ui-bootstrap' : 'lib/ui-bootstrap-tpls-0.1.0',
       'async' : 'lib/async',
       'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
-      'google-analytics' : '//google-analytics.com/ga',
+      'google-analytics' : '//www.google-analytics.com/ga',
       'json' : 'lib/requirejs-plugins-master/src/json',
       'jquery' : 'lib/jquery-1.8.3',
       'jquery-gridster' : 'lib/gridster.js-master/dist/jquery.gridster.js',
