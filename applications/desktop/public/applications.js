@@ -104,6 +104,7 @@ define(
       /* Site-wide analytics tracking. */
       gaq.push(['_setAccount', 'UA-38900919-1'])
       gaq.push(['_setDomainName', 'team4mil.org'])
+      gaq.push(['_setAllowLinker', true])
       var trackView = function () {
         $log.info('Logging ' + $location.url())
         gaq.push(['_trackPageview', $location.url()])
