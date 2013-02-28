@@ -1,7 +1,11 @@
 'use strict'
 
 define('google-analytics', ['//google-analytics.com/ga.js'], function () {
-  return window._gaq
+  var gaq = window._gaq
+  gaq.push(['_setAccount', 'UA-38900919-1'])
+  gaq.push(['_setDomainName', 'team4mil.org'])
+  gaq.push(['_setAllowLinker', true])
+  return gaq
 })
 
 define(
@@ -102,9 +106,6 @@ define(
     module.run(function ($rootScope, $location, $log) {
 
       /* Site-wide analytics tracking. */
-      gaq.push(['_setAccount', 'UA-38900919-1'])
-      gaq.push(['_setDomainName', 'team4mil.org'])
-      gaq.push(['_setAllowLinker', true])
       var trackView = function () {
         $log.info('Logging ' + $location.url())
         gaq.push(['_trackPageview', $location.url()])
