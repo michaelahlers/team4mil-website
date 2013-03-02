@@ -101,10 +101,6 @@ define([
       reset()
     }
 
-    $scope.$on('$routeChangeSuccess', function () {
-      closeStatus()
-    })
-
     $scope.startDonation = function () {
       var amount = $scope.$eval('donation.amount')
 
