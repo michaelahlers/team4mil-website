@@ -191,6 +191,13 @@ div(id='modalStatus', class='modal fade', tabindex='-1')
   div(class='modal-header')
     h3 Donate
 
+  div(ng-show='status.excessive')
+    div(class='modal-body')
+      include donate/excessive-message.html
+
+    div(class='modal-footer')
+      button(class='btn', ng-click='cancelDonation()') Close
+
   div(ng-show='status.pending')
     div(class='modal-body')
       p

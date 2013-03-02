@@ -101,16 +101,33 @@ define([
       reset()
     }
 
-    $scope.startDonation = function () {
-      var number = $scope.$eval('donation.card.number').trim()
-      number = number.substring(number.length - 4)
+    $scope.$on('$routeChangeSuccess', function () {
+      closeStatus()
+    })
 
-      $scope.status = {
-        pending : true,
-        card : {
-          number : number
-        },
-        amount : $scope.$eval('donation.amount')
+    $scope.startDonation = function () {
+      var amount = $scope.$eval('donation.amount')
+
+      if (amount > 1000) {
+
+        $scope.status = {
+          excessive : true,
+          amount : amount
+        }
+
+      } else {
+
+        var number = $scope.$eval('donation.card.number').trim()
+        number = number.substring(number.length - 4)
+
+        $scope.status = {
+          pending : true,
+          card : {
+            number : number
+          },
+          amount : $scope.$eval('donation.amount')
+        }
+
       }
 
       openStatus()
