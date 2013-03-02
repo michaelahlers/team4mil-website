@@ -16,6 +16,12 @@ exports.create = function (req, res) {
     currency : req.body.currency,
     amount : req.body.amount
   }
+  if (charge.amount > (1000 * 100)) {
+    /* Restrict to sane amounts. */
+    res.json(500, {
+      reason : 'Charge amount greater than $1,000.00'
+    })
+  }
 
   var payer = {
     name : req.body.payer.name,
