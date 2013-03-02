@@ -91,6 +91,16 @@ header {
 
     .nav {
       font-size: @baseFontSize + 4px;
+      a {
+        text-shadow: @shadowDropSharp;
+      }
+
+      .active {
+        a {
+          .border-radius(@baseBorderRadius);
+          #translucent > .background(@black, 0.75);
+        }
+      }
     }
 
     .brand {
@@ -106,9 +116,8 @@ header {
       .box-shadow(@shadowDropStandard);
       background-image: url("images/backgrounds/USA-flag_isolated_500x335.png");
       background-position: -150px -75px;
-      background-repeat: no-repeat;
-      //background-color: black;
-      //#translucent > .background(@grayDarker, 0.5);
+      background-repeat: no-repeat; //background-color: black;
+    //#translucent > .background(@grayDarker, 0.5);
     }
   }
 }
