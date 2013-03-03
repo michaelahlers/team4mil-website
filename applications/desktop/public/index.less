@@ -74,63 +74,6 @@ body {
 @navbarHeight: 60px;
 @navbarTotalHeight: @navbarHeight + @navbarMarginTop + @navbarMarginBottom;
 
-html.ie8 .hero-contact {
-  .navbar-inner {
-    -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.htc');
-  }
-}
-
-@media (max-width: 640px) {
-  header {
-    .navbar {
-      position: relative;
-      //margin: 0;
-    }
-  }
-}
-
-header {
-  .navbar {
-    margin: @navbarMarginTop @navbarMarginRight @navbarMarginBottom @navbarMarginLeft;
-
-    .container-fluid {
-      margin-left: -@navbarMarginLeft;
-      margin-right: -@navbarMarginRight;
-    }
-
-    .nav {
-      font-size: @baseFontSize + 4px;
-      a {
-        text-shadow: @shadowDropSharp;
-      }
-
-      .active {
-        a {
-          .border-radius(@baseBorderRadius);
-          #translucent > .background(@black, 0.75);
-        }
-      }
-    }
-
-    .brand {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      img {
-        height: 40px;
-      }
-    }
-
-    .navbar-inner {
-      .border-radius(@baseBorderRadius);
-      .box-shadow(@shadowDropStandard);
-      background-image: url("images/backgrounds/USA-flag_isolated_500x335.png");
-      background-position: -150px -75px;
-      background-repeat: no-repeat; //background-color: black;
-    //#translucent > .background(@grayDarker, 0.5);
-    }
-  }
-}
-
 .hero {
   h1 {
     font-size: @baseFontSize * 3;
@@ -172,6 +115,10 @@ header {
     }
   }
 }
+
+@import-once
+'styles/header'
+;
 
 @import-once
 'styles/contact'
