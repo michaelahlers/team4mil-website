@@ -75,7 +75,7 @@ exports.get = function (req, res) {
                   id : toId(image.name),
                   name : image.name,
                   picture : { location : image.source},
-                  biography : getBiography(image.name).message.replace(/\<p\>\s*\<\/p\>/g, '')
+                  biography : (getBiography(image.name).message||'').replace(/\<p\>\s*\<\/p\>/g, '')
                 }
               })
             },
@@ -88,7 +88,7 @@ exports.get = function (req, res) {
                   id : toId(image.name),
                   name : image.name,
                   picture : { location : image.source},
-                  biography : getBiography(image.name).message.replace(/\<p\>\s*\<\/p\>/g, '')
+                  biography : (getBiography(image.name).message||'').replace(/\<p\>\s*\<\/p\>/g, '')
                 }
               })
             }
