@@ -53,41 +53,39 @@ exports.get = function (req, res) {
         return note || {}
       }
 
-      res.json(
-        {
-          _version : 0,
-          title : results[0].subject,
-          summary : results[0].message,
-          teams : [
-            {
-              id : toId(results[1].name),
-              title : results[1].name,
-              summary : results[1].description,
-              members : results[2].data.map(function (image) {
-                return {
-                  id : toId(image.name),
-                  name : image.name,
-                  picture : { location : image.source},
-                  biography : (getBiography(image.name).message||'').replace(/\<p\>\s*\<\/p\>/g, '')
-                }
-              })
-            },
-            {
-              id : toId(results[3].name),
-              title : results[3].name,
-              summary : results[3].description,
-              members : results[4].data.map(function (image) {
-                return {
-                  id : toId(image.name),
-                  name : image.name,
-                  picture : { location : image.source},
-                  biography : (getBiography(image.name).message||'').replace(/\<p\>\s*\<\/p\>/g, '')
-                }
-              })
-            }
-          ]
-        }
-      )
+      res.json({
+        _version : 0,
+        title : results[0].subject,
+        summary : results[0].message,
+        teams : [
+          {
+            id : toId(results[1].name),
+            title : results[1].name,
+            summary : results[1].description,
+            members : results[2].data.map(function (image) {
+              return {
+                id : toId(image.name),
+                name : image.name,
+                picture : { location : image.source},
+                biography : (getBiography(image.name).message || '').replace(/\<p\>\s*\<\/p\>/g, '')
+              }
+            })
+          },
+          {
+            id : toId(results[3].name),
+            title : results[3].name,
+            summary : results[3].description,
+            members : results[4].data.map(function (image) {
+              return {
+                id : toId(image.name),
+                name : image.name,
+                picture : { location : image.source},
+                biography : (getBiography(image.name).message || '').replace(/\<p\>\s*\<\/p\>/g, '')
+              }
+            })
+          }
+        ]
+      })
 
     }
   )
