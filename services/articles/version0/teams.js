@@ -53,13 +53,6 @@ exports.get = function (req, res) {
         return note || {}
       }
 
-      var toId = function (name) {
-        return name
-          .replace(/[“”]/g, '')
-          .replace(/[\s]/g, '-')
-          .toLowerCase()
-      }
-
       res.json(
         {
           _version : 0,
