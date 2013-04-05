@@ -16,7 +16,8 @@ analytics0.get('/', function (req, res) {
     google : {
       analytics : {
         tracking : {
-          id : environment.GOOGLE_ANALYTICS_TRACKING_ID
+          id : environment.GOOGLE_ANALYTICS_TRACKING_ID,
+          domainName : environment.GOOGLE_ANALYTICS_TRACKING_DOMAIN_NAME
         }
       }
     }
