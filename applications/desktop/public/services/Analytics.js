@@ -41,6 +41,7 @@ define([
               gaq.push(['_setAccount', tracking.id ])
               gaq.push(['_setDomainName', tracking.name ])
               gaq.push(['_setAllowLinker', true])
+              gaq.push(['_trackPageview', true])
 
               deferred.resolve(gaq)
             } else {
