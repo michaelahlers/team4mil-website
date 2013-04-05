@@ -1,9 +1,7 @@
-@import-once
-'lib/chinstrap'
-;
-@import-once
-'styles/variables'
-;
+@import-once 'lib/bootstrap-2.3.1/less/bootstrap';
+@import-once 'lib/Font-Awesome-3.0.2/less/font-awesome.less';
+
+@FontAwesomePath: 'lib/Font-Awesome-3.0.2/font';
 
 html {
   overflow-y: scroll;
@@ -82,7 +80,7 @@ body {
 
   .hero-summary {
     padding: @gridGutterWidth; // font-size: @baseFontSize * 1.25;
-  // line-height: @baseLineHeight * 1.25;
+    // line-height: @baseLineHeight * 1.25;
     color: white;
     text-shadow: @shadowDropSharp;
     #translucent > .background(@black, .75);
@@ -116,39 +114,25 @@ body {
   }
 }
 
-@import-once
-'styles/header'
-;
+@import-once 'styles/header';
 
-@import-once
-'styles/contact'
-;
+@import-once 'styles/contact';
 
-@import-once
-'styles/donate'
-;
+@import-once 'styles/donate';
 
-@import-once
-'styles/mission'
-;
+@import-once 'styles/mission';
 
-@import-once
-'styles/sponsorship'
-;
+@import-once 'styles/sponsorship';
 
-@import-once
-'styles/teams'
-;
+@import-once 'styles/teams';
 
-@import-once
-'styles/footer'
-;
+@import-once 'styles/footer';
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   visibility: hidden;
 }
 
-/* A suggestion from http://stackoverflow.com/questions/3975769/disable-webkits-spin-buttons-on-input-type-number. Thank you, Stack Overflow! */
+  /* A suggestion from http://stackoverflow.com/questions/3975769/disable-webkits-spin-buttons-on-input-type-number. Thank you, Stack Overflow! */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
