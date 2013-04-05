@@ -97,7 +97,7 @@ define(
     })
 
     module.run(function ($rootScope, Analytics) {
-      $rootScope.$on('$viewContentLoaded', Analytics.trackView)
+      // $rootScope.$on('$viewContentLoaded', Analytics.trackView)
       $rootScope.$on('$routeUpdate', Analytics.trackView)
 
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
