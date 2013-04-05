@@ -87,7 +87,7 @@ define([
             sender : data.sender
           }
 
-          $scope.reset()
+          $scope.reset(true)
           $timeout(closeStatus, 5000)
 
         })
