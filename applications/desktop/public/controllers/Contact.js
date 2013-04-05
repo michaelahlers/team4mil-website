@@ -10,38 +10,41 @@ define([
   controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $routeParams, $http, $timeout, content) {
     $scope.content = content
 
-    var selectRecipient = $scope.selectRecipient = function (id) {
-      $scope.recipientId = angular.isString(id) ? id : $routeParams.recipient
-    }
-
-    $scope.$watch('content.board.members', function (members) {
-      var recipients = $scope.recipients = [
+    var updateRecipients = function (members) {
+      $scope.recipients = [
         {
           id : 'anybody',
           name : 'Team 4Mil',
           mail : 'contact@team4mil.org'
         }
       ].concat(members || [])
+    }
 
-      $scope.recipientId = $scope.recipientId || recipients[0].id
-    })
+    updateRecipients()
 
-    $scope.$on('$routeChangeSuccess', selectRecipient)
+    $scope.$watch('content.board.members', updateRecipients)
+
+    var selectRecipient = function () {
+      $scope.recipientId = $routeParams.recipient || $scope.$eval('recipients[0].id')
+    }
+
     $scope.$on('$routeUpdate', selectRecipient)
 
     var reset = $scope.reset = function () {
-      $scope.recipientId = $scope.$eval('recipients[0].id')
+      selectRecipient()
       $scope.sender = {}
-      $scope.subject = ''
-      $scope.body = ''
+      $scope.subject = $routeParams.subject || ''
+      $scope.body = $routeParams.body || ''
     }
-
-    reset()
 
     $scope.$watch('recipientId', function (id) {
       $scope.recipient = ($.grep($scope.recipients || [], function (recipient) {
         return recipient.id == id
       })[0] || $scope.recipients[0])
+    })
+
+    $scope.$on('$routeChangeSuccess', function () {
+      reset()
     })
 
     var openStatus = function () {

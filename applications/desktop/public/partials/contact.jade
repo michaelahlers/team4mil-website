@@ -25,7 +25,7 @@ section(class='body-contact container-fluid')
       a(id='{{member.id}}'
       , class='media thumbnail t4m-member'
       , ng-repeat='member in content.board.members'
-      , ng-class='{selected:member.id == recipientId || recipients[0].id == recipientId}'
+      , ng-class='{selected:member.id == recipientId || recipient == recipients[0]}'
       , ng-href='#/contact?recipient={{member.id}}')
         img(class='pull-left span2', ng-src='{{member.picture.location}}')
         span(class='lead')
