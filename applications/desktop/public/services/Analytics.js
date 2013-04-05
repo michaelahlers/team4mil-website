@@ -31,7 +31,7 @@ define([
           return deferred.promise
         }
 
-        var getAPI = function () {
+        var getQueue = function () {
           var deferred = $q.defer()
 
           getStatus().then(function (status) {
@@ -52,12 +52,17 @@ define([
           return deferred.promise
         }
 
+        var queue = getQueue()
+
+        var trackPageView = function () {
+          queue.then(function (gaq) {
+            $log.log('Tracking page view.')
+            gaq.push(['_trackPageview', $location.url()])
+          })
+        }
+
         return {
-          trackView : function () {
-            getAPI().then(function (gaq) {
-              gaq.push(['_trackPageview', $location.url()])
-            })
-          }
+          trackPageView : trackPageView
         }
 
       }
