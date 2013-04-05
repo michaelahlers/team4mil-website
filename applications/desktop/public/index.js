@@ -3,8 +3,6 @@ require([
   'jquery',
   'angular',
 
-  'bootstrap',
-
   /* The application itself. */
   'applications'
 
