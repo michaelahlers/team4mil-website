@@ -56,7 +56,6 @@ define([
 
         var trackPageView = function () {
           queue.then(function (gaq) {
-            $log.log('Tracking page view.')
             gaq.push(['_trackPageview', $location.url()])
           })
         }
