@@ -21,13 +21,15 @@
       'angular-resource' : 'lib/angular-1.1.2/angular-resource',
       'angular-sanitize' : 'lib/angular-1.1.2/angular-sanitize',
       'angular-ui-bootstrap' : 'lib/ui-bootstrap-tpls-0.1.0',
-      'async' : 'lib/async',
       'bootstrap' : 'lib/bootstrap-2.2.2/js/bootstrap',
-      'json' : 'lib/requirejs-plugins-master/src/json',
       'jquery' : 'lib/jquery-1.8.3',
       'jquery-gridster' : 'lib/gridster.js-master/dist/jquery.gridster.js',
       'jquery-imagesLoaded' : 'lib/jquery.imagesloaded',
       'jquery-smooth-scroll' : 'lib/jquery-smooth-scroll-1.4.9/jquery.smooth-scroll',
+
+      'async' : 'lib/requirejs-plugins-master/src/async',
+      'depend' : 'lib/requirejs-plugins-master/src/depend',
+      'json' : 'lib/requirejs-plugins-master/src/json',
       'noext' : 'lib/requirejs-plugins-master/src/noext',
       'text' : 'lib/text-2.0.5'
     },
