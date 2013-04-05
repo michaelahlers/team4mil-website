@@ -1,9 +1,5 @@
-@import-once
-'../lib/chinstrap'
-;
-@import-once
-'variables'
-;
+@import-once '../lib/chinstrap';
+@import-once 'variables';
 
 html.ie8 .hero-sponsorship {
   -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.htc');
@@ -28,50 +24,74 @@ html.ie8 .hero-sponsorship {
   padding-bottom: @gridGutterWidth;
 
   .t4m-summary {
-  /* From Bootstrap type.less, blockquote, p. */
-   // #font > .shorthand(16px,300,@baseLineHeight * 1.25);
+    /* From Bootstrap type.less, blockquote, p. */
+    // #font > .shorthand(16px,300,@baseLineHeight * 1.25);
   }
 
+  @titleBaseColor: #6699CC;
   .t4m-sponsor-title {
-  /* http://99colors.net/name/blue-gray */
-    @baseColor: #6699CC;
-    @transparentColor: fade(@baseColor, 20%);
+    /* http://99colors.net/name/blue-gray */
+    @transparentColor: fade(@titleBaseColor, 20%);
     @startColor: @transparentColor;
     @midColor: lighten(@transparentColor, 50%);
     @endColor: darken(@transparentColor, 10%);
     #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
-    border-color: @baseColor;
+    border-color: @titleBaseColor;
+    color: gray;
   }
 
+  .t4m-sponsor-title:hover {
+    color: black;
+    .box-shadow(0 0 20px @titleBaseColor);
+  }
+
+  @goldBaseColor: gold;
   .t4m-sponsor-gold {
-  /* http://99colors.net/name/gold. */
-    @baseColor: gold;
-    @transparentColor: fade(@baseColor, 20%);
+    /* http://99colors.net/name/gold. */
+    @transparentColor: fade(@goldBaseColor, 20%);
     @startColor: @transparentColor;
     @midColor: lighten(@transparentColor, 50%);
     @endColor: darken(@transparentColor, 10%);
     #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
-    border-color: @baseColor;
+    border-color: @goldBaseColor;
+    color: gray;
   }
 
+  .t4m-sponsor-gold:hover {
+    color: black;
+    .box-shadow(0 0 20px @goldBaseColor);
+  }
+
+  @silverBaseColor: silver;
   .t4m-sponsor-silver {
-    @baseColor: silver;
-    @transparentColor: fade(@baseColor, 20%);
+    @transparentColor: fade(@silverBaseColor, 20%);
     @startColor: @transparentColor;
     @midColor: lighten(@transparentColor, 50%);
     @endColor: darken(@transparentColor, 10%);
     #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
-    border-color: @baseColor;
+    border-color: @silverBaseColor;
+    color: gray;
   }
 
+  .t4m-sponsor-silver:hover {
+    color: black;
+    .box-shadow(0 0 20px @silverBaseColor);
+  }
+
+  @bronzeBaseColor: #CD7F32;
   .t4m-sponsor-bronze {
-  /*  http://99colors.net/name/bronze. */
-    @baseColor: #CD7F32;
-    @transparentColor: fade(@baseColor, 20%);
+    /*  http://99colors.net/name/bronze. */
+    @transparentColor: fade(@bronzeBaseColor, 20%);
     @startColor: @transparentColor;
     @midColor: lighten(@transparentColor, 50%);
     @endColor: darken(@transparentColor, 10%);
     #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
-    border-color: @baseColor;
+    border-color: @bronzeBaseColor;
+    color: gray;
+  }
+
+  .t4m-sponsor-bronze:hover {
+    color: black;
+    .box-shadow(0 0 20px @bronzeBaseColor);
   }
 }
