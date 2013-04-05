@@ -41,9 +41,7 @@ exports.get = function (req, res) {
               name : sponsor.name.split('\n')[0],
               location : sponsor.name.split('\n')[1],
               description : sponsor.name.split('\n')[2],
-              source : sponsor.images.filter(function (image) {
-                return 480 == image.width
-              })[0].source
+              source : sponsor.images[1].source
             }
           }
         )
