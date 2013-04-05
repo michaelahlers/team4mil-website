@@ -2,9 +2,6 @@
 
 define('google-analytics', ['//google-analytics.com/ga.js'], function () {
   return window._gaq
-//  gaq.push(['_setAccount', 'UA-38900919-1'])
-//  gaq.push(['_setDomainName', 'team4mil.org'])
-//  gaq.push(['_setAllowLinker', true])
 })
 
 define([
@@ -13,7 +10,6 @@ define([
   'services',
   'google-analytics'
 ], function (angular, $, services, gaq) {
-
     services.factory('Analytics', function ($rootScope, $parse, $q, $http, $log, $location) {
 
         /**
@@ -38,8 +34,8 @@ define([
         var getAPI = function () {
           var deferred = $q.defer()
 
-          return getStatus().then(function (status) {
-            var tracking = $parse('status.google.analytics.tracking')(status)
+          getStatus().then(function (status) {
+            var tracking = $parse('google.analytics.tracking')(status)
 
             if (tracking.id && tracking.domainName) {
               gaq.push(['_setAccount', tracking.id ])
