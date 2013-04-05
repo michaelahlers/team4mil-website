@@ -52,9 +52,9 @@ define([
         }
 
         return {
-          trackView : function (location) {
+          trackView : function () {
             getAPI().then(function (gaq) {
-              gaq.push(['_trackPageview', location || $location.url()])
+              gaq.push(['_trackPageview', $location.url()])
             })
           }
         }
