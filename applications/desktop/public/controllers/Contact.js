@@ -7,7 +7,7 @@ define([
 
 ], function (controllers, $) {
 
-  controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $routeParams, $http, $timeout, content) {
+  controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $location, $routeParams, $http, $timeout, content) {
     $scope.content = content
 
     var selectRecipient = function () {
@@ -15,6 +15,9 @@ define([
         return $routeParams.recipient == recipient.id
       })[0] || $scope.recipients[0]
     }
+
+    $scope.$on('$routeUpdate', selectRecipient)
+    $scope.$on('$routeChangeSuccess', selectRecipient)
 
     var updateRecipients = function (members) {
       $scope.recipients = [
@@ -32,14 +35,17 @@ define([
 
     $scope.$watch('content.board.members', updateRecipients)
 
-    $scope.$on('$routeUpdate', selectRecipient)
-    $scope.$on('$routeChangeSuccess', selectRecipient)
+    var reset = $scope.reset = function (clearLocation) {
+      if (clearLocation) {
+        $location.search('recipient', null)
+      }
 
-    var reset = $scope.reset = function () {
       $scope.recipient = $scope.recipients[0]
       $scope.sender = {}
-      $scope.subject = $routeParams.subject || ''
-      $scope.body = $routeParams.body || ''
+      $scope.subject = $rootScope.$eval('contact.subject') || ''
+      $scope.body = $rootScope.$eval('contact.body') || ''
+
+      delete $rootScope.contact
     }
 
     reset()
