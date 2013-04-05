@@ -17,15 +17,15 @@ section(class='body-contact container-fluid')
         span(class='lead') <strong>First</strong>, chose who you would like to contact.
         br
         span(class='muted') You may optionally choose a specific recipient below.
-        span(class='muted', ng-show='recipients[0].id == recipientId')
+        span(class='muted', ng-show='recipient == recipients[0]')
           | &nbsp;(You've not chosen a specific person, so anyone who's available will answer your message.)
-        span(class='muted', ng-hide='recipients[0].id == recipientId')
+        span(class='muted', ng-hide='recipient == recipients[0]')
           | &nbsp;(You've chosen {{recipient.name}} to receive your message, but you can still pick someone else.)
 
       a(id='{{member.id}}'
       , class='media thumbnail t4m-member'
       , ng-repeat='member in content.board.members'
-      , ng-class='{selected:member.id == recipientId || recipient == recipients[0]}'
+      , ng-class='{selected:recipient.id == member.id || recipient == recipients[0]}'
       , ng-href='#/contact?recipient={{member.id}}')
         img(class='pull-left span2', ng-src='{{member.picture.location}}')
         span(class='lead')

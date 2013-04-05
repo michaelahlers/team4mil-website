@@ -10,6 +10,12 @@ define([
   controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $routeParams, $http, $timeout, content) {
     $scope.content = content
 
+    var selectRecipient = function () {
+      $scope.recipient = $.grep($scope.recipients || [], function (recipient) {
+        return $routeParams.recipient == recipient.id
+      })[0] || $scope.recipients[0]
+    }
+
     var updateRecipients = function (members) {
       $scope.recipients = [
         {
@@ -18,34 +24,25 @@ define([
           mail : 'contact@team4mil.org'
         }
       ].concat(members || [])
+
+      selectRecipient()
     }
 
     updateRecipients()
 
     $scope.$watch('content.board.members', updateRecipients)
 
-    var selectRecipient = function () {
-      $scope.recipientId = $routeParams.recipient || $scope.$eval('recipients[0].id')
-    }
-
     $scope.$on('$routeUpdate', selectRecipient)
+    $scope.$on('$routeChangeSuccess', selectRecipient)
 
     var reset = $scope.reset = function () {
-      selectRecipient()
+      $scope.recipient = $scope.recipients[0]
       $scope.sender = {}
       $scope.subject = $routeParams.subject || ''
       $scope.body = $routeParams.body || ''
     }
 
-    $scope.$watch('recipientId', function (id) {
-      $scope.recipient = ($.grep($scope.recipients || [], function (recipient) {
-        return recipient.id == id
-      })[0] || $scope.recipients[0])
-    })
-
-    $scope.$on('$routeChangeSuccess', function () {
-      reset()
-    })
+    reset()
 
     var openStatus = function () {
       $('#modalStatus').modal({
