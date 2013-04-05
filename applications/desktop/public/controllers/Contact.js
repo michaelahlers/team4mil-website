@@ -10,8 +10,8 @@ define([
   controllers.controller('Contact', function ($rootScope, $scope, $log, $route, $routeParams, $http, $timeout, content) {
     $scope.content = content
 
-    $scope.selectRecipient = function (id) {
-      $scope.recipientId = id
+    var selectRecipient = $scope.selectRecipient = function (id) {
+      $scope.recipientId = angular.isString(id) ? id : $routeParams.recipient
     }
 
     $scope.$watch('content.board.members', function (members) {
@@ -23,8 +23,11 @@ define([
         }
       ].concat(members || [])
 
-      $scope.recipientId = recipients[0].id
+      $scope.recipientId = $scope.recipientId || recipients[0].id
     })
+
+    $scope.$on('$routeChangeSuccess', selectRecipient)
+    $scope.$on('$routeUpdate', selectRecipient)
 
     var reset = $scope.reset = function () {
       $scope.recipientId = $scope.$eval('recipients[0].id')
@@ -36,9 +39,9 @@ define([
     reset()
 
     $scope.$watch('recipientId', function (id) {
-      $scope.recipient = $.grep($scope.recipients || [], function (recipient) {
+      $scope.recipient = ($.grep($scope.recipients || [], function (recipient) {
         return recipient.id == id
-      })[0]
+      })[0] || $scope.recipients[0])
     })
 
     var openStatus = function () {

@@ -89,6 +89,7 @@ define(
 
       $routeProvider.when('/contact', {
         templateUrl : 'partials/contact',
+        reloadOnSearch : false,
         controller : 'Contact',
         resolve : {
           content : function (Articles) {
