@@ -14,7 +14,7 @@ define([
   'google-analytics'
 ], function (angular, $, services, gaq) {
 
-    services.factory('Analytics', function ($rootScope, $parse, $q, $http, $rootScope, $log, $location) {
+    services.factory('Analytics', function ($rootScope, $parse, $q, $http, $log, $location) {
 
         /**
          * @return {promise} Promise providing the Analytics status object.
