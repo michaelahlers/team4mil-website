@@ -22,7 +22,6 @@
         <option name="HTML_ALIGN_TEXT" value="true" />
         <JSCodeStyleSettings>
           <option name="SPACE_BEFORE_PROPERTY_COLON" value="true" />
-          <option name="SPACE_AFTER_PROPERTY_COLON" value="true" />
         </JSCodeStyleSettings>
         <XML>
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />

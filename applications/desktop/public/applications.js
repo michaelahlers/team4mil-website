@@ -107,7 +107,6 @@ define(
 
       /* Site-wide analytics tracking. */
       var trackView = function () {
-        $log.info('Logging ' + $location.url())
         gaq.push(['_trackPageview', $location.url()])
       }
       $rootScope.$on('$viewContentLoaded', trackView)
