@@ -1,0 +1,101 @@
+@import-once '../lib/chinstrap';
+@import-once 'variables';
+
+html.ie8 .hero-sponsorship {
+  -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.htc');
+}
+
+.hero-sponsorship {
+  background-image: url('images/backgrounds/woundedwarriors-raam-finish_1022x681.jpeg');
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+
+  h1 {
+    color: @white;
+    margin-top: @heroTopMargin;
+    margin-bottom: @gridGutterWidth;
+  }
+}
+
+.body-sponsorship {
+  background: @white;
+  padding-top: @gridGutterWidth;
+  padding-bottom: @gridGutterWidth;
+
+  .t4m-summary {
+    /* From Bootstrap type.less, blockquote, p. */
+    // #font > .shorthand(16px,300,@baseLineHeight * 1.25);
+  }
+
+  @titleBaseColor: #6699CC;
+  .t4m-sponsor-title {
+    display: block;
+    /* http://99colors.net/name/blue-gray */
+    @transparentColor: fade(@titleBaseColor, 20%);
+    @startColor: @transparentColor;
+    @midColor: lighten(@transparentColor, 50%);
+    @endColor: darken(@transparentColor, 10%);
+    #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
+    border-color: @titleBaseColor;
+    color: gray;
+  }
+
+  .t4m-sponsor-title:hover {
+    color: black;
+    .box-shadow(0 0 20px @titleBaseColor);
+  }
+
+  @goldBaseColor: gold;
+  .t4m-sponsor-gold {
+    display: block;
+    /* http://99colors.net/name/gold. */
+    @transparentColor: fade(@goldBaseColor, 20%);
+    @startColor: @transparentColor;
+    @midColor: lighten(@transparentColor, 50%);
+    @endColor: darken(@transparentColor, 10%);
+    #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
+    border-color: @goldBaseColor;
+    color: gray;
+  }
+
+  .t4m-sponsor-gold:hover {
+    color: black;
+    .box-shadow(0 0 20px @goldBaseColor);
+  }
+
+  @silverBaseColor: silver;
+  .t4m-sponsor-silver {
+    display: block;
+    @transparentColor: fade(@silverBaseColor, 20%);
+    @startColor: @transparentColor;
+    @midColor: lighten(@transparentColor, 50%);
+    @endColor: darken(@transparentColor, 10%);
+    #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
+    border-color: @silverBaseColor;
+    color: gray;
+  }
+
+  .t4m-sponsor-silver:hover {
+    color: black;
+    .box-shadow(0 0 20px @silverBaseColor);
+  }
+
+  @bronzeBaseColor: #CD7F32;
+  .t4m-sponsor-bronze {
+    display: block;
+    /*  http://99colors.net/name/bronze. */
+    @transparentColor: fade(@bronzeBaseColor, 20%);
+    @startColor: @transparentColor;
+    @midColor: lighten(@transparentColor, 50%);
+    @endColor: darken(@transparentColor, 10%);
+    #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
+    border-color: @bronzeBaseColor;
+    color: gray;
+  }
+
+  .t4m-sponsor-bronze:hover {
+    color: black;
+    .box-shadow(0 0 20px @bronzeBaseColor);
+  }
+}
