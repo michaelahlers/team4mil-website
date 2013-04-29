@@ -10,7 +10,7 @@ exports.get = function (req, res) {
 
   var toId = function (name) {
     return (name || '')
-      .replace(/[“”]/g, '')
+      .replace(/[^\w\s]/g, '')
       .replace(/[\s]/g, '-')
       .toLowerCase()
   }
