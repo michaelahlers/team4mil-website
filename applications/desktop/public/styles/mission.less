@@ -1,9 +1,4 @@
-@import-once
-'../lib/chinstrap'
-;
-@import-once
-'variables'
-;
+@import-once '../lib/bootstrap-2.3.1/less/mixins';
 
 html.ie8 .hero-mission {
   -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.htc');
@@ -27,4 +22,20 @@ html.ie8 .hero-mission {
   background: @white;
   padding-top: @gridGutterWidth;
   padding-bottom: @gridGutterWidth;
+
+  @pageBaseColor: silver;
+  .t4m-page {
+    @transparentColor: fade(@pageBaseColor, 20%);
+    @startColor: @transparentColor;
+    @midColor: lighten(@transparentColor, 50%);
+    @endColor: darken(@transparentColor, 10%);
+    #gradient > .vertical-three-colors(@startColor, @midColor, @colorStop: 25%, @endColor);
+    border-color: @pageBaseColor;
+    .transition(all .25s ease-in-out);
+    .box-shadow(0 0 0px @pageBaseColor);
+  }
+
+  .t4m-page:hover {
+    .box-shadow(0 0 20px @pageBaseColor);
+  }
 }

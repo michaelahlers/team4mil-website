@@ -12,23 +12,25 @@ services.configure(function () {
 
 module.exports = Q.all([
 
-  require('./articles').then(function (articles) {
-    services.use('/articles', articles)
-  }),
+    require('./analytics0').then(function (analytics0) {
+      services.use('/analytics0', analytics0)
+    }),
 
-  require('./stripe').then(function (stripe) {
-    services.use('/stripe', stripe)
-  })
+    require('./articles').then(function (articles) {
+      services.use('/articles', articles)
+    }),
 
-]).then(
+    require('./stripe').then(function (stripe) {
+      services.use('/stripe', stripe)
+    })
 
-  function () {
+  ])
+
+  .then(function () {
     console.info('services', 'available')
     return services
-  },
+  })
 
-  function (reason) {
+  .fail(function (reason) {
     console.error('services', 'unavailable', reason)
-  }
-
-)
+  })

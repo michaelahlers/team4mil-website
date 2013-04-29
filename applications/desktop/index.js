@@ -11,11 +11,11 @@ var contact = require('./contact')
 var application = express()
 
 application.configure(function () {
-  application.set('views', __dirname + '/public')
+  application.set('views', path.join(__dirname, 'public'))
   application.set('view engine', 'jade')
-  application.use(express.favicon(__dirname + '/public/images/logos/team4mil_favicon.ico'))
-  application.use(require('less-middleware')({ src : __dirname + '/public' }))
-  application.use(express.static(path.join(__dirname, '/public')))
+  application.use(express.favicon(path.join(__dirname, 'public', 'images', 'logos', 'team4mil_favicon.ico')))
+  application.use(require('less-middleware')({ src : path.join(__dirname, 'public') }))
+  application.use(express.static(path.join(__dirname, 'public')))
 })
 
 var getBuild = function () {

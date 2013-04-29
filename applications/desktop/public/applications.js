@@ -1,18 +1,10 @@
 'use strict'
 
-define('google-analytics', ['//google-analytics.com/ga.js'], function () {
-  var gaq = window._gaq
-  gaq.push(['_setAccount', 'UA-38900919-1'])
-  gaq.push(['_setDomainName', 'team4mil.org'])
-  gaq.push(['_setAllowLinker', true])
-  return gaq
-})
-
 define(
   [
     'angular',
-    'google-analytics',
 
+    'services/Analytics',
     'services/Articles',
 
     'controllers',
@@ -104,19 +96,13 @@ define(
 
     })
 
-    module.run(function ($rootScope, $location, $log) {
-
-      /* Site-wide analytics tracking. */
-      var trackView = function () {
-        gaq.push(['_trackPageview', $location.url()])
-      }
-      $rootScope.$on('$viewContentLoaded', trackView)
-      $rootScope.$on('$routeUpdate', trackView)
+    module.run(function ($rootScope, Analytics) {
+      $rootScope.$on('$viewContentLoaded', Analytics.trackPageView)
+      $rootScope.$on('$routeUpdate', Analytics.trackPageView)
 
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.controller = current && current.$route && current.$route.controller
       })
-
     })
 
     return module
