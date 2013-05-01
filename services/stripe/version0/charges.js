@@ -40,14 +40,10 @@ exports.create = function (req, res) {
         mail : 'donations@team4mil.org'
       },
 
-      recipient : [{
+      recipient : {
         name : payer.name,
         mail : payer.mail
       },
-      {
-        name : 'Wayne Dowd',
-        mail : 'wayne.dowd@team4mil.org'
-      }],
 
       subject : 'Thank you, from Team 4Mil, for your donation!',
       body : util.format("We've processed your donation of $%s.00 to account ending %s.", Math.floor(charge.amount / 100), result.card.last4)
