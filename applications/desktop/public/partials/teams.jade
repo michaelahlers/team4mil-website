@@ -41,3 +41,6 @@ section(class='container-fluid body-teams')
           i(class='icon-arrow-right', tooltip='Go to {{getNext().name}}.', tooltip-placement='left')
         a(class='btn', ng-href='#/teams/{{team.id}}')
           i(class='icon-circle-blank', tooltip='See all riders.', tooltip-placement='left')
+
+footer(ng-cloak, ng-controller='Footer')
+  include ../footer.jade
