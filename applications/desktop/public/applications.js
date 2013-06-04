@@ -17,6 +17,7 @@ define(
     'controllers/Contact',
     'controllers/Sponsorship',
     'controllers/Teams',
+    'controllers/Trackers',
     'controllers/Donate',
 
     'directives',
@@ -61,6 +62,16 @@ define(
             return Articles.get('teams')
           }
         }
+      })
+
+      $routeProvider.when('/trackers/:id', {
+        templateUrl : 'partials/trackers',
+        controller : 'Trackers',
+        reloadOnSearch : false
+      })
+
+      $routeProvider.when('/trackers', {
+        redirectTo : '/trackers/'
       })
 
       $routeProvider.when('/sponsorship', {
