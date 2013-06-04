@@ -4,7 +4,7 @@ define([
   'controllers'
 ], function (controllers) {
 
-  return controllers.controller('Trackers', function ($rootScope, $scope) {
+  return controllers.controller('Trackers', function ($rootScope, $scope, $log) {
   })
 
 })
