@@ -18,7 +18,7 @@ define([
         var frameEl = $('<iframe class="map" style="margin: 0; padding: 0; width: 100%; height: 100%;" frameborder="0"></iframe>')
           .appendTo(iEl)
           .load(function () {
-            frameEl.contents().find('#map').parent()
+            frameEl.contents().find('#map')
               .css({
                 position : 'absolute',
                 float : 10000,
