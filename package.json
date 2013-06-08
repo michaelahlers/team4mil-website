@@ -11,6 +11,7 @@
     "futures" : "2.1.x",
     "jade" : "*",
     "mailgun" : "0.4.x",
+    "less" : "1.4.x",
     "less-middleware" : "0.1.x",
     "q" : "0.8.x",
     "requirejs" : "2.1.x",
