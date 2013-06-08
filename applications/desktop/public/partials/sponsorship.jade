@@ -1,0 +1,55 @@
+div(class='container-fluid hero hero-sponsorship')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      h1 Sponsorship
+      ul(class='nav nav-tabs lead')
+        li(ng-class='{active : "contributors" == view}')
+          a(href='#/sponsorship?contributors') Contributors
+        li(ng-class='{active : "opportunities" == view}')
+          a(href='#/sponsorship?opportunities') Opportunities
+
+div(class='container-fluid body-sponsorship', ng-show='"contributors" == view')
+  div(class='row-fluid')
+
+    div(class='offset1 span4')
+      div(class='t4m-summary', ng-bind-html='content.summary')
+
+    div(class='span6')
+      div(ng-repeat='sponsor in content.sponsors')
+        div(class='row-fluid')
+          div(class='span8', style='background: none;')
+            p
+              span(class='lead') {{sponsor.name}}
+              br
+              a(ng-href='{{sponsor.location}}', target='_blank') {{sponsor.location}}
+            p
+              small(class='muted') {{sponsor.description}}
+          div(class='span4')
+            a(ng-href='{{sponsor.location}}', target='_blank')
+              img(ng-src='{{sponsor.source}}')
+
+        hr(ng-hide='$last')
+
+div(class='container-fluid body-sponsorship', ng-show='"opportunities" == view')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      include sponsorship/opportunities/summary.html
+
+  div(class='row-fluid')
+    div(class='span3')
+      include sponsorship/opportunities/title
+
+    div(class='span3')
+      include sponsorship/opportunities/gold
+
+    div(class='span3')
+      include sponsorship/opportunities/silver
+
+    div(class='span3')
+      include sponsorship/opportunities/bronze
+
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      p.lead
+        | These sponsorship levels are meant to start the conversation about ways to integrate our mission and your company mission into a mutually beneficial
+        | opportunity. Let’s join together and build on our successful 2013 campaign to help honor and empower our military veterans.
