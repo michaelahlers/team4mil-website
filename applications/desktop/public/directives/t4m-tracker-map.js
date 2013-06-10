@@ -21,7 +21,7 @@ define([
             frameEl.contents().find('#map')
               .css({
                 position : 'absolute',
-                float : 10000,
+                float : 1000,
                 left : 0,
                 top : 0,
                 width : '100%',
