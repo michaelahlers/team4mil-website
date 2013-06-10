@@ -2,20 +2,32 @@
 'use strict'
 
 var express = require('express')
+  , os = require('os')
   , path = require('path')
   , Q = require('q')
   , requirejs = require('requirejs')
 
 var contact = require('./contact')
 
+var build = {
+  baseUrl : path.join(os.tmpDir(), 'team4mil-website', '' + process.pid)
+}
+
 var application = express()
 
 application.configure(function () {
   application.set('views', path.join(__dirname, 'public'))
   application.set('view engine', 'jade')
+
   application.use(express.favicon(path.join(__dirname, 'public', 'images', 'logos', 'team4mil_favicon.ico')))
-  application.use(require('less-middleware')({ src : path.join(__dirname, 'public') }))
+
+  application.use(require('less-middleware')({
+    src : path.join(__dirname, 'public'),
+    dest : path.join(build.baseUrl, 'public')
+  }))
+
   application.use(express.static(path.join(__dirname, 'public')))
+  application.use('/', express.static(path.join(build.baseUrl, 'public')))
 })
 
 var getBuild = function () {
@@ -29,8 +41,8 @@ var getBuild = function () {
   application.configure('production', function () {
     var config = require('./public/build')
 
-    config.baseUrl = __dirname + '/public'
-    config.out = __dirname + '/public/' + config.out
+    config.baseUrl = path.join(__dirname, 'public')
+    config.out = path.join(build.baseUrl, 'public', config.out)
 
     console.info('Building the desktop web client.')
 
