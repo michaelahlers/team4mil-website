@@ -7,10 +7,10 @@ var express = require('express')
   , Q = require('q')
 
 var trackers = {
-  '2013-warrior-team' : {
-    name : '2013 Warrior Team',
-    location : 'http://share.findmespot.com/shared/faces/viewspots.jsp?glId=0UsXxonLsY1eNYu07minJ9UzXhb8WmDn5'
-  },
+//  '2013-warrior-team' : {
+//    name : '2013 Warrior Team',
+//    location : 'http://share.findmespot.com/shared/faces/viewspots.jsp?glId=0UsXxonLsY1eNYu07minJ9UzXhb8WmDn5'
+//  },
 
   '2013-allied-forces-team' : {
     name : '2013 Allied Forces Team',
