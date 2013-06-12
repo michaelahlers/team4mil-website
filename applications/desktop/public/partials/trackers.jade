@@ -4,3 +4,4 @@
     .container-fluid
       .row-fluid
         img.span1.spot-logo(src='images/logos/spot_3-color_789x445.png')
+        select.span2(ng-model='settings.tracker', ng-options='tracker as tracker.name for tracker in trackers')
