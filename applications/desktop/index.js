@@ -26,7 +26,7 @@ application.configure(function () {
     dest : path.join(build.baseUrl, 'public')
   }))
 
-  application.use(express.static(path.join(__dirname, 'public')))
+  application.use('/', express.static(path.join(__dirname, 'public')))
   application.use('/', express.static(path.join(build.baseUrl, 'public')))
 })
 
