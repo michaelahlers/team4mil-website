@@ -12,6 +12,10 @@ nav(class='navbar navbar-inverse navbar-fixed-top navbar-blurred')
             li(ng-class="{'teams':'active'}[settings.article]")
               a(href='#/teams', tooltip="Meet our warriors and their mentors.", tooltip-placement='bottom')
                 | Teams
+            if ('true' == process.env.TRACKERS_ENABLED)
+              li(ng-class="{'trackers':'active'}[settings.article]")
+                a(href='#/trackers', tooltip="Follow our racers as they compete in the 2013 Race Across America.", tooltip-placement='bottom')
+                  | Trackers
             li(ng-class="{'sponsorship':'active'}[settings.article]")
               a(href='#/sponsorship', tooltip="Meet the companies who make our work possible.", tooltip-placement='bottom')
                 | Sponsorship

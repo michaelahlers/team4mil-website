@@ -17,6 +17,7 @@ define(
     'controllers/Contact',
     'controllers/Sponsorship',
     'controllers/Teams',
+    'controllers/Trackers',
     'controllers/Donate',
 
     'directives',
@@ -75,6 +76,23 @@ define(
             return Articles.get('teams')
           }
         }
+      })
+
+      $routeProvider.when('/trackers/:id', {
+        templateUrl : 'partials/trackers',
+        controller : 'Trackers',
+        settings : {
+          article : 'trackers',
+          title : 'Trackers',
+          body : {
+            style : 't4m-trackers'
+          }
+        },
+        reloadOnSearch : false
+      })
+
+      $routeProvider.when('/trackers', {
+        redirectTo : '/trackers/'
       })
 
       $routeProvider.when('/sponsorship', {
