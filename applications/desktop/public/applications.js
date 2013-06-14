@@ -71,6 +71,8 @@ define(
       $routeProvider.when('/trackers/:id', {
         templateUrl : 'partials/trackers',
         controller : 'Trackers',
+        article : 'trackers',
+        styleClass : 't4m-trackers',
         reloadOnSearch : false
       })
 
