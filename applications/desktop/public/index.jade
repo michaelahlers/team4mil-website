@@ -31,7 +31,7 @@ html(lang="en")
         var require = window.build
       script(type='text/javascript', data-main='index', src='lib/require-2.1.4.min.js')
 
-  body
+  body(ng-class='{{active.styleClass}}')
     div(class='loading', ng-controller='Loading', ng-show='visible')
       div(class='loading-container')
         div(class='loading-inner')

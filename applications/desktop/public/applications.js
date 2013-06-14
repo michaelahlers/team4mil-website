@@ -107,14 +107,13 @@ define(
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         var controller = current && current.$$route && current.$$route.controller || ''
           , article = controller.toLowerCase()
-          , styleClass = 't4m-article'
+          , styleClass = 't4m-article-' + article
 
         $rootScope.active = {
           controller : controller,
           article : article,
           styleClass : styleClass
         }
-        // $log.log('controller', $rootScope.controller)
       })
     })
 
