@@ -86,6 +86,10 @@ define(
           title : 'Trackers',
           body : {
             style : 't4m-trackers'
+          },
+          header : {
+            branding : false,
+            layout : 'minimal'
           }
         },
         reloadOnSearch : false

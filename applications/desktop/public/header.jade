@@ -1,9 +1,10 @@
-nav(class='navbar navbar-inverse navbar-fixed-top navbar-blurred')
+nav(class='navbar navbar-inverse navbar-fixed-top navbar-blurred'
+, ng-class='{"default":"t4m-layout-default", "minimal":"t4m-layout-minimal"}[settings.header.layout||"default"]')
   div(class='navbar-inner')
     div(class='container-fluid')
       div(class='row-fluid')
-        div(class='offset1 span10')
-          a(class='brand', href='#/about')
+        div(class='offset1 span11')
+          a(class='brand', href='#/about', ng-hide='false == settings.header.branding')
             img(src='images/logos/team4mil_white-text_650x200.png', alt='Team 4Mil: For the Military, Warriors and Veterans')
           ul(class='nav pull-right')
             li(ng-class="{'mission':'active'}[settings.article]")
