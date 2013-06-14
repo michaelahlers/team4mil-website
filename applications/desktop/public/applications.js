@@ -107,12 +107,24 @@ define(
 
     })
 
-    module.run(function ($rootScope, Analytics) {
+    module.run(function ($rootScope, $log, Analytics) {
       $rootScope.$on('$viewContentLoaded', Analytics.trackPageView)
       $rootScope.$on('$routeUpdate', Analytics.trackPageView)
 
+      $rootScope.$on('$routeChangeStart', function (event, current, previous) {
+        delete $rootScope.active
+      })
+
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.controller = current && current.$route && current.$route.controller
+        var controller = current && current.$$route && current.$$route.controller || ''
+          , article = controller.toLowerCase()
+          , styleClass = 't4m-article-' + article
+
+        $rootScope.active = {
+          controller : controller,
+          article : article,
+          styleClass : styleClass
+        }
       })
     })
 

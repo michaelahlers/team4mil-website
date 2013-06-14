@@ -44,7 +44,12 @@ exports.send = function (message, callback) {
   transport.sendText(
 
     util.format('"%s" <%s>', sender.name || '', sender.mail),
-    [ util.format('"%s" <%s>', recipient.name, recipient.mail), '"Michael Ahlers" <michael.ahlers@patternconsulting.com>' ],
+
+    /* TODO: Make recipient plural. */
+    [
+      util.format('"%s" <%s>', recipient.name, recipient.mail)
+      , '"Michael Ahlers" <michael.ahlers@pattern.nu>'
+    ],
 
     subject || 'No subject.',
     body || 'No body.',
