@@ -10,7 +10,7 @@ define([
     return {
       restrict : 'E',
       replace : true,
-      template : '<div style="margin: 0; padding: 0; width: 100%; height: 100%; visibility: hidden;" />',
+      template : '<div style="margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; visibility: hidden;" />',
 
       scope : {
         tracker : '=ngModel'
