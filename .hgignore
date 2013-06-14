@@ -1,0 +1,16 @@
+.DS_Store
+.idea/Team 4Mil.iml
+.idea/encodings.xml
+.idea/jsLibraryMappings.xml
+.idea/libraries/sass_stdlib.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
+applications/desktop/public/vendor
+logs/
+node_modules/
+public/index.css
+public/index.production.js

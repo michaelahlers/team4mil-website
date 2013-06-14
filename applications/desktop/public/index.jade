@@ -1,0 +1,52 @@
+doctype 5
+//if IE 7
+  html(class="ie7 ie", lang="en")
+//if IE 8
+  html(class="ie8 ie", lang="en")
+//if IE 9
+  html(class="ie9 ie", lang="en")
+// [if !IE ] <!
+html(lang="en")
+  // <![endif]
+
+  head
+    meta(http-equiv='X-UA-Compatible', content='chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=yes')
+
+    meta(property='og:url', content='http://team4mil.org/')
+    meta(property='og:title', content='Team 4Mil')
+    meta(property='og:image', content='http://team4mil.org/images/logos/team4mil_200x200.png')
+
+    title(ng-cloak, ng-bind-template='{{settings.title || "Loading…"}} - Team 4Mil')
+
+    link(type='text/css', media='screen', rel='stylesheet', href='index.css')
+
+    script(type='text/javascript', src='//html5shim.googlecode.com/svn/trunk/html5.js')
+
+    if ('production' == process.env.NODE_ENV)
+      script(type='text/javascript', data-main='index.production', src='lib/require-2.1.4.min.js')
+    else
+      script(type='text/javascript', src='build.js')
+      script(type='text/javascript')
+        var require = window.build
+      script(type='text/javascript', data-main='index', src='lib/require-2.1.4.min.js')
+
+  body(class='{{settings.body.style}}')
+    div(class='loading', ng-controller='Loading', ng-show='visible')
+      div(class='loading-container')
+        div(class='loading-inner')
+          i(class='icon-spinner icon-spin')
+          | &nbsp;Please wait&hellip;
+
+    if('true' == process.env.BETA_FLAG)
+      div(class='t4m-beta-program progress progress-warning progress-striped')
+        a(class='bar', style='width: 100%;', href='https://bitbucket.org/michaelahlers/team-4mil-website/issues/new', target='_blank')
+          | Team 4Mil Public Beta&mdash;Please click here to report any issues.
+
+    header(ng-cloak, ng-controller='Header', ng-show='visible')
+      include header.jade
+
+    article(ng-cloak, ng-view)
+
+    footer(ng-cloak, ng-controller='Footer', ng-show='visible')
+      include footer.jade

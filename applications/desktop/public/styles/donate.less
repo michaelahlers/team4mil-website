@@ -1,0 +1,37 @@
+@import '../vendor/bootstrap/less/mixins';
+
+html.ie8 .hero-donate {
+  -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.htc');
+}
+
+.hero-donate {
+  background-image: url('images/backgrounds/team4mil-coin_3000x2000.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  h1 {
+    color: @white;
+    margin-top: @heroTopMargin;
+    margin-bottom: @gridGutterWidth;
+  }
+}
+
+.body-donate {
+  background: @white;
+  padding-top: @gridGutterWidth;
+  padding-bottom: @gridGutterWidth;
+
+  .input-amount,
+  .input-card-expiration-year {
+    text-align: right;
+  }
+
+  .logo-credit-card {
+    .opacity(25);
+  }
+
+  .logo-credit-card.active {
+    .opacity(100);
+  }
+}
