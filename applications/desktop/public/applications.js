@@ -88,7 +88,6 @@ define(
             style : 't4m-trackers'
           },
           header : {
-            branding : false
           }
         },
         reloadOnSearch : false

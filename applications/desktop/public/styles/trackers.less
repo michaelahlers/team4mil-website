@@ -3,12 +3,19 @@
 body.t4m-trackers {
   header {
     .navbar {
-      .transition(opacity 1s ease-in-out);
+      //.transition(opacity 1s ease-in-out);
+
       .opacity(25);
+
+      margin: @navbarMarginTop @navbarMarginRight * 5 @navbarMarginBottom @navbarMarginLeft * 5;
+
+      .navbar-inner {
+        // background-image: none;
+      }
     }
 
     .navbar:hover {
-      .transition(opacity .25s ease-in-out);
+      //.transition(opacity .25s ease-in-out);
       .opacity(100);
     }
   }
