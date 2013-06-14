@@ -101,11 +101,19 @@ define(
       $rootScope.$on('$routeUpdate', Analytics.trackPageView)
 
       $rootScope.$on('$routeChangeStart', function (event, current, previous) {
-        delete $rootScope.controller
+        delete $rootScope.active
       })
 
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.controller = current && current.$$route && current.$$route.controller
+        var controller = current && current.$$route && current.$$route.controller || ''
+          , article = controller.toLowerCase()
+          , styleClass = 't4m-article'
+
+        $rootScope.active = {
+          controller : controller,
+          article : article,
+          styleClass : styleClass
+        }
         // $log.log('controller', $rootScope.controller)
       })
     })
