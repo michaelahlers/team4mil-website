@@ -1,0 +1,35 @@
+@import '../vendor/bootstrap/less/mixins';
+
+html.ie8 .hero-teams {
+  -ms-behavior: url('lib/background-size-polyfill-gh-pages/backgroundsize.htc');
+}
+
+.hero-teams {
+  background-image: url('images/backgrounds/2012-complete-rider-team_2048x1356.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  h1 {
+    color: white;
+    margin-top: @heroTopMargin;
+    margin-bottom: @gridGutterWidth;
+  }
+}
+
+.body-teams {
+  background: @white;
+  padding-top: @gridGutterWidth;
+  padding-bottom: @gridGutterWidth;
+}
+
+.t4m-member {
+  .opacity(25);
+  background: @navbarBackground;
+}
+
+.t4m-member.selected,
+.t4m-member:hover {
+  .opacity(100);
+  text-decoration: none;
+}
