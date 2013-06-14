@@ -15,15 +15,14 @@ html, body {
 }
 
 body {
-  display: table;
+//  display: table;
   width: 100%;
   background: #333;
 
-  & > header,
-  & > article,
-  & > footer {
-    display: table-row;
-  }
+//  & > header,
+//  & > article {
+//    display: table-row;
+//  }
 
   & > div.loading {
     position: fixed;
@@ -51,6 +50,7 @@ body {
       }
     }
   }
+
 }
 
 .photo_img {
@@ -122,6 +122,7 @@ body {
 @import 'styles/mission';
 @import 'styles/sponsorship';
 @import 'styles/teams';
+@import 'styles/trackers';
 @import 'styles/footer';
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
