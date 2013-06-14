@@ -22,6 +22,10 @@ module.exports = Q.all([
 
     require('./stripe').then(function (stripe) {
       services.use('/stripe', stripe)
+    }),
+
+    require('./trackers0').then(function (trackers0) {
+      services.use('/trackers0', trackers0)
     })
 
   ])
