@@ -1,0 +1,150 @@
+@import 'vendor/bootstrap/less/bootstrap';
+@import 'vendor/font-awesome/less/font-awesome';
+
+@FontAwesomePath: 'vendor/font-awesome/font';
+
+@import 'styles/variables';
+
+html {
+  overflow-y: scroll;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+//  display: table;
+  width: 100%;
+  background: #333;
+
+//  & > header,
+//  & > article {
+//    display: table-row;
+//  }
+
+  & > div.loading {
+    position: fixed;
+    width: 100%;
+    margin-top: @navbarTotalHeight;
+    text-align: center;
+
+    & > div.loading-container {
+
+      background: #222;
+      .opacity(75);
+
+      display: inline-block;
+      .box-shadow(inset 0 1px 0 @black);
+      .border-radius(0.5em);
+
+      margin: 1em;
+
+      & > div.loading-inner {
+        color: silver;
+        padding: 0.5em 1em;
+        .box-shadow(0 1px 0 silver);
+        .border-radius(0.5em);
+        text-shadow: 0 1px 0 @black;
+      }
+    }
+  }
+
+}
+
+.photo_img {
+  .img-rounded;
+}
+
+.photo_left {
+  .pull-left;
+}
+
+.photo_right {
+  .pull-right;
+}
+
+// Navigation styles.
+
+@navbarMarginTop: 30px;
+@navbarMarginRight: 20px;
+@navbarMarginBottom: 20px;
+@navbarMarginLeft: 20px;
+@navbarHeight: 60px;
+@navbarTotalHeight: @navbarHeight + @navbarMarginTop + @navbarMarginBottom;
+
+.hero {
+  h1 {
+    font-size: @baseFontSize * 3;
+    text-shadow: @shadowDropSharp;
+  }
+
+  .hero-summary {
+    padding: @gridGutterWidth; // font-size: @baseFontSize * 1.25;
+    // line-height: @baseLineHeight * 1.25;
+    color: white;
+    text-shadow: @shadowDropSharp;
+    #translucent > .background(@black, .75);
+    .border-radius(@baseBorderRadius);
+  }
+
+  .nav {
+    margin-bottom: 0;
+    border-bottom: none;
+
+    li {
+      margin-bottom: 0;
+
+      a {
+        background-color: @grayLighter;
+        border-bottom: none;
+        margin-right: @gridGutterWidth / 2;
+      }
+
+      a:hover {
+        border-bottom: none;
+      }
+    }
+
+    li.active {
+      a {
+        font-weight: bold;
+        background-color: @white;
+      }
+    }
+  }
+}
+
+@import 'styles/header';
+@import 'styles/contact';
+@import 'styles/donate';
+@import 'styles/mission';
+@import 'styles/sponsorship';
+@import 'styles/teams';
+@import 'styles/trackers';
+@import 'styles/footer';
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  visibility: hidden;
+}
+
+/* A suggestion from http://stackoverflow.com/questions/3975769/disable-webkits-spin-buttons-on-input-type-number. Thank you, Stack Overflow! */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.t4m-beta-program {
+  position: fixed;
+  width: 100%;
+
+  a {
+    color: white;
+  }
+}

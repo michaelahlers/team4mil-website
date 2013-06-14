@@ -1,0 +1,41 @@
+{
+  "name" : "team4mil",
+  "version" : "1.0.0",
+  "description" : "Web site for Team 4Mil.",
+
+  "private" : true,
+
+  "dependencies" : {
+    "async" : "*",
+    "bower" : "0.9.x",
+    "ejs" : "0.8.x",
+    "express" : "3.x",
+    "facebook-node-sdk" : "0.2.x",
+    "futures" : "2.1.x",
+    "grunt" : "0.4.x",
+    "grunt-cli" : "*",
+    "jade" : "*",
+    "mailgun" : "0.4.x",
+    "less" : "1.4.x",
+    "less-middleware" : "0.1.x",
+    "q" : "0.8.x",
+    "request" : "2.x.x",
+    "requirejs" : "2.1.x",
+    "stripe" : "1.3.x"
+  },
+
+  "engines" : {
+    "node" : "0.10.x",
+    "npm" : "1.2.x"
+  },
+
+  "scripts" : {
+    "postinstall" : "node_modules/grunt-cli/bin/grunt --base ../.. bower"
+  },
+
+  "author" : {
+    "name" : "Michael Ahlers",
+    "email" : "michael.ahlers@pattern.nu"
+  }
+
+}

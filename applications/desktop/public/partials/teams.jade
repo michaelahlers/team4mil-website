@@ -1,0 +1,46 @@
+header(class='container-fluid hero hero-teams')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      h1 {{content.title}}
+        pc-scroller(monitor='member', offset="-$('body > header > nav').outerHeight(true)", cancel='!member')
+      ul(class='nav nav-tabs lead')
+        li(ng-repeat='team in content.teams', ng-class='{ "active" : $parent.team.id == team.id }')
+          a(ng-href='#/teams/{{team.id}}') {{team.title}}
+
+section(class='container-fluid body-teams')
+  div(class='row-fluid')
+    div(class='offset1 span3')
+
+      a(id='{{member.id}}'
+      , class='media thumbnail t4m-member'
+      , ng-repeat='member in team.members'
+      , ng-class='{ selected : member == $parent.member || !$parent.member }'
+      , ng-href='#/teams/{{team.id}}?member={{member.id}}')
+        img(class='pull-left span3', ng-src='{{member.picture.location}}')
+        span(class='lead')
+          strong {{member.name}}
+
+    div(class='span7', ng-hide='member')
+      h2 {{team.title}}
+      p(class='lead') {{team.summary}}
+      p(class='lead help-block')
+        strong To learn more about a rider,
+        | &nbsp;please click their name or picture from the list to the left.
+
+    div(class='span7 t4m-member-biography', ng-show='member')
+      div(class='span5 pull-right media')
+        img(class='span12 img-rounded media-object', ng-src='{{member.picture.location}}')
+      h3 {{member.name}}
+      div(ng-bind-html='member.biography')
+
+    div(class='span1', ng-show='member')
+      div(class='btn-group btn-group-vertical')
+        a(class='btn', ng-href='#/teams/{{team.id}}?member={{getPrevious().id}}')
+          i(class='icon-arrow-left', tooltip='Go to {{getPrevious().name}}.', tooltip-placement='left')
+        a(class='btn', ng-href='#/teams/{{team.id}}?member={{getNext().id}}')
+          i(class='icon-arrow-right', tooltip='Go to {{getNext().name}}.', tooltip-placement='left')
+        a(class='btn', ng-href='#/teams/{{team.id}}')
+          i(class='icon-circle-blank', tooltip='See all riders.', tooltip-placement='left')
+
+footer(ng-cloak, ng-controller='Footer')
+  include ../footer.jade

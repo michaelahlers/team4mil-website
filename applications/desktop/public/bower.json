@@ -1,0 +1,14 @@
+{
+  "name" : "team4mil-website-desktop",
+
+  "ignore" : [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+
+  "dependencies" : {
+    "bootstrap" : "latest",
+    "font-awesome" : "latest"
+  }
+}

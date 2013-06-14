@@ -1,0 +1,97 @@
+div(class='container-fluid hero hero-contact')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      h1 Contact
+
+section(class='body-contact container-fluid')
+  div(class='row-fluid')
+    div(class='offset1 span10')
+      p(class='lead')
+        | We welcome your interest, comments, and suggestions!
+
+  div(class='row-fluid')
+
+    div(class='offset1 span5')
+
+      p(class='help-block')
+        span(class='lead') <strong>First</strong>, chose who you would like to contact.
+        br
+        span(class='muted') You may optionally choose a specific recipient below.
+        span(class='muted', ng-show='recipient == recipients[0]')
+          | &nbsp;(You've not chosen a specific person, so anyone who's available will answer your message.)
+        span(class='muted', ng-hide='recipient == recipients[0]')
+          | &nbsp;(You've chosen {{recipient.name}} to receive your message, but you can still pick someone else.)
+
+      a(id='{{member.id}}'
+      , class='media thumbnail t4m-member'
+      , ng-repeat='member in content.board.members'
+      , ng-class='{selected:recipient.id == member.id || recipient == recipients[0]}'
+      , ng-href='#/contact?recipient={{member.id}}')
+        img(class='pull-left span2', ng-src='{{member.picture.location}}')
+        span(class='lead')
+          strong {{member.name}}
+        br
+        span {{member.title}}
+
+    div(class='span5')
+      form(name='messageForm')
+
+        p(class='help-block')
+          span(class='lead') <strong>Second</strong>, tell us a little about yourself.
+          br
+          span(class='muted') Don't worry, we will <em>only</em> use this information to contact you.
+
+        div(class='alert', ng-show='messageForm.senderNameText.$invalid || messageForm.senderMailText.$invalid')
+          i(class='icon-exclamation-sign')
+          | &nbsp;We need your name and a valid e-mail address.
+
+        div(class='alert alert-success', ng-hide='messageForm.senderNameText.$invalid || messageForm.senderMailText.$invalid')
+          i(class='icon-ok-sign')
+          | &nbsp;Your name and e-mail address look good!
+
+        div(class='control-group', ng-class='{"error":messageForm.senderNameText.$invalid}')
+          div(class='controls')
+            input(class='span6', type='text', name='senderNameText', ng-model='sender.name', placeholder='Your name.', required)
+
+        div(class='control-group', ng-class='{"error":messageForm.senderMailText.$invalid}')
+          div(class='controls')
+            input(class='span8', type='email', name='senderMailText', ng-model='sender.mail', placeholder='Your e-mail address.', required)
+
+        div(class='control-group')
+          div(class='controls')
+            p(class='help-block')
+              span(class='lead') <strong>Third</strong>, leave your comments below.
+              br
+              span(class='muted') Once you're finished, click the “Send” button below.
+
+        div(class='control-group')
+          div(class='controls')
+            input(class='span12', type='text', name='subjectText', ng-model='subject', placeholder='Message subject.')
+
+        div(class='control-group')
+          div(class='controls')
+            textarea(class='span12', rows='10', name='bodyText', ng-model='body', placeholder='Your comments to Team 4Mil.')
+
+        div(class='control-group')
+          button(type='button', class='btn', ng-click='reset(true)') Reset
+          button(type='submit', class='btn btn-primary pull-right', ng-click='send()', ng-disabled='messageForm.$invalid') Send
+
+      div(id='modalStatus', class='modal fade', tabindex='-1')
+        div(class='modal-header')
+          h3 Contacting Team 4Mil
+        div(class='modal-body')
+          p(ng-show='status.pending') Sending your message to {{status.recipient.mail}}&hellip;
+          p(ng-show='status.success')
+            span(class='label label-success') Success!
+            | &nbsp;Your message was sent to {{status.recipient.name}}!
+          p(ng-show='status.error')
+            span(class='label label-important') Error!
+            | &nbsp;We're sorry, but there was a problem sending your message!
+            | You can still reach Team 4Mil by writing to&nbsp;
+            a(href='mailto:contact@team4mil.org') contact@team4mil.org
+            | .
+        div(class='modal-footer', ng-hide='status.pending')
+          button(class='btn btn-primary', ng-click='closeStatus()') Close
+
+footer(ng-cloak, ng-controller='Footer')
+  include ../footer.jade
