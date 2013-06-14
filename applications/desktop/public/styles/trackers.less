@@ -1,5 +1,19 @@
 @import '../vendor/bootstrap/less/bootstrap';
 
+body.t4m-trackers {
+  header {
+    .navbar {
+      .transition(opacity 1s ease-in-out);
+      .opacity(25);
+    }
+
+    .navbar:hover {
+      .transition(opacity .25s ease-in-out);
+      .opacity(100);
+    }
+  }
+}
+
 #body-trackers {
   position: absolute;
   left: 0;

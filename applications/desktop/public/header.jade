@@ -13,7 +13,7 @@ nav(class='navbar navbar-inverse navbar-fixed-top navbar-blurred')
               a(href='#/teams', tooltip="Meet our warriors and their mentors.", tooltip-placement='bottom')
                 | Teams
             if ('true' == process.env.TRACKERS_ENABLED)
-              li(ng-class="{'Trackers':'active'}[controller]")
+              li(ng-class="{'Trackers':'active'}[active.controller]")
                 a(href='#/trackers', tooltip="Follow our racers as they compete in the 2013 Race Across America.", tooltip-placement='bottom')
                   | Trackers
             li(ng-class="{'Sponsorship':'active'}[active.controller]")
