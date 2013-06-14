@@ -96,12 +96,13 @@ define(
 
     })
 
-    module.run(function ($rootScope, Analytics) {
+    module.run(function ($rootScope, $log, Analytics) {
       $rootScope.$on('$viewContentLoaded', Analytics.trackPageView)
       $rootScope.$on('$routeUpdate', Analytics.trackPageView)
 
       $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.controller = current && current.$route && current.$route.controller
+        $rootScope.controller = current && current.$$route && current.$$route.controller
+        // $log.log('controller', $rootScope.controller)
       })
     })
 
