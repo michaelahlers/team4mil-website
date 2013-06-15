@@ -12,7 +12,8 @@ nav(class='navbar navbar-fixed-top navbar-blurred', ng-class='{"navbar-inverse":
       if ('true' == process.env.TRACKERS_ENABLED)
         li(ng-class="{'trackers':'active'}[settings.article]")
           a(href='#/trackers', tooltip="Follow our racers as they compete in the 2013 Race Across America.", tooltip-placement='bottom')
-            | Trackers
+            | Trackers &nbsp;
+            span.label.label-warning LIVE
       li(ng-class="{'sponsorship':'active'}[settings.article]")
         a(href='#/sponsorship', tooltip="Meet the companies who make our work possible.", tooltip-placement='bottom')
           | Sponsorship
