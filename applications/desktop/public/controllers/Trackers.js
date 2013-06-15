@@ -2,14 +2,15 @@
 
 define([
   'controllers'
-  , 'services/Trackers'
   , 'directives/t4m-tracker-map'
 ], function (controllers) {
 
-  return controllers.controller('Trackers', function ($rootScope, $scope, $log, Trackers) {
+  return controllers.controller('Trackers', function ($rootScope, $scope, $log, $resource) {
+    var service = $resource('/services/trackers0/:id', {id : '@id'})
+
     $scope.settings = {}
 
-    $scope.trackers = Trackers.query().$then(function (response) {
+    $scope.trackers = service.query().$then(function (response) {
       var trackers = response.data || []
       $scope.settings.tracker = trackers[0]
       return trackers
