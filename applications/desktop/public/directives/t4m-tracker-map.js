@@ -10,7 +10,7 @@ define([
     return {
       restrict : 'E',
       replace : true,
-      template : '<div style="margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;" />',
+      template : '<div style="margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; visibility: hidden;" />',
 
       scope : {
         tracker : '=ngModel'
@@ -18,7 +18,7 @@ define([
 
       link : function (scope, iEl, iAttrs, controller) {
         scope.$watch('tracker', function (tracker) {
-          //iEl.css({visibility : 'hidden'})
+          iEl.css({visibility : 'hidden'})
 
           iEl.html('')
 
@@ -28,7 +28,7 @@ define([
 
           $rootScope.$broadcast('t4m-loadingStart')
 
-          var frameEl = $('<iframe class="map" style="margin: 0; padding: 0; width: 100%; height: 100%; border: 0; visibility: hidden;" frameBorder="0" scrolling="no" hspace="0" vspace="0" marginheight="0" marginwidth="0"></iframe>')
+          var frameEl = $('<iframe class="map" style="margin: 0; padding: 0; width: 100%; height: 100%; border: 0;" frameBorder="0" scrolling="no" hspace="0" vspace="0" marginheight="0" marginwidth="0"></iframe>')
             .appendTo(iEl)
             .load(function () {
               frameEl.contents().find('head')
@@ -50,7 +50,8 @@ define([
               scope.$apply(function () {
                 $rootScope.$broadcast('t4m-loadingSuccess')
               })
-              //iEl.css({visibility : 'visible'})
+
+              iEl.css({visibility : 'visible'})
             })
             .attr('src', '/services/trackers0/' + tracker.id)
 
