@@ -15,17 +15,18 @@ html, body {
 }
 
 body {
-//  display: table;
+  //  display: table;
   width: 100%;
   background: #333;
 
-//  & > header,
-//  & > article {
-//    display: table-row;
-//  }
+  //  & > header,
+  //  & > article {
+  //    display: table-row;
+  //  }
 
   & > div.loading {
     position: fixed;
+    z-index: 1000;
     width: 100%;
     margin-top: @navbarTotalHeight;
     text-align: center;
