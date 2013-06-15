@@ -1,4 +1,4 @@
-@import '../vendor/bootstrap/less/mixins';
+@import '../vendor/bootstrap/less/bootstrap';
 
 header {
   .navbar {
@@ -7,6 +7,9 @@ header {
     margin: @navbarMarginTop @navbarMarginRight @navbarMarginBottom @navbarMarginLeft;
 
     .brand {
+      .transition(all .5s ease-in-out);
+
+      margin-left: 0;
       padding-top: 10px;
       padding-bottom: 10px;
 
@@ -15,17 +18,24 @@ header {
       }
     }
 
-    .container-fluid {
-      margin-left: -@navbarMarginLeft;
-      margin-right: -@navbarMarginRight;
-    }
+    //    .container-fluid {
+    //      margin-left: -@navbarMarginLeft;
+    //      margin-right: -@navbarMarginRight;
+    //    }
 
     ul.nav {
+      //      .transition(all .5s ease-in-out);
+
       font-size: @baseFontSize + 4px;
 
       li.active,
       li.active:hover {
+        .transition(all .5s ease-in-out);
+
         a {
+          .transition(color .5s ease-in-out);
+          //.transition(text-shadow .25s ease-in-out);
+
           //.border-radius(@baseBorderRadius);
           //background-color: @white;
         }
@@ -33,20 +43,23 @@ header {
     }
 
     .navbar-inner {
-      .transition(all .5s ease-in-out);
+      .transition(all .25s ease-in-out);
 
       .border-radius(@baseBorderRadius);
       .box-shadow(@shadowDropStandard);
 
-      background-image: url("images/backgrounds/USA-flag_isolated_500x335.png");
       background-position: -150px -75px;
       background-repeat: no-repeat;
     }
 
   }
 
-  .navbar-inverse {
-    .transition(all .5s ease-in-out);
+  .navbar.navbar-inverse {
+    //.transition(all .5s ease-in-out);
+
+    .brand {
+      margin-left: 40px;
+    }
 
     ul.nav {
       li {
@@ -64,8 +77,9 @@ header {
     }
 
     .navbar-inner {
-      .transition(all .5s ease-in-out);
+      //.transition(all .5s ease-in-out);
 
+      background-image: url("images/backgrounds/USA-flag_isolated_500x335.png");
       #translucent > .background(@grayDarker, 0.85);
     }
   }

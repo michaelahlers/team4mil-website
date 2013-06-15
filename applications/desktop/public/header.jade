@@ -1,33 +1,30 @@
 nav(class='navbar navbar-fixed-top navbar-blurred', ng-class='{"navbar-inverse":false!==settings.header.inverse}')
   div(class='navbar-inner')
-    div(class='container-fluid')
-      div(class='row-fluid')
-        div(class='offset1 span10')
-          a(class='brand', href='#/about', ng-hide='false == settings.header.branding')
-            img(src='images/logos/team4mil_white-text_650x200.png', alt='Team 4Mil: For the Military, Warriors and Veterans')
-          ul(class='nav pull-right')
-            li(ng-class="{'mission':'active'}[settings.article]")
-              a(href='#/mission', tooltip="Read about the mission to help our nation's Combat-Wounded Veterans.", tooltip-placement='bottom')
-                | Mission
-            li(ng-class="{'teams':'active'}[settings.article]")
-              a(href='#/teams', tooltip="Meet our warriors and their mentors.", tooltip-placement='bottom')
-                | Teams
-            if ('true' == process.env.TRACKERS_ENABLED)
-              li(ng-class="{'trackers':'active'}[settings.article]")
-                a(href='#/trackers', tooltip="Follow our racers as they compete in the 2013 Race Across America.", tooltip-placement='bottom')
-                  | Trackers
-            li(ng-class="{'sponsorship':'active'}[settings.article]")
-              a(href='#/sponsorship', tooltip="Meet the companies who make our work possible.", tooltip-placement='bottom')
-                | Sponsorship
-            li(ng-class="{'donate':'active'}[settings.article]")
-              a(href='#/donate', tooltip="Help our soldiers by contributing financial support to our cause.", tooltip-placement='bottom')
-                | Donate
-            li(ng-class="{'contact':'active'}[settings.article]")
-              a(href='#/contact', tooltip="Send questions, comments, and feedback to our board of directors.", tooltip-placement='bottom')
-                | Contact
-            li
-              a(target='_blank', href='//twitter.com/team4mil', tooltip="Follow us on Twitter.", tooltip-placement='bottom')
-                i(class='icon-twitter-sign')
-            li
-              a(target='_blank', href='//facebook.com/team4mil', tooltip="Follow us on Facebook.", tooltip-placement='bottom')
-                i(class='icon-facebook-sign')
+    a(class='brand', href='#/about', ng-hide='false == settings.header.branding')
+      img(src='images/logos/team4mil_white-text_650x200.png', alt='Team 4Mil: For the Military, Warriors and Veterans')
+    ul(class='nav pull-right')
+      li(ng-class="{'mission':'active'}[settings.article]")
+        a(href='#/mission', tooltip="Read about the mission to help our nation's Combat-Wounded Veterans.", tooltip-placement='bottom')
+          | Mission
+      li(ng-class="{'teams':'active'}[settings.article]")
+        a(href='#/teams', tooltip="Meet our warriors and their mentors.", tooltip-placement='bottom')
+          | Teams
+      if ('true' == process.env.TRACKERS_ENABLED)
+        li(ng-class="{'trackers':'active'}[settings.article]")
+          a(href='#/trackers', tooltip="Follow our racers as they compete in the 2013 Race Across America.", tooltip-placement='bottom')
+            | Trackers
+      li(ng-class="{'sponsorship':'active'}[settings.article]")
+        a(href='#/sponsorship', tooltip="Meet the companies who make our work possible.", tooltip-placement='bottom')
+          | Sponsorship
+      li(ng-class="{'donate':'active'}[settings.article]")
+        a(href='#/donate', tooltip="Help our soldiers by contributing financial support to our cause.", tooltip-placement='bottom')
+          | Donate
+      li(ng-class="{'contact':'active'}[settings.article]")
+        a(href='#/contact', tooltip="Send questions, comments, and feedback to our board of directors.", tooltip-placement='bottom')
+          | Contact
+      li
+        a(target='_blank', href='//twitter.com/team4mil', tooltip="Follow us on Twitter.", tooltip-placement='bottom')
+          i(class='icon-twitter-sign')
+      li
+        a(target='_blank', href='//facebook.com/team4mil', tooltip="Follow us on Facebook.", tooltip-placement='bottom')
+          i(class='icon-facebook-sign')
