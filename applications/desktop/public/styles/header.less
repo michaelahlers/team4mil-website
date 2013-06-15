@@ -6,38 +6,66 @@ header {
 
     margin: @navbarMarginTop @navbarMarginRight @navbarMarginBottom @navbarMarginLeft;
 
-    .container-fluid {
-      margin-left: -@navbarMarginLeft;
-      margin-right: -@navbarMarginRight;
-    }
-
-    .nav {
-      font-size: @baseFontSize + 4px;
-
-      li.active,
-      li.active:hover {
-        a {
-          text-shadow: @shadowDropSharp;
-          .border-radius(@baseBorderRadius);
-          #translucent > .background(@grayDark, 0.5);
-        }
-      }
-    }
-
     .brand {
       padding-top: 10px;
       padding-bottom: 10px;
+
       img {
         height: 40px;
       }
     }
 
+    .container-fluid {
+      margin-left: -@navbarMarginLeft;
+      margin-right: -@navbarMarginRight;
+    }
+
+    ul.nav {
+      font-size: @baseFontSize + 4px;
+
+      li.active,
+      li.active:hover {
+        a {
+          //.border-radius(@baseBorderRadius);
+          //background-color: @white;
+        }
+      }
+    }
+
     .navbar-inner {
+      .transition(all .5s ease-in-out);
+
       .border-radius(@baseBorderRadius);
       .box-shadow(@shadowDropStandard);
+
       background-image: url("images/backgrounds/USA-flag_isolated_500x335.png");
       background-position: -150px -75px;
-      background-repeat: no-repeat; //background-color: black;
+      background-repeat: no-repeat;
+    }
+
+  }
+
+  .navbar-inverse {
+    .transition(all .5s ease-in-out);
+
+    ul.nav {
+      li {
+        a {
+          text-shadow: @shadowDropSharp;
+        }
+      }
+
+      li.active,
+      li.active:hover {
+        a {
+          #translucent > .background(@black, 0.25);
+        }
+      }
+    }
+
+    .navbar-inner {
+      .transition(all .5s ease-in-out);
+
       #translucent > .background(@grayDarker, 0.85);
     }
   }
