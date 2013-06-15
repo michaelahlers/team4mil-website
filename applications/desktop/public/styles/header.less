@@ -13,13 +13,11 @@ header {
 
     .nav {
       font-size: @baseFontSize + 4px;
-      a {
-        text-shadow: @shadowDropSharp;
-      }
 
       li.active,
       li.active:hover {
         a {
+          text-shadow: @shadowDropSharp;
           .border-radius(@baseBorderRadius);
           #translucent > .background(@grayDark, 0.5);
         }
