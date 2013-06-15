@@ -8,6 +8,7 @@ define([
     $scope.loaders = 0
 
     $scope.$watch('loaders', function (loaders) {
+      $log.log(loaders)
       $scope.visible = loaders > 0
     })
 
