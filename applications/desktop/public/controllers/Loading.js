@@ -5,14 +5,26 @@ define([
 ], function (controllers) {
 
   return controllers.controller('Loading', function ($rootScope, $scope, $log) {
-    $scope.visible = true
+    $scope.loaders = 0
+
+    $scope.$watch('loaders', function (loaders) {
+      $scope.visible = loaders > 0
+    })
 
     $rootScope.$on('$routeChangeStart', function (event, current, previous) {
-      $scope.visible = true
+      $scope.loaders++
     })
 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-      $scope.visible = false
+      $scope.loaders--
+    })
+
+    $rootScope.$on('t4m-loadingStart', function () {
+      $scope.loaders++
+    })
+
+    $rootScope.$on('t4m-loadingSuccess', function () {
+      $scope.loaders--
     })
   })
 
