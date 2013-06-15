@@ -78,7 +78,7 @@ define(
         }
       })
 
-      $routeProvider.when('/trackers/:id', {
+      $routeProvider.when('/trackers', {
         templateUrl : 'partials/trackers',
         controller : 'Trackers',
         settings : {
@@ -88,13 +88,10 @@ define(
             style : 't4m-trackers'
           },
           header : {
+            inverse : false
           }
         },
         reloadOnSearch : false
-      })
-
-      $routeProvider.when('/trackers', {
-        redirectTo : '/trackers/'
       })
 
       $routeProvider.when('/sponsorship', {
