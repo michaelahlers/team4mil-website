@@ -31,10 +31,16 @@ define([
           var frameEl = $('<iframe class="map" style="margin: 0; padding: 0; width: 100%; height: 100%; border: 0;" frameBorder="0" scrolling="no" hspace="0" vspace="0" marginheight="0" marginwidth="0"></iframe>')
             .appendTo(iEl)
             .load(function () {
-              frameEl.contents().find('head')
-                .append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
 
-              frameEl.contents().find('#map')
+              var spotEl = frameEl.contents()
+                , spotHeadEl = spotEl.find('head')
+                , spotBodyEl = spotEl.find('body')
+                , spotMapEl = spotEl.find('#map')
+                , googleMapEl = spotMapEl.children()
+
+              spotHeadEl.append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
+
+              spotMapEl
                 .css({
                   position : 'absolute',
                   float : 1000,
@@ -43,15 +49,23 @@ define([
                   width : '100%',
                   height : '100%',
                   border : 'none',
-                  background : 'gray'
+                  background : 'gray',
+                  visibility : 'hidden'
                 })
-                .appendTo(frameEl.contents().find('body'))
+                .appendTo(spotBodyEl)
+
+              googleMapEl
+                .css({
+                  visibility : 'hidden'
+                })
+
+              spotMapEl.css({visibility : 'visible'})
+              googleMapEl.css({visibility : 'visible'})
+              iEl.css({visibility : 'visible'})
 
               scope.$apply(function () {
                 $rootScope.$broadcast('t4m-loadingSuccess')
               })
-
-              iEl.css({visibility : 'visible'})
             })
             .attr('src', '/services/trackers0/' + tracker.id)
 
