@@ -32,8 +32,8 @@ define([
             .css({
               margin : 0,
               padding : 0,
-              width : '100%',
-              height : '100%',
+              width : '99%',
+              height : '99%',
               border : 0,
               visibility : 'hidden'
             })
@@ -70,7 +70,11 @@ define([
 
                   // googleMapEl.css({width : '100%'})
                   // spotMapEl.css({visibility : 'visible'})
-                  frameEl.css({visibility : 'visible'})
+                  frameEl.css({
+                    width : '100%',
+                    height : '100%',
+                    visibility : 'visible'
+                  })
                   // iEl.css({visibility : 'visible'})
 
                   $rootScope.$broadcast('t4m-loadingSuccess')
