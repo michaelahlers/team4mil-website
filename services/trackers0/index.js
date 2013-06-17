@@ -36,6 +36,7 @@ trackers0.get('/', function (req, res) {
 trackers0.get('/:id', function (req, res) {
   req.pipe(request({
     method : 'get',
+    proxy : 'http://asqproxy.vzbi.com:80',
     url : trackers[req.params.id].location,
     body : JSON.stringify(req.body)
   })).pipe(res)

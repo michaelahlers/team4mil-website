@@ -6,7 +6,7 @@ define([
   , 'jquery'
 ], function (angular, directives, $) {
 
-  directives.directive('t4mTrackerMap', function ($rootScope, $timeout) {
+  directives.directive('t4mTrackerMap', function ($rootScope, $window, $timeout) {
     return {
       restrict : 'E',
       replace : true,
@@ -28,7 +28,9 @@ define([
 
           $rootScope.$broadcast('t4m-loadingStart')
 
-          var frameEl = $('<iframe class="map" frameBorder="0" scrolling="no"></iframe>')
+          var frameEl = $('<iframe class="map" frameBorder="0" scrolling="no" onload="t4m_tracker_map_onload_fn()"></iframe>')
+
+          frameEl
             .css({
               margin : 0,
               padding : 0,
@@ -38,51 +40,55 @@ define([
               visibility : 'hidden'
             })
             .appendTo(iEl)
-            .load(function () {
 
-              var spotEl = frameEl.contents()
-                , spotHeadEl = spotEl.find('head')
-                , spotBodyEl = spotEl.find('body')
-                , spotMapEl = spotEl.find('#map')
-                , googleMapEl = spotMapEl.children()
+          $window['t4m_tracker_map_onload_fn'] = function () {
+            //.load(function () {
 
-              //spotHeadEl.append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
-              spotBodyEl.children().css({display : 'none'})
-              spotMapEl.appendTo(spotBodyEl).css({display : 'block', visibility : 'visible'})
+            var spotEl = frameEl.contents()
+              , spotHeadEl = spotEl.find('head')
+              , spotBodyEl = spotEl.find('body')
+              , spotMapEl = spotEl.find('#map')
+              , googleMapEl = spotMapEl.children()
 
-              /* This callback is triggered from outside the Angular digest cycle. */
-              scope.$apply(function () {
-                $timeout(function () {
+            //spotHeadEl.append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
+            spotBodyEl.children().css({display : 'none'})
+            spotMapEl.appendTo(spotBodyEl).css({display : 'block', visibility : 'visible'})
 
-                  spotMapEl
-                    .css({
-                      display : 'block',
-                      position : 'absolute',
-                      float : 1000,
-                      left : 0,
-                      top : 0,
-                      width : '100%',
-                      height : '100%',
-                      border : 'none',
-                      background : 'gray'
-                      //,visibility : 'hidden'
-                    })
+            /* This callback is triggered from outside the Angular digest cycle. */
+            scope.$apply(function () {
+              $timeout(function () {
 
-                  // googleMapEl.css({width : '100%'})
-                  // spotMapEl.css({visibility : 'visible'})
-                  frameEl.css({
+                spotMapEl
+                  .css({
+                    display : 'block',
+                    position : 'absolute',
+                    float : 1000,
+                    left : 0,
+                    top : 0,
                     width : '100%',
                     height : '100%',
-                    visibility : 'visible'
+                    border : 'none',
+                    background : 'gray'
+                    //,visibility : 'hidden'
                   })
-                  // iEl.css({visibility : 'visible'})
 
-                  $rootScope.$broadcast('t4m-loadingSuccess')
+                // googleMapEl.css({width : '100%'})
+                // spotMapEl.css({visibility : 'visible'})
+                frameEl.css({
+                  width : '100%',
+                  height : '100%',
+                  visibility : 'visible'
+                })
+                // iEl.css({visibility : 'visible'})
 
-                }, 500)
-              })
+                $rootScope.$broadcast('t4m-loadingSuccess')
+
+              }, 500)
             })
-            .attr('src', '/services/trackers0/' + tracker.id)
+          }
+          //})
+
+          frameEl.attr('src', '/services/trackers0/' + tracker.id)
 
         })
       }
