@@ -40,7 +40,7 @@ define([
 
               spotHeadEl.append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
 
-              spotMapEl
+              googleMapEl
                 .css({
                   position : 'absolute',
                   float : 1000,
@@ -54,10 +54,10 @@ define([
                 })
                 .appendTo(spotBodyEl)
 
-              googleMapEl
-                .css({
-                  visibility : 'hidden'
-                })
+//              googleMapEl
+//                .css({
+//                  visibility : 'hidden'
+//                })
 
               spotMapEl.css({visibility : 'visible'})
               googleMapEl.css({visibility : 'visible'})
