@@ -6,6 +6,8 @@ define([
   , 'jquery'
 ], function (angular, directives, $) {
 
+  var instance = 0
+
   directives.directive('t4mTrackerMap', function ($rootScope, $parse, $window, $q, $timeout, $log) {
     return {
       restrict : 'E',
@@ -23,77 +25,60 @@ define([
             return
           }
 
+          instance++
+
+          var onloadRef = 't4m_tracker_map_onload_fn' + instance
+
           $rootScope.$broadcast('t4m-loadingStart')
 
-          $window.t4m_tracker_map_onload_fn = function () {
-
-            delete $window.t4m_tracker_map_onload_fn
+          $window[onloadRef] = function () {
+            delete $window[onloadRef]
 
             var frameEl = $(iEl.find('iframe'))
               , documentEl = frameEl.contents()
-              , headEl = documentEl.find('head')
               , bodyEl = documentEl.find('body')
               , mapEl = documentEl.find('#map')
               , windowObj = documentEl[0].parentWindow || documentEl[0].defaultView
-              , mapsAPI = windowObj.google.maps
-              , mapObj = new mapsAPI.Map(mapEl[0])
 
-            headEl.append($('<style type="text/css">.x-panel, .x-border-panel { visibility: hidden; }</style>'))
-            headEl.append($('<style type="text/css">body { background: red ! important; }</style>'))
+            /* The onload callback is triggered from outside the Angular digest cycle. */
+            scope.$apply(function () {
 
-            var getReady = function () {
-              var deferred = $q.defer()
+              var isReady = function () {
+                var deferred = $q.defer()
 
-//              function monitor() {
-//                if (windowObj.isMapSetup && windowObj.isFirstSuccessfulReq) {
-//                  deferred.resolve(true)
-//                  return
-//                }
-//
-//                $timeout(monitor, 500)
-//              }
-//
-//              monitor()
+                function monitor() {
+                  if (windowObj.isMapSetup && windowObj.isFirstSuccessfulReq && 0 == bodyEl.find('.x-mask-loading').length) {
+                    deferred.resolve()
+                    return
+                  }
 
-              mapsAPI.event.addListenerOnce(mapObj, 'idle', function () {
-                scope.$apply(function () {
-                  deferred.resolve(true)
-                })
-              })
+                  $timeout(monitor, 500)
+                }
 
-              return deferred.promise
-            }
+                monitor()
 
-            /* This callback is triggered from outside the Angular digest cycle. */
-            //scope.$apply(function () {
-            getReady().then(function (ready) {
-              alert('ready')
+                return deferred.promise
+              }
 
-              mapEl
-                .appendTo(bodyEl)
-                .css({
-                  display : 'block',
+              isReady().then(function () {
+
+                mapEl.appendTo(bodyEl)
+                mapEl.css({
                   position : 'absolute',
                   left : 0,
                   top : 0,
                   width : '100%',
-                  height : '100%',
-                  visibility : 'visible',
-                  background : 'blue'
+                  height : '100%'
                 })
 
-              frameEl.css({
-                width : '100%',
-                height : '100%',
-                visibility : 'visible'
+                frameEl.css({ width : '100%', height : '100%' })
+                iEl.find('div').remove()
+                $rootScope.$broadcast('t4m-loadingSuccess')
               })
-
-              $rootScope.$broadcast('t4m-loadingSuccess')
             })
-            //})
           }
 
-          iEl.html('<iframe class="map" style="margin: 0; padding: 0; width: 99%; height: 99%; border: 0; visibility: hidden;" frameBorder="0" scrolling="no" onload="t4m_tracker_map_onload_fn()" src="/services/trackers0/' + tracker.id + '"></iframe>')
+          iEl.html('<div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #333;"></div><iframe class="map" style="margin: 0; padding: 0; width: 99%; height: 99%; border: 0;" frameBorder="0" scrolling="no" onload="' + onloadRef + '()" src="/services/trackers0/' + tracker.id + '"></iframe>')
 
         })
       }
