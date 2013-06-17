@@ -44,6 +44,8 @@ define([
           $window['t4m_tracker_map_onload_fn'] = function () {
             //.load(function () {
 
+            alert('I hate IE.')
+
             var spotEl = frameEl.contents()
               , spotHeadEl = spotEl.find('head')
               , spotBodyEl = spotEl.find('body')
