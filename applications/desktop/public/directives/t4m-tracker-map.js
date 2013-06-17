@@ -18,9 +18,8 @@ define([
 
       link : function (scope, iEl, iAttrs, controller) {
         scope.$watch('tracker', function (tracker) {
-          //iEl.css({visibility : 'hidden'})
-
           if (!tracker) {
+            iEl.html('')
             return
           }
 
