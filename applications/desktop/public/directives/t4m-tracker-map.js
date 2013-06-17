@@ -35,15 +35,15 @@ define([
               , spotMapEl = spotEl.find('#map')
 
             spotHeadEl.append($('<style type="text/css">.x-panel, .x-border-panel { visibility: hidden; }</style>'))
-            spotMapEl.appendTo(spotBodyEl)
 
             /* This callback is triggered from outside the Angular digest cycle. */
             scope.$apply(function () {
               $timeout(function () {
 
-//                spotBodyEl.children().css({display : 'none'})
+                spotMapEl.appendTo(spotBodyEl)
 
-//                spotMapEl                  .appendTo(spotBodyEl)
+//                spotMapEl
+//                  .appendTo(spotBodyEl)
 //                  .css({
 //                    display : 'block'
 //                    position : 'absolute',
@@ -64,6 +64,7 @@ define([
                   height : '100%',
                   visibility : 'visible'
                 })
+
                 // iEl.css({visibility : 'visible'})
 
                 $rootScope.$broadcast('t4m-loadingSuccess')
