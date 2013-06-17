@@ -40,7 +40,11 @@ define([
             scope.$apply(function () {
               $timeout(function () {
 
-                spotMapEl.appendTo(spotBodyEl)
+                spotMapEl
+                  .appendTo(spotBodyEl)
+                  .css({
+                    'z-index' : 10000
+                  })
 
 //                spotMapEl
 //                  .appendTo(spotBodyEl)
