@@ -69,7 +69,7 @@ define([
 
                 $rootScope.$broadcast('t4m-loadingSuccess')
 
-              }, 500)
+              }, 2000)
             })
           }
 
