@@ -44,8 +44,6 @@ define([
           $window['t4m_tracker_map_onload_fn'] = function () {
             //.load(function () {
 
-            alert('I hate IE.')
-
             var spotEl = frameEl.contents()
               , spotHeadEl = spotEl.find('head')
               , spotBodyEl = spotEl.find('body')
@@ -54,7 +52,8 @@ define([
 
             //spotHeadEl.append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
             spotBodyEl.children().css({display : 'none'})
-            spotMapEl.appendTo(spotBodyEl).css({display : 'block', visibility : 'visible'})
+            spotBodyEl.append(spotMapEl)
+            spotMapEl.css({display : 'block', visibility : 'visible'})
 
             /* This callback is triggered from outside the Angular digest cycle. */
             scope.$apply(function () {
