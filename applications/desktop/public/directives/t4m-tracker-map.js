@@ -27,6 +27,8 @@ define([
 
           $window.t4m_tracker_map_onload_fn = function () {
 
+            delete $window.t4m_tracker_map_onload_fn
+
             var frameEl = $(iEl.find('iframe'))
               , documentEl = frameEl.contents()
               , headEl = documentEl.find('head')
