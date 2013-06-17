@@ -3,5 +3,5 @@
   .navbar.navbar-fixed-bottom
     .container-fluid
       .row-fluid.text-center
-        select.span3(ng-model='settings.tracker', ng-options='tracker as tracker.name for tracker in trackers')
+        select(ng-model='settings.tracker', ng-options='tracker as tracker.name for tracker in trackers')
   img.spot-logo(src='images/logos/spot_3-color_789x445.png')
