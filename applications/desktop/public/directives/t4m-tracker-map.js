@@ -6,7 +6,7 @@ define([
   , 'jquery'
 ], function (angular, directives, $) {
 
-  directives.directive('t4mTrackerMap', function ($rootScope) {
+  directives.directive('t4mTrackerMap', function ($rootScope, $timeout) {
     return {
       restrict : 'E',
       replace : true,
@@ -36,35 +36,33 @@ define([
                 , spotHeadEl = spotEl.find('head')
                 , spotBodyEl = spotEl.find('body')
                 , spotMapEl = spotEl.find('#map')
-                , googleMapEl = spotMapEl.children()
 
               spotHeadEl.append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
 
-              googleMapEl
-                .css({
-                  position : 'absolute',
-                  float : 1000,
-                  left : 0,
-                  top : 0,
-                  width : '100%',
-                  height : '100%',
-                  border : 'none',
-                  background : 'gray',
-                  visibility : 'hidden'
-                })
-                .appendTo(spotBodyEl)
-
-//              googleMapEl
-//                .css({
-//                  visibility : 'hidden'
-//                })
-
-              spotMapEl.css({visibility : 'visible'})
-              googleMapEl.css({visibility : 'visible'})
-              iEl.css({visibility : 'visible'})
-
+              /* This callback is triggered from outside the Angular digest cycle. */
               scope.$apply(function () {
-                $rootScope.$broadcast('t4m-loadingSuccess')
+                $timeout(function () {
+
+                  spotMapEl
+                    .css({
+                      position : 'absolute',
+                      float : 1000,
+                      left : 0,
+                      top : 0,
+                      width : '100%',
+                      height : '100%',
+                      border : 'none',
+                      background : 'gray',
+                      visibility : 'hidden'
+                    })
+                    .appendTo(spotBodyEl)
+
+                  spotMapEl.css({visibility : 'visible'})
+                  iEl.css({visibility : 'visible'})
+
+                  $rootScope.$broadcast('t4m-loadingSuccess')
+
+                }, 500)
               })
             })
             .attr('src', '/services/trackers0/' + tracker.id)
