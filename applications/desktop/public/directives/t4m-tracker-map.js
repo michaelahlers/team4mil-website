@@ -48,13 +48,13 @@ define([
 
               //spotHeadEl.append('<style type="text/css">.ext-el-mask, .x-mask-loading { display: none ! important; }</style>')
               spotBodyEl.children().css({display : 'none'})
+              spotMapEl.appendTo(spotBodyEl).css({display : 'block', visibility : 'visible'})
 
               /* This callback is triggered from outside the Angular digest cycle. */
               scope.$apply(function () {
                 $timeout(function () {
 
                   spotMapEl
-                    .appendTo(spotBodyEl)
                     .css({
                       display : 'block',
                       position : 'absolute',
