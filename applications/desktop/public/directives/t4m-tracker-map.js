@@ -6,7 +6,7 @@ define([
   , 'jquery'
 ], function (angular, directives, $) {
 
-  directives.directive('t4mTrackerMap', function ($rootScope, $window, $timeout, $log) {
+  directives.directive('t4mTrackerMap', function ($rootScope, $window, $q, $timeout, $log) {
     return {
       restrict : 'E',
       replace : true,
@@ -29,51 +29,42 @@ define([
           $window.t4m_tracker_map_onload_fn = function () {
 
             var frameEl = $(iEl.find('iframe'))
-              , spotEl = frameEl.contents()
-              , spotHeadEl = spotEl.find('head')
-              , spotBodyEl = spotEl.find('body')
-              , spotMapEl = spotEl.find('#map')
+              , documentEl = frameEl.contents()
+              , headEl = documentEl.find('head')
+              , bodyEl = documentEl.find('body')
+              , mapEl = documentEl.find('#map')
+              , windowObj = documentEl[0].parentWindow || documentEl[0].defaultView
 
-            spotHeadEl.append($('<style type="text/css">.x-panel, .x-border-panel { visibility: hidden; }</style>'))
+            headEl.append($('<style type="text/css">.x-panel, .x-border-panel { visibility: hidden; }</style>'))
+
+            var getReady = function () {
+              var deferred = $q.defer()
+
+              function monitor() {
+                if (windowObj.isMapSetup) {
+                  deferred.resolve(true)
+                  return
+                }
+
+                $timeout(monitor, 500)
+              }
+
+              monitor()
+
+              return deferred.promise
+            }
 
             /* This callback is triggered from outside the Angular digest cycle. */
             scope.$apply(function () {
-              $timeout(function () {
-
-                spotMapEl
-                  .appendTo(spotBodyEl)
-                  .css({
-                    'z-index' : 10000
-                  })
-
-//                spotMapEl
-//                  .appendTo(spotBodyEl)
-//                  .css({
-//                    display : 'block'
-//                    position : 'absolute',
-//                    float : 1000,
-//                    left : 0,
-//                    top : 0,
-//                    width : '100%',
-//                    height : '100%',
-//                    border : 'none',
-//                    background : 'gray'
-//                    visibility : 'visible'
-//                  })
-
-                // googleMapEl.css({width : '100%'})
-                // spotMapEl.css({visibility : 'visible'})
+              getReady().then(function (status) {
+                mapEl.appendTo(bodyEl)
                 frameEl.css({
                   width : '100%',
                   height : '100%',
                   visibility : 'visible'
                 })
-
-                // iEl.css({visibility : 'visible'})
-
                 $rootScope.$broadcast('t4m-loadingSuccess')
-
-              }, 2000)
+              })
             })
           }
 
