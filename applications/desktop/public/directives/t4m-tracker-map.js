@@ -58,8 +58,8 @@ define([
                   width : '100%',
                   height : '100%',
                   border : 'none',
-                  background : 'gray',
-                  visibility : 'hidden'
+                  background : 'gray'
+                  //,visibility : 'hidden'
                 })
                 .appendTo(spotBodyEl)
 
@@ -68,7 +68,7 @@ define([
                 $timeout(function () {
 
                   // googleMapEl.css({width : '100%'})
-                  spotMapEl.css({visibility : 'visible'})
+                  // spotMapEl.css({visibility : 'visible'})
                   frameEl.css({visibility : 'visible'})
                   //iEl.css({visibility : 'visible'})
 
