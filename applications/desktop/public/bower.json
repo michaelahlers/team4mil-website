@@ -9,6 +9,7 @@
 
   "dependencies" : {
     "bootstrap" : "latest",
-    "font-awesome" : "latest"
+    "font-awesome" : "latest",
+    "html5shiv" : "aFarkas/html5shiv#3.6.2"
   }
 }
