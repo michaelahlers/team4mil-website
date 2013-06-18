@@ -18,6 +18,7 @@
     "mailgun" : "0.4.x",
     "less" : "1.4.x",
     "less-middleware" : "0.1.x",
+    "node-csv-parser" : "https://github.com/wdavidw/node-csv-parser/tarball/master",
     "q" : "0.8.x",
     "request" : "2.x.x",
     "requirejs" : "2.1.x",
