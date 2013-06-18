@@ -81,50 +81,44 @@ trackers0.get('/', function (req, res) {
 })
 
 var getProgress = function (referencePoint) {
-  return route.then(function (route) {
-    var points = route.points
-      , shortestDistance = toDistance(referencePoint, points[0])
-      , closestIndex = 0
-
-    for (var index = 1; index < points.length; index++) {
-      var distance = toDistance(referencePoint, points[index])
-
-      if (distance < shortestDistance) {
-        closestIndex = index
-        shortestDistance = distance
-      }
-    }
-
-    return{
-      index : closestIndex,
-      total : points.length,
-      percent : closestIndex / points.length,
-      closest : {
-        point : points[closestIndex]
-      },
-      reference : {
-        point : referencePoint
-      }
-    }
-  })
+  return
 }
 
 
 trackers0.get('/:id', function (req, res) {
   request(trackers[req.params.id].location, function (err, status, body) {
     var message = JSON.parse(body).response.feedMessageResponse.messages.message[0]
-      , point = {
+      , referencePoint = {
         latitude : message.latitude,
         longitude : message.longitude
       }
 
-    getProgress(point).then(function (progress) {
+
+    route.then(function (route) {
+      var points = route.points
+        , shortestDistance = toDistance(referencePoint, points[0])
+        , closestIndex = 0
+
+      for (var index = 1; index < points.length; index++) {
+        var distance = toDistance(referencePoint, points[index])
+
+        if (distance < shortestDistance) {
+          closestIndex = index
+          shortestDistance = distance
+        }
+      }
+
       res.send({
-        position : {
-          timestamp : message.dateTime,
-          point : point
+        timestamp : message.dateTime,
+        total : points.length,
+        percent : closestIndex / points.length,
+        nearest : {
+          index : closestIndex,
+          point : points[closestIndex]
         },
-        progress : progress
+        reference : {
+          point : referencePoint
+        }
       })
     })
   })
