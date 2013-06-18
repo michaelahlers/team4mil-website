@@ -118,16 +118,22 @@ trackers0.get('/:id', function (req, res) {
 
       var delta = times.current.getTime() - times.started.getTime()
       var speed = {
-        kpm : distance / (delta / 1000 / 60 / 60)
+        kph : distance / (delta / 1000 / 60 / 60)
       }
-      speed.mph = speed.kpm * 0.621371
+      speed.mph = speed.kph * 0.621371
+
+      times.arrival = new Date(times.started.getTime() + (route.distance.kilometers / (speed.kph / 60 / 60 / 1000)))
 
       res.send({
         times : times,
         percent : distance / route.distance.kilometers,
-        distance : {
+        traveled : {
           kilometers : distance,
           miles : distance * 0.621371
+        },
+        remaining : {
+          kilometers : route.distance.kilometers - distance,
+          miles : (route.distance.kilometers - distance) * 0.621371
         },
         speed : speed,
         nearest : {

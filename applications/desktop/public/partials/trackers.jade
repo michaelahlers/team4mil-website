@@ -13,13 +13,20 @@
             tbody
               tr
                 th Total
-                td {{route.distance.miles|number}} mi.
+                td
+                  span(ng-show='route.distance.miles') {{route.distance.miles|number}} mi.
               tr
                 th Traveled
-                td {{progress.distance.miles|number}} mi.
+                td
+                  span(ng-show='progress.traveled.miles') {{progress.traveled.miles|number}} mi.
+              tr
+                th Remaining
+                td
+                  span(ng-show='progress.remaining.miles') {{progress.remaining.miles|number}} mi.
               tr
                 th ETA
-                td {{progress.arrival.date|date}}
+                td
+                  span(ng-show='progress.times.arrival') {{progress.times.arrival|date:'medium'}}
 
   t4m-tracker-map(ng-model='settings.tracker')
 
