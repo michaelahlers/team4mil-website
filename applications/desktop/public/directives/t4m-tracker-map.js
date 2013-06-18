@@ -113,7 +113,7 @@ define([
                 $rootScope.$broadcast('t4m-loadingSuccess')
                 return response.data.response.feedMessageResponse.messages.message
               })
-              $timeout(monitor, 1000 * 30)
+              $timeout(monitor, 1000 * 60)
             }
           }
           monitor()
