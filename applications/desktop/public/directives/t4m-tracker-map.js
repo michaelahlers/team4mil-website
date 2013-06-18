@@ -40,7 +40,10 @@ define([
         }
 
         var map = new maps.Map(iEl[0], {
-          mapTypeId : maps.MapTypeId.TERRAIN
+          mapTypeId : maps.MapTypeId.TERRAIN,
+          disableDefaultUI : true,
+          panControl : true,
+          zoomControl : true
         })
 
         getDefaultViewport().then(function (viewport) {
@@ -60,7 +63,6 @@ define([
           }
 
           var monitor = function () {
-            $rootScope.$broadcast('t4m-loadingStart')
             if (tracker == scope.tracker) {
               scope.messages = feed.get({ id : tracker.id}).$then(function (response) {
                 $rootScope.$broadcast('t4m-loadingSuccess')
