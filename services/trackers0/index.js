@@ -107,17 +107,29 @@ trackers0.get('/:id', function (req, res) {
 
       if (1 < behindPoints.length) {
         for (var index = 1; index < behindPoints.length; index++) {
-          distance+=toDistance(behindPoints[index], behindPoints[index - 1])
+          distance += toDistance(behindPoints[index], behindPoints[index - 1])
         }
       }
 
+      var times = {
+        started : new Date('06/15/2013 15:32 EST'),
+        current : new Date(message.dateTime)
+      }
+
+      var delta = times.current.getTime() - times.started.getTime()
+      var speed = {
+        kpm : distance / (delta / 1000 / 60 / 60)
+      }
+      speed.mph = speed.kpm * 0.621371
+
       res.send({
-        timestamp : message.dateTime,
+        times : times,
         percent : distance / route.distance.kilometers,
         distance : {
           kilometers : distance,
           miles : distance * 0.621371
         },
+        speed : speed,
         nearest : {
           index : closestIndex,
           point : points[closestIndex]
