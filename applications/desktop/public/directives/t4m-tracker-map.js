@@ -64,14 +64,14 @@ define([
             return new maps.LatLng(position.latitude, position.longitude)
           })
 
-          var path = new maps.Polyline({
-            path : coordinates,
-            strokeColor : '#000000',
-            strokeOpacity : 0.5,
-            strokeWeight : 5
-          })
-
-          path.setMap(map)
+//var path = new maps.Polyline({
+//  path : coordinates,
+//  strokeColor : '#000000',
+//  strokeOpacity : 0.5,
+//  strokeWeight : 5
+//})
+//
+//path.setMap(map)
 
           geocoder.geocode({'location' : coordinates[0]}, function (results, status) {
             var marker = new maps.Marker({
@@ -116,51 +116,83 @@ define([
           monitor()
         })
 
-        var path
+        var behindPolyline = new maps.Polyline({
+            strokeColor : '#FF0000',
+            strokeOpacity : 0.75,
+            strokeWeight : 5
+          })
+          , aheadPolyline = new maps.Polyline({
+            strokeColor : '#000000',
+            strokeOpacity : 0.5,
+            strokeWeight : 3
+          })
           , currentMarker = new maps.Marker({ map : map })
           , currentPopup = new maps.InfoWindow()
+
+        behindPolyline.setMap(map)
+        aheadPolyline.setMap(map)
 
         maps.event.addListener(currentMarker, 'click', function () {
           currentPopup.open(map, currentMarker)
         })
 
-//        var toClosest = function (referencePoint) {
-//          var deferred = $q.defer()
-//
-//          getRoute().then(function (points) {
-//            var shortestDistance
-//            for (var index = 0; index < points.length; index++) {
-//          var distance = Math.sqrt()
-//            }
-//          })
-//
-//          return deferred.promise
-//        }
+        var toLatLng = function (point) {
+          return new maps.LatLng(point.latitude, point.longitude)
+        }
+
+        var toLatLngs = function (points) {
+          return jQuery.map(points, toLatLng)
+        }
+
+        var toDistance = function (point0, point1) {
+          return Math.sqrt(Math.pow(point0.latitude - point1.latitude, 2) + Math.pow(point0.longitude - point1.longitude, 2))
+        }
+
+        var getProgress = function (referencePoint) {
+          var deferred = $q.defer()
+
+          getRoute().then(function (points) {
+            var shortestDistance = toDistance(referencePoint, points[0])
+              , closestIndex = 0
+
+            for (var index = 1; index < points.length; index++) {
+              var distance = toDistance(referencePoint, points[index])
+
+              if (distance < shortestDistance) {
+                closestIndex = index
+                shortestDistance = distance
+              }
+            }
+
+            deferred.resolve({
+              index : closestIndex,
+              total : points.length,
+              all : points,
+              behind : points.slice(0, closestIndex),
+              ahead : points.slice(closestIndex, points.length - 1),
+              resolved : points[closestIndex],
+              reference : referencePoint
+            })
+          })
+
+          return deferred.promise
+        }
 
         scope.$watch('messages', function (messages) {
-          if (path) {
-            path.setMap(null)
-          }
-
           if (!messages) {
             return
           }
 
-          var coordinates = jQuery.map(messages, function (message) {
-            return new maps.LatLng(message.latitude, message.longitude)
+          var currentCoordinate = toLatLng(messages[0])
+
+          currentMarker.setPosition(currentCoordinate)
+
+          getProgress(messages[0]).then(function (progress) {
+            behindPolyline.setPath(toLatLngs(progress.behind))
+            aheadPolyline.setPath(toLatLngs(progress.ahead))
           })
 
-          path = new maps.Polyline({
-            path : coordinates,
-            strokeColor : '#FF0000',
-            strokeOpacity : 0.75,
-            strokeWeight : 5
-          })
-
-          path.setMap(map)
-          currentMarker.setPosition(coordinates[0])
-
-          geocoder.geocode({'location' : coordinates[0]}, function (results, status) {
+          geocoder.geocode({'location' : currentCoordinate}, function (results, status) {
             currentPopup.setContent(results[0].formatted_address)
           })
         })
