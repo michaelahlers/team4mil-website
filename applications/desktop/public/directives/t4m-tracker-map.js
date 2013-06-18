@@ -10,6 +10,7 @@ define([
   , 'directives'
   , 'jquery'
   , 'google-maps'
+  , 'services/Trackers'
 ], function (angular, directives, jQuery, maps) {
 
   var geocoder = new maps.Geocoder()
@@ -27,7 +28,7 @@ define([
     return Math.sqrt(Math.pow(point0.latitude - point1.latitude, 2) + Math.pow(point0.longitude - point1.longitude, 2))
   }
 
-  directives.directive('t4mTrackerMap', function ($rootScope, $http, $resource, $q, $timeout, $log) {
+  directives.directive('t4mTrackerMap', function ($rootScope, $http, $resource, $q, $timeout, Trackers, $log) {
     var feed = $resource('/services/trackers0/:id')
 
     return {
@@ -54,12 +55,6 @@ define([
           return deferred.promise
         }
 
-        var getRoute = function () {
-          return $http.get('/services/trackers0/2013-raam-route').then(function (response) {
-            return response.data
-          })
-        }
-
         var map = new maps.Map(iEl[0], {
           mapTypeId : maps.MapTypeId.TERRAIN,
           disableDefaultUI : true,
@@ -71,7 +66,7 @@ define([
           map.fitBounds(viewport)
         })
 
-        getRoute().then(function (route) {
+        Trackers.getRoutePoints().then(function (route) {
           var coordinates = jQuery.map(route, function (position) {
             return new maps.LatLng(position.latitude, position.longitude)
           })
@@ -143,7 +138,7 @@ define([
         var getProgress = function (referencePoint) {
           var deferred = $q.defer()
 
-          getRoute().then(function (points) {
+          Trackers.getRoutePoints().then(function (points) {
             var shortestDistance = toDistance(referencePoint, points[0])
               , closestIndex = 0
 

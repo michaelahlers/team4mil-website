@@ -5,6 +5,7 @@ var csv = require('csv')
   , express = require('express')
   , environment = require('../../environment')
   , fs = require('fs')
+  , LatLon = require('./LatLon')
   , path = require('path')
   , request = require('request')
   , Q = require('q')
@@ -22,25 +23,52 @@ trackers0.configure(function () {
   /* Empty for now. */
 })
 
-trackers0.get('/2013-raam-route', function (req, res) {
+var toDistance = function (point0, point1) {
+  if ('undefined' === typeof point0 || 'undefined' === typeof point1) {
+    throw {
+      message : 'Both arguments are required to compute distance.'
+    }
+  }
+  return parseFloat(new LatLon(point0.latitude, point0.longitude).distanceTo(new LatLon(point1.latitude, point1.longitude)))
+}
 
-  var coordinates = []
+var route = Q.fcall(function () {
+  var deferred = Q.defer()
+    , points = []
+    , distance = 0
 
   csv()
     .from.stream(fs.createReadStream(path.join(__dirname, '2013-raam-route.csv')))
     .on('record', function (row, index) {
       /* If the mode is not defined, then default it to the environment
        * setting so that the condition will pass. */
-      coordinates.push({
+      points.push({
         latitude : parseFloat(row.shift()),
         longitude : parseFloat(row.shift()),
         name : row.shift()
       })
+
+      if (1 < points.length) {
+        distance += toDistance(points[points.length - 1], points[points.length - 2])
+      }
     })
     .on('end', function () {
-      res.send(coordinates)
+      deferred.resolve({
+        distance : {
+          kilometers : distance,
+          miles : distance * 0.621371
+        },
+        points : points
+      })
     })
 
+  return deferred.promise
+})
+
+trackers0.get('/2013-raam-route', function (req, res) {
+  route.then(function (route) {
+    res.send(route)
+  })
 })
 
 trackers0.get('/', function (req, res) {
@@ -52,12 +80,54 @@ trackers0.get('/', function (req, res) {
   }))
 })
 
+var getProgress = function (referencePoint) {
+  return route.then(function (route) {
+    var points = route.points
+      , shortestDistance = toDistance(referencePoint, points[0])
+      , closestIndex = 0
+
+    for (var index = 1; index < points.length; index++) {
+      var distance = toDistance(referencePoint, points[index])
+
+      if (distance < shortestDistance) {
+        closestIndex = index
+        shortestDistance = distance
+      }
+    }
+
+    return{
+      index : closestIndex,
+      total : points.length,
+      percent : closestIndex / points.length,
+      closest : {
+        point : points[closestIndex]
+      },
+      reference : {
+        point : referencePoint
+      }
+    }
+  })
+}
+
+
 trackers0.get('/:id', function (req, res) {
-  req.pipe(request({
-    method : 'get',
-    url : trackers[req.params.id].location,
-    body : JSON.stringify(req.body)
-  })).pipe(res)
+  request(trackers[req.params.id].location, function (err, status, body) {
+    var message = JSON.parse(body).response.feedMessageResponse.messages.message[0]
+      , point = {
+        latitude : message.latitude,
+        longitude : message.longitude
+      }
+
+    getProgress(point).then(function (progress) {
+      res.send({
+        position : {
+          timestamp : message.dateTime,
+          point : point
+        },
+        progress : progress
+      })
+    })
+  })
 })
 
 module.exports = Q.fcall(function () {
