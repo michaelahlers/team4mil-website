@@ -82,50 +82,45 @@ define([
           Trackers.monitor(tracker)
         })
 
-        scope.$on('t4m-trackers-update', function (event, update) {
-          $log.log(update)
+        var behindPolyline = new maps.Polyline({
+            strokeColor : '#FF0000',
+            strokeOpacity : 0.75,
+            strokeWeight : 5
+          })
+          , aheadPolyline = new maps.Polyline({
+            strokeColor : '#000000',
+            strokeOpacity : 0.5,
+            strokeWeight : 3
+          })
+          , currentMarker = new maps.Marker({ map : map })
+          , currentPopup = new maps.InfoWindow()
+
+        behindPolyline.setMap(map)
+        aheadPolyline.setMap(map)
+
+        maps.event.addListener(currentMarker, 'click', function () {
+          currentPopup.open(map, currentMarker)
+          map.panTo(currentMarker.getPosition())
         })
 
-//        var behindPolyline = new maps.Polyline({
-//            strokeColor : '#FF0000',
-//            strokeOpacity : 0.75,
-//            strokeWeight : 5
-//          })
-//          , aheadPolyline = new maps.Polyline({
-//            strokeColor : '#000000',
-//            strokeOpacity : 0.5,
-//            strokeWeight : 3
-//          })
-//          , currentMarker = new maps.Marker({ map : map })
-//          , currentPopup = new maps.InfoWindow()
-//
-//        behindPolyline.setMap(map)
-//        aheadPolyline.setMap(map)
-//
-//        maps.event.addListener(currentMarker, 'click', function () {
-//          currentPopup.open(map, currentMarker)
-//          map.panTo(currentMarker.getPosition())
-//        })
-//
-//
-//        scope.$watch('messages', function (messages) {
-//          if (!messages) {
-//            return
-//          }
-//
-//          var currentCoordinate = toLatLng(messages[0])
-//
-//          currentMarker.setPosition(currentCoordinate)
-//
-//          getProgress(messages[0]).then(function (progress) {
-//            behindPolyline.setPath(toLatLngs(progress.behind).concat([currentCoordinate]))
-//            aheadPolyline.setPath([currentCoordinate].concat(toLatLngs(progress.ahead)))
-//          })
-//
-//          geocoder.geocode({'location' : currentCoordinate}, function (results, status) {
-//            currentPopup.setContent(results[0].formatted_address)
-//          })
-//        })
+        scope.$on('t4m-trackers-progress', function (event, progress) {
+          var currentCoordinate = toLatLng(progress.reference.point)
+
+          currentMarker.setPosition(currentCoordinate)
+
+          Trackers.getRoute().then(function (route) {
+            var points = toLatLngs(route.points)
+              , behindPoints = points.slice(0, progress.nearest.index)
+              , aheadPoints = points.slice(progress.nearest.index, points.length - 1)
+
+            behindPolyline.setPath(behindPoints.concat([currentCoordinate]))
+            aheadPolyline.setPath([currentCoordinate].concat(aheadPoints))
+
+            geocoder.geocode({'location' : currentCoordinate}, function (results, status) {
+              currentPopup.setContent(results[0].formatted_address)
+            })
+          })
+        })
       }
     }
   })
