@@ -24,9 +24,7 @@ define([
     return jQuery.map(points, toLatLng)
   }
 
-  directives.directive('t4mTrackerMap', function ($rootScope, $http, $resource, $q, $timeout, Trackers, $log) {
-    var feed = $resource('/services/trackers0/:id')
-
+  directives.directive('t4mTrackerMap', function ($rootScope, Trackers, $log) {
     return {
       restrict : 'E',
       replace : true,
@@ -37,7 +35,7 @@ define([
       },
 
       link : function (scope, iEl, iAttrs, controller) {
-        //$rootScope.$broadcast('t4m-loadingStart')
+        $rootScope.$broadcast('t4m-loadingStart')
 
         var map = new maps.Map(iEl[0], {
           mapTypeId : maps.MapTypeId.TERRAIN,
@@ -104,6 +102,8 @@ define([
         })
 
         scope.$on('t4m-trackers-progress', function (event, progress) {
+          $rootScope.$broadcast('t4m-loadingSuccess')
+
           var currentCoordinate = toLatLng(progress.reference.point)
 
           currentMarker.setPosition(currentCoordinate)
