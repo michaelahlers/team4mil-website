@@ -19,20 +19,30 @@ define([
 
       link : function (scope, iEl, iAttrs, controller) {
         var options = {
-          width : 150,
+          width : 150, height : 150,
           redFrom : 40, redTo : 60,
           yellowFrom : 30, yellowTo : 40,
-          max: 60,
-          minorTicks : 5
-        };
+          max : 60,
+          minorTicks : 5,
+          animation : {
+            'duration' : 1000,
+            'easing' : 'inAndOut'
+          }
+        }
 
         var chart = new visualization.Gauge(iEl[0])
-        //chart.draw(data, options)
+
+        var data = visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Avg. MPH', 0],
+        ])
+
+        chart.draw(data, options)
 
         $rootScope.$on('t4m-trackers-progress', function (event, progress) {
           var data = visualization.arrayToDataTable([
             ['Label', 'Value'],
-            ['MPH', Math.round(progress.speed.mph * 10) / 10]
+            ['Avg. MPH', Math.round(progress.speed.mph * 10) / 10],
           ])
 
           chart.draw(data, options)
