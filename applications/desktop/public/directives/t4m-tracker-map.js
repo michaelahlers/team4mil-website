@@ -180,8 +180,8 @@ define([
           currentMarker.setPosition(currentCoordinate)
 
           getProgress(messages[0]).then(function (progress) {
-            behindPolyline.setPath(toLatLngs(progress.behind))
-            aheadPolyline.setPath(toLatLngs(progress.ahead))
+            behindPolyline.setPath(toLatLngs(progress.behind).concat([currentCoordinate]))
+            aheadPolyline.setPath([currentCoordinate].concat(toLatLngs(progress.ahead)))
           })
 
           geocoder.geocode({'location' : currentCoordinate}, function (results, status) {
