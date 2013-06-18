@@ -38,8 +38,15 @@ body.t4m-trackers {
   }
 
   .t4m-trackers-speed {
+    .transition(opacity 1s ease-in-out);
     position: absolute;
     bottom: 50px;
-    z-index: 10000;
+    z-index: 10;
+    .opacity(50);
+  }
+
+  .t4m-trackers-speed:hover {
+    .transition(opacity 250ms ease-in-out);
+    .opacity(100);
   }
 }
