@@ -7,14 +7,9 @@ var express = require('express')
   , Q = require('q')
 
 var trackers = {
-//  '2013-warrior-team' : {
-//    name : '2013 Warrior Team',
-//    location : 'http://share.findmespot.com/shared/faces/viewspots.jsp?glId=0UsXxonLsY1eNYu07minJ9UzXhb8WmDn5'
-//  },
-
   '2013-allied-forces-team' : {
     name : '2013 Allied Forces Team',
-    location : 'http://share.findmespot.com/shared/faces/viewspots.jsp?glId=0qnLoEtgyf0esT6DpOxqE3HsIVDJJp3HK'
+    location : 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/0qnLoEtgyf0esT6DpOxqE3HsIVDJJp3HK/message'
   }
 }
 
