@@ -80,11 +80,6 @@ trackers0.get('/', function (req, res) {
   }))
 })
 
-var getProgress = function (referencePoint) {
-  return
-}
-
-
 trackers0.get('/:id', function (req, res) {
   request(trackers[req.params.id].location, function (err, status, body) {
     var message = JSON.parse(body).response.feedMessageResponse.messages.message[0]
@@ -92,7 +87,6 @@ trackers0.get('/:id', function (req, res) {
         latitude : message.latitude,
         longitude : message.longitude
       }
-
 
     route.then(function (route) {
       var points = route.points
