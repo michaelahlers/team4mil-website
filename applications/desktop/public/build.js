@@ -35,10 +35,10 @@
       'jquery-imagesLoaded' : 'lib/jquery.imagesloaded',
       'jquery-smooth-scroll' : 'lib/jquery-smooth-scroll-1.4.9/jquery.smooth-scroll',
 
-      'async' : 'lib/requirejs-plugins-master/src/async',
-      'depend' : 'lib/requirejs-plugins-master/src/depend',
-      'json' : 'lib/requirejs-plugins-master/src/json',
-      'noext' : 'lib/requirejs-plugins-master/src/noext',
+      'async' : 'vendor/requirejs-plugins/src/async',
+      'depend' : 'vendor/requirejs-plugins/src/depend',
+      'json' : 'vendor/requirejs-plugins/src/json',
+      'noext' : 'vendor/requirejs-plugins/src/noext',
       'text' : 'lib/text-2.0.5'
     },
 
