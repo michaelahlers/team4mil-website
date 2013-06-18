@@ -8,6 +8,7 @@
   "dependencies" : {
     "async" : "*",
     "bower" : "0.9.x",
+    "csv" : "0.3.x",
     "ejs" : "0.8.x",
     "express" : "3.x",
     "facebook-node-sdk" : "0.2.x",
@@ -18,7 +19,6 @@
     "mailgun" : "0.4.x",
     "less" : "1.4.x",
     "less-middleware" : "0.1.x",
-    "node-csv" : "https://github.com/wdavidw/node-csv/tarball/master",
     "q" : "0.8.x",
     "request" : "2.x.x",
     "requirejs" : "2.1.x",
