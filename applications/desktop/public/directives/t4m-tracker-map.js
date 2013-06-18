@@ -12,7 +12,7 @@ define([
   , 'google-maps'
 ], function (angular, directives, jQuery, maps) {
 
-  directives.directive('t4mTrackerMap', function ($rootScope, $resource, $parse, $window, $q, $timeout, $log) {
+  directives.directive('t4mTrackerMap', function ($rootScope, $http, $resource, $q, $timeout, $log) {
     var feed = $resource('/services/trackers0/:id')
 
     return {
@@ -39,6 +39,12 @@ define([
           return deferred.promise
         }
 
+        var getRoute = function () {
+          return $http.get('/services/trackers0/2013-raam-route').then(function (response) {
+            return response.data
+          })
+        }
+
         var map = new maps.Map(iEl[0], {
           mapTypeId : maps.MapTypeId.TERRAIN,
           disableDefaultUI : true,
@@ -48,6 +54,21 @@ define([
 
         getDefaultViewport().then(function (viewport) {
           map.fitBounds(viewport)
+        })
+
+        getRoute().then(function (route) {
+          var coordinates = jQuery.map(route, function (position) {
+            return new maps.LatLng(position.lat, position.long)
+          })
+
+          var path = new maps.Polyline({
+            path : coordinates,
+            strokeColor : '#000000',
+            strokeOpacity : 0.5,
+            strokeWeight : 5
+          })
+
+          path.setMap(map)
         })
 
         // maps.event.addListenerOnce(map, 'idle', function () {
@@ -97,8 +118,8 @@ define([
           path = new maps.Polyline({
             path : coordinates,
             strokeColor : '#FF0000',
-            strokeOpacity : 0.5,
-            strokeWeight : 3
+            strokeOpacity : 0.75,
+            strokeWeight : 5
           })
 
           path.setMap(map)
@@ -108,8 +129,8 @@ define([
             map : map
           })
 
-          map.panTo(coordinates[0])
-          map.setZoom(7)
+          //map.panTo(coordinates[0])
+          //map.setZoom(7)
         })
       }
     }
