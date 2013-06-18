@@ -37,12 +37,15 @@ body.t4m-trackers {
     .opacity(50)
   }
 
-  .t4m-trackers-speed {
-    .transition(opacity 1s ease-in-out);
+  .t4m-trackers-status {
     position: absolute;
     bottom: 50px;
     z-index: 10;
-    .opacity(50);
+  }
+
+  .t4m-trackers-speed {
+    .transition(opacity 500ms ease-in-out);
+    .opacity(25);
   }
 
   .t4m-trackers-speed:hover {

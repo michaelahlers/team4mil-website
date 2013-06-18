@@ -11,7 +11,7 @@ define([
 ], function (angular, directives, visualization) {
 
 
-  directives.directive('t4mTrackersSpeed', function ($rootScope, $log) {
+  directives.directive('t4mTrackersSpeed', function ($rootScope, $filter, $log) {
     return {
       restrict : 'E',
       replace : true,
@@ -21,8 +21,8 @@ define([
         var options = {
           width : 150, height : 150,
           greenFrom : 20, greenTo : 35,
-          yellowFrom : 35, yellowTo : 45,
-          redFrom : 45, redTo : 60,
+          yellowFrom : 35, yellowTo : 50,
+          redFrom : 50, redTo : 60,
           max : 60,
           minorTicks : 5,
           animation : {
@@ -41,9 +41,10 @@ define([
         chart.draw(data, options)
 
         $rootScope.$on('t4m-trackers-progress', function (event, progress) {
+
           var data = visualization.arrayToDataTable([
             ['Label', 'Value'],
-            ['Avg. MPH', Math.round(progress.speed.mph * 10) / 10],
+            ['Avg. MPH', Number($filter('number')(progress.speed.mph))],
           ])
 
           chart.draw(data, options)
