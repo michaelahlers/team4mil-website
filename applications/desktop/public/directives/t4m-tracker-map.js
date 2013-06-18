@@ -74,8 +74,6 @@ define([
           path.setMap(map)
 
           geocoder.geocode({'location' : coordinates[0]}, function (results, status) {
-            $log.log(results[0])
-
             var marker = new maps.Marker({
               position : coordinates[0],
               map : map
@@ -119,15 +117,16 @@ define([
         })
 
         var path
-          , marker
+          , currentMarker = new maps.Marker({ map : map })
+          , currentPopup = new maps.InfoWindow()
+
+        maps.event.addListener(currentMarker, 'click', function () {
+          currentPopup.open(map, currentMarker)
+        })
 
         scope.$watch('messages', function (messages) {
           if (path) {
             path.setMap(null)
-          }
-
-          if (marker) {
-            marker.setMap(null)
           }
 
           if (!messages) {
@@ -146,17 +145,10 @@ define([
           })
 
           path.setMap(map)
-
-          marker = new maps.Marker({
-            position : coordinates[0],
-            map : map
-          })
+          currentMarker.setPosition(coordinates[0])
 
           geocoder.geocode({'location' : coordinates[0]}, function (results, status) {
-            maps.event.addListener(marker, 'click', function () {
-              popup.setContent(results[0].formatted_address)
-              popup.open(map, marker)
-            })
+            currentPopup.setContent(results[0].formatted_address)
           })
         })
       }
