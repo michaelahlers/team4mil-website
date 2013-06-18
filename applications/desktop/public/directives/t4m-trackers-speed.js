@@ -20,8 +20,9 @@ define([
       link : function (scope, iEl, iAttrs, controller) {
         var options = {
           width : 150, height : 150,
-          redFrom : 40, redTo : 60,
-          yellowFrom : 30, yellowTo : 40,
+          greenFrom : 20, greenTo : 35,
+          yellowFrom : 35, yellowTo : 45,
+          redFrom : 45, redTo : 60,
           max : 60,
           minorTicks : 5,
           animation : {
