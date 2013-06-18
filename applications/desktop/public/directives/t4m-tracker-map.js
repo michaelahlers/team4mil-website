@@ -12,15 +12,13 @@ define([
   , 'google-maps'
 ], function (angular, directives, jQuery, maps) {
 
-  var instance = 0
-
   directives.directive('t4mTrackerMap', function ($rootScope, $resource, $parse, $window, $q, $timeout, $log) {
     var feed = $resource('/services/trackers0/:id')
 
     return {
       restrict : 'E',
       replace : true,
-      template : '<div style="margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;" />',
+      template : '<div class="t4m-tracker-map" />',
 
       scope : {
         tracker : '=ngModel'
@@ -49,11 +47,11 @@ define([
           map.fitBounds(viewport)
         })
 
-        maps.event.addListenerOnce(map, 'idle', function () {
-          scope.$apply(function () {
-            $rootScope.$broadcast('t4m-loadingSuccess')
-          })
-        })
+        // maps.event.addListenerOnce(map, 'idle', function () {
+        //scope.$apply(function () {
+        //$rootScope.$broadcast('t4m-loadingSuccess')
+        //})
+        //})
 
         scope.$watch('tracker', function (tracker) {
           if (!tracker) {
@@ -62,8 +60,10 @@ define([
           }
 
           var monitor = function () {
+            $rootScope.$broadcast('t4m-loadingStart')
             if (tracker == scope.tracker) {
               scope.messages = feed.get({ id : tracker.id}).$then(function (response) {
+                $rootScope.$broadcast('t4m-loadingSuccess')
                 return response.data.response.feedMessageResponse.messages.message
               })
               $timeout(monitor, 10000)
@@ -107,7 +107,7 @@ define([
           })
 
           map.panTo(coordinates[0])
-          map.setZoom(8)
+          map.setZoom(7)
         })
       }
     }
