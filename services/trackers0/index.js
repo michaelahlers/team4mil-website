@@ -32,8 +32,8 @@ trackers0.get('/2013-raam-route', function (req, res) {
       /* If the mode is not defined, then default it to the environment
        * setting so that the condition will pass. */
       coordinates.push({
-        lat : parseFloat(row.shift()),
-        long : parseFloat(row.shift()),
+        latitude : parseFloat(row.shift()),
+        longitude : parseFloat(row.shift()),
         name : row.shift()
       })
     })

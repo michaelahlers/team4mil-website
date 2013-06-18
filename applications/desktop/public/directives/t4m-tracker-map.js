@@ -61,7 +61,7 @@ define([
 
         getRoute().then(function (route) {
           var coordinates = jQuery.map(route, function (position) {
-            return new maps.LatLng(position.lat, position.long)
+            return new maps.LatLng(position.latitude, position.longitude)
           })
 
           var path = new maps.Polyline({
@@ -123,6 +123,19 @@ define([
         maps.event.addListener(currentMarker, 'click', function () {
           currentPopup.open(map, currentMarker)
         })
+
+//        var toClosest = function (referencePoint) {
+//          var deferred = $q.defer()
+//
+//          getRoute().then(function (points) {
+//            var shortestDistance
+//            for (var index = 0; index < points.length; index++) {
+//          var distance = Math.sqrt()
+//            }
+//          })
+//
+//          return deferred.promise
+//        }
 
         scope.$watch('messages', function (messages) {
           if (path) {
