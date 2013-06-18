@@ -29,7 +29,7 @@ define([
         var monitor = function () {
           if (tracker == activeTracker) {
             $http.get('/services/trackers0/' + tracker.id).then(function (response) {
-              $rootScope.$broadcast('t4m-trackers-update', response.data)
+              $rootScope.$broadcast('t4m-trackers-progress', response.data)
             })
             $timeout(monitor, 10000)
           }
