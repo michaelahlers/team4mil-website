@@ -102,10 +102,22 @@ trackers0.get('/:id', function (req, res) {
         }
       }
 
+      var distance = 0
+        , behindPoints = points.slice(0, closestIndex).concat([referencePoint])
+
+      if (1 < behindPoints.length) {
+        for (var index = 1; index < behindPoints.length; index++) {
+          distance+=toDistance(behindPoints[index], behindPoints[index - 1])
+        }
+      }
+
       res.send({
         timestamp : message.dateTime,
-        total : points.length,
-        percent : closestIndex / points.length,
+        percent : distance / route.distance.kilometers,
+        distance : {
+          kilometers : distance,
+          miles : distance * 0.621371
+        },
         nearest : {
           index : closestIndex,
           point : points[closestIndex]
