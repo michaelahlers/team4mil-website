@@ -12,9 +12,9 @@
           table.table.table-bordered.table-condensed
             tbody
               tr
-                th Total
+                th Updated
                 td
-                  span(ng-show='route.distance.miles') {{route.distance.miles|number}} mi.
+                  span(ng-show='progress.times.updated') {{progress.times.updated|date:'medium'}}
               tr
                 th Traveled
                 td
@@ -23,6 +23,10 @@
                 th Remaining
                 td
                   span(ng-show='progress.remaining.miles') {{progress.remaining.miles|number}} mi.
+              tr
+                th Total
+                td
+                  span(ng-show='route.distance.miles') {{route.distance.miles|number}} mi.
               tr
                 th ETA
                 td

@@ -113,10 +113,10 @@ trackers0.get('/:id', function (req, res) {
 
       var times = {
         started : new Date('06/15/2013 15:32 EST'),
-        current : new Date(message.dateTime)
+        updated : new Date(message.dateTime)
       }
 
-      var delta = times.current.getTime() - times.started.getTime()
+      var delta = times.updated.getTime() - times.started.getTime()
       var speed = {
         kph : distance / (delta / 1000 / 60 / 60)
       }
