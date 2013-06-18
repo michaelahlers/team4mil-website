@@ -66,102 +66,49 @@ define([
               scope.messages = feed.get({ id : tracker.id}).$then(function (response) {
                 return response.data.response.feedMessageResponse.messages.message
               })
-              //$timeout(monitor, 10000)
+              $timeout(monitor, 10000)
             }
           }
           monitor()
         })
 
-//        scope.$watch('messages', function (messages) {
-//          if (!messages) {
-//            return
-//          }
-//
-//          var coordinates = jQuery.map(messages, function (message) {
-//            return new maps.LatLng(message.latitude, message.longitude)
-//          })
-//
-//          var path = new maps.Polyline({
-//            path : coordinates,
-//            strokeColor : '#FF0000',
-//            strokeOpacity : 1.0,
-//            strokeWeight : 2
-//          })
-//
-//          path.setMap(map)
-//
-//          var marker = new maps.Marker({
-//            position : coordinates[0],
-//            map : map
-//          })
-//
-//          map.setCenter(coordinates[0])
-//
-//        })
+        var path
+          , marker
 
+        scope.$watch('messages', function (messages) {
+          if (path) {
+            path.setMap(null)
+          }
 
-//        scope.$watch('tracker', function (tracker) {
-//          if (!tracker) {
-//            iEl.html('')
-//            return
-//          }
-//
-//          instance++
-//
-//          var onloadRef = 't4m_tracker_map_onload_fn' + instance
-//
-//          $rootScope.$broadcast('t4m-loadingStart')
-//
-//          $window[onloadRef] = function () {
-//            delete $window[onloadRef]
-//
-//            var frameEl = $(iEl.find('iframe'))
-//              , documentEl = frameEl.contents()
-//              , bodyEl = documentEl.find('body')
-//              , mapEl = documentEl.find('#map')
-//              , windowObj = documentEl[0].parentWindow || documentEl[0].defaultView
-//
-//            /* The onload callback is triggered from outside the Angular digest cycle. */
-//            scope.$apply(function () {
-//
-//              var isReady = function () {
-//                var deferred = $q.defer()
-//
-//                function monitor() {
-//                  if (windowObj.isMapSetup && windowObj.isFirstSuccessfulReq && 0 == bodyEl.find('.x-mask-loading').length) {
-//                    deferred.resolve()
-//                    return
-//                  }
-//
-//                  $timeout(monitor, 500)
-//                }
-//
-//                monitor()
-//
-//                return deferred.promise
-//              }
-//
-//              isReady().then(function () {
-//
-//                mapEl.appendTo(bodyEl)
-//                mapEl.css({
-//                  position : 'absolute',
-//                  left : 0,
-//                  top : 0,
-//                  width : '100%',
-//                  height : '100%'
-//                })
-//
-//                frameEl.css({ width : '100%', height : '100%' })
-//                iEl.find('div').remove()
-//                $rootScope.$broadcast('t4m-loadingSuccess')
-//              })
-//            })
-//          }
-//
-//          iEl.html('<div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #333;"></div><iframe class="map" style="margin: 0; padding: 0; width: 99%; height: 99%; border: 0;" frameBorder="0" scrolling="no" onload="' + onloadRef + '()" src="/services/trackers0/' + tracker.id + '"></iframe>')
-//
-//        })
+          if (marker) {
+            marker.setMap(null)
+          }
+
+          if (!messages) {
+            return
+          }
+
+          var coordinates = jQuery.map(messages, function (message) {
+            return new maps.LatLng(message.latitude, message.longitude)
+          })
+
+          path = new maps.Polyline({
+            path : coordinates,
+            strokeColor : '#FF0000',
+            strokeOpacity : 0.5,
+            strokeWeight : 3
+          })
+
+          path.setMap(map)
+
+          marker = new maps.Marker({
+            position : coordinates[0],
+            map : map
+          })
+
+          map.panTo(coordinates[0])
+          map.setZoom(8)
+        })
       }
     }
   })
