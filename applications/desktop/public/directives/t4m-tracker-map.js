@@ -15,6 +15,18 @@ define([
   var geocoder = new maps.Geocoder()
     , popup = new maps.InfoWindow()
 
+  var toLatLng = function (point) {
+    return new maps.LatLng(point.latitude, point.longitude)
+  }
+
+  var toLatLngs = function (points) {
+    return jQuery.map(points, toLatLng)
+  }
+
+  var toDistance = function (point0, point1) {
+    return Math.sqrt(Math.pow(point0.latitude - point1.latitude, 2) + Math.pow(point0.longitude - point1.longitude, 2))
+  }
+
   directives.directive('t4mTrackerMap', function ($rootScope, $http, $resource, $q, $timeout, $log) {
     var feed = $resource('/services/trackers0/:id')
 
@@ -63,15 +75,6 @@ define([
           var coordinates = jQuery.map(route, function (position) {
             return new maps.LatLng(position.latitude, position.longitude)
           })
-
-//var path = new maps.Polyline({
-//  path : coordinates,
-//  strokeColor : '#000000',
-//  strokeOpacity : 0.5,
-//  strokeWeight : 5
-//})
-//
-//path.setMap(map)
 
           geocoder.geocode({'location' : coordinates[0]}, function (results, status) {
             var marker = new maps.Marker({
@@ -135,18 +138,6 @@ define([
         maps.event.addListener(currentMarker, 'click', function () {
           currentPopup.open(map, currentMarker)
         })
-
-        var toLatLng = function (point) {
-          return new maps.LatLng(point.latitude, point.longitude)
-        }
-
-        var toLatLngs = function (points) {
-          return jQuery.map(points, toLatLng)
-        }
-
-        var toDistance = function (point0, point1) {
-          return Math.sqrt(Math.pow(point0.latitude - point1.latitude, 2) + Math.pow(point0.longitude - point1.longitude, 2))
-        }
 
         var getProgress = function (referencePoint) {
           var deferred = $q.defer()
