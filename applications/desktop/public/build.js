@@ -37,8 +37,10 @@
 
       'async' : 'vendor/requirejs-plugins/src/async',
       'depend' : 'vendor/requirejs-plugins/src/depend',
+      'goog' : 'vendor/requirejs-plugins/src/goog',
       'json' : 'vendor/requirejs-plugins/src/json',
       'noext' : 'vendor/requirejs-plugins/src/noext',
+      'propertyParser' : 'vendor/requirejs-plugins/src/propertyParser',
       'text' : 'lib/text-2.0.5'
     },
 
