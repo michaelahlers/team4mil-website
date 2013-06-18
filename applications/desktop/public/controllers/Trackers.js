@@ -4,6 +4,7 @@ define([
   'controllers'
   , 'directives/t4m-tracker-map'
   , 'directives/t4m-trackers-speed'
+  , 'directives/t4m-trackers-completion'
 ], function (controllers) {
 
   return controllers.controller('Trackers', function ($rootScope, $scope, $log, $resource) {

@@ -11,19 +11,19 @@ define([
 ], function (angular, directives, visualization) {
 
 
-  directives.directive('t4mTrackersSpeed', function ($rootScope, $filter, $log) {
+  directives.directive('t4mTrackersCompletion', function ($rootScope, $filter, $log) {
     return {
       restrict : 'E',
       replace : true,
-      template : '<div class="t4m-trackers-speed" />',
+      template : '<div class="t4m-trackers-completion" />',
 
       link : function (scope, iEl, iAttrs, controller) {
         var options = {
           width : 125, height : 125,
-          greenFrom : 20, greenTo : 35,
-          yellowFrom : 35, yellowTo : 50,
-          redFrom : 50, redTo : 60,
-          max : 60,
+//          greenFrom : 20, greenTo : 35,
+//          yellowFrom : 35, yellowTo : 50,
+//          redFrom : 50, redTo : 60,
+          max : 100,
           minorTicks : 5,
           animation : {
             'duration' : 1000,
@@ -35,7 +35,7 @@ define([
 
         var data = visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Avg. MPH', 0],
+          ['Completed', 0],
         ])
 
         chart.draw(data, options)
@@ -44,7 +44,7 @@ define([
 
           var data = visualization.arrayToDataTable([
             ['Label', 'Value'],
-            ['Avg. MPH', Number($filter('number')(progress.speed.mph))],
+            ['Completed', Number($filter('number')(progress.percent * 100))],
           ])
 
           chart.draw(data, options)
