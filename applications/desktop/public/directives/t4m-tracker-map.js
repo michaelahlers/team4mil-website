@@ -12,6 +12,9 @@ define([
   , 'google-maps'
 ], function (angular, directives, jQuery, maps) {
 
+  var geocoder = new maps.Geocoder()
+    , popup = new maps.InfoWindow()
+
   directives.directive('t4mTrackerMap', function ($rootScope, $http, $resource, $q, $timeout, $log) {
     var feed = $resource('/services/trackers0/:id')
 
@@ -30,7 +33,7 @@ define([
         var getDefaultViewport = function () {
           var deferred = $q.defer()
 
-          new maps.Geocoder().geocode({'address' : 'US'}, function (results, status) {
+          geocoder.geocode({'address' : 'US'}, function (results, status) {
             scope.$apply(function () {
               deferred.resolve(results[0].geometry.viewport)
             })
@@ -69,13 +72,33 @@ define([
           })
 
           path.setMap(map)
-        })
 
-        // maps.event.addListenerOnce(map, 'idle', function () {
-        //scope.$apply(function () {
-        //$rootScope.$broadcast('t4m-loadingSuccess')
-        //})
-        //})
+          geocoder.geocode({'location' : coordinates[0]}, function (results, status) {
+            $log.log(results[0])
+
+            var marker = new maps.Marker({
+              position : coordinates[0],
+              map : map
+            })
+
+            maps.event.addListener(marker, 'click', function () {
+              popup.setContent(results[0].formatted_address)
+              popup.open(map, marker)
+            })
+          })
+
+          geocoder.geocode({'location' : coordinates[coordinates.length - 1]}, function (results, status) {
+            var marker = new maps.Marker({
+              position : coordinates[coordinates.length - 1],
+              map : map
+            })
+
+            maps.event.addListener(marker, 'click', function () {
+              popup.setContent(results[0].formatted_address)
+              popup.open(map, marker)
+            })
+          })
+        })
 
         scope.$watch('tracker', function (tracker) {
           if (!tracker) {
@@ -129,8 +152,12 @@ define([
             map : map
           })
 
-          //map.panTo(coordinates[0])
-          //map.setZoom(7)
+          geocoder.geocode({'location' : coordinates[0]}, function (results, status) {
+            maps.event.addListener(marker, 'click', function () {
+              popup.setContent(results[0].formatted_address)
+              popup.open(map, marker)
+            })
+          })
         })
       }
     }
