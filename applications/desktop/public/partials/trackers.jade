@@ -1,17 +1,29 @@
 #body-trackers
-  .t4m-trackers-status.container-fluid
-    .row-fluid
-      .span2
-        t4m-trackers-completion
-    .row-fluid
-      .span2
-        t4m-trackers-speed
+  .t4m-trackers-guages
+    t4m-trackers-completion
+    t4m-trackers-speed
+
+  .t4m-trackers-status
+    .container-fluid
+      .row-fluid
+        select.offset9.span3(ng-model='settings.tracker', ng-options='tracker as tracker.name for tracker in trackers')
+      .row-fluid
+        .offset9.span3
+          table.table.table-bordered.table-condensed
+            tbody
+              tr
+                th Total
+                td {{route.distance.miles|number}} mi.
+              tr
+                th Traveled
+                td {{progress.distance.miles|number}} mi.
+              tr
+                th ETA
+                td {{progress.arrival.date|date}}
 
   t4m-tracker-map(ng-model='settings.tracker')
 
   .navbar.navbar-fixed-bottom
     .container-fluid
       .row-fluid.text-center
-        select(ng-model='settings.tracker', ng-options='tracker as tracker.name for tracker in trackers')
-
   img.spot-logo(src='images/logos/spot_3-color_789x445.png')

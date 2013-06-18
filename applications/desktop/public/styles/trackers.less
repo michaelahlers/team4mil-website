@@ -37,20 +37,36 @@ body.t4m-trackers {
     .opacity(50)
   }
 
+  .t4m-trackers-guages,
   .t4m-trackers-status {
     position: absolute;
     bottom: 50px;
+
+  }
+
+  .t4m-trackers-guages {
+    z-index: 20;
+  }
+
+  .t4m-trackers-status {
     z-index: 10;
+    width: 100%;
+    table {
+      th,
+      td {
+        background: white;
+      }
+    }
   }
 
-  .t4m-trackers-speed,
-  .t4m-trackers-completion {
+  .t4m-trackers-speed table,
+  .t4m-trackers-completion table {
     .transition(opacity 500ms ease-in-out);
-    .opacity(25);
+    .opacity(40);
   }
 
-  .t4m-trackers-speed:hover,
-  .t4m-trackers-completion:hover {
+  .t4m-trackers-speed table:hover,
+  .t4m-trackers-completion table:hover {
     .transition(opacity 250ms ease-in-out);
     .opacity(100);
   }
