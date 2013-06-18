@@ -137,6 +137,7 @@ define([
 
         maps.event.addListener(currentMarker, 'click', function () {
           currentPopup.open(map, currentMarker)
+          map.panTo(currentMarker.getPosition())
         })
 
         var getProgress = function (referencePoint) {
